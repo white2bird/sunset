@@ -16,8 +16,8 @@ public class RegisterController {
     }
 
 
-    @PostMapping("/register")
-    public Boolean add(Register register) {
+    @PostMapping("/log_register")
+    public Boolean log_register(Register register) {
         return registerService.add(register);
     }
 }

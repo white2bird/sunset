@@ -8,7 +8,7 @@
 <!--        <result column="create_time" jabctype="STRING" property="create_time"/>-->
 <!--        <result column="update_time" jabctype="STRING" property="update_time"/>-->
 <!--    </resultMap>-->
-    <insert id="add" parameterType="com.example.sunset.entity.Register">
+    <insert id="add" parameterType="com.example.sunset.mapper.RegisterMapper">
         inster into tb_register(id,phone,password,create_time,update_time) values (#{id},#{phone},#{password},#{create_time},#{update_time})
     </insert>
 </mapper>
