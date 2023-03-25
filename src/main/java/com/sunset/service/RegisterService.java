@@ -1,7 +1,7 @@
-package com.example.sunset.service;
+package com.sunset.service;
 
-import com.example.sunset.entity.Register;
-import com.example.sunset.mapper.RegisterMapper;
+import com.sunset.entity.Register;
+import com.sunset.mapper.RegisterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class RegisterService {
     @Autowired
     RegisterMapper registerMapper;
+
     public Boolean add(Register register){
         return registerMapper.add(register);
     }

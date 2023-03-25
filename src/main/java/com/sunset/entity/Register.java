@@ -1,18 +1,19 @@
-package com.example.sunset.entity;
+package com.sunset.entity;
 
 public class Register {
-    private String id;
-    private String phone;
-    private String password;
-    private String create_time;
-    private String update_time;
 
-    public String getId() {
-        return id;
+    public String uid;
+    public String phone;
+    public String password;
+    public String create_time;
+    public String update_time;
+
+    public String getUid() {
+        return uid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getPhone() {
@@ -26,7 +27,7 @@ public class Register {
     @Override
     public String toString() {
         return "Register{" +
-                "id='" + id + '\'' +
+                "uid='" + uid + '\'' +
                 ", phone='" + phone + '\'' +
                 ", password='" + password + '\'' +
                 ", create_time='" + create_time + '\'' +
