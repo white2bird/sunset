@@ -1,6 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-</beans>
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.sunset.mapper.RegisterMapper">
+<!--    <resultMap id="BaseResultMap" type="com.example.sunset.entity.Register">-->
+<!--        <result column="id" jabctype="INT" property="id"/>-->
+<!--        <result column="phone" jabctype="STRING" property="phone"/>-->
+<!--        <result column="password" jabctype="STRING" property="password"/>-->
+<!--        <result column="create_time" jabctype="STRING" property="create_time"/>-->
+<!--        <result column="update_time" jabctype="STRING" property="update_time"/>-->
+<!--    </resultMap>-->
+    <insert id="add" parameterType="com.example.sunset.entity.Register">
+        inster into tb_register(id,phone,password,create_time,update_time) values (#{id},#{phone},#{password},#{create_time},#{update_time})
+    </insert>
+</mapper>

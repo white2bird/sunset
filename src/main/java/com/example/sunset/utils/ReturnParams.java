@@ -3,9 +3,10 @@ package com.example.sunset.utils;
 public class ReturnParams {
     private int code;
     private String message;
-    private T data;
+//    private T data;
     private String date_time;
     private  long timestamp;
+
 
     public int getCode() {
         return code;

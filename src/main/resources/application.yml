@@ -7,5 +7,6 @@ spring:
     password: sunset
     driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
-  mapper-locations: classpath:mapper/*Mapper.xml
-  type-aliases-package: com.example.sunset.mybatis.entity
+  mapper-locations: classpath:mapper/*.xml
+#  mapper-locations: com.example.sunset.mapper/*.xml
+  type-aliases-package: com.example.sunset.entity
