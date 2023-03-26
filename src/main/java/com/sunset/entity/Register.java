@@ -3,7 +3,6 @@ package com.sunset.entity;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
-
 public class Register {
 
     public String uid;

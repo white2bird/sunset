@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sunset.mapper.RegisterMapper">
-    <insert  id="RegisterInsert" parameterType="com.sunset.entity.Register">
+    <insert id="RegisterInsert" parameterType="com.sunset.entity.Register">
         insert into tb_register (uid,phone,password,create_time,update_time) values (#{uid},#{phone},#{password},#{create_time},#{update_time});
-    </insert  >
+    </insert>
+    <select id="RegisterFindPhone" resultType="com.sunset.entity.Register">
+        select * from tb_register where phone=#{phone}
+    </select>
 </mapper>

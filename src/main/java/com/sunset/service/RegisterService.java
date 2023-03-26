@@ -24,4 +24,8 @@ public class RegisterService {
         register.setCreate_time(dateTime);
         return registerMapper.RegisterInsert(register);
     }
+
+    public Register RegisterFindPhone(String phone){
+        return registerMapper.RegisterFindPhone(phone);
+    }
 }
