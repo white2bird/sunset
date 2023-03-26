@@ -21,8 +21,15 @@ public class RegisterController {
 
     @PostMapping("/register")
     public ReturnJson<String> log_register(@RequestBody Register register) {
-        System.out.println(register.getPhone());
-        return ReturnJson.success("phone","ok");
-//        return registerService.add(register);
+        String phone = register.phone;
+        String verCode = register.verCode;
+        if(phone == null || phone == ""){
+            return ReturnJson.fail(-1,"手机号不能为空");
+        }
+        if(verCode == null || verCode == ""){
+            return ReturnJson.fail(-1,"验证码不能为空");
+        }
+        registerService.RegisterInsert(register);
+        return ReturnJson.success(null,"ok");
     }
 }

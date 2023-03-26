@@ -1,5 +1,9 @@
 package com.sunset.entity;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.UUID;
+
 public class Register {
 
     public String uid;
@@ -7,6 +11,15 @@ public class Register {
     public String password;
     public String create_time;
     public String update_time;
+    public String verCode;
+
+    public void setVerCode(String verCode) {
+        this.verCode = verCode;
+    }
+
+    public String getVerCode() {
+        return verCode;
+    }
 
     public String getUid() {
         return uid;
@@ -48,6 +61,7 @@ public class Register {
     }
 
     public void setCreate_time(String create_time) {
+
         this.create_time = create_time;
     }
 
