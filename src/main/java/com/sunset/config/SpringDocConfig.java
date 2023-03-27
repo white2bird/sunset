@@ -8,10 +8,6 @@ import org.springdoc.core.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * SpringDoc API文档相关配置
- * Created by macro on 2022/3/4.
- */
 @Configuration
 public class SpringDocConfig {
     @Bean
