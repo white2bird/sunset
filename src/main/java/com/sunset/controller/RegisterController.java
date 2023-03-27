@@ -21,7 +21,6 @@ public class RegisterController {
 
     @PostMapping("/register")
     public ReturnJson<String> log_register(@RequestBody Register register) {
-
       return  registerService.RegisterInsert(register);
     }
 }

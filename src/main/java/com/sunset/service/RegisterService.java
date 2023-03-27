@@ -1,14 +1,18 @@
 package com.sunset.service;
 
+import com.auth0.jwt.interfaces.Claim;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.sunset.entity.Register;
 import com.sunset.mapper.RegisterMapper;
 import com.sunset.utils.ReturnJson;
+import com.sunset.utils.TokenUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 import java.util.UUID;
 @Slf4j
 @Service
@@ -20,7 +24,10 @@ public class RegisterService {
         String phone = register.phone;
         String verCode = register.verCode;
         Register p = RegisterFindPhone(phone); // 查询手机号是否存在
-        log.info(p.getPhone());
+        String token = TokenUtils.setToken(phone);
+        Map<String,String> map = TokenUtils.SelectToken(token);
+        log.info(token);
+        log.info(map.get("uid"));
         if(p != null){
             return ReturnJson.fail(-1, "手机号已注册");
         }
