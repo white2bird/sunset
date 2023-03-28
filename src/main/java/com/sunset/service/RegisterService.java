@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
 @Slf4j
 @Service
@@ -25,11 +27,8 @@ public class RegisterService {
         String verCode = register.verCode;
         Register p = RegisterFindPhone(phone); // 查询手机号是否存在
         String token = TokenUtils.setToken(phone);
-        Map<String,String> map = TokenUtils.SelectToken(token);
-        log.info(token);
-        log.info(map.get("uid"));
         if(p != null){
-            return ReturnJson.fail(-1, "手机号已注册");
+            return ReturnJson.fail(-1, token);//手机号已注册
         }
         if (phone == null || phone == "") {
             return ReturnJson.fail(-1, "手机号不能为空");
