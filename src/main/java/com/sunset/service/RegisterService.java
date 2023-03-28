@@ -1,7 +1,4 @@
 package com.sunset.service;
-
-import com.auth0.jwt.interfaces.Claim;
-import com.auth0.jwt.interfaces.DecodedJWT;
 import com.sunset.entity.Register;
 import com.sunset.mapper.RegisterMapper;
 import com.sunset.utils.ReturnJson;
@@ -12,9 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.UUID;
 @Slf4j
 @Service
