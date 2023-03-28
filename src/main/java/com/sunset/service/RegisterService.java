@@ -45,7 +45,6 @@ public class RegisterService {
         register.setCreate_time(dateTime);
         registerMapper.RegisterInsert(register);
         return ReturnJson.success(null, "ok");
-
     }
 
     public Register RegisterFindPhone(String phone){
