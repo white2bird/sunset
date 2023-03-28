@@ -1,10 +1,6 @@
 package com.sunset.entity;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.UUID;
-public class Register {
-
+public class RegisterEntity {
     public String uid;
     public String phone;
     public String password;

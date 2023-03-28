@@ -1,7 +1,7 @@
 package com.sunset.controller;
 
-import com.sunset.entity.Register;
-import com.sunset.service.RegisterService;
+import com.sunset.entity.RegisterEntity;
+import com.sunset.service.SignService;
 import com.sunset.utils.ReturnJson;
 import com.sunset.utils.TokenUtils;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -15,16 +15,16 @@ import java.util.Map;
 @RequestMapping("/sign")
 @ResponseBody
 @Slf4j
-public class RegisterController {
-    private RegisterService registerService;
+public class SignController {
+    private SignService registerService;
 
-    public RegisterController(RegisterService registerService) {
+    public SignController(SignService registerService) {
         this.registerService = registerService;
     }
 
     @PostMapping("/register")
-    public ReturnJson<String> log_register(@RequestBody Register register) {
-      return  registerService.RegisterInsert(register);
+    public ReturnJson<String> log_register(@RequestBody RegisterEntity registerEntity) {
+      return  registerService.RegisterInsert(registerEntity);
     }
 
     @PostMapping("/login")
