@@ -5,7 +5,9 @@ import com.sunset.service.SignService;
 import com.sunset.utils.ReturnJson;
 import com.sunset.utils.TokenUtils;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,11 +29,19 @@ public class SignController {
     public ReturnJson<String> log_register(@RequestBody RegisterEntity registerEntity) {
       return  registerService.RegisterInsert(registerEntity);
     }
-
+    @Operation(summary = "验证码登录")
     @PostMapping("/login")
-    public ReturnJson<String> log_login(@RequestParam("token") String token){
-        Map<String,String> map = TokenUtils.SelectToken(token);
-        log.info(map.get("uid"));
+    public ReturnJson<String> log_login(@RequestBody LoginVerCode loginVerCode){
+
+//        Map<String,String> map = TokenUtils.SelectToken(loginVerCode.getToken());
+//        log.info(map.get("uid"));
         return ReturnJson.success(null,"ok");
+    }
+    @Data
+    public  class LoginVerCode{
+        @Schema(description = "手机号")
+        private String phone;
+        @Schema(description = "验证码")
+        private String verCode;
     }
 }
