@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Slf4j
 @ControllerAdvice
 public class GlobalException extends  RuntimeException{
+
     // token 失效
     @ExceptionHandler(TokenExpiredException.class)
     @ResponseBody

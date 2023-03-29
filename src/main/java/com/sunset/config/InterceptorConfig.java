@@ -1,6 +1,9 @@
 package com.sunset.config;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.sunset.utils.AuthMsToken;
+import com.sunset.utils.GlobalException;
+import com.sunset.utils.ReturnJson;
 import com.sunset.utils.TokenUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.method.HandlerMethod;
@@ -40,7 +43,7 @@ public class InterceptorConfig extends HandlerInterceptorAdapter {
 
             return true;
         }else{
-            return false;
+            throw new TokenExpiredException(null);
         }
 
     }
