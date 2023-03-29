@@ -13,7 +13,7 @@ import java.util.HashMap;
 @Slf4j
 public class TokenUtils {
     private  static final String key = "sunset_server_123456.";
-    private  static  final long  jt = 30000; // 毫秒
+    private  static  final long  jt = 120000; // 毫秒
     public static String setToken(String uid){
         Date t = new Date(System.currentTimeMillis() + jt);
         String token = JWT.create().withClaim("uid",uid).withExpiresAt(t).sign(Algorithm.HMAC256(key));

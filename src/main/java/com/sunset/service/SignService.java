@@ -21,7 +21,6 @@ public class SignService {
         String phone = registerEntity.phone;
         String verCode = registerEntity.verCode;
         RegisterEntity p = FindUserPhone(phone); // 查询手机号是否存在
-        String token = TokenUtils.setToken(phone);
         if(p != null){
             return ReturnJson.fail(-1, "手机号已注册");
         }
@@ -53,5 +52,8 @@ public class SignService {
     // 查询手机号是否存在
     public RegisterEntity FindUserPhone(String phone){
         return signMapper.FindUserPhone(phone);
+    }
+    public RegisterEntity FindUserInfo(String uid){
+        return signMapper.FindUserInfo(uid);
     }
 }

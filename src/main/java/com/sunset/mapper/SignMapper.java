@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 public interface SignMapper {
     int RegisterInsert(RegisterEntity registerEntity);
     RegisterEntity FindUserPhone(String phone);
+
+    RegisterEntity FindUserInfo(String uid);
 }
