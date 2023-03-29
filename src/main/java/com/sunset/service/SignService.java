@@ -14,7 +14,7 @@ import java.util.UUID;
 @Service
 public class SignService {
     @Autowired
-    SignMapper registerMapper;
+    SignMapper signMapper;
 
     public ReturnJson<String> RegisterInsert(RegisterEntity registerEntity) {
         String phone = registerEntity.phone;
@@ -36,11 +36,11 @@ public class SignService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dateTime = formatter.format(LocalDateTime.now());
         registerEntity.setCreate_time(dateTime);
-        registerMapper.RegisterInsert(registerEntity);
+        signMapper.RegisterInsert(registerEntity);
         return ReturnJson.success(null, "ok");
     }
 
     public RegisterEntity FindUserPhone(String phone){
-        return registerMapper.FindUserPhone(phone);
+        return signMapper.FindUserPhone(phone);
     }
 }
