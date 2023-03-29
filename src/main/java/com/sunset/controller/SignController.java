@@ -26,7 +26,7 @@ public class SignController {
     }
     @Operation(summary = "注册")
     @PostMapping("/register")
-    public ReturnJson<String> log_register(@RequestBody RegisterEntity registerEntity) {
+    public ReturnJson<String> log_registe (@RequestBody RegisterEntity registerEntity) {
       return  registerService.RegisterInsert(registerEntity);
     }
     @Operation(summary = "验证码登录")

@@ -4,7 +4,7 @@
     <insert id="RegisterInsert" parameterType="com.sunset.entity.RegisterEntity">
         insert into tb_register (uid,phone,password,create_time,update_time) values (#{uid},#{phone},#{password},#{create_time},#{update_time});
     </insert>
-    <select id="RegisterFindPhone" resultType="com.sunset.entity.RegisterEntity">
+    <select id="FindUserPhone" resultType="com.sunset.entity.RegisterEntity">
         select * from tb_register where phone=#{phone}
     </select>
 </mapper>

@@ -19,7 +19,7 @@ public class SignService {
     public ReturnJson<String> RegisterInsert(RegisterEntity registerEntity) {
         String phone = registerEntity.phone;
         String verCode = registerEntity.verCode;
-        RegisterEntity p = RegisterFindPhone(phone); // 查询手机号是否存在
+        RegisterEntity p = FindUserPhone(phone); // 查询手机号是否存在
         String token = TokenUtils.setToken(phone);
         if(p != null){
             return ReturnJson.fail(-1, token);//手机号已注册
@@ -40,7 +40,7 @@ public class SignService {
         return ReturnJson.success(null, "ok");
     }
 
-    public RegisterEntity RegisterFindPhone(String phone){
-        return registerMapper.RegisterFindPhone(phone);
+    public RegisterEntity FindUserPhone(String phone){
+        return registerMapper.FindUserPhone(phone);
     }
 }
