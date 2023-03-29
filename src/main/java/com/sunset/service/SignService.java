@@ -16,6 +16,7 @@ import java.util.UUID;
 public class SignService {
     @Autowired
     SignMapper signMapper;
+    // 注册
     public ReturnJson<String> RegisterInsert(RegisterEntity registerEntity) {
         String phone = registerEntity.phone;
         String verCode = registerEntity.verCode;
@@ -39,6 +40,7 @@ public class SignService {
         signMapper.RegisterInsert(registerEntity);
         return ReturnJson.success(null, "ok");
     }
+    // 验证码登录
     public ReturnJson<String> LoginVerToken(LoginVerCode loginVerCode){
         String phone = loginVerCode.getPhone();
         RegisterEntity p = FindUserPhone(phone);
@@ -48,6 +50,7 @@ public class SignService {
         String token = TokenUtils.setToken(p.getUid());
         return ReturnJson.success(token,"ok");
     }
+    // 查询手机号是否存在
     public RegisterEntity FindUserPhone(String phone){
         return signMapper.FindUserPhone(phone);
     }
