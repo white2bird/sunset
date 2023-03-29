@@ -41,13 +41,9 @@ public class InterceptorConfig extends HandlerInterceptorAdapter {
             log.info("解析token：" + uid);
             return true;
         }else{
+            // token过期
             throw new TokenExpiredException(null);
         }
 
-    }
-
-    public void postHandle(HttpServletRequest request, HttpServletResponse
-            response, Object handler, ModelAndView modelAndView) throws Exception {
-        log.info(String.valueOf(request));
     }
 }
