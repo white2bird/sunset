@@ -19,7 +19,6 @@ public class InterceptorConfig extends HandlerInterceptorAdapter {
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Headers", "*");
         response.setCharacterEncoding("UTF-8");
-
         AuthMsToken authVaildate;
         if(handler instanceof HandlerMethod) {
             authVaildate = ((HandlerMethod) handler).getMethodAnnotation(AuthMsToken.class);
