@@ -1,6 +1,7 @@
 package com.sunset.config;
 
 import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.sunset.entity.RegisterEntity;
 import com.sunset.utils.AuthMsToken;
 import com.sunset.utils.GlobalException;
 import com.sunset.utils.ReturnJson;
@@ -37,10 +38,7 @@ public class InterceptorConfig extends HandlerInterceptorAdapter {
         if (msToken != null) {
             HashMap<String, String> map = TokenUtils.SelectToken(msToken);
             String uid = map.get("uid");
-//            RegisterEntity uinfo =  FindUserInfo(uid);
             log.info("解析token：" + uid);
-//            log.info("用户信息：" + uinfo);
-
             return true;
         }else{
             throw new TokenExpiredException(null);
