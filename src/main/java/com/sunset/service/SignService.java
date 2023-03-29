@@ -1,4 +1,5 @@
 package com.sunset.service;
+import com.sunset.entity.LoginVerCode;
 import com.sunset.entity.RegisterEntity;
 import com.sunset.mapper.SignMapper;
 import com.sunset.utils.ReturnJson;
@@ -15,14 +16,13 @@ import java.util.UUID;
 public class SignService {
     @Autowired
     SignMapper signMapper;
-
     public ReturnJson<String> RegisterInsert(RegisterEntity registerEntity) {
         String phone = registerEntity.phone;
         String verCode = registerEntity.verCode;
         RegisterEntity p = FindUserPhone(phone); // 查询手机号是否存在
         String token = TokenUtils.setToken(phone);
         if(p != null){
-            return ReturnJson.fail(-1, token);//手机号已注册
+            return ReturnJson.fail(-1, "手机号已注册");
         }
         if (phone == null || phone == "") {
             return ReturnJson.fail(-1, "手机号不能为空");
@@ -39,7 +39,15 @@ public class SignService {
         signMapper.RegisterInsert(registerEntity);
         return ReturnJson.success(null, "ok");
     }
-
+    public ReturnJson<String> LoginVerToken(LoginVerCode loginVerCode){
+        String phone = loginVerCode.getPhone();
+        RegisterEntity p = FindUserPhone(phone);
+        if(p == null){
+            return ReturnJson.fail(-1,"手机号不存在");
+        }
+        String token = TokenUtils.setToken(p.getUid());
+        return ReturnJson.success(token,"ok");
+    }
     public RegisterEntity FindUserPhone(String phone){
         return signMapper.FindUserPhone(phone);
     }
