@@ -16,6 +16,13 @@ import java.util.HashMap;
 @Slf4j
 public class InterceptorConfig extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Headers", "*");
+        response.setCharacterEncoding("UTF-8");
+
+
+
         String msToken = request.getHeader("ms_token");
         log.info("获取的token：" + msToken);
         if (msToken != null) {
