@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 @Slf4j
 public class WebConfig extends WebMvcConfigurationSupport {
     protected void addInterceptors(InterceptorRegistry interceptorRegistry) {
-        interceptorRegistry.addInterceptor(new InterceptorConfig());
+        interceptorRegistry.addInterceptor(new InterceptorConfig()).addPathPatterns("/**");
         super.addInterceptors(interceptorRegistry);
 
     }
