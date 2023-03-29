@@ -3,6 +3,8 @@ package com.sunset.utils;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
+
 @Data
 public class ReturnJson<T> implements Serializable {
     private Integer code;
@@ -14,6 +16,7 @@ public class ReturnJson<T> implements Serializable {
         returnJson.code = 200;
         returnJson.data = data;
         returnJson.message = message;
+        returnJson.timestamp = new Date().getTime();
         return returnJson;
     }
 
@@ -21,6 +24,7 @@ public class ReturnJson<T> implements Serializable {
         ReturnJson<T> returnJson = new ReturnJson<>();
         returnJson.code = code;
         returnJson.message = message;
+        returnJson.timestamp = new Date().getTime();
         return returnJson;
     }
 }
