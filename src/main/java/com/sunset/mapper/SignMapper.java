@@ -9,4 +9,5 @@ public interface SignMapper {
     RegisterEntity FindUserPhone(String phone);
 
     RegisterEntity FindUserInfo(String uid);
+    RegisterEntity FindIsPassword(String phone);
 }

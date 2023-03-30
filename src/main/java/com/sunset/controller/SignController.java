@@ -1,5 +1,6 @@
 package com.sunset.controller;
 
+import com.sunset.entity.LoginPwd;
 import com.sunset.entity.LoginVerCode;
 import com.sunset.entity.RegisterEntity;
 import com.sunset.service.SignService;
@@ -34,7 +35,7 @@ public class SignController {
     }
     @Operation(summary = "密码登录")
     @PostMapping("/pwd_login")
-    public ReturnJson<String> sign_pwdLogin(@RequestBody LoginVerCode loginVerCode){
-        return  signService.LoginPwdToken(loginVerCode);
+    public ReturnJson<String> sign_pwdLogin(@RequestBody LoginPwd loginPwd){
+        return  signService.LoginPwdToken(loginPwd);
     }
 }

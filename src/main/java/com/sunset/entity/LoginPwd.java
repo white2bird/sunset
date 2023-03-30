@@ -1,7 +1,9 @@
 package com.sunset.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
+@Data
 public class LoginPwd {
     @Schema(description = "手机号")
     private String phone;

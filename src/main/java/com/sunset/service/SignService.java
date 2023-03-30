@@ -1,4 +1,5 @@
 package com.sunset.service;
+import com.sunset.entity.LoginPwd;
 import com.sunset.entity.LoginVerCode;
 import com.sunset.entity.RegisterEntity;
 import com.sunset.mapper.SignMapper;
@@ -64,9 +65,22 @@ public class SignService {
         String token = TokenUtils.setToken(p.getUid());
         return ReturnJson.success(token,"login::ok");
     }
-    public ReturnJson<String> LoginPwdToken(){
-
+    // 密码登录
+    public ReturnJson<String> LoginPwdToken(LoginPwd loginPwd){
+        String phone = loginPwd.getPhone();
+        String pwd = loginPwd.getPassword();
+        RegisterEntity p = FindUserPhone(phone);
+        if(p == null){
+            return ReturnJson.fail(-1,"该手机号未注册");
+        }
+        RegisterEntity pd =  signMapper.FindIsPassword(pwd);
+        if(pd == null){
+            return ReturnJson.fail(-1,"该手机号未设置密码，请使用验证码登录");
+        }
+        String token = TokenUtils.setToken(p.getUid());
+        return ReturnJson.success(token,"ok");
     }
+
     // 查询手机号是否存在
     public RegisterEntity FindUserPhone(String phone){
         return signMapper.FindUserPhone(phone);
