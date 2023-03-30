@@ -30,7 +30,7 @@ public class InterceptorConfig extends HandlerInterceptorAdapter {
             return true;
         }
         //没有声明需要权限,或者声明不验证权限
-        if(authVaildate == null || authVaildate.validate() == false){
+        if(authVaildate == null || !authVaildate.validate()){
             return true;
         }
         String msToken = request.getHeader("ms_token");
