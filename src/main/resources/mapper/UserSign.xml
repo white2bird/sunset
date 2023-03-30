@@ -10,4 +10,7 @@
     <select id="FindUserInfo" resultType="com.sunset.entity.RegisterEntity">
         select * from tb_register where uid=#{uid}
     </select>
+    <update id="UpdatePwd" parameterType="com.sunset.entity.PwdEntity">
+        update tb_register set password =
+    </update>
 </mapper>

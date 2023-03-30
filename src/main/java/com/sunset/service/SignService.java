@@ -1,6 +1,7 @@
 package com.sunset.service;
 import com.sunset.entity.LoginPwd;
 import com.sunset.entity.LoginVerCode;
+import com.sunset.entity.PwdEntity;
 import com.sunset.entity.RegisterEntity;
 import com.sunset.mapper.SignMapper;
 import com.sunset.utils.ReturnJson;
@@ -82,7 +83,13 @@ public class SignService {
         String token = TokenUtils.setToken(p.getUid());
         return ReturnJson.success(token,"ok");
     }
+    // 设置密码
+    public ReturnJson<String> SetPassword(PwdEntity pwdEntity){
+        String password = pwdEntity.getPassword();
 
+
+        return ReturnJson.success(password,"ok");
+    }
     public RegisterEntity FindUserInfo(String uid){
         return signMapper.FindUserInfo(uid);
     }

@@ -17,9 +17,13 @@ public class TokenUtils {
     private static long jt_date = 20000; // 毫秒
 
     public static String setToken(String uid) {
-        log.info("值》》》"+key);
+        log.info("值》》》" + key);
         Date t = new Date(System.currentTimeMillis() + jt_date);
-        return JWT.create().withClaim("uid", uid).withExpiresAt(t).sign(Algorithm.HMAC256(key));
+        return JWT.create()
+                .withClaim("uid", uid)
+                .withClaim("stamp", System.currentTimeMillis())
+                .withExpiresAt(t)
+                .sign(Algorithm.HMAC256(key));
     }
 
     public static HashMap<String, String> SelectToken(String token) {
