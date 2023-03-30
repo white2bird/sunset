@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "Sign", description = "登录注册")
+@Tag(name = "Sign")
 @RestController
 @RequestMapping("/sign")
 @ResponseBody
@@ -21,13 +21,13 @@ import org.springframework.web.bind.annotation.*;
 public class SignController {
     @Autowired
     SignService signService;
-    @Operation(summary = "注册")
+    @Operation(summary = "注册【待用】")
     @PostMapping("/register")
     @AuthMsToken
     public ReturnJson<String> sign_registe (@RequestBody RegisterEntity registerEntity) {
       return  signService.RegisterInsert(registerEntity);
     }
-    @Operation(summary = "验证码登录")
+    @Operation(summary = "验证码登录/注册")
     @PostMapping("/code_login")
     public ReturnJson<String> sign_verLogin(@RequestBody LoginVerCode loginVerCode){
         return  signService.LoginVerToken(loginVerCode);

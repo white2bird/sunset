@@ -17,7 +17,7 @@ import java.util.UUID;
 public class SignService {
     @Autowired
     SignMapper signMapper;
-    // 注册
+    // 注册 【待用】
     public ReturnJson<String> RegisterInsert(RegisterEntity registerEntity) {
         String phone = registerEntity.phone;
         String verCode = registerEntity.verCode;
@@ -44,11 +44,25 @@ public class SignService {
     public ReturnJson<String> LoginVerToken(LoginVerCode loginVerCode){
         String phone = loginVerCode.getPhone();
         RegisterEntity p = FindUserPhone(phone);
+        // 手机号不存在直接注册
         if(p == null){
-            return ReturnJson.fail(-1,"手机号不存在");
+            RegisterEntity registerEntity = new RegisterEntity();
+            registerEntity.setPhone(phone);
+            String uuid = UUID.randomUUID().toString().toUpperCase();
+            registerEntity.setUid(uuid);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String dateTime = formatter.format(LocalDateTime.now());
+            registerEntity.setCreate_time(dateTime);
+            signMapper.RegisterInsert(registerEntity);
+            RegisterEntity p1 = FindUserPhone(phone);
+            String token = TokenUtils.setToken(p1.getUid());
+
+            return ReturnJson.success(token,"register::ok");
         }
+        // 查询已注册直接登录
         String token = TokenUtils.setToken(p.getUid());
-        return ReturnJson.success(token,"ok");
+        return ReturnJson.success(token,"login::ok");
     }
     // 查询手机号是否存在
     public RegisterEntity FindUserPhone(String phone){
