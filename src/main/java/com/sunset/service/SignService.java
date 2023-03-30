@@ -9,6 +9,7 @@ import com.sunset.utils.TokenUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -68,13 +69,16 @@ public class SignService {
     // 密码登录
     public ReturnJson<String> LoginPwdToken(LoginPwd loginPwd){
         String phone = loginPwd.getPhone();
-        String pwd = loginPwd.getPassword();
+        String pwd = DigestUtils.md5Hex(loginPwd.getPassword());
         RegisterEntity p = FindUserPhone(phone);
         if(p.getPhone() == null){
             return ReturnJson.fail(-1,"该手机号未注册");
         }
         if(p.getPassword() == null){
             return ReturnJson.fail(-1,"该手机号未设置密码，请使用验证码登录");
+        }
+        if(p.getPassword() != pwd){
+            return ReturnJson.fail(-1,"密码错误");
         }
         String token = TokenUtils.setToken(p.getUid());
         return ReturnJson.success(token,"ok");
