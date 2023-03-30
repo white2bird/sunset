@@ -26,7 +26,7 @@ public class SignController {
       return  signService.RegisterInsert(registerEntity);
     }
     @Operation(summary = "验证码登录")
-    @PostMapping("/login")
+    @PostMapping("/code_login")
     public ReturnJson<String> sign_verLogin(@RequestBody LoginVerCode loginVerCode){
         return  signService.LoginVerToken(loginVerCode);
     }
