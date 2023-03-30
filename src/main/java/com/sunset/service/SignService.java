@@ -77,7 +77,7 @@ public class SignService {
         if(p.getPassword() == null){
             return ReturnJson.fail(-1,"该手机号未设置密码，请使用验证码登录");
         }
-        if(p.getPassword() != pwd){
+        if(!p.getPassword().equals(pwd)){
             return ReturnJson.fail(-1,"密码错误");
         }
         String token = TokenUtils.setToken(p.getUid());
