@@ -23,7 +23,7 @@ public class SignService {
     public ReturnJson<String> RegisterInsert(RegisterEntity registerEntity) {
         String phone = registerEntity.phone;
         String verCode = registerEntity.verCode;
-        RegisterEntity p = FindUserPhone(phone); // 查询手机号是否存在
+        RegisterEntity p = signMapper.FindUserPhone(phone);// 查询手机号是否存在
         if(p != null){
             return ReturnJson.fail(-1, "手机号已注册");
         }
@@ -45,7 +45,7 @@ public class SignService {
     // 验证码登录
     public ReturnJson<String> LoginVerToken(LoginVerCode loginVerCode){
         String phone = loginVerCode.getPhone();
-        RegisterEntity p = FindUserPhone(phone);
+        RegisterEntity p = signMapper.FindUserPhone(phone);
         // 手机号不存在直接注册
         if(p == null){
             RegisterEntity registerEntity = new RegisterEntity();
@@ -57,7 +57,7 @@ public class SignService {
             String dateTime = formatter.format(LocalDateTime.now());
             registerEntity.setCreate_time(dateTime);
             signMapper.RegisterInsert(registerEntity);
-            RegisterEntity p1 = FindUserPhone(phone);
+            RegisterEntity p1 = signMapper.FindUserPhone(phone);
             String token = TokenUtils.setToken(p1.getUid());
 
             return ReturnJson.success(token,"register::ok");
@@ -70,7 +70,7 @@ public class SignService {
     public ReturnJson<String> LoginPwdToken(LoginPwd loginPwd){
         String phone = loginPwd.getPhone();
         String pwd = DigestUtils.md5Hex(loginPwd.getPassword());
-        RegisterEntity p = FindUserPhone(phone);
+        RegisterEntity p = signMapper.FindUserPhone(phone);
         if(p.getPhone() == null){
             return ReturnJson.fail(-1,"该手机号未注册");
         }
@@ -84,10 +84,6 @@ public class SignService {
         return ReturnJson.success(token,"ok");
     }
 
-    // 查询手机号是否存在
-    public RegisterEntity FindUserPhone(String phone){
-        return signMapper.FindUserPhone(phone);
-    }
     public RegisterEntity FindUserInfo(String uid){
         return signMapper.FindUserInfo(uid);
     }
