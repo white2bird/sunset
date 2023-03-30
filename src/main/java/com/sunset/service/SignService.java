@@ -2,6 +2,7 @@ package com.sunset.service;
 import com.sunset.entity.LoginVerCode;
 import com.sunset.entity.RegisterEntity;
 import com.sunset.mapper.SignMapper;
+import com.sunset.utils.AuthMsToken;
 import com.sunset.utils.ReturnJson;
 import com.sunset.utils.TokenUtils;
 import lombok.extern.slf4j.Slf4j;

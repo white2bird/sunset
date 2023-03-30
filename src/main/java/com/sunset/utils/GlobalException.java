@@ -7,17 +7,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Slf4j
 @ControllerAdvice
 public class GlobalException extends  RuntimeException{
+
     // token 失效
     @ExceptionHandler(TokenExpiredException.class)
     @ResponseBody
-    public  ReturnJson tokenException(){
+    public  ReturnJson tokenException(Exception exception){
+
+        log.info(exception.toString());
+        log.info("Token异常："+exception.getMessage());
         return ReturnJson.fail(401, "令牌过期");
     }
     // 全局异常
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public ReturnJson<Object> otherException(Exception exception){
-        log.info(exception.toString());
+        log.info("全局异常："+exception.getMessage());
         return ReturnJson.fail(500,exception.getMessage());
     }
 

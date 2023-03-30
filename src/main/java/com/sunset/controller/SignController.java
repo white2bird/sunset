@@ -3,6 +3,7 @@ package com.sunset.controller;
 import com.sunset.entity.LoginVerCode;
 import com.sunset.entity.RegisterEntity;
 import com.sunset.service.SignService;
+import com.sunset.utils.AuthMsToken;
 import com.sunset.utils.ReturnJson;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,6 +23,7 @@ public class SignController {
     SignService signService;
     @Operation(summary = "注册")
     @PostMapping("/register")
+    @AuthMsToken
     public ReturnJson<String> sign_registe (@RequestBody RegisterEntity registerEntity) {
       return  signService.RegisterInsert(registerEntity);
     }
