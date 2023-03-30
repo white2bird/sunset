@@ -70,11 +70,10 @@ public class SignService {
         String phone = loginPwd.getPhone();
         String pwd = loginPwd.getPassword();
         RegisterEntity p = FindUserPhone(phone);
-        if(p == null){
+        if(p.getPhone() == null){
             return ReturnJson.fail(-1,"该手机号未注册");
         }
-        RegisterEntity pd =  signMapper.FindIsPassword(pwd);
-        if(pd == null){
+        if(p.getPassword() == null){
             return ReturnJson.fail(-1,"该手机号未设置密码，请使用验证码登录");
         }
         String token = TokenUtils.setToken(p.getUid());

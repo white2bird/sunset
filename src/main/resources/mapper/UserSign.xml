@@ -7,9 +7,6 @@
     <select id="FindUserPhone" resultType="com.sunset.entity.RegisterEntity">
         select * from tb_register where phone=#{phone}
     </select>
-    <select id="FindIsPassword" resultType="com.sunset.entity.RegisterEntity">
-        select * from tb_register where password=#{password}
-    </select>
     <select id="FindUserInfo" resultType="com.sunset.entity.RegisterEntity">
         select * from tb_register where uid=#{uid}
     </select>
