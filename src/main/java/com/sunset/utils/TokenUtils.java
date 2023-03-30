@@ -17,7 +17,6 @@ public class TokenUtils {
     private static long jt_date = 20000; // 毫秒
 
     public static String setToken(String uid) {
-        log.info("值》》》" + key);
         Date t = new Date(System.currentTimeMillis() + jt_date);
         return JWT.create()
                 .withClaim("uid", uid)

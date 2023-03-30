@@ -8,12 +8,15 @@ import com.sunset.service.SignService;
 import com.sunset.utils.AuthMsToken;
 import com.sunset.utils.ReturnJson;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Tag(name = "Sign")
 @RestController
@@ -43,7 +46,8 @@ public class SignController {
 
     @Operation(summary = "设置密码")
     @PostMapping("/set_pwd")
-    public ReturnJson<String> sign_setpwd(@RequestBody PwdEntity pwdEntity){
-        return  signService.SetPassword(pwdEntity);
+    @AuthMsToken
+    public ReturnJson<String> sign_setpwd(@RequestBody PwdEntity pwdEntity, HttpServletRequest request){
+        return  signService.SetPassword(pwdEntity,request);
     }
 }
