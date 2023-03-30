@@ -64,6 +64,9 @@ public class SignService {
         String token = TokenUtils.setToken(p.getUid());
         return ReturnJson.success(token,"login::ok");
     }
+    public ReturnJson<String> LoginPwdToken(){
+
+    }
     // 查询手机号是否存在
     public RegisterEntity FindUserPhone(String phone){
         return signMapper.FindUserPhone(phone);

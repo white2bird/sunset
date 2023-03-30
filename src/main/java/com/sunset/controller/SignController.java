@@ -24,12 +24,17 @@ public class SignController {
     @Operation(summary = "注册【待用】")
     @PostMapping("/register")
     @AuthMsToken
-    public ReturnJson<String> sign_registe (@RequestBody RegisterEntity registerEntity) {
+    public ReturnJson<String> sign_register (@RequestBody RegisterEntity registerEntity) {
       return  signService.RegisterInsert(registerEntity);
     }
     @Operation(summary = "验证码登录/注册")
     @PostMapping("/code_login")
     public ReturnJson<String> sign_verLogin(@RequestBody LoginVerCode loginVerCode){
         return  signService.LoginVerToken(loginVerCode);
+    }
+    @Operation(summary = "密码登录")
+    @PostMapping("/pwd_login")
+    public ReturnJson<String> sign_pwdLogin(@RequestBody LoginVerCode loginVerCode){
+        return  signService.LoginPwdToken(loginVerCode);
     }
 }
