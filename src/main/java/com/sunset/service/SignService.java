@@ -104,8 +104,12 @@ public class SignService {
         }
         return ReturnJson.success(null, "ok");
     }
-
-    public RegisterEntity FindUserInfo(String uid) {
-        return signMapper.FindUserInfo(uid);
+    // 手机号是否存在
+    public ReturnJson<String> FindIsPhone(LoginVerCode loginVerCode) {
+        RegisterEntity p = signMapper.FindUserPhone(loginVerCode.getPhone());// 查询手机号是否存在
+        if (p == null) {
+            return ReturnJson.fail(-1, "手机号不存在");
+        }
+        return ReturnJson.success(null, "ok");
     }
 }

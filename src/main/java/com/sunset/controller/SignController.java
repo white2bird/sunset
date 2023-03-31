@@ -50,4 +50,10 @@ public class SignController {
     public ReturnJson<String> sign_setpwd(@RequestBody PwdEntity pwdEntity, HttpServletRequest request){
         return  signService.SetPassword(pwdEntity,request);
     }
+
+    @Operation(summary = "忘记密码>>查询手机号")
+    @PostMapping("/get_isPhone")
+    public ReturnJson<String> get_isPhone(@RequestBody LoginVerCode loginVerCode){
+        return  signService.FindIsPhone(loginVerCode);
+    }
 }
