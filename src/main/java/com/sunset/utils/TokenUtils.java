@@ -12,7 +12,7 @@ import java.util.HashMap;
 @Slf4j
 public class TokenUtils {
     private static String key = "sunset_server123456.";
-    private static long jt_date = 20000; // 毫秒
+    private static long jt_date = 1000 * 60 * 60 * 60; // 毫秒
 
     public static String setToken(String uid) {
         Date t = new Date(System.currentTimeMillis() + jt_date);

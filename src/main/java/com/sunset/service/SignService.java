@@ -5,6 +5,7 @@ import com.sunset.mapper.SignMapper;
 import com.sunset.utils.ReturnJson;
 import com.sunset.utils.TokenUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -158,5 +159,14 @@ public class SignService {
         String uid = map.get("uid");
         UserInfoEntity userInfoEntity = signMapper.GetUserInfo(uid);
         return ReturnJson.success(userInfoEntity, "ok");
+    }
+    // 更新用户信息
+    public  ReturnJson<String> UpdateUserInfo(UserInfoEntity userInfoEntity,HttpServletRequest request){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String dateTime = formatter.format(LocalDateTime.now());
+        userInfoEntity.setUpdate_time(dateTime);
+        log.info(String.valueOf(userInfoEntity));
+        signMapper.UpdateUserInfo(userInfoEntity);
+        return ReturnJson.success(null,"ok");
     }
 }

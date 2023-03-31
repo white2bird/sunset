@@ -26,4 +26,15 @@
     <select id="GetUserInfo" resultType="com.sunset.entity.UserInfoEntity">
         select * from tb_userinfo where uid=#{uid}
     </select>
+    <update id="UpdateUserInfo" parameterType="com.sunset.entity.UserInfoEntity">
+        update tb_userinfo set nickname = #{nickname},
+                               avator=#{avator},
+                               birthday=#{birthday},
+                               description=#{description},
+                               sex=#{sex},
+                               height=#{height},
+                               weight=#{weight},
+                               waistline=#{waistline},
+                               update_time=#{update_time} where id = #{id}
+    </update>
 </mapper>
