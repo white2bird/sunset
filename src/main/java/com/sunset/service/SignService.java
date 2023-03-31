@@ -1,9 +1,6 @@
 package com.sunset.service;
 
-import com.sunset.entity.LoginPwd;
-import com.sunset.entity.LoginVerCode;
-import com.sunset.entity.PwdEntity;
-import com.sunset.entity.RegisterEntity;
+import com.sunset.entity.*;
 import com.sunset.mapper.SignMapper;
 import com.sunset.utils.ReturnJson;
 import com.sunset.utils.TokenUtils;
@@ -63,7 +60,24 @@ public class SignService {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String dateTime = formatter.format(LocalDateTime.now());
             registerEntity.setCreate_time(dateTime);
+
+
+            UserInfoEntity userInfoEntity = new UserInfoEntity();
+            userInfoEntity.setCreate_time(dateTime);
+            String userId = UUID.randomUUID().toString().toUpperCase();
+            userInfoEntity.setId(userId);
+            int random = (int) (Math.random()*999999);
+            String nickname = "用户-"+random;
+            userInfoEntity.setNickname(nickname);
+            userInfoEntity.setUid(uuid);
+            int sid = (int) (Math.random()*999999);
+            String tmp = System.currentTimeMillis() + "";
+            String showid = sid +tmp.substring(tmp.length()-4,tmp.length());
+            userInfoEntity.setShowid(showid);
+            userInfoEntity.setAvator("/avator/sunset202303311711.png");
+
             signMapper.RegisterInsert(registerEntity);
+            signMapper.UserInfoInsert(userInfoEntity);
             RegisterEntity p1 = signMapper.FindUserPhone(phone);
             String token = TokenUtils.setToken(p1.getUid());
 

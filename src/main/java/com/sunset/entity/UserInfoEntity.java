@@ -6,7 +6,8 @@ import lombok.Data;
 public class UserInfoEntity {
     private String id;
     private String nickname;
-    private String desc;
+    private String avator;
+    private String description;
     private String birthday;
     private int sex;
     private String height;
