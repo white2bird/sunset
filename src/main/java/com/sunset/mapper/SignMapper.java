@@ -14,4 +14,5 @@ public interface SignMapper {
     int ResetPwd(String phone, String password);
     int UpdatePhone(String uid,String phone);
     int UserInfoInsert(UserInfoEntity userInfoEntity);
+    UserInfoEntity GetUserInfo(String uid);
 }

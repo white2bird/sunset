@@ -1,9 +1,6 @@
 package com.sunset.controller;
 
-import com.sunset.entity.LoginPwd;
-import com.sunset.entity.LoginVerCode;
-import com.sunset.entity.PwdEntity;
-import com.sunset.entity.RegisterEntity;
+import com.sunset.entity.*;
 import com.sunset.service.SignService;
 import com.sunset.utils.AuthMsToken;
 import com.sunset.utils.ReturnJson;
@@ -67,5 +64,11 @@ public class SignController {
     @AuthMsToken
     public ReturnJson<String> get_isPhone(@RequestParam(name = "phone") String phone, HttpServletRequest request){
         return  signService.UpdatePhone(phone,request);
+    }
+    @Operation(summary = "获取用户信息")
+    @PostMapping("/get/userinfo")
+    @AuthMsToken
+    public ReturnJson<UserInfoEntity> get_isPhone(HttpServletRequest request){
+        return  signService.GetUserInfo(request);
     }
 }

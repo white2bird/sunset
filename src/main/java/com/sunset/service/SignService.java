@@ -66,13 +66,13 @@ public class SignService {
             userInfoEntity.setCreate_time(dateTime);
             String userId = UUID.randomUUID().toString().toUpperCase();
             userInfoEntity.setId(userId);
-            int random = (int) (Math.random()*999999);
-            String nickname = "用户-"+random;
+            int random = (int) (Math.random() * 999999);
+            String nickname = "用户-" + random;
             userInfoEntity.setNickname(nickname);
             userInfoEntity.setUid(uuid);
-            int sid = (int) (Math.random()*999999);
+            int sid = (int) (Math.random() * 999999);
             String tmp = System.currentTimeMillis() + "";
-            String showid = sid +tmp.substring(tmp.length()-4,tmp.length());
+            String showid = sid + tmp.substring(tmp.length() - 4, tmp.length());
             userInfoEntity.setShowid(showid);
             userInfoEntity.setAvator("/avator/sunset202303311711.png");
 
@@ -119,6 +119,7 @@ public class SignService {
         }
         return ReturnJson.success(null, "ok");
     }
+
     // 手机号是否存在
     public ReturnJson<String> FindIsPhone(LoginVerCode loginVerCode) {
         RegisterEntity p = signMapper.FindUserPhone(loginVerCode.getPhone());// 查询手机号是否存在
@@ -127,25 +128,35 @@ public class SignService {
         }
         return ReturnJson.success(null, "ok");
     }
+
     // 重置密码
-    public ReturnJson<String> ResetPwd(LoginPwd loginPwd){
+    public ReturnJson<String> ResetPwd(LoginPwd loginPwd) {
         String password = DigestUtils.md5Hex(loginPwd.getPassword());
         String phone = loginPwd.getPhone();
-        signMapper.ResetPwd(phone,password);
-        return ReturnJson.success(null,"重置密码成功");
+        signMapper.ResetPwd(phone, password);
+        return ReturnJson.success(null, "重置密码成功");
     }
 
-    // 换绑手机后
-    public ReturnJson<String> UpdatePhone(String phone,HttpServletRequest request){
+    // 换绑手机号
+    public ReturnJson<String> UpdatePhone(String phone, HttpServletRequest request) {
         String token = request.getHeader("ms_token");
         Map<String, String> map = TokenUtils.SelectToken(token);
         String uid = map.get("uid");
         RegisterEntity r = signMapper.FindUserInfo(uid);
         String oPhone = r.getPhone();
-        if(Objects.equals(phone, oPhone)){
-            return ReturnJson.fail(-1,"更换新的手机号");
+        if (Objects.equals(phone, oPhone)) {
+            return ReturnJson.fail(-1, "更换新的手机号");
         }
-        signMapper.UpdatePhone(uid,phone);
-        return ReturnJson.success(null,"ok");
+        signMapper.UpdatePhone(uid, phone);
+        return ReturnJson.success(null, "ok");
+    }
+
+    // 获取用户信息
+    public ReturnJson<UserInfoEntity> GetUserInfo(HttpServletRequest request) {
+        String token = request.getHeader("ms_token");
+        Map<String, String> map = TokenUtils.SelectToken(token);
+        String uid = map.get("uid");
+        UserInfoEntity userInfoEntity = signMapper.GetUserInfo(uid);
+        return ReturnJson.success(userInfoEntity, "ok");
     }
 }

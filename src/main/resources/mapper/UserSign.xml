@@ -23,4 +23,7 @@
     <insert id="UserInfoInsert" parameterType="com.sunset.entity.UserInfoEntity">
         insert into tb_userinfo (id,nickname,avator,description,birthday,sex,height,weight,waistline,uid,showid,create_time,update_time) values (#{id},#{nickname},#{avator},#{description},#{birthday},#{sex},#{height},#{weight},#{waistline},#{uid},#{showid},#{create_time},#{update_time});
     </insert>
+    <select id="GetUserInfo" resultType="com.sunset.entity.UserInfoEntity">
+        select * from tb_userinfo where uid=#{uid}
+    </select>
 </mapper>
