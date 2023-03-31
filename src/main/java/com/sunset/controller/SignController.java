@@ -56,4 +56,9 @@ public class SignController {
     public ReturnJson<String> get_isPhone(@RequestBody LoginVerCode loginVerCode){
         return  signService.FindIsPhone(loginVerCode);
     }
+    @Operation(summary = "忘记密码>>重置密码")
+    @PostMapping("/reset_pwd")
+    public ReturnJson<String> get_isPhone(@RequestBody LoginPwd loginPwd){
+        return  signService.ResetPwd(loginPwd);
+    }
 }

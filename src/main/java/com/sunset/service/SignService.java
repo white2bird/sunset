@@ -112,4 +112,9 @@ public class SignService {
         }
         return ReturnJson.success(null, "ok");
     }
+    // 重置密码
+    public ReturnJson<String> ResetPwd(LoginPwd loginPwd){
+        signMapper.ResetPwd(loginPwd);
+        return ReturnJson.success(null,"重置密码成功");
+    }
 }

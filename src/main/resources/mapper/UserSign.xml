@@ -13,4 +13,7 @@
     <update id="UpdatePwd" parameterType="com.sunset.entity.RegisterEntity">
         update tb_register set password = #{password} where uid = #{uid}
     </update>
+    <update id="ResetPwd" parameterType="com.sunset.entity.RegisterEntity">
+        update tb_register set password = #{password} where phone = #{phone}
+    </update>
 </mapper>
