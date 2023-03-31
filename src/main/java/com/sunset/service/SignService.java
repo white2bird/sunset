@@ -117,4 +117,13 @@ public class SignService {
         signMapper.ResetPwd(loginPwd);
         return ReturnJson.success(null,"重置密码成功");
     }
+
+    // 换绑手机后
+    public ReturnJson<String> UpdatePhone(String phone,HttpServletRequest request){
+        String token = request.getHeader("ms_token");
+        Map<String, String> map = TokenUtils.SelectToken(token);
+        String uid = map.get("uid");
+        signMapper.UpdatePhone(uid,phone);
+        return ReturnJson.success(null,"ok");
+    }
 }

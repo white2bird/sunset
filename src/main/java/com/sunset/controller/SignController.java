@@ -61,4 +61,11 @@ public class SignController {
     public ReturnJson<String> get_isPhone(@RequestBody LoginPwd loginPwd){
         return  signService.ResetPwd(loginPwd);
     }
+
+    @Operation(summary = "换绑手机号")
+    @PostMapping("/change_phone")
+    @AuthMsToken
+    public ReturnJson<String> get_isPhone(@RequestParam(name = "phone") String phone, HttpServletRequest request){
+        return  signService.UpdatePhone(phone,request);
+    }
 }
