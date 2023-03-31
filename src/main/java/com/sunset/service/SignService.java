@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 @Slf4j
@@ -32,10 +33,10 @@ public class SignService {
         if (p != null) {
             return ReturnJson.fail(-1, "手机号已注册");
         }
-        if (phone == null || phone == "") {
+        if (phone == null || phone.equals("")) {
             return ReturnJson.fail(-1, "手机号不能为空");
         }
-        if (verCode == null || verCode == "") {
+        if (verCode == null || verCode.equals("")) {
             return ReturnJson.fail(-1, "验证码不能为空");
         }
         String uuid = UUID.randomUUID().toString().toUpperCase();
@@ -78,7 +79,7 @@ public class SignService {
         String phone = loginPwd.getPhone();
         String pwd = DigestUtils.md5Hex(loginPwd.getPassword());
         RegisterEntity p = signMapper.FindUserPhone(phone);
-        if (p.getPhone() == null) {
+        if (p == null) {
             return ReturnJson.fail(-1, "该手机号未注册");
         }
         if (p.getPassword() == null) {
@@ -114,7 +115,9 @@ public class SignService {
     }
     // 重置密码
     public ReturnJson<String> ResetPwd(LoginPwd loginPwd){
-        signMapper.ResetPwd(loginPwd);
+        String password = DigestUtils.md5Hex(loginPwd.getPassword());
+        String phone = loginPwd.getPhone();
+        signMapper.ResetPwd(phone,password);
         return ReturnJson.success(null,"重置密码成功");
     }
 
@@ -123,6 +126,11 @@ public class SignService {
         String token = request.getHeader("ms_token");
         Map<String, String> map = TokenUtils.SelectToken(token);
         String uid = map.get("uid");
+        RegisterEntity r = signMapper.FindUserInfo(uid);
+        String oPhone = r.getPhone();
+        if(Objects.equals(phone, oPhone)){
+            return ReturnJson.fail(-1,"更换新的手机号");
+        }
         signMapper.UpdatePhone(uid,phone);
         return ReturnJson.success(null,"ok");
     }

@@ -10,6 +10,6 @@ public interface SignMapper {
     RegisterEntity FindUserPhone(String phone);
     RegisterEntity FindUserInfo(String uid);
     int UpdatePwd(String password,String uid);
-    int ResetPwd(LoginPwd loginPwd);
-    int UpdatePhone(String uid,String Phone);
+    int ResetPwd(String phone, String password);
+    int UpdatePhone(String uid,String phone);
 }
