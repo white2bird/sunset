@@ -66,7 +66,7 @@ public class SignController {
         return  signService.UpdatePhone(phone,request);
     }
     @Operation(summary = "获取用户信息")
-    @PostMapping("/get/userinfo")
+    @GetMapping("/get/userinfo")
     @AuthMsToken
     public ReturnJson<UserInfoEntity> get_isPhone(HttpServletRequest request){
         return  signService.GetUserInfo(request);
