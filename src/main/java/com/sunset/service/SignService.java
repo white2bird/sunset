@@ -146,7 +146,7 @@ public class SignService {
         RegisterEntity r = signMapper.FindUserInfo(uid);
         String oPhone = r.getPhone();
         if (Objects.equals(phone, oPhone)) {
-            return ReturnJson.fail(-1, "更换新的手机号");
+            return ReturnJson.fail(-1, "当前手机号与已绑手机号重复");
         }
         signMapper.UpdatePhone(uid, phone);
         return ReturnJson.success(null, "ok");
