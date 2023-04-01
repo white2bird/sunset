@@ -31,6 +31,7 @@ public class SignController {
     @Operation(summary = "验证码登录/注册")
     @PostMapping("/code_login")
     public ReturnJson<String> sign_verLogin(@RequestBody LoginVerCode loginVerCode){
+        log.info("登录请求参数："+loginVerCode);
         return  signService.LoginVerToken(loginVerCode);
     }
     @Operation(summary = "密码登录")
