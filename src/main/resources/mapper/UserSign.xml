@@ -12,11 +12,11 @@
     <select id="FindUserInfo" resultType="com.sunset.entity.RegisterEntity">
         select * from tb_register where uid=#{uid}
     </select>
-    <!--  更新密码  -->
+    <!--  设置密码  -->
     <update id="UpdatePwd" parameterType="com.sunset.entity.RegisterEntity">
         update tb_register set password = #{password} where uid = #{uid}
     </update>
-    <!--  重置密码  -->
+    <!--  忘记密码  -->
     <update id="ResetPwd" parameterType="com.sunset.entity.RegisterEntity">
         update tb_register set password = #{password} where phone = #{phone}
     </update>
@@ -24,7 +24,7 @@
     <update id="UpdatePhone" parameterType="com.sunset.entity.RegisterEntity">
         update tb_register set phone = #{phone} where uid = #{uid}
     </update>
-    <!--  用户信息  -->
+    <!--  注册成功初始化用户信息  -->
     <insert id="UserInfoInsert" parameterType="com.sunset.entity.UserInfoEntity">
         insert into tb_userinfo (id,nickname,avator,description,birthday,sex,height,weight,waistline,uid,showid,create_time,update_time) values (#{id},#{nickname},#{avator},#{description},#{birthday},#{sex},#{height},#{weight},#{waistline},#{uid},#{showid},#{create_time},#{update_time});
     </insert>
@@ -51,5 +51,12 @@
             update_time=#{update_time}
         where id = #{id}
     </update>
-
+    <!--  删除用户，这里应该是软删除，但是无所谓了直接删记录  -->
+    <delete id="DeleteUser" parameterType="com.sunset.entity.RegisterEntity">
+        delete from tb_register where uid=#{id}
+    </delete>
+    <!--  删除用户信息直接删记录  -->
+    <delete id="DeleteUserInfo" parameterType="com.sunset.entity.UserInfoEntity">
+        delete from tb_userinfo where uid=#{id}
+    </delete>
 </mapper>

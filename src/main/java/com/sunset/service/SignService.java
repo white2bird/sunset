@@ -175,4 +175,17 @@ public class SignService {
         signMapper.UpdateUserInfo(userInfoEntity);
         return ReturnJson.success(null,"ok");
     }
+    // 注销账号
+    public ReturnJson<String> DistryAccount(HttpServletRequest request){
+        String token = request.getHeader("ms_token");
+        Map<String, String> map = TokenUtils.SelectToken(token);
+        String uid = map.get("uid");
+        RegisterEntity r = signMapper.FindUserInfo(uid);
+        if(r != null){
+            signMapper.DeleteUser(uid);
+            signMapper.DeleteUserInfo(uid);
+            return ReturnJson.success(null,"ok");
+        }
+        return ReturnJson.fail(-1,"账号不存在");
+    }
 }

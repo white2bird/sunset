@@ -76,4 +76,10 @@ public class SignController {
     public ReturnJson<String> updateUserinfo(@RequestBody UserInfoEntity userInfoEntity, HttpServletRequest request){
         return  signService.UpdateUserInfo(userInfoEntity,request);
     }
+    @Operation(summary = "注销账号")
+    @PostMapping("/distry_info")
+    @AuthMsToken
+    public ReturnJson<String> distryUserinfo(HttpServletRequest request){
+        return  signService.DistryAccount(request);
+    }
 }
