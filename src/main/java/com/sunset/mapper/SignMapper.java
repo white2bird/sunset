@@ -16,4 +16,5 @@ public interface SignMapper {
     int UserInfoInsert(UserInfoEntity userInfoEntity);
     UserInfoEntity GetUserInfo(String uid);
     int UpdateUserInfo(UserInfoEntity userInfoEntity);
+    int UpdateUserDesc(UserInfoEntity userInfoEntity);
 }

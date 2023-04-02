@@ -166,6 +166,12 @@ public class SignService {
         String dateTime = formatter.format(LocalDateTime.now());
         userInfoEntity.setUpdate_time(dateTime);
         log.info(String.valueOf(userInfoEntity));
+        int state = userInfoEntity.getState();
+        // 仅更新用户简介
+        if(state == 1){
+            signMapper.UpdateUserDesc(userInfoEntity);
+            return ReturnJson.success(null,"ok");
+        }
         signMapper.UpdateUserInfo(userInfoEntity);
         return ReturnJson.success(null,"ok");
     }

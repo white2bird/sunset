@@ -24,4 +24,5 @@ public class UserInfoEntity {
     private String uid;
     private String create_time;
     private String update_time;
+    private int state; // 判断是全量更新信息 还是仅更新 个人简介
 }

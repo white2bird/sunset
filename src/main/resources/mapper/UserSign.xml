@@ -4,18 +4,23 @@
     <insert id="RegisterInsert" parameterType="com.sunset.entity.RegisterEntity">
         insert into tb_register (uid,phone,password,create_time,update_time) values (#{uid},#{phone},#{password},#{create_time},#{update_time});
     </insert>
+    <!--  根据手机号校验用户是否存在  -->
     <select id="FindUserPhone" resultType="com.sunset.entity.RegisterEntity">
         select * from tb_register where phone=#{phone}
     </select>
+    <!--  根据 token 解析用户 id 获取用户信息  -->
     <select id="FindUserInfo" resultType="com.sunset.entity.RegisterEntity">
         select * from tb_register where uid=#{uid}
     </select>
+    <!--  更新密码  -->
     <update id="UpdatePwd" parameterType="com.sunset.entity.RegisterEntity">
         update tb_register set password = #{password} where uid = #{uid}
     </update>
+    <!--  重置密码  -->
     <update id="ResetPwd" parameterType="com.sunset.entity.RegisterEntity">
         update tb_register set password = #{password} where phone = #{phone}
     </update>
+    <!--  换绑手机号  -->
     <update id="UpdatePhone" parameterType="com.sunset.entity.RegisterEntity">
         update tb_register set phone = #{phone} where uid = #{uid}
     </update>
@@ -23,9 +28,11 @@
     <insert id="UserInfoInsert" parameterType="com.sunset.entity.UserInfoEntity">
         insert into tb_userinfo (id,nickname,avator,description,birthday,sex,height,weight,waistline,uid,showid,create_time,update_time) values (#{id},#{nickname},#{avator},#{description},#{birthday},#{sex},#{height},#{weight},#{waistline},#{uid},#{showid},#{create_time},#{update_time});
     </insert>
+    <!--  获取用户信息  -->
     <select id="GetUserInfo" resultType="com.sunset.entity.UserInfoEntity">
         select * from tb_userinfo where uid=#{uid}
     </select>
+    <!--  更新用户信息  -->
     <update id="UpdateUserInfo" parameterType="com.sunset.entity.UserInfoEntity">
         update tb_userinfo set nickname = #{nickname},
                                avator=#{avator},
@@ -37,4 +44,12 @@
                                waistline=#{waistline},
                                update_time=#{update_time} where id = #{id}
     </update>
+    <!--  更新用户简介  -->
+    <update id="UpdateUserDesc" parameterType="com.sunset.entity.UserInfoEntity">
+        update tb_userinfo
+        set description=#{description},
+            update_time=#{update_time}
+        where id = #{id}
+    </update>
+
 </mapper>
