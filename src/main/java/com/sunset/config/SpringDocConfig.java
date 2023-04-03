@@ -25,13 +25,13 @@ public class SpringDocConfig {
         return openAPI;
     }
 
-    @Bean
-    public GroupedOpenApi publicApi() {
-        return GroupedOpenApi.builder()
-                .group("sign")
-                .pathsToMatch("/sign/**")
-                .build();
-    }
+//    @Bean
+//    public GroupedOpenApi publicApi() {
+//        return GroupedOpenApi.builder()
+//                .group("v1")
+//                .pathsToMatch("/v1/**")
+//                .build();
+//    }
     private SecurityScheme securityScheme() {
         SecurityScheme securityScheme = new SecurityScheme();
         securityScheme.setType(SecurityScheme.Type.APIKEY);

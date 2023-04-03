@@ -1,0 +1,203 @@
+[
+  {
+    "id": "24",
+    "name": "饮品",
+    "sort": 6,
+    "listItem": [
+      {
+        "id": "103",
+        "icon": "https://image.findlinked.cn/xiangrui/2023-02-27/d74a45aa-547e-48dc-acf7-ec3ef44cb12a.jpg",
+        "title": "冬瓜荷叶茶大肚茶",
+        "subTitle": "绿色健康  口味清香 合理配比 ",
+        "originalPrice": "29.90",
+        "currentPrice": "9.90",
+        "url": "https://s.click.taobao.com/peaXULu",
+        "jumpType": 1
+      },
+      {
+        "id": "119",
+        "icon": "https://image.findlinked.cn/xiangrui/2023-03-30/320ea279-828a-4e47-8b5b-806e49b4f8c8.jpg",
+        "title": "谷为纤即食燕麦片无蔗糖",
+        "subTitle": "美味代餐 持久饱腹",
+        "originalPrice": "12.90",
+        "currentPrice": "9.90",
+        "url": "https://s.click.taobao.com/qESzVJu",
+        "jumpType": 1
+      },
+      {
+        "id": "120",
+        "icon": "https://image.findlinked.cn/xiangrui/2023-03-30/1143b5fa-ec73-4602-921f-dfc4f0a94c11.jpg",
+        "title": "仁和益生元青汁固体饮料",
+        "subTitle": "早晚一杯 肠享轻生活",
+        "originalPrice": "19.90",
+        "currentPrice": "9.90",
+        "url": "https://s.click.taobao.com/kz2QWJu",
+        "jumpType": 1
+      },
+      {
+        "id": "125",
+        "icon": "https://image.findlinked.cn/xiangrui/2023-03-02/380e8576-1c71-4771-9496-45600b570193.jpg",
+        "title": "隅田川小红杯醇香即溶黑咖啡",
+        "subTitle": "100%巴西咖啡豆 还原现磨鲜香",
+        "originalPrice": "39.90",
+        "currentPrice": "14.90",
+        "url": "https://s.click.taobao.com/tmAleKu",
+        "jumpType": 1
+      }
+    ]
+  },
+  {
+    "id": "26",
+    "name": "轻食",
+    "sort": 5,
+    "listItem": [
+      {
+        "id": "99",
+        "icon": "https://image.findlinked.cn/xiangrui/2023-02-27/0d722271-5d36-495d-94fa-2e0c4f5121a4.jpg",
+        "title": "优形低脂鸡胸肉肠",
+        "subTitle": "真低脂 高蛋白 一口弹牙",
+        "originalPrice": "34.90",
+        "currentPrice": "19.90",
+        "url": "https://s.click.taobao.com/84QJHLu",
+        "jumpType": 1
+      },
+      {
+        "id": "106",
+        "icon": "https://image.findlinked.cn/xiangrui/2023-03-02/8fc35fe1-a574-4eec-bacc-717b2174d3ae.jpg",
+        "title": "盐津铺子全麦欧包",
+        "subTitle": "真全麦 高饱腹 多口味随心选",
+        "originalPrice": "22.90",
+        "currentPrice": "17.90",
+        "url": "https://s.click.taobao.com/UERIRLu",
+        "jumpType": 1
+      },
+      {
+        "id": "109",
+        "icon": "https://image.findlinked.cn/xiangrui/2023-03-02/88f6cfac-0e5a-441f-a681-af2d7e88df89.jpg",
+        "title": "味出道黑麦全麦代餐面包",
+        "subTitle": "健康粗粮 轻食之选",
+        "originalPrice": "24.80",
+        "currentPrice": "14.80",
+        "url": "https://s.click.taobao.com/1myJRLu",
+        "jumpType": 1
+      },
+      {
+        "id": "113",
+        "icon": "https://image.findlinked.cn/xiangrui/2023-03-06/3219ab42-6eed-4c81-a0b2-39fa9cfbb05f.jpg",
+        "title": "吃欢天荞麦面皮袋装",
+        "subTitle": "面饼非油炸 持久饱腹 杂粮更健康",
+        "originalPrice": "31.90",
+        "currentPrice": "21.90",
+        "url": "https://s.click.taobao.com/iiLtqKu",
+        "jumpType": 1
+      },
+      {
+        "id": "114",
+        "icon": "https://image.findlinked.cn/xiangrui/2023-03-02/5b14cac0-3d5b-4f21-8509-cdcf52cf13c1.jpg",
+        "title": "肌房重地油醋汁0蔗糖0脂",
+        "subTitle": "自然原料提鲜 轻食代餐新选择",
+        "originalPrice": "12.90",
+        "currentPrice": "6.90",
+        "url": "https://s.click.taobao.com/7fyARLu",
+        "jumpType": 1
+      },
+      {
+        "id": "128",
+        "icon": "https://image.findlinked.cn/xiangrui/2023-03-07/ce9bbdd8-2eea-45df-af63-e3a7ecae7410.jpg",
+        "title": "0脂魔芋凉皮代餐5盒装",
+        "subTitle": "0脂轻卡 Q弹多汁 饱腹感强",
+        "originalPrice": "49.90",
+        "currentPrice": "17.40",
+        "url": "https://s.click.taobao.com/9sTI7Lu",
+        "jumpType": 1
+      },
+      {
+        "id": "129",
+        "icon": "https://image.findlinked.cn/xiangrui/2023-03-10/0d293445-4d45-4737-8a5a-449182426eaa.jpg",
+        "title": "低卡博士鲜椒牛肉酱",
+        "subTitle": "不加糖不加油 热量低80%",
+        "originalPrice": "22.80",
+        "currentPrice": "19.80",
+        "url": "https://s.click.taobao.com/DujVcKu",
+        "jumpType": 1
+      },
+      {
+        "id": "134",
+        "icon": "https://image.findlinked.cn/xiangrui/2023-03-10/ccdc8a6a-c4f7-42cd-9263-283398bb52fe.jpg",
+        "title": "盐津铺子0卡蒟蒻果冻",
+        "subTitle": "0脂0糖0卡0色素 爽滑好Q弹",
+        "originalPrice": "8.80",
+        "currentPrice": "5.90",
+        "url": "https://s.click.taobao.com/5fLRcKu",
+        "jumpType": 1
+      },
+      {
+        "id": "135",
+        "icon": "https://image.findlinked.cn/xiangrui/2023-03-10/179eeca6-2ebc-400e-a2ce-327656b91d43.jpg",
+        "title": "舌里轻食海盐花生酱",
+        "subTitle": "无蔗糖 高蛋白 醇香浓郁",
+        "originalPrice": "14.90",
+        "currentPrice": "10.40",
+        "url": "https://s.click.taobao.com/KgrQcKu",
+        "jumpType": 1
+      },
+      {
+        "id": "140",
+        "icon": "https://image.findlinked.cn/xiangrui/2023-03-10/f4fd206a-5664-466b-ab8e-3d2913c29619.jpg",
+        "title": "三眼井0脂肪辣椒酱",
+        "subTitle": "鲜香清爽不油腻  开启辣味轻生活",
+        "originalPrice": "8.90",
+        "currentPrice": "5.90",
+        "url": "https://s.click.taobao.com/O8LPcKu",
+        "jumpType": 1
+      },
+      {
+        "id": "141",
+        "icon": "https://image.findlinked.cn/xiangrui/2023-03-10/f37e4769-978d-4fcb-82e4-618058b4d483.jpg",
+        "title": "全麦碱水面包饱腹代餐",
+        "subTitle": "外皮弹韧 咸香紧实 高饱腹 不添加油",
+        "originalPrice": "19.90",
+        "currentPrice": "11.90",
+        "url": "https://s.click.taobao.com/APAwvKu",
+        "jumpType": 1
+      }
+    ]
+  },
+  {
+    "id": "28",
+    "name": "运动用品",
+    "sort": 1,
+    "listItem": [
+      {
+        "id": "146",
+        "icon": "https://image.findlinked.cn/xiangrui/2023-03-12/2a730a07-d7b0-4fb8-a0a0-5f4516e52c81.jpg",
+        "title": " 奥义家用防滑瑜伽垫",
+        "subTitle": "加厚 防滑 高回弹 防硌痛 强降噪",
+        "originalPrice": "17.90",
+        "currentPrice": "12.10",
+        "url": "https://s.click.taobao.com/Xx1WVKu",
+        "jumpType": 1
+      },
+      {
+        "id": "147",
+        "icon": "https://image.findlinked.cn/xiangrui/2023-03-12/5ea64011-52d9-4000-87c7-daff1aabfc45.jpg",
+        "title": "派普瑜伽球健身球",
+        "subTitle": "拒绝水桶腰 练出迷人马甲线",
+        "originalPrice": "25.90",
+        "currentPrice": "22.90",
+        "url": "https://s.click.taobao.com/y9RVVKu",
+        "jumpType": 1
+      },
+      {
+        "id": "152",
+        "icon": "https://image.findlinked.cn/xiangrui/2023-03-12/e495ffaa-4969-4542-8aad-ff8ca6b8eaa0.jpg",
+        "title": "青鸟健身瑜伽裤",
+        "subTitle": "高弹面料 拉伸自如 塑形美腿",
+        "originalPrice": "139.00",
+        "currentPrice": "39.00",
+        "url": "https://s.click.taobao.com/5X0UVKu",
+        "jumpType": 1
+      }
+    ]
+  }
+]
