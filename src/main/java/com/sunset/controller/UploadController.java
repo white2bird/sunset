@@ -25,41 +25,33 @@ public class UploadController {
     @Operation(summary = "上传图片")
     @PostMapping("/image")
     public ReturnJson<Map> UploadImage(@RequestParam("file") MultipartFile fImage) throws IOException {
-        // 文件名
-        String fName = fImage.getOriginalFilename();
-        // 原始后缀名
-        String suffixName = fName.substring(fName.lastIndexOf("."));
-        // 重新生成后缀名
-        String uuid = UUID.randomUUID() +"-"+ System.currentTimeMillis()+suffixName;
-        // 存储的绝对路径
-        String path = System.getProperty("user.dir")+uploadImageUrl;
-        String fuuid = path + uuid;
-        HashMap<String,String> map = new HashMap<>();
-        map.put("path","/images/"+uuid);
-        map.put("name",fName);
-        File file = new File(fuuid);
-        // 保存到目录中
-        fImage.transferTo(file);
+       Map map= getImageMap(fImage,uploadImageUrl,"/images/");
         return ReturnJson.success(map,"ok");
     }
     @Operation(summary = "上传头像")
     @PostMapping("/avator")
     public ReturnJson<Map> UploadAvator(@RequestParam("file") MultipartFile fImage) throws IOException {
+        Map map= getImageMap(fImage,uploadAvatorUrl,"/avator/");
+        return ReturnJson.success(map,"ok");
+    }
+
+
+    public Map getImageMap(MultipartFile params,String uploadUrl,String setPath) throws IOException {
         // 文件名
-        String fName = fImage.getOriginalFilename();
+        String fName = params.getOriginalFilename();
         // 原始后缀名
         String suffixName = fName.substring(fName.lastIndexOf("."));
         // 重新生成后缀名
         String uuid = UUID.randomUUID() +"-"+ System.currentTimeMillis()+suffixName;
         // 存储的绝对路径
-        String path = System.getProperty("user.dir")+uploadAvatorUrl;
+        String path = System.getProperty("user.dir")+uploadUrl;
         String fuuid = path + uuid;
         HashMap<String,String> map = new HashMap<>();
-        map.put("path","/avator/"+uuid);
+        map.put("path",setPath+uuid);
         map.put("name",fName);
         File file = new File(fuuid);
         // 保存到目录中
-        fImage.transferTo(file);
-        return ReturnJson.success(map,"ok");
+        params.transferTo(file);
+        return map;
     }
 }
