@@ -5,7 +5,6 @@ import com.sunset.mapper.SignMapper;
 import com.sunset.utils.ReturnJson;
 import com.sunset.utils.TokenUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.commons.codec.digest.DigestUtils;

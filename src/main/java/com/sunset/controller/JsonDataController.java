@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.sunset.utils.ReturnJson;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.util.ClassUtils;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 @Tag(name = "Goods")
 @RestController
