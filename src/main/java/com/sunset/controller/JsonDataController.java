@@ -29,11 +29,11 @@ public class JsonDataController {
     @Operation(summary = "发现--好物列表")
     @GetMapping("/get_shopp")
     public ReturnJson<List> getGoodShopp() throws IOException {
-//        ClassPathResource classPathResource = new ClassPathResource("static/json/goodShopp.json");
-//        InputStream inputStream = classPathResource.getInputStream();
-        File file = new File("src/main/resources/json/goodShopp.json");
+        // 获取绝对路径
+        String path = ClassUtils.getDefaultClassLoader().getResource("").getPath();
+        File file = new File(path+"/json/goodShopp.json");
         String jsonData = FileUtils.readFileToString(file);
-        List list = JSONObject.parseArray(jsonData); // JSON 转换 List
+        JSONArray list = JSONObject.parseArray(jsonData); // JSON 转换 List
         return ReturnJson.success(list, "ok");
     }
     @Operation(summary = "首页--轮播图")
@@ -43,9 +43,7 @@ public class JsonDataController {
         String path = ClassUtils.getDefaultClassLoader().getResource("").getPath();
         File file = new File(path+"/json/banner.json");
         String jsonData = FileUtils.readFileToString(file);
-        log.info(jsonData);
         JSONArray list = JSONObject.parseArray(jsonData); // JSON 转换 List
-        log.info(String.valueOf(list));
         return ReturnJson.success(list, "ok");
     }
 
