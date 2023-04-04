@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,11 +39,13 @@ public class JsonDataController {
     @Operation(summary = "首页--轮播图")
     @GetMapping("/get_banner")
     public ReturnJson<List> getBannerShopp() throws IOException {
-//        ClassPathResource classPathResource = new ClassPathResource("static/json/goodShopp.json");
-//        InputStream inputStream = classPathResource.getInputStream();
-        File file = new File("src/main/resources/json/banner.json");
+        // 获取绝对路径
+        String path = ClassUtils.getDefaultClassLoader().getResource("").getPath();
+        File file = new File(path+"/json/banner.json");
         String jsonData = FileUtils.readFileToString(file);
+        log.info(jsonData);
         JSONArray list = JSONObject.parseArray(jsonData); // JSON 转换 List
+        log.info(String.valueOf(list));
         return ReturnJson.success(list, "ok");
     }
 
