@@ -7,6 +7,6 @@
     </select>
     <!--  发布动态  -->
     <insert id="SetTrends" parameterType="com.sunset.entity.Trends.NewTrends">
-        insert into tb_trends (id,uid,text,images,star,create_time) values (#{id},#{uid},#{text},#{images},#{star},#{create_time});
+        insert into tb_trends (id,uid,text,images,create_time) values (#{id},#{uid},#{text},#{images},#{create_time});
     </insert>
 </mapper>
