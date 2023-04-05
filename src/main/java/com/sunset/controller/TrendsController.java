@@ -28,7 +28,7 @@ public class TrendsController {
         return trendsService.getUserFollow(uid);
     }
     @Operation(summary = "发表动态")
-    @PostMapping("/publish")
+    @PostMapping("/pub/trands")
     @AuthMsToken
     public ReturnJson<String> setTrends(@RequestBody PubTrends pubTrends, HttpServletRequest request) {
         return trendsService.setTrends(pubTrends,request);
@@ -48,7 +48,7 @@ public class TrendsController {
         return trendsService.getTrendsDetail(trends_id);
     }
     @Operation(summary = "发表评论")
-    @PostMapping("/pub_comm")
+    @PostMapping("/pub/comment")
     @AuthMsToken
     public ReturnJson<String> setTrendsComm(@RequestBody SetComm setComm,HttpServletRequest request) {
         return trendsService.setTrendsComm(setComm,request);

@@ -134,7 +134,7 @@ public class TrendsService {
         String uid = map.get("uid");
         NewTrends newTrends = trendsMapper.GetTrensDetail(setComm.getTrends_id());
         if(newTrends == null){
-            return ReturnJson.fail(-1,"该动态记录不存在");
+            return ReturnJson.fail(-1,"该动态不存在");
         }
         CommTrends commTrends = new CommTrends();
         String uuid = UUID.randomUUID().toString().toUpperCase();
