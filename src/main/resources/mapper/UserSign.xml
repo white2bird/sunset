@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sunset.mapper.SignMapper">
-    <insert id="RegisterInsert" parameterType="com.sunset.entity.RegisterEntity">
+    <insert id="RegisterInsert" parameterType="com.sunset.entity.Sign.RegisterEntity">
         insert into tb_register (uid,phone,password,create_time,update_time) values (#{uid},#{phone},#{password},#{create_time},#{update_time});
     </insert>
     <!--  根据手机号校验用户是否存在  -->
-    <select id="FindUserPhone" resultType="com.sunset.entity.RegisterEntity">
+    <select id="FindUserPhone" resultType="com.sunset.entity.Sign.RegisterEntity">
         select * from tb_register where phone=#{phone}
     </select>
     <!--  根据 token 解析用户 id 获取用户信息  -->
-    <select id="FindUserInfo" resultType="com.sunset.entity.RegisterEntity">
+    <select id="FindUserInfo" resultType="com.sunset.entity.Sign.RegisterEntity">
         select * from tb_register where uid=#{uid}
     </select>
     <!--  设置密码  -->
-    <update id="UpdatePwd" parameterType="com.sunset.entity.RegisterEntity">
+    <update id="UpdatePwd" parameterType="com.sunset.entity.Sign.RegisterEntity">
         update tb_register set password = #{password} where uid = #{uid}
     </update>
     <!--  忘记密码  -->
-    <update id="ResetPwd" parameterType="com.sunset.entity.RegisterEntity">
+    <update id="ResetPwd" parameterType="com.sunset.entity.Sign.RegisterEntity">
         update tb_register set password = #{password} where phone = #{phone}
     </update>
     <!--  换绑手机号  -->
-    <update id="UpdatePhone" parameterType="com.sunset.entity.RegisterEntity">
+    <update id="UpdatePhone" parameterType="com.sunset.entity.Sign.RegisterEntity">
         update tb_register set phone = #{phone} where uid = #{uid}
     </update>
     <!--  注册成功初始化用户信息  -->
-    <insert id="UserInfoInsert" parameterType="com.sunset.entity.UserInfoEntity">
+    <insert id="UserInfoInsert" parameterType="com.sunset.entity.User.UserInfoEntity">
         insert into tb_userinfo (id,nickname,avator,description,constellation,birthday,sex,height,weight,waistline,uid,showid,create_time,update_time) values (#{id},#{nickname},#{avator},#{description},#{constellation},#{birthday},#{sex},#{height},#{weight},#{waistline},#{uid},#{showid},#{create_time},#{update_time});
     </insert>
     <!--  获取用户信息  -->
-    <select id="GetUserInfo" resultType="com.sunset.entity.UserInfoEntity">
+    <select id="GetUserInfo" resultType="com.sunset.entity.User.UserInfoEntity">
         select * from tb_userinfo where uid=#{uid}
     </select>
     <!--  更新用户信息  -->
-    <update id="UpdateUserInfo" parameterType="com.sunset.entity.UserInfoEntity">
+    <update id="UpdateUserInfo" parameterType="com.sunset.entity.User.UserInfoEntity">
         update tb_userinfo set nickname = #{nickname},
                                avator=#{avator},
                                birthday=#{birthday},
@@ -45,18 +45,18 @@
                                update_time=#{update_time} where id = #{id}
     </update>
     <!--  更新用户简介  -->
-    <update id="UpdateUserDesc" parameterType="com.sunset.entity.UserInfoEntity">
+    <update id="UpdateUserDesc" parameterType="com.sunset.entity.User.UserInfoEntity">
         update tb_userinfo
         set description=#{description},
             update_time=#{update_time}
         where id = #{id}
     </update>
     <!--  删除用户，这里应该是软删除，但是无所谓了直接删记录  -->
-    <delete id="DeleteUser" parameterType="com.sunset.entity.RegisterEntity">
+    <delete id="DeleteUser" parameterType="com.sunset.entity.Sign.RegisterEntity">
         delete from tb_register where uid=#{id}
     </delete>
     <!--  删除用户信息直接删记录  -->
-    <delete id="DeleteUserInfo" parameterType="com.sunset.entity.UserInfoEntity">
+    <delete id="DeleteUserInfo" parameterType="com.sunset.entity.User.UserInfoEntity">
         delete from tb_userinfo where uid=#{id}
     </delete>
 </mapper>

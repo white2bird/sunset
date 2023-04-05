@@ -1,4 +1,4 @@
-package com.sunset.entity;
+package com.sunset.entity.Sign;
 
 import lombok.Data;
 

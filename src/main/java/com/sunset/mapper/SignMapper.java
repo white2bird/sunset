@@ -1,8 +1,7 @@
 package com.sunset.mapper;
 
-import com.sunset.entity.LoginPwd;
-import com.sunset.entity.RegisterEntity;
-import com.sunset.entity.UserInfoEntity;
+import com.sunset.entity.Sign.RegisterEntity;
+import com.sunset.entity.User.UserInfoEntity;
 import org.springframework.stereotype.Repository;
 
 @Repository

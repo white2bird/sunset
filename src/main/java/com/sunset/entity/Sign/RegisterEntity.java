@@ -1,4 +1,4 @@
-package com.sunset.entity;
+package com.sunset.entity.Sign;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

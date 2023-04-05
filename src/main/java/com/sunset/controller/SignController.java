@@ -1,7 +1,10 @@
 package com.sunset.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.sunset.entity.*;
+import com.sunset.entity.Sign.LoginPwd;
+import com.sunset.entity.Sign.LoginVerCode;
+import com.sunset.entity.Sign.PwdEntity;
+import com.sunset.entity.Sign.RegisterEntity;
+import com.sunset.entity.User.UserInfoEntity;
 import com.sunset.service.SignService;
 import com.sunset.utils.AuthMsToken;
 import com.sunset.utils.ReturnJson;
@@ -9,16 +12,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 
 @Tag(name = "Sign")
 @RestController
