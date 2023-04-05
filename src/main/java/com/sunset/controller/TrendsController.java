@@ -35,7 +35,7 @@ public class TrendsController {
     public ReturnJson<String> pubListTrends(@RequestBody PubTrends pubTrends, HttpServletRequest request) {
         return trendsService.setTrends(pubTrends,request);
     }
-    @Operation(summary = "获取用户动态列表")
+    @Operation(summary = "获取动态列表")
     @GetMapping("/get/list")
     public ReturnJson<ListTrends> pubListTrends(@RequestParam(name = "uid", required = false) @Parameter(description="用户id") String uid, @Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows) {
         PageRends p =new PageRends();
