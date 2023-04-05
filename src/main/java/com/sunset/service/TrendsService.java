@@ -4,10 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sunset.entity.Trends.ListTrends;
-import com.sunset.entity.Trends.NewTrends;
-import com.sunset.entity.Trends.PageRends;
-import com.sunset.entity.Trends.PubTrends;
+import com.sunset.entity.Trends.*;
 import com.sunset.entity.User.UserFollow;
 import com.sunset.mapper.TrendsMapper;
 import com.sunset.utils.ReturnJson;
@@ -81,18 +78,18 @@ public class TrendsService {
 
         PageInfo<NewTrends> pageInfo = new PageInfo<>(list);
         List<NewTrends> lists = pageInfo.getList();
-        List<TrendsObj> newList = new ArrayList<>();
+        List<ObjTrends> newList = new ArrayList<>();
         lists.forEach((x) -> {
-            TrendsObj trendsObj = new TrendsObj();
+            ObjTrends objTrends = new ObjTrends();
             JSONArray images = JSONArray.parseArray(x.getImages());
-            trendsObj.setId(x.getId());
-            trendsObj.setUid(x.getUid());
-            trendsObj.setText(x.getText());
-            trendsObj.setImages(images);
-            trendsObj.setStar(x.getStar());
-            trendsObj.setCreate_time(x.getCreate_time());
+            objTrends.setId(x.getId());
+            objTrends.setUid(x.getUid());
+            objTrends.setText(x.getText());
+            objTrends.setImages(images);
+            objTrends.setStar(x.getStar());
+            objTrends.setCreate_time(x.getCreate_time());
             // 序列化处理完新加旧往新数组追加
-            newList.add(trendsObj);
+            newList.add(objTrends);
         });
         ListTrends listTrends = new ListTrends();
         listTrends.setTotal(pageInfo.getTotal());
@@ -102,7 +99,7 @@ public class TrendsService {
 
     // 用于返回的用户关注，粉丝，获赞的新实体类
     @Data
-    public class UserFollows {
+    public static class UserFollows {
         private String uid;
         @Schema(description = "关注")
         private String following = "0";
@@ -110,19 +107,5 @@ public class TrendsService {
         private String followers = "0";
         @Schema(description = "获赞")
         private String star = "0";
-    }
-
-    @Data
-    public class TrendsObj {
-        private String id;
-        private String uid;
-        @Schema(description = "动态")
-        private String text;
-        @Schema(description = "图片集合")
-        private List images;
-        @Schema(description = "点赞数量")
-        private String star;
-        @Schema(description = "发布时间")
-        private String create_time;
     }
 }

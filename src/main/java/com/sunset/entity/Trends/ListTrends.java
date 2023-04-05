@@ -6,8 +6,8 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ListTrends<T> {
+public class ListTrends {
     @Schema(description = "总数")
     private Long total;
-    private List<T> list;
+    private List<ObjTrends> list;
 }
