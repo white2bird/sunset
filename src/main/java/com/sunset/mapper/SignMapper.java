@@ -30,4 +30,5 @@ public interface SignMapper {
     int DeleteUser(String uid);
     // 删除用户信息
     int DeleteUserInfo(String uid);
+
 }
