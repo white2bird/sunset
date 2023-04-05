@@ -2,8 +2,6 @@ package com.sunset.entity.Trends;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 public class NewTrends {
     private String id;
