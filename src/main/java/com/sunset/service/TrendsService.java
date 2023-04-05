@@ -1,6 +1,6 @@
 package com.sunset.service;
 
-import com.sunset.entity.Trends.NewTrends;
+import com.sunset.entity.Trends.PubTrends;
 import com.sunset.entity.User.UserFollow;
 import com.sunset.mapper.TrendsMapper;
 import com.sunset.utils.ReturnJson;
@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @Service
@@ -31,7 +31,8 @@ public class TrendsService {
         return ReturnJson.success(userFollows, "ok");
     }
 
-    public ReturnJson<String> setTrends(PubTrends pubTrends){
+    public ReturnJson<String> setTrends(PubTrends pubTrends, HttpServletRequest request){
+            log.info(""+pubTrends);
 //        NewTrends  s = trendsMapper.SetTrends(pubTrends);
         return ReturnJson.success(null,"ok");
     }
@@ -47,11 +48,4 @@ public class TrendsService {
         private String star = "0";
     }
 
-    @Data
-    public class PubTrends{
-        @Schema(description = "动态")
-        private String text;
-        @Schema(description = "上传的多图")
-        private String[] images;
-    }
 }

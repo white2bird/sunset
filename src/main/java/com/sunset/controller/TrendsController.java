@@ -1,5 +1,6 @@
 package com.sunset.controller;
 
+import com.sunset.entity.Trends.PubTrends;
 import com.sunset.service.TrendsService;
 import com.sunset.utils.AuthMsToken;
 import com.sunset.utils.ReturnJson;
@@ -9,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.sunset.entity.Trends.NewTrends;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Tag(name = "Trends")
 @RestController
@@ -26,7 +29,7 @@ public class TrendsController {
     @Operation(summary = "发表动态")
     @PostMapping("/publish")
     @AuthMsToken
-    public ReturnJson<String> pubListTrends(@RequestBody TrendsService.PubTrends pubTrends) {
-        return trendsService.setTrends(pubTrends);
+    public ReturnJson<String> pubListTrends(@RequestBody PubTrends pubTrends, HttpServletRequest request) {
+        return trendsService.setTrends(pubTrends,request);
     }
 }
