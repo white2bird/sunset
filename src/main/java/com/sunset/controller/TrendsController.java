@@ -1,8 +1,6 @@
 package com.sunset.controller;
 
-import com.sunset.entity.Trends.ListTrends;
-import com.sunset.entity.Trends.PageRends;
-import com.sunset.entity.Trends.PubTrends;
+import com.sunset.entity.Trends.*;
 import com.sunset.service.TrendsService;
 import com.sunset.utils.AuthMsToken;
 import com.sunset.utils.ReturnJson;
@@ -32,16 +30,27 @@ public class TrendsController {
     @Operation(summary = "发表动态")
     @PostMapping("/publish")
     @AuthMsToken
-    public ReturnJson<String> pubListTrends(@RequestBody PubTrends pubTrends, HttpServletRequest request) {
+    public ReturnJson<String> setTrends(@RequestBody PubTrends pubTrends, HttpServletRequest request) {
         return trendsService.setTrends(pubTrends,request);
     }
     @Operation(summary = "获取动态列表")
     @GetMapping("/get/list")
-    public ReturnJson<ListTrends> pubListTrends(@RequestParam(name = "uid", required = false) @Parameter(description="用户id") String uid, @Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows) {
+    public ReturnJson<ListTrends> getTrendslist(@RequestParam(name = "uid", required = false) @Parameter(description="用户id") String uid, @Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows) {
         PageRends p =new PageRends();
         p.setUid(uid);
         p.setPage_num(page_num);
         p.setPage_rows(page_rows);
         return trendsService.getTrendslist(p);
+    }
+    @Operation(summary = "获取动态详情")
+    @GetMapping("/get/detail")
+    public ReturnJson<ObjTrends> getTrendsDetail(@RequestParam(name = "trends_id") @Parameter(description="动态详情id") String trends_id) {
+        return trendsService.getTrendsDetail(trends_id);
+    }
+    @Operation(summary = "发表评论")
+    @PostMapping("/pub_comm")
+    @AuthMsToken
+    public ReturnJson<String> setTrendsComm(@RequestBody SetComm setComm,HttpServletRequest request) {
+        return trendsService.setTrendsComm(setComm,request);
     }
 }

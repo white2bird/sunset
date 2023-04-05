@@ -16,4 +16,12 @@
             where uid = #{uid}
         </if>
     </select>
+    <!--  动态详情  -->
+    <select id="GetTrensDetail" resultType="NewTrends">
+        select * from tb_trends where id = #{id}
+    </select>
+    <!--  发表评论  -->
+    <insert id="SetTrendsComm" parameterType="CommTrends">
+        insert into tb_comment (id,uid,trends_id,content,create_time) values (#{id},#{uid},#{trends_id},#{content},#{create_time});
+    </insert>
 </mapper>

@@ -16,19 +16,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sunset.mapper.SignMapper;
+
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Slf4j
 @Service
 public class TrendsService {
     @Autowired
     TrendsMapper trendsMapper;
+    @Autowired
     SignMapper signMapper;
 
     // 用户的关注，粉丝，关注
@@ -110,6 +109,45 @@ public class TrendsService {
         return ReturnJson.success(listTrends, "ok");
     }
 
+    // 动态详情
+    public ReturnJson<ObjTrends> getTrendsDetail(String id) {
+        NewTrends newTrends = trendsMapper.GetTrensDetail(id);
+        ObjTrends objTrends = new ObjTrends();
+        String uid = newTrends.getUid();
+        UserInfoEntity uinfo = signMapper.GetUserInfo(uid);
+        JSONArray images = JSONArray.parseArray(newTrends.getImages());
+        objTrends.setId(newTrends.getId());
+        objTrends.setNickname(uinfo.getNickname());
+        objTrends.setAvator(uinfo.getAvator());
+        objTrends.setUid(uinfo.getUid());
+        objTrends.setText(newTrends.getText());
+        objTrends.setImages(images);
+        objTrends.setStar(newTrends.getStar());
+        objTrends.setCreate_time(newTrends.getCreate_time());
+
+        return ReturnJson.success(objTrends,"ok");
+    }
+    // 发表评论
+    public ReturnJson<String> setTrendsComm(SetComm setComm,HttpServletRequest request){
+        String token = request.getHeader("ms_token");
+        Map<String, String> map = TokenUtils.SelectToken(token);
+        String uid = map.get("uid");
+        NewTrends newTrends = trendsMapper.GetTrensDetail(setComm.getTrends_id());
+        if(newTrends == null){
+            return ReturnJson.fail(-1,"该动态记录不存在");
+        }
+        CommTrends commTrends = new CommTrends();
+        String uuid = UUID.randomUUID().toString().toUpperCase();
+        commTrends.setId(uuid);
+        commTrends.setUid(uid);
+        commTrends.setTrends_id(setComm.getTrends_id());
+        commTrends.setContent(setComm.getContent());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String dateTime = formatter.format(LocalDateTime.now());
+        commTrends.setCreate_time(dateTime);
+        trendsMapper.SetTrendsComm(commTrends);
+        return ReturnJson.success(null,"ok");
+    }
     // 用于返回的用户关注，粉丝，获赞的新实体类
     @Data
     public static class UserFollows {

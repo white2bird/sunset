@@ -1,7 +1,6 @@
 package com.sunset.mapper;
 
-import com.sunset.entity.Trends.NewTrends;
-import com.sunset.entity.Trends.PageRends;
+import com.sunset.entity.Trends.*;
 import com.sunset.entity.User.UserFollow;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +15,8 @@ public interface TrendsMapper {
     int SetTrends(NewTrends newTrends);
     // 动态列表
     List<NewTrends> GetTrends(PageRends pageRends);
+    // 动态详情
+    NewTrends GetTrensDetail(String id);
+    // 发表评论
+    int SetTrendsComm(CommTrends commTrends);
 }
