@@ -1,33 +1,41 @@
 package com.sunset.service;
 
 import com.sunset.entity.User.UserFollow;
-import com.sunset.entity.User.UserInfoEntity;
-import com.sunset.mapper.SignMapper;
 import com.sunset.mapper.TrendsMapper;
 import com.sunset.utils.ReturnJson;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 @Service
 public class TrendsService {
     @Autowired
     TrendsMapper trendsMapper;
-
-    public ReturnJson<Map> getUserFollow(String uid) {
+    // 用户的关注，粉丝，关注
+    public ReturnJson<UserFollows> getUserFollow(String uid) {
         UserFollow userFollow = trendsMapper.GetUserFollw(uid);
-        HashMap<String, String> map = new HashMap<>();
-        map.put("following", userFollow.getFollowing());
-        map.put("followers", userFollow.getFollowers());
-        map.put("start", userFollow.getStar());
+        UserFollows userFollows = new UserFollows();
         if (userFollow == null) {
             return ReturnJson.fail(-1, "fail");
         }
+        userFollows.setFollowers(userFollow.getFollowers());
+        userFollows.setFollowing(userFollow.getFollowing());
+        userFollows.setStar(userFollow.getStar());
 
-        return ReturnJson.success(map, "ok");
+        return ReturnJson.success(userFollows, "ok");
+    }
+    // 用于返回的用户关注，粉丝，获赞的新实体类
+    @Data
+    public class UserFollows{
+        private String uid;
+        @Schema(description = "关注")
+        private String following = "0";
+        @Schema(description = "粉丝")
+        private String followers = "0";
+        @Schema(description = "获赞")
+        private String star = "0";
     }
 }

@@ -1,5 +1,6 @@
 package com.sunset.controller;
 
+import com.sunset.entity.User.UserFollow;
 import com.sunset.service.TrendsService;
 import com.sunset.utils.ReturnJson;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,7 +21,7 @@ public class TrendsController {
     TrendsService trendsService;
     @Operation(summary = "获取关注，粉丝，获赞数量")
     @GetMapping("/user/follow")
-    public ReturnJson<Map> getUserFollow(@RequestParam(name = "uid") String uid) {
+    public ReturnJson<TrendsService.UserFollows> getUserFollow(@RequestParam(name = "uid") String uid) {
         return trendsService.getUserFollow(uid);
     }
 }

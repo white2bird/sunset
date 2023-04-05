@@ -6,11 +6,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import static io.swagger.v3.oas.annotations.media.Schema.AccessMode.READ_ONLY;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserFollow {
+    @Schema(accessMode = READ_ONLY)
     private String id;
     private String uid;
     @Schema(description = "关注")
