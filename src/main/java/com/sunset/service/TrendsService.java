@@ -148,6 +148,42 @@ public class TrendsService {
         trendsMapper.SetTrendsComm(commTrends);
         return ReturnJson.success(null,"ok");
     }
+    // 根据动态id获取评论列表
+    public ReturnJson<ListComment> getTrendsComm(PageComm pageComm){
+        // 时间倒序
+        String orby = "create_time desc";
+        // 分页查询
+        PageHelper.startPage(pageComm.getPage_num(), pageComm.getPage_rows(), orby);
+        NewTrends newTrends = trendsMapper.GetTrensDetail(pageComm.getTrends_id());
+        if(newTrends == null){
+            return ReturnJson.fail(-1,"该动态不存在");
+        }
+        String id = pageComm.getTrends_id();
+        List<CommTrends> list =  trendsMapper.GetTrendsComm(id);
+        PageInfo<CommTrends> pageInfo = new PageInfo<>(list);
+        List<CommTrends> lists = pageInfo.getList();
+        List<CommTrends> newList = new ArrayList<>();
+        CommTrends commTrends = new CommTrends();
+        lists.forEach((x) -> {
+            UserInfoEntity uinfo = signMapper.GetUserInfo(x.getUid());
+            commTrends.setId(x.getId());
+            commTrends.setTrends_id(x.getTrends_id());
+            commTrends.setUid(x.getUid());
+            commTrends.setContent(x.getContent());
+            commTrends.setStar(x.getStar());
+            commTrends.setAvator(uinfo.getAvator());
+            commTrends.setNickname(uinfo.getNickname());
+            commTrends.setCreate_time(x.getCreate_time());
+            newList.add(commTrends);
+        });
+
+
+        ListComment listComment = new ListComment();
+        listComment.setTotal(pageInfo.getTotal());
+        listComment.setList(newList);
+
+        return ReturnJson.success(listComment,"ok");
+    }
     // 用于返回的用户关注，粉丝，获赞的新实体类
     @Data
     public static class UserFollows {

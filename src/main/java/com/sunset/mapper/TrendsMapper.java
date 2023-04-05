@@ -19,4 +19,6 @@ public interface TrendsMapper {
     NewTrends GetTrensDetail(String id);
     // 发表评论
     int SetTrendsComm(CommTrends commTrends);
+    // 根据动态id获取评论列表
+    List<CommTrends> GetTrendsComm(String id);
 }

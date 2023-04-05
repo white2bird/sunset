@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 @Tag(name = "Trends")
@@ -52,5 +53,14 @@ public class TrendsController {
     @AuthMsToken
     public ReturnJson<String> setTrendsComm(@RequestBody SetComm setComm,HttpServletRequest request) {
         return trendsService.setTrendsComm(setComm,request);
+    }
+    @Operation(summary = "根据动态id获取评论列表")
+    @GetMapping("/get/comment")
+    public ReturnJson<ListComment> getTrendsComm(@RequestParam(name = "trends_id", required = false) @Parameter(description="动态内容id") String trends_id, @Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows) {
+        PageComm p =new PageComm();
+        p.setTrends_id(trends_id);
+        p.setPage_num(page_num);
+        p.setPage_rows(page_rows);
+        return trendsService.getTrendsComm(p);
     }
 }
