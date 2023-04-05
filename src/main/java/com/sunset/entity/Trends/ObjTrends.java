@@ -8,6 +8,10 @@ import java.util.List;
 public class ObjTrends {
     private String id;
     private String uid;
+    @Schema(description = "头像")
+    private String avator;
+    @Schema(description = "昵称")
+    private String nickname;
     @Schema(description = "动态")
     private String text;
     @Schema(description = "图片集合")

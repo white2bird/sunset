@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sunset.entity.Trends.*;
 import com.sunset.entity.User.UserFollow;
+import com.sunset.entity.User.UserInfoEntity;
 import com.sunset.mapper.TrendsMapper;
 import com.sunset.utils.ReturnJson;
 import com.sunset.utils.TokenUtils;
@@ -14,7 +15,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.sunset.mapper.SignMapper;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -28,6 +29,7 @@ import java.util.UUID;
 public class TrendsService {
     @Autowired
     TrendsMapper trendsMapper;
+    SignMapper signMapper;
 
     // 用户的关注，粉丝，关注
     public ReturnJson<UserFollows> getUserFollow(String uid) {
@@ -80,6 +82,8 @@ public class TrendsService {
         List<NewTrends> lists = pageInfo.getList();
         List<ObjTrends> newList = new ArrayList<>();
         lists.forEach((x) -> {
+            UserInfoEntity uinfo = signMapper.GetUserInfo(x.getUid());
+
             ObjTrends objTrends = new ObjTrends();
             JSONArray images = JSONArray.parseArray(x.getImages());
             objTrends.setId(x.getId());
@@ -88,6 +92,10 @@ public class TrendsService {
             objTrends.setImages(images);
             objTrends.setStar(x.getStar());
             objTrends.setCreate_time(x.getCreate_time());
+
+            // 用户信息
+            objTrends.setAvator(uinfo.getAvator());
+            objTrends.setNickname(uinfo.getNickname());
             // 序列化处理完新加旧往新数组追加
             newList.add(objTrends);
         });
