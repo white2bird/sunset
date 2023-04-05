@@ -26,7 +26,7 @@
     </update>
     <!--  注册成功初始化用户信息  -->
     <insert id="UserInfoInsert" parameterType="com.sunset.entity.UserInfoEntity">
-        insert into tb_userinfo (id,nickname,avator,description,birthday,sex,height,weight,waistline,uid,showid,create_time,update_time) values (#{id},#{nickname},#{avator},#{description},#{birthday},#{sex},#{height},#{weight},#{waistline},#{uid},#{showid},#{create_time},#{update_time});
+        insert into tb_userinfo (id,nickname,avator,description,constellation,birthday,sex,height,weight,waistline,uid,showid,create_time,update_time) values (#{id},#{nickname},#{avator},#{description},#{constellation},#{birthday},#{sex},#{height},#{weight},#{waistline},#{uid},#{showid},#{create_time},#{update_time});
     </insert>
     <!--  获取用户信息  -->
     <select id="GetUserInfo" resultType="com.sunset.entity.UserInfoEntity">

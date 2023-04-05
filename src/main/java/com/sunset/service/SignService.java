@@ -74,7 +74,6 @@ public class SignService {
             String tmp = System.currentTimeMillis() + "";
             String showid = sid + tmp.substring(tmp.length() - 4, tmp.length());
             userInfoEntity.setShowid(showid);
-            userInfoEntity.setAvator("/avator/sunset202303311711.png");
 
             signMapper.RegisterInsert(registerEntity);
             signMapper.UserInfoInsert(userInfoEntity);
