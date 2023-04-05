@@ -150,15 +150,16 @@ public class TrendsService {
     }
     // 根据动态id获取评论列表
     public ReturnJson<ListComment> getTrendsComm(PageComm pageComm){
-        // 时间倒序
-        String orby = "create_time desc";
-        // 分页查询
-        PageHelper.startPage(pageComm.getPage_num(), pageComm.getPage_rows(), orby);
+
         NewTrends newTrends = trendsMapper.GetTrensDetail(pageComm.getTrends_id());
         if(newTrends == null){
             return ReturnJson.fail(-1,"该动态不存在");
         }
         String id = pageComm.getTrends_id();
+        // 时间倒序
+        String orby = "create_time desc";
+        // 分页查询
+        PageHelper.startPage(pageComm.getPage_num(), pageComm.getPage_rows(), orby);
         List<CommTrends> list =  trendsMapper.GetTrendsComm(id);
         PageInfo<CommTrends> pageInfo = new PageInfo<>(list);
         List<CommTrends> lists = pageInfo.getList();
@@ -176,7 +177,6 @@ public class TrendsService {
             commTrends.setCreate_time(x.getCreate_time());
             newList.add(commTrends);
         });
-
 
         ListComment listComment = new ListComment();
         listComment.setTotal(pageInfo.getTotal());
