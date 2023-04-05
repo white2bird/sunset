@@ -38,10 +38,15 @@ public class TrendsService {
         if (userFollow == null) {
             return ReturnJson.fail(-1, "fail");
         }
+        UserInfoEntity uinfo = signMapper.GetUserInfo(uid);
         userFollows.setFollowers(userFollow.getFollowers());
         userFollows.setFollowing(userFollow.getFollowing());
         userFollows.setStar(userFollow.getStar());
-
+        // 用户信息
+        userFollows.setNickname(uinfo.getNickname());
+        userFollows.setAvator(uinfo.getAvator());
+        userFollows.setConstellation(uinfo.getConstellation());
+        userFollows.setDescription(userFollows.getDescription());
         return ReturnJson.success(userFollows, "ok");
     }
 
@@ -109,6 +114,14 @@ public class TrendsService {
     @Data
     public static class UserFollows {
         private String uid;
+        @Schema(description = "昵称")
+        private String nickname;
+        @Schema(description = "头像")
+        private String avator;
+        @Schema(description = "简介")
+        private String description;
+        @Schema(description = "星座")
+        private String constellation;
         @Schema(description = "关注")
         private String following = "0";
         @Schema(description = "粉丝")
