@@ -9,4 +9,11 @@
     <insert id="SetTrends" parameterType="com.sunset.entity.Trends.NewTrends">
         insert into tb_trends (id,uid,text,images,create_time) values (#{id},#{uid},#{text},#{images},#{create_time});
     </insert>
+    <!-- 动态列表 -->
+    <select id="GetTrends" resultType="com.sunset.entity.Trends.NewTrends" >
+        select * from tb_trends
+        <if test="uid != null">
+            where uid = #{uid}
+        </if>
+    </select>
 </mapper>

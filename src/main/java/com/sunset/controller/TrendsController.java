@@ -1,17 +1,22 @@
 package com.sunset.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.sunset.entity.Trends.ListTrends;
+import com.sunset.entity.Trends.PageRends;
 import com.sunset.entity.Trends.PubTrends;
 import com.sunset.service.TrendsService;
 import com.sunset.utils.AuthMsToken;
 import com.sunset.utils.ReturnJson;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.sunset.entity.Trends.NewTrends;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 
 @Tag(name = "Trends")
 @RestController
@@ -31,5 +36,14 @@ public class TrendsController {
     @AuthMsToken
     public ReturnJson<String> pubListTrends(@RequestBody PubTrends pubTrends, HttpServletRequest request) {
         return trendsService.setTrends(pubTrends,request);
+    }
+    @Operation(summary = "获取用户动态列表")
+    @GetMapping("/get/list")
+    public ReturnJson<ListTrends> pubListTrends(@RequestParam(name = "uid", required = false) @Parameter(description="用户id") String uid, @Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows) {
+        PageRends p =new PageRends();
+        p.setUid(uid);
+        p.setPage_num(page_num);
+        p.setPage_rows(page_rows);
+        return trendsService.getTrendslist(p);
     }
 }

@@ -1,9 +1,16 @@
 package com.sunset.service;
 
+import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.sunset.entity.Trends.ListTrends;
+import com.sunset.entity.Trends.NewTrends;
+import com.sunset.entity.Trends.PageRends;
 import com.sunset.entity.Trends.PubTrends;
 import com.sunset.entity.User.UserFollow;
 import com.sunset.mapper.TrendsMapper;
 import com.sunset.utils.ReturnJson;
+import com.sunset.utils.TokenUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +18,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -30,11 +42,44 @@ public class TrendsService {
 
         return ReturnJson.success(userFollows, "ok");
     }
-
+    // 发表动态
     public ReturnJson<String> setTrends(PubTrends pubTrends, HttpServletRequest request){
-            log.info(""+pubTrends);
-//        NewTrends  s = trendsMapper.SetTrends(pubTrends);
+        NewTrends newTrends = new NewTrends();
+        String token = request.getHeader("ms_token");
+        Map<String, String> map = TokenUtils.SelectToken(token);
+        log.info("用户id：" + map.get("uid"));
+        String uid = map.get("uid");
+        String text = pubTrends.getText();
+        if(text == null || text == ""){
+            return ReturnJson.fail(-1,"发表的内容不能为空");
+        }
+        newTrends.setUid(uid);
+        String image = JSON.toJSONString(pubTrends.getImages());
+        newTrends.setImages(image);
+        newTrends.setText(pubTrends.getText());
+
+        String uuid = UUID.randomUUID().toString().toUpperCase();
+        newTrends.setId(uuid);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String dateTime = formatter.format(LocalDateTime.now());
+        newTrends.setCreate_time(dateTime);
+        trendsMapper.SetTrends(newTrends);
         return ReturnJson.success(null,"ok");
+    }
+    // 获取用户动态列表
+    public ReturnJson<ListTrends> getTrendslist(PageRends pageRends){
+        // 时间倒序
+        String orby = "create_time desc";
+        // 分页查询
+        PageHelper.startPage(pageRends.getPage_num(),pageRends.getPage_rows(),orby);
+        List<NewTrends> list= trendsMapper.GetTrends(pageRends);
+
+        PageInfo<NewTrends> pageInfo = new PageInfo<>(list);
+        ListTrends listTrends = new ListTrends();
+        listTrends.setTotal(pageInfo.getTotal());
+        listTrends.setList(pageInfo.getList());
+        log.info(""+listTrends);
+        return ReturnJson.success(listTrends,"ok");
     }
     // 用于返回的用户关注，粉丝，获赞的新实体类
     @Data
