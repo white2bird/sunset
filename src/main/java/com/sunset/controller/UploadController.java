@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Tag(name = "Upload")
 @RestController
@@ -22,7 +20,7 @@ import java.util.UUID;
 public class UploadController {
     String uploadImageUrl = "/src/main/resources/static/images/";
     String uploadAvatorUrl = "/src/main/resources/static/avator/";
-    @Operation(summary = "上传图片")
+    @Operation(summary = "上传图片【单图】")
     @PostMapping("/image")
     public ReturnJson<Map> UploadImage(@RequestParam("file") MultipartFile fImage) throws IOException {
        Map map= getImageMap(fImage,uploadImageUrl,"/images/");
@@ -34,7 +32,17 @@ public class UploadController {
         Map map= getImageMap(fImage,uploadAvatorUrl,"/avator/");
         return ReturnJson.success(map,"ok");
     }
-
+    @Operation(summary = "多图上传【多图】")
+    @PostMapping("/image_s")
+    public ReturnJson<List> UploadImage(@RequestParam("file") List<MultipartFile> fImage) throws IOException {
+        List<Map> list = new ArrayList<>();
+        for (int i = 0; i < fImage.size(); i++) {
+            MultipartFile mf = fImage.get(i);
+            Map map= getImageMap(mf,uploadImageUrl,"/images/");
+            list.add(map);
+        }
+        return ReturnJson.success(list,"ok");
+    }
 
     public Map getImageMap(MultipartFile params,String uploadUrl,String setPath) throws IOException {
         // 文件名
