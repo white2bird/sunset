@@ -29,7 +29,7 @@ public class TrendsController {
         return trendsService.getUserFollow(uid);
     }
     @Operation(summary = "发表动态")
-    @PostMapping("/pub/trands")
+    @PostMapping("/pub_trends")
     @AuthMsToken
     public ReturnJson<String> setTrends(@RequestBody PubTrends pubTrends, HttpServletRequest request) {
         return trendsService.setTrends(pubTrends,request);
