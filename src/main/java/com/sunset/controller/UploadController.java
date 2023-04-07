@@ -35,11 +35,11 @@ public class UploadController {
     @Operation(summary = "多图上传【多图】")
     @PostMapping("/image_s")
     public ReturnJson<List> UploadImage(@RequestParam("file") List<MultipartFile> fImage) throws IOException {
-        List<Map> list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         for (int i = 0; i < fImage.size(); i++) {
             MultipartFile mf = fImage.get(i);
             Map map= getImageMap(mf,uploadImageUrl,"/images/");
-            list.add(map);
+            list.add((String) map.get("path"));
         }
         return ReturnJson.success(list,"ok");
     }
