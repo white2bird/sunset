@@ -45,7 +45,7 @@ public class TrendsService {
         userFollows.setNickname(uinfo.getNickname());
         userFollows.setAvator(uinfo.getAvator());
         userFollows.setConstellation(uinfo.getConstellation());
-        userFollows.setDescription(userFollows.getDescription());
+        userFollows.setDescription(uinfo.getDescription());
         userFollows.setSex(uinfo.getSex());
         return ReturnJson.success(userFollows, "ok");
     }
