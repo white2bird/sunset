@@ -91,8 +91,8 @@ public class TrendsService {
             // 用户信息
             UserInfoEntity uinfo = signMapper.GetUserInfo(x.getUid());
             // 评论列表
+            PageHelper.startPage(1, 2, "create_time desc");
             List<CommTrends> commList = trendsMapper.GetTrendsComm(x.getId());
-            PageHelper.startPage(1, 3, "create_time desc");
             PageInfo<CommTrends> comm_page = new PageInfo<>(commList);
             ObjTrends objTrends = new ObjTrends();
 
