@@ -165,8 +165,8 @@ public class TrendsService {
         PageInfo<CommTrends> pageInfo = new PageInfo<>(list);
         List<CommTrends> lists = pageInfo.getList();
         List<CommTrends> newList = new ArrayList<>();
-        CommTrends commTrends = new CommTrends();
         lists.forEach((x) -> {
+            CommTrends commTrends = new CommTrends();
             UserInfoEntity uinfo = signMapper.GetUserInfo(x.getUid());
             commTrends.setId(x.getId());
             commTrends.setTrends_id(x.getTrends_id());
