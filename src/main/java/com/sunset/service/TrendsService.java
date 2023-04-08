@@ -10,6 +10,7 @@ import com.sunset.entity.User.UserInfoEntity;
 import com.sunset.mapper.TrendsMapper;
 import com.sunset.utils.ReturnJson;
 import com.sunset.utils.TokenUtils;
+import com.vdurmont.emoji.EmojiParser;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -142,7 +143,7 @@ public class TrendsService {
         commTrends.setId(uuid);
         commTrends.setUid(uid);
         commTrends.setTrends_id(setComm.getTrends_id());
-        commTrends.setContent(setComm.getContent());
+        commTrends.setContent(EmojiParser.parseToAliases(setComm.getContent()));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dateTime = formatter.format(LocalDateTime.now());
         commTrends.setCreate_time(dateTime);
@@ -171,7 +172,8 @@ public class TrendsService {
             commTrends.setId(x.getId());
             commTrends.setTrends_id(x.getTrends_id());
             commTrends.setUid(x.getUid());
-            commTrends.setContent(x.getContent());
+            // 解码数据库存储的 Emoji 表情符号
+            commTrends.setContent(EmojiParser.parseToUnicode(x.getContent()));
             commTrends.setStar(x.getStar());
             commTrends.setAvator(uinfo.getAvator());
             commTrends.setNickname(uinfo.getNickname());
