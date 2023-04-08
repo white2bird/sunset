@@ -65,7 +65,7 @@ public class TrendsService {
         newTrends.setUid(uid);
         String image = JSON.toJSONString(pubTrends.getImages());
         newTrends.setImages(image);
-        newTrends.setText(pubTrends.getText());
+        newTrends.setText(EmojiParser.parseToAliases(pubTrends.getText()));
 
         String uuid = UUID.randomUUID().toString().toUpperCase();
         newTrends.setId(uuid);
@@ -143,6 +143,7 @@ public class TrendsService {
         commTrends.setId(uuid);
         commTrends.setUid(uid);
         commTrends.setTrends_id(setComm.getTrends_id());
+        // 解码数据库存储的 Emoji 表情符号
         commTrends.setContent(EmojiParser.parseToAliases(setComm.getContent()));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dateTime = formatter.format(LocalDateTime.now());
