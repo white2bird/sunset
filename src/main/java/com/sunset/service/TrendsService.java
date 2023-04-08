@@ -63,8 +63,10 @@ public class TrendsService {
             return ReturnJson.fail(-1, "发表的内容不能为空");
         }
         newTrends.setUid(uid);
-        String image = JSON.toJSONString(pubTrends.getImages());
-        newTrends.setImages(image);
+        if(pubTrends.getImages() != null){
+            String image = JSON.toJSONString(pubTrends.getImages());
+            newTrends.setImages(image);
+        }
         newTrends.setText(EmojiParser.parseToAliases(pubTrends.getText()));
 
         String uuid = UUID.randomUUID().toString().toUpperCase();
@@ -131,7 +133,39 @@ public class TrendsService {
         listTrends.setList(newList);
         return ReturnJson.success(listTrends, "ok");
     }
+    // 含有图片的动态
+    public ReturnJson<ListTrends> getImgTrendsList(PageRends pageRends){
+        // 时间倒序
+        String orby = "create_time desc";
+        // 分页查询
+        PageHelper.startPage(pageRends.getPage_num(), pageRends.getPage_rows(), orby);
+        List<NewTrends> list = trendsMapper.GetImgTrends(pageRends);
 
+        PageInfo<NewTrends> pageInfo = new PageInfo<>(list);
+        List<NewTrends> lists = pageInfo.getList();
+        List<ObjTrends> newList = new ArrayList<>();
+        lists.forEach((x) -> {
+            // 用户信息
+            UserInfoEntity uinfo = signMapper.GetUserInfo(x.getUid());
+            ObjTrends objTrends = new ObjTrends();
+            JSONArray images = JSONArray.parseArray(x.getImages());
+            objTrends.setId(x.getId());
+            objTrends.setUid(x.getUid());
+            objTrends.setText(x.getText());
+            objTrends.setImages(images);
+            objTrends.setStar(x.getStar());
+            objTrends.setCreate_time(x.getCreate_time());
+            // 用户信息
+            objTrends.setAvator(uinfo.getAvator());
+            objTrends.setNickname(uinfo.getNickname());
+            // 序列化处理完新加旧往新数组追加
+            newList.add(objTrends);
+        });
+        ListTrends listTrends = new ListTrends();
+        listTrends.setTotal(pageInfo.getTotal());
+        listTrends.setList(newList);
+        return ReturnJson.success(listTrends, "ok");
+    }
     // 动态详情
     public ReturnJson<ObjTrends> getTrendsDetail(String id) {
         NewTrends newTrends = trendsMapper.GetTrensDetail(id);

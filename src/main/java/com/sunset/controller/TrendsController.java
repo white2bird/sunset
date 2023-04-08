@@ -43,6 +43,14 @@ public class TrendsController {
         p.setPage_rows(page_rows);
         return trendsService.getTrendslist(p);
     }
+    @Operation(summary = "获取动态列表【含有图片】")
+    @GetMapping("/home/get")
+    public ReturnJson<ListTrends> getTrendslist(@Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows) {
+        PageRends p =new PageRends();
+        p.setPage_num(page_num);
+        p.setPage_rows(page_rows);
+        return trendsService.getImgTrendsList(p);
+    }
     @Operation(summary = "获取动态详情")
     @GetMapping("/get/detail")
     public ReturnJson<ObjTrends> getTrendsDetail(@RequestParam(name = "trends_id") @Parameter(description="动态详情id") String trends_id) {

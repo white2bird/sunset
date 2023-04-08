@@ -16,6 +16,10 @@
             where uid = #{uid}
         </if>
     </select>
+    <!--  含图片的动态  -->
+    <select id="GetImgTrends" resultType="NewTrends" >
+        select * from tb_trends where images is not null
+    </select>
     <!--  动态详情  -->
     <select id="GetTrensDetail" resultType="NewTrends">
         select * from tb_trends where id = #{id}

@@ -15,6 +15,8 @@ public interface TrendsMapper {
     int SetTrends(NewTrends newTrends);
     // 动态列表
     List<NewTrends> GetTrends(PageRends pageRends);
+    // 含有图片的动态【首页】
+    List<NewTrends> GetImgTrends(PageRends pageRends);
     // 动态详情
     NewTrends GetTrensDetail(String id);
     // 发表评论
