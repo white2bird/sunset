@@ -46,6 +46,7 @@ public class TrendsService {
         userFollows.setAvator(uinfo.getAvator());
         userFollows.setConstellation(uinfo.getConstellation());
         userFollows.setDescription(userFollows.getDescription());
+        userFollows.setSex(uinfo.getSex());
         return ReturnJson.success(userFollows, "ok");
     }
 
@@ -192,6 +193,8 @@ public class TrendsService {
         private String nickname;
         @Schema(description = "头像")
         private String avator;
+        @Schema(description = "性别")
+        private Integer sex;
         @Schema(description = "简介")
         private String description;
         @Schema(description = "星座")
