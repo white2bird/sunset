@@ -88,9 +88,15 @@ public class TrendsService {
         List<NewTrends> lists = pageInfo.getList();
         List<ObjTrends> newList = new ArrayList<>();
         lists.forEach((x) -> {
+            // 用户信息
             UserInfoEntity uinfo = signMapper.GetUserInfo(x.getUid());
-
+            // 评论列表
+            List<CommTrends> commList = trendsMapper.GetTrendsComm(x.getId());
+            PageHelper.startPage(1, 3, "create_time desc");
+            PageInfo<CommTrends> comm_page = new PageInfo<>(commList);
             ObjTrends objTrends = new ObjTrends();
+
+
             JSONArray images = JSONArray.parseArray(x.getImages());
             objTrends.setId(x.getId());
             objTrends.setUid(x.getUid());
@@ -98,10 +104,25 @@ public class TrendsService {
             objTrends.setImages(images);
             objTrends.setStar(x.getStar());
             objTrends.setCreate_time(x.getCreate_time());
-
+            objTrends.setComment_num(comm_page.getTotal());
             // 用户信息
             objTrends.setAvator(uinfo.getAvator());
             objTrends.setNickname(uinfo.getNickname());
+            List<CommTrends> comm_list = comm_page.getList();
+
+            List<CommThree> newComm_list = new ArrayList<>();
+            // 这里挂载前三条最新的评论
+            comm_list.forEach((y) -> {
+                // 挂载用户信息
+                UserInfoEntity ucomInfo = signMapper.GetUserInfo(y.getUid());
+                CommThree commThree = new CommThree();
+                commThree.setNickname(ucomInfo.getNickname());
+                commThree.setComment(y.getContent());
+                newComm_list.add(commThree);
+            });
+            objTrends.setComment_list(newComm_list);
+
+
             // 序列化处理完新加旧往新数组追加
             newList.add(objTrends);
         });
@@ -127,16 +148,17 @@ public class TrendsService {
         objTrends.setStar(newTrends.getStar());
         objTrends.setCreate_time(newTrends.getCreate_time());
 
-        return ReturnJson.success(objTrends,"ok");
+        return ReturnJson.success(objTrends, "ok");
     }
+
     // 发表评论
-    public ReturnJson<String> setTrendsComm(SetComm setComm,HttpServletRequest request){
+    public ReturnJson<String> setTrendsComm(SetComm setComm, HttpServletRequest request) {
         String token = request.getHeader("ms_token");
         Map<String, String> map = TokenUtils.SelectToken(token);
         String uid = map.get("uid");
         NewTrends newTrends = trendsMapper.GetTrensDetail(setComm.getTrends_id());
-        if(newTrends == null){
-            return ReturnJson.fail(-1,"该动态不存在");
+        if (newTrends == null) {
+            return ReturnJson.fail(-1, "该动态不存在");
         }
         CommTrends commTrends = new CommTrends();
         String uuid = UUID.randomUUID().toString().toUpperCase();
@@ -149,21 +171,22 @@ public class TrendsService {
         String dateTime = formatter.format(LocalDateTime.now());
         commTrends.setCreate_time(dateTime);
         trendsMapper.SetTrendsComm(commTrends);
-        return ReturnJson.success(null,"ok");
+        return ReturnJson.success(null, "ok");
     }
+
     // 根据动态id获取评论列表
-    public ReturnJson<ListComment> getTrendsComm(PageComm pageComm){
+    public ReturnJson<ListComment> getTrendsComm(PageComm pageComm) {
 
         NewTrends newTrends = trendsMapper.GetTrensDetail(pageComm.getTrends_id());
-        if(newTrends == null){
-            return ReturnJson.fail(-1,"该动态不存在");
+        if (newTrends == null) {
+            return ReturnJson.fail(-1, "该动态不存在");
         }
         String id = pageComm.getTrends_id();
         // 时间倒序
         String orby = "create_time desc";
         // 分页查询
         PageHelper.startPage(pageComm.getPage_num(), pageComm.getPage_rows(), orby);
-        List<CommTrends> list =  trendsMapper.GetTrendsComm(id);
+        List<CommTrends> list = trendsMapper.GetTrendsComm(id);
         PageInfo<CommTrends> pageInfo = new PageInfo<>(list);
         List<CommTrends> lists = pageInfo.getList();
         List<CommTrends> newList = new ArrayList<>();
@@ -186,8 +209,9 @@ public class TrendsService {
         listComment.setTotal(pageInfo.getTotal());
         listComment.setList(newList);
 
-        return ReturnJson.success(listComment,"ok");
+        return ReturnJson.success(listComment, "ok");
     }
+
     // 用于返回的用户关注，粉丝，获赞的新实体类
     @Data
     public static class UserFollows {

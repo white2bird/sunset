@@ -18,6 +18,10 @@ public class ObjTrends {
     private List images;
     @Schema(description = "点赞数量")
     private String star;
+    @Schema(description = "评论数量")
+    private long comment_num;
+    @Schema(description = "前三评论")
+    private List<CommThree> comment_list;
     @Schema(description = "发布时间")
     private String create_time;
 }
