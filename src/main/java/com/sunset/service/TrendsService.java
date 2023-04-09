@@ -46,7 +46,7 @@ public class TrendsService {
         userFollows.setNickname(uinfo.getNickname());
         userFollows.setAvator(uinfo.getAvator());
         userFollows.setConstellation(uinfo.getConstellation());
-        userFollows.setDescription(uinfo.getDescription());
+        userFollows.setDescription(EmojiParser.parseToUnicode(uinfo.getDescription()));
         userFollows.setSex(uinfo.getSex());
         return ReturnJson.success(userFollows, "ok");
     }
@@ -123,7 +123,6 @@ public class TrendsService {
                 commThree.setNickname(ucomInfo.getNickname());
                 // 解码数据库存储的 Emoji 表情符号
                 commThree.setComment(EmojiParser.parseToUnicode(y.getContent()));
-//                commThree.setComment(y.getContent());
                 newComm_list.add(commThree);
             });
             objTrends.setComment_list(newComm_list);

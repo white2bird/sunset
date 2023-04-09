@@ -10,6 +10,7 @@ import com.sunset.mapper.SignMapper;
 import com.sunset.mapper.TrendsMapper;
 import com.sunset.utils.ReturnJson;
 import com.sunset.utils.TokenUtils;
+import com.vdurmont.emoji.EmojiParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -173,6 +174,7 @@ public class SignService {
         Map<String, String> map = TokenUtils.SelectToken(token);
         String uid = map.get("uid");
         UserInfoEntity userInfoEntity = signMapper.GetUserInfo(uid);
+        userInfoEntity.setDescription(EmojiParser.parseToUnicode(userInfoEntity.getDescription()));
         return ReturnJson.success(userInfoEntity, "ok");
     }
     // 更新用户信息
@@ -180,6 +182,7 @@ public class SignService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dateTime = formatter.format(LocalDateTime.now());
         userInfoEntity.setUpdate_time(dateTime);
+        userInfoEntity.setDescription(EmojiParser.parseToAliases(userInfoEntity.getDescription()));
         log.info(String.valueOf(userInfoEntity));
         int state = userInfoEntity.getState();
         // 仅更新用户简介
