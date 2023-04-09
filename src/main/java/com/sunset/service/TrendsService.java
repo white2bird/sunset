@@ -182,7 +182,8 @@ public class TrendsService {
         objTrends.setNickname(uinfo.getNickname());
         objTrends.setAvator(uinfo.getAvator());
         objTrends.setUid(uinfo.getUid());
-        objTrends.setText(newTrends.getText());
+        // 解码数据库存储的 Emoji 表情符号
+        objTrends.setText(EmojiParser.parseToUnicode(newTrends.getText()));
         objTrends.setImages(images);
         objTrends.setStar(newTrends.getStar());
         objTrends.setCreate_time(newTrends.getCreate_time());

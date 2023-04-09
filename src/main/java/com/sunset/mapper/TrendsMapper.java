@@ -8,7 +8,8 @@ import java.util.List;
 
 @Repository
 public interface TrendsMapper {
-
+    // 初始化关注，粉丝，获赞
+    int SetInitFollow(UserFollow userFollow);
     // 获取用户关注，粉丝，获赞
     UserFollow GetUserFollw(String uid);
     // 发布动态

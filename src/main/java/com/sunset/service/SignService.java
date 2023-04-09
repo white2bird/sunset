@@ -4,8 +4,10 @@ import com.sunset.entity.Sign.LoginPwd;
 import com.sunset.entity.Sign.LoginVerCode;
 import com.sunset.entity.Sign.PwdEntity;
 import com.sunset.entity.Sign.RegisterEntity;
+import com.sunset.entity.User.UserFollow;
 import com.sunset.entity.User.UserInfoEntity;
 import com.sunset.mapper.SignMapper;
+import com.sunset.mapper.TrendsMapper;
 import com.sunset.utils.ReturnJson;
 import com.sunset.utils.TokenUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +27,8 @@ import java.util.UUID;
 public class SignService {
     @Autowired
     SignMapper signMapper;
-
+    @Autowired
+    TrendsMapper trendsMapper;
     // 注册 【待用】
     public ReturnJson<String> RegisterInsert(RegisterEntity registerEntity) {
         String phone = registerEntity.phone;
@@ -79,6 +82,16 @@ public class SignService {
             String showid = sid + tmp.substring(tmp.length() - 4, tmp.length());
             userInfoEntity.setShowid(showid);
 
+            // 初始化粉丝，关注，获赞
+            UserFollow userFollow = new UserFollow();
+            userFollow.setFollowers("0");
+            userFollow.setStar("0");
+            userFollow.setFollowers("0");
+            userFollow.setUid(uuid);
+            String followId = UUID.randomUUID().toString().toUpperCase();
+            userFollow.setId(followId);
+
+            trendsMapper.SetInitFollow(userFollow);
             signMapper.RegisterInsert(registerEntity);
             signMapper.UserInfoInsert(userInfoEntity);
             RegisterEntity p1 = signMapper.FindUserPhone(phone);
