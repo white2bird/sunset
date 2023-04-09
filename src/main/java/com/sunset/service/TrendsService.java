@@ -103,7 +103,8 @@ public class TrendsService {
             JSONArray images = JSONArray.parseArray(x.getImages());
             objTrends.setId(x.getId());
             objTrends.setUid(x.getUid());
-            objTrends.setText(x.getText());
+            // 解码数据库存储的 Emoji 表情符号
+            objTrends.setText(EmojiParser.parseToUnicode(x.getText()));
             objTrends.setImages(images);
             objTrends.setStar(x.getStar());
             objTrends.setCreate_time(x.getCreate_time());
@@ -120,7 +121,9 @@ public class TrendsService {
                 UserInfoEntity ucomInfo = signMapper.GetUserInfo(y.getUid());
                 CommThree commThree = new CommThree();
                 commThree.setNickname(ucomInfo.getNickname());
-                commThree.setComment(y.getContent());
+                // 解码数据库存储的 Emoji 表情符号
+                commThree.setComment(EmojiParser.parseToUnicode(y.getContent()));
+//                commThree.setComment(y.getContent());
                 newComm_list.add(commThree);
             });
             objTrends.setComment_list(newComm_list);
@@ -152,7 +155,8 @@ public class TrendsService {
             JSONArray images = JSONArray.parseArray(x.getImages());
             objTrends.setId(x.getId());
             objTrends.setUid(x.getUid());
-            objTrends.setText(x.getText());
+            // 解码数据库存储的 Emoji 表情符号
+            objTrends.setText(EmojiParser.parseToUnicode(x.getText()));
             objTrends.setImages(images);
             objTrends.setStar(x.getStar());
             objTrends.setCreate_time(x.getCreate_time());
