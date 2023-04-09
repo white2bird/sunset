@@ -88,6 +88,7 @@ public class TrendsService {
 
         PageInfo<NewTrends> pageInfo = new PageInfo<>(list);
         List<NewTrends> lists = pageInfo.getList();
+        log.info(""+list);
         List<ObjTrends> newList = new ArrayList<>();
         lists.forEach((x) -> {
             // 用户信息
