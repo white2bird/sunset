@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 
 @Tag(name = "Sign")
 @RestController
@@ -83,7 +84,7 @@ public class SignController {
     @Operation(summary = "更新用户信息")
     @PostMapping("/update/userinfo")
     @AuthMsToken
-    public ReturnJson<String> updateUserinfo(@RequestBody UserInfoEntity userInfoEntity, HttpServletRequest request) {
+    public ReturnJson<String> updateUserinfo(@RequestBody UserInfoEntity userInfoEntity, HttpServletRequest request) throws ParseException {
         return signService.UpdateUserInfo(userInfoEntity, request);
     }
 

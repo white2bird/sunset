@@ -38,6 +38,7 @@
                                avator=#{avator},
                                birthday=#{birthday},
                                description=#{description},
+                               constellation=#{constellation},
                                sex=#{sex},
                                height=#{height},
                                weight=#{weight},

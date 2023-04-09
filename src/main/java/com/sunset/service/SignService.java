@@ -17,11 +17,11 @@ import org.springframework.stereotype.Service;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -178,13 +178,22 @@ public class SignService {
         return ReturnJson.success(userInfoEntity, "ok");
     }
     // 更新用户信息
-    public  ReturnJson<String> UpdateUserInfo(UserInfoEntity userInfoEntity,HttpServletRequest request){
+    public  ReturnJson<String> UpdateUserInfo(UserInfoEntity userInfoEntity,HttpServletRequest request) throws ParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dateTime = formatter.format(LocalDateTime.now());
         userInfoEntity.setUpdate_time(dateTime);
         userInfoEntity.setDescription(EmojiParser.parseToAliases(userInfoEntity.getDescription()));
         log.info(String.valueOf(userInfoEntity));
         int state = userInfoEntity.getState();
+        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(userInfoEntity.getBirthday());
+        // 根据日期转换星座
+        Calendar calender = Calendar.getInstance();
+        calender.setTime(date);
+        int month = calender.get(Calendar.MONTH);
+        int day = calender.get(Calendar.DATE);
+        String constellation = constellation(month+1, day);
+        log.info(constellation);
+        userInfoEntity.setConstellation(constellation);
         // 仅更新用户简介
         if(state == 1){
             signMapper.UpdateUserDesc(userInfoEntity);
@@ -206,4 +215,46 @@ public class SignService {
         }
         return ReturnJson.fail(-1,"账号不存在");
     }
+
+    public static String constellation(int month, int day) {
+        String constellation = "";
+        if (month == 1 && day >= 20 || month == 2 && day <= 18) {
+            constellation = "水瓶座";
+        }
+        if (month == 2 && day >= 19 || month == 3 && day <= 20) {
+            constellation = "双鱼座";
+        }
+        if (month == 3 && day >= 21 || month == 4 && day <= 19) {
+            constellation = "白羊座";
+        }
+        if (month == 4 && day >= 20 || month == 5 && day <= 20) {
+            constellation = "金牛座";
+        }
+        if (month == 5 && day >= 21 || month == 6 && day <= 21) {
+            constellation = "双子座";
+        }
+        if (month == 6 && day >= 22 || month == 7 && day <= 22) {
+            constellation = "巨蟹座";
+        }
+        if (month == 7 && day >= 23 || month == 8 && day <= 22) {
+            constellation = "狮子座";
+        }
+        if (month == 8 && day >= 23 || month == 9 && day <= 22) {
+            constellation = "处女座";
+        }
+        if (month == 9 && day >= 23 || month == 10 && day <= 23) {
+            constellation = "天秤座";
+        }
+        if (month == 10 && day >= 24 || month == 11 && day <= 22) {
+            constellation = "天蝎座";
+        }
+        if (month == 11 && day >= 23 || month == 12 && day <= 21) {
+            constellation = "射手座";
+        }
+        if (month == 12 && day >= 22 || month == 1 && day <= 19) {
+            constellation = "摩羯座";
+        }
+        return constellation;
+    }
+
 }
