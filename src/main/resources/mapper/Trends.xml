@@ -18,7 +18,7 @@
     </select>
     <!--  含图片的动态  -->
     <select id="GetImgTrends" resultType="NewTrends" >
-        select * from tb_trends where images is not null
+        select * from tb_trends where images is not null and images != "" and images != "[]"
     </select>
     <!--  动态详情  -->
     <select id="GetTrensDetail" resultType="NewTrends">
