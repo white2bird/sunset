@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sunset.entity.Sign.FollowComm;
+import com.sunset.entity.User.FollowComm;
 import com.sunset.entity.Trends.*;
 import com.sunset.entity.User.UserFollow;
 import com.sunset.entity.User.UserInfoEntity;
@@ -64,7 +64,7 @@ public class TrendsService {
             return ReturnJson.fail(-1, "发表的内容不能为空");
         }
         newTrends.setUid(uid);
-        if(pubTrends.getImages() != null){
+        if (pubTrends.getImages() != null) {
             String image = JSON.toJSONString(pubTrends.getImages());
             newTrends.setImages(image);
         }
@@ -80,7 +80,10 @@ public class TrendsService {
     }
 
     // 获取用户动态列表
-    public ReturnJson<ListTrends> getTrendslist(PageRends pageRends) {
+    public ReturnJson<ListTrends> getTrendslist(PageRends pageRends, HttpServletRequest request) {
+        String token = request.getHeader("ms_token");
+        Map<String, String> map = TokenUtils.SelectToken(token);
+        String uid = map.get("uid");
         // 时间倒序
         String orby = "create_time desc";
         // 分页查询
@@ -89,7 +92,6 @@ public class TrendsService {
 
         PageInfo<NewTrends> pageInfo = new PageInfo<>(list);
         List<NewTrends> lists = pageInfo.getList();
-        log.info(""+list);
         List<ObjTrends> newList = new ArrayList<>();
         lists.forEach((x) -> {
             // 用户信息
@@ -99,8 +101,17 @@ public class TrendsService {
             List<CommTrends> commList = trendsMapper.GetTrendsComm(x.getId());
             PageInfo<CommTrends> comm_page = new PageInfo<>(commList);
             ObjTrends objTrends = new ObjTrends();
-
-
+            // 判断动态是否有点赞
+            if (uid != null) {
+                String isStar = trendsMapper.FindIsStar(x.getId(), uid);
+                if (isStar != null) {
+                    objTrends.setIsstar(true);
+                } else {
+                    objTrends.setIsstar(false);
+                }
+            } else {
+                objTrends.setIsstar(false);
+            }
             JSONArray images = JSONArray.parseArray(x.getImages());
             objTrends.setId(x.getId());
             objTrends.setUid(x.getUid());
@@ -137,8 +148,9 @@ public class TrendsService {
         listTrends.setList(newList);
         return ReturnJson.success(listTrends, "ok");
     }
+
     // 含有图片的动态
-    public ReturnJson<ListTrends> getImgTrendsList(PageRends pageRends){
+    public ReturnJson<ListTrends> getImgTrendsList(PageRends pageRends) {
         // 时间倒序
         String orby = "create_time desc";
         // 分页查询
@@ -171,6 +183,7 @@ public class TrendsService {
         listTrends.setList(newList);
         return ReturnJson.success(listTrends, "ok");
     }
+
     // 动态详情
     public ReturnJson<ObjTrends> getTrendsDetail(String id) {
         NewTrends newTrends = trendsMapper.GetTrensDetail(id);
@@ -251,18 +264,25 @@ public class TrendsService {
 
         return ReturnJson.success(listComment, "ok");
     }
+
     // 点赞
-    public ReturnJson<String> setTrendsStar(String id,HttpServletRequest request){
+    public ReturnJson<String> setTrendsStar(String id, HttpServletRequest request) {
         String token = request.getHeader("ms_token");
         Map<String, String> map = TokenUtils.SelectToken(token);
         String uid = map.get("uid");
-       FollowComm followComm = trendsMapper.FindIsStar(id,uid);
-       if(followComm != null){
-           trendsMapper.DeleteStar(followComm.getId());
-           return ReturnJson.success("取消点赞ok","ok");
+        String followComm_id = trendsMapper.FindIsStar(id, uid);
+
+        NewTrends newTrends = trendsMapper.GetTrensDetail(id);
+        int star = newTrends.getStar() == null ? 0 : Integer.parseInt(newTrends.getStar());
+        if (followComm_id != null) {
+            trendsMapper.DeleteStar(followComm_id);
+            star = star - 1;
+            // 动态列表 star 减一
+            trendsMapper.UpdateTrendsStar(star + "", id);
+            return ReturnJson.success("取消点赞ok", "ok");
         }
-       FollowComm fcomm = new FollowComm();
-       String uuid = UUID.randomUUID().toString().toUpperCase();
+        FollowComm fcomm = new FollowComm();
+        String uuid = UUID.randomUUID().toString().toUpperCase();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dateTime = formatter.format(LocalDateTime.now());
         fcomm.setId(uuid);
@@ -270,9 +290,13 @@ public class TrendsService {
         fcomm.setUid(uid);
         fcomm.setCreate_time(dateTime);
         fcomm.setType(0);
+        star = star + 1;
+        // 动态列表 star 增一
+        trendsMapper.UpdateTrendsStar(star + "", id);
         trendsMapper.SetTrendsStar(fcomm);
-       return ReturnJson.success("点赞ok","ok");
+        return ReturnJson.success("点赞ok", "ok");
     }
+
     // 用于返回的用户关注，粉丝，获赞的新实体类
     @Data
     public static class UserFollows {

@@ -28,6 +28,10 @@
     <select id="GetTrensDetail" resultType="NewTrends">
         select * from tb_trends where id = #{id}
     </select>
+    <!--  更新动态点赞  -->
+    <update id="UpdateTrendsStar" parameterType="NewTrends">
+        update tb_trends set star=#{star} where id = #{id}
+    </update>
     <!--  发表评论  -->
     <insert id="SetTrendsComm" parameterType="CommTrends">
         insert into tb_comment (id,uid,trends_id,content,create_time) values (#{id},#{uid},#{trends_id},#{content},#{create_time});
@@ -37,15 +41,15 @@
         select * from tb_comment where trends_id=#{id}
     </select>
     <!--  动态点赞  -->
-    <insert id="SetTrendsComm" parameterType="CommTrends">
+    <insert id="SetTrendsStar" parameterType="CommTrends">
         insert into tb_followComm (id,uid,trends_id,comment_id,type,create_time) values (#{id},#{uid},#{trends_id},#{comment_id},#{type},#{create_time});
     </insert>
     <!--  查询是否点赞  -->
-    <select id="FindIsStar" resultType="CommTrends">
-        select * from tb_followComm where trends_id=#{id} and uid= #{uid}
+    <select id="FindIsStar" resultType="String">
+        select id from tb_followComm where trends_id= #{trends_id} and uid= #{uid}
     </select>
     <!--  删除一条点赞记录  -->
-    <delete id="deleteStar" parameterType="CommTrends">
+    <delete id="DeleteStar" parameterType="CommTrends">
         delete from tb_followComm where id = #{id}
     </delete>
 </mapper>

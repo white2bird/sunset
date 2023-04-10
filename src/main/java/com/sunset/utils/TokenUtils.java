@@ -24,11 +24,15 @@ public class TokenUtils {
     }
 
     public static HashMap<String, String> SelectToken(String token) {
-        JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(key)).build(); // 传入签名
-        DecodedJWT verify = jwtVerifier.verify(token);// 传入token
-        Claim uid = verify.getClaim("uid");
         HashMap<String, String> map = new HashMap<>();
+        if(token != null){
+            JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(key)).build(); // 传入签名
+            DecodedJWT verify = jwtVerifier.verify(token);// 传入token
+            Claim uid = verify.getClaim("uid");
         map.put("uid", uid.asString());
+        }else{
+            map.put("uid", null);
+        }
         return map;
     }
 }

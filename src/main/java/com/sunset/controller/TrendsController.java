@@ -36,12 +36,12 @@ public class TrendsController {
     }
     @Operation(summary = "获取动态列表")
     @GetMapping("/get/list")
-    public ReturnJson<ListTrends> getTrendslist(@RequestParam(name = "uid", required = false) @Parameter(description="用户id") String uid, @Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows) {
+    public ReturnJson<ListTrends> getTrendslist(@RequestParam(name = "uid", required = false) @Parameter(description="用户id") String uid, @Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows,HttpServletRequest request) {
         PageRends p =new PageRends();
         p.setUid(uid);
         p.setPage_num(page_num);
         p.setPage_rows(page_rows);
-        return trendsService.getTrendslist(p);
+        return trendsService.getTrendslist(p,request);
     }
     @Operation(summary = "获取动态列表【含有图片】")
     @GetMapping("/home/get")

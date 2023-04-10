@@ -18,6 +18,8 @@ public class ObjTrends {
     private List images;
     @Schema(description = "点赞数量")
     private String star;
+    @Schema(description = "是否点赞")
+    private boolean isstar;
     @Schema(description = "评论数量")
     private long comment_num;
     @Schema(description = "前三评论")
