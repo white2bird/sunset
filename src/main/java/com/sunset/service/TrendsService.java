@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sunset.entity.Sign.FollowComm;
 import com.sunset.entity.Trends.*;
 import com.sunset.entity.User.UserFollow;
 import com.sunset.entity.User.UserInfoEntity;
@@ -250,7 +251,28 @@ public class TrendsService {
 
         return ReturnJson.success(listComment, "ok");
     }
-
+    // 点赞
+    public ReturnJson<String> setTrendsStar(String id,HttpServletRequest request){
+        String token = request.getHeader("ms_token");
+        Map<String, String> map = TokenUtils.SelectToken(token);
+        String uid = map.get("uid");
+       FollowComm followComm = trendsMapper.FindIsStar(id,uid);
+       if(followComm != null){
+           trendsMapper.DeleteStar(followComm.getId());
+           return ReturnJson.success("取消点赞ok","ok");
+        }
+       FollowComm fcomm = new FollowComm();
+       String uuid = UUID.randomUUID().toString().toUpperCase();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String dateTime = formatter.format(LocalDateTime.now());
+        fcomm.setId(uuid);
+        fcomm.setTrends_id(id);
+        fcomm.setUid(uid);
+        fcomm.setCreate_time(dateTime);
+        fcomm.setType(0);
+        trendsMapper.SetTrendsStar(fcomm);
+       return ReturnJson.success("点赞ok","ok");
+    }
     // 用于返回的用户关注，粉丝，获赞的新实体类
     @Data
     public static class UserFollows {

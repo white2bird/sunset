@@ -1,5 +1,6 @@
 package com.sunset.mapper;
 
+import com.sunset.entity.Sign.FollowComm;
 import com.sunset.entity.Trends.*;
 import com.sunset.entity.User.UserFollow;
 import org.springframework.stereotype.Repository;
@@ -24,4 +25,10 @@ public interface TrendsMapper {
     int SetTrendsComm(CommTrends commTrends);
     // 根据动态id获取评论列表
     List<CommTrends> GetTrendsComm(String id);
+    // 动态点赞
+    int SetTrendsStar (FollowComm followComm);
+    // 是否点赞
+    FollowComm FindIsStar(String trends_id, String uid);
+    // 删除一条点赞记录
+    int DeleteStar(String id);
 }

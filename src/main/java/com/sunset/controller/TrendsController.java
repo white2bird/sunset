@@ -71,4 +71,10 @@ public class TrendsController {
         p.setPage_rows(page_rows);
         return trendsService.getTrendsComm(p);
     }
+    @Operation(summary = "动态文章点赞")
+    @PostMapping("/set_star")
+    @AuthMsToken
+    public  ReturnJson<String> setTrendsStar(@RequestParam(name = "trends_id", required = false) @Parameter(description="动态内容id") String trends_id,HttpServletRequest request){
+        return trendsService.setTrendsStar(trends_id,request);
+    }
 }

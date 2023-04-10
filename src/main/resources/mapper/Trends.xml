@@ -3,11 +3,11 @@
 <mapper namespace="com.sunset.mapper.TrendsMapper">
     <!--  初始化用户关注，粉丝，获赞   -->
     <insert id="SetInitFollow" parameterType="UserFollow">
-        insert into tb_follow (id,uid,following,followers,star) values (#{id},#{uid},#{following},#{followers},#{star});
+        insert into tb_userFollow (id,uid,following,followers,star) values (#{id},#{uid},#{following},#{followers},#{star});
     </insert>
     <!--  获取用户关注，粉丝，获赞  -->
     <select id="GetUserFollw" resultType="com.sunset.entity.User.UserFollow">
-        select * from tb_follow where uid=#{uid}
+        select * from tb_userFollow where uid=#{uid}
     </select>
     <!--  发布动态  -->
     <insert id="SetTrends" parameterType="com.sunset.entity.Trends.NewTrends">
@@ -36,4 +36,16 @@
     <select id="GetTrendsComm" resultType="CommTrends">
         select * from tb_comment where trends_id=#{id}
     </select>
+    <!--  动态点赞  -->
+    <insert id="SetTrendsComm" parameterType="CommTrends">
+        insert into tb_followComm (id,uid,trends_id,comment_id,type,create_time) values (#{id},#{uid},#{trends_id},#{comment_id},#{type},#{create_time});
+    </insert>
+    <!--  查询是否点赞  -->
+    <select id="FindIsStar" resultType="CommTrends">
+        select * from tb_followComm where trends_id=#{id} and uid= #{uid}
+    </select>
+    <!--  删除一条点赞记录  -->
+    <delete id="deleteStar" parameterType="CommTrends">
+        delete from tb_followComm where id = #{id}
+    </delete>
 </mapper>
