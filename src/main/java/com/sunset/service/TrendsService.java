@@ -273,7 +273,8 @@ public class TrendsService {
         String followComm_id = trendsMapper.FindIsStar(id, uid);
 
         NewTrends newTrends = trendsMapper.GetTrensDetail(id);
-        int star = newTrends.getStar() == null ? 0 : Integer.parseInt(newTrends.getStar());
+        String s = newTrends.getStar();
+        int star = s == null || s.equals("") ? 0 : Integer.parseInt(newTrends.getStar());
         String userUid = trendsMapper.FindUserFollow(newTrends.getUid());
         log.info(userUid);
         if (followComm_id != null) {
