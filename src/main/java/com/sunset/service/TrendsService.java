@@ -89,7 +89,6 @@ public class TrendsService {
         // 分页查询
         PageHelper.startPage(pageRends.getPage_num(), pageRends.getPage_rows(), orby);
         List<NewTrends> list = trendsMapper.GetTrends(pageRends);
-
         PageInfo<NewTrends> pageInfo = new PageInfo<>(list);
         List<NewTrends> lists = pageInfo.getList();
         List<ObjTrends> newList = new ArrayList<>();
