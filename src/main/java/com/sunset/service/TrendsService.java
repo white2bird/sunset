@@ -312,17 +312,15 @@ public class TrendsService {
         String token = request.getHeader("ms_token");
         Map<String, String> map = TokenUtils.SelectToken(token);
         String uid = map.get("uid");
-        String commid = trendsMapper.FindCommentStar(trends_id,comment_id, uid);
-
+        String commid = trendsMapper.FindCommentStar(comment_id,trends_id, uid);
         CommTrends trendsComm = trendsMapper.GetCommentDetail(comment_id);
-        log.info(String.valueOf(trendsComm.getStar()));
-        int star = trendsComm.getStar() == null ? 0 : Integer.parseInt(trendsComm.getStar());
+        String s = trendsComm.getStar();
+        int star = s == null || s.equals("") ? 0 : Integer.parseInt(s);
         if (commid != null) {
-
             trendsMapper.DeleteCommentStar(commid);
-            // 动态列表 star 减一
+            // 评论列表 star 减一
             star = star - 1;
-            trendsMapper.UpdateCommentStar(star + "", commid);
+            trendsMapper.UpdateCommentStar(star + "", comment_id);
             return ReturnJson.success("取消评论点赞ok", "ok");
         }
         FollowComm fcomm = new FollowComm();
@@ -335,10 +333,10 @@ public class TrendsService {
         fcomm.setCreate_time(dateTime);
         fcomm.setComment_id(comment_id);
         fcomm.setType(0);
-        // 动态列表 star 增一
+        // 评论列表 star 增一
         star = star + 1;
-        trendsMapper.UpdateCommentStar(star + "", commid);
-        trendsMapper.SetTrendsStar(fcomm);
+        trendsMapper.UpdateCommentStar(star + "", comment_id);
+        trendsMapper.SetCommentStar(fcomm);
         return ReturnJson.success("点赞评论ok", "ok");
     }
     // 用于返回的用户关注，粉丝，获赞的新实体类

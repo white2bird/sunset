@@ -43,7 +43,7 @@ public interface TrendsMapper {
     // 评论点赞
     int SetCommentStar (FollowComm followComm);
     // 评论是否点赞
-    String FindCommentStar(String trends_id, String uid,String comment_id);
+    String FindCommentStar(String comment_id,String trends_id, String uid);
     // 删除一条评论点赞记录
     int DeleteCommentStar(String id);
     // 更新评论详情里的点赞 +1

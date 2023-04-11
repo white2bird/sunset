@@ -62,7 +62,7 @@
     </insert>
     <!--  查询是否点赞 【评论】 -->
     <select id="FindCommentStar" resultType="String">
-        select id from tb_followComm where trends_id= #{trends_id} and uid= #{uid} and comment_id = #{comment_id}
+        select id from tb_followComm where trends_id= #{trends_id} and comment_id = #{comment_id} and uid= #{uid}
     </select>
     <!--  取消点赞【评论】  -->
     <delete id="DeleteCommentStar" parameterType="CommTrends">
