@@ -33,4 +33,8 @@ public interface TrendsMapper {
     int DeleteStar(String id);
     // 更新动态详情里的点赞 +1
     int UpdateTrendsStar(String star,String id);
+    // 查询用户记录表中是否点赞
+    String FindUserFollow(String uid);
+    //更新用户表点赞
+    int UpdateUserStar(String star,String uid);
 }

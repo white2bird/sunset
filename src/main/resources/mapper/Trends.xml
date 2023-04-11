@@ -52,4 +52,12 @@
     <delete id="DeleteStar" parameterType="CommTrends">
         delete from tb_followComm where id = #{id}
     </delete>
+    <!--  查询用户点赞集合  -->
+    <select id="FindUserFollow" resultType="String">
+        select uid from tb_userfollow where uid= #{uid}
+    </select>
+    <!--  插入用户点赞  -->
+    <update id="UpdateUserStar" parameterType="UserFollow">
+        update tb_userfollow set star=#{star} where uid = #{uid}
+    </update>
 </mapper>

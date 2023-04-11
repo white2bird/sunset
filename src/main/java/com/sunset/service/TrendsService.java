@@ -274,10 +274,17 @@ public class TrendsService {
 
         NewTrends newTrends = trendsMapper.GetTrensDetail(id);
         int star = newTrends.getStar() == null ? 0 : Integer.parseInt(newTrends.getStar());
+        String userUid = trendsMapper.FindUserFollow(newTrends.getUid());
+        log.info(userUid);
         if (followComm_id != null) {
+
             trendsMapper.DeleteStar(followComm_id);
-            star = star - 1;
             // 动态列表 star 减一
+            star = star - 1;
+            if (userUid != null) {
+                log.info(String.valueOf(star));
+                trendsMapper.UpdateUserStar(star + "", userUid);
+            }
             trendsMapper.UpdateTrendsStar(star + "", id);
             return ReturnJson.success("取消点赞ok", "ok");
         }
@@ -290,8 +297,12 @@ public class TrendsService {
         fcomm.setUid(uid);
         fcomm.setCreate_time(dateTime);
         fcomm.setType(0);
-        star = star + 1;
         // 动态列表 star 增一
+        star = star + 1;
+        if (userUid != null) {
+            log.info(String.valueOf(star));
+            trendsMapper.UpdateUserStar(star + "", userUid);
+        }
         trendsMapper.UpdateTrendsStar(star + "", id);
         trendsMapper.SetTrendsStar(fcomm);
         return ReturnJson.success("点赞ok", "ok");
