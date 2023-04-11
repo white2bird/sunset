@@ -77,4 +77,10 @@ public class TrendsController {
     public  ReturnJson<String> setTrendsStar(@RequestParam(name = "trends_id", required = false) @Parameter(description="动态内容id") String trends_id,HttpServletRequest request){
         return trendsService.setTrendsStar(trends_id,request);
     }
+    @Operation(summary = "评论点赞")
+    @PostMapping("/comment/set_star")
+    @AuthMsToken
+    public  ReturnJson<String> setTrendsStar(@RequestParam(name = "comment_id", required = false) @Parameter(description="评论id") String comment_id,@RequestParam(name = "trends_id", required = false) @Parameter(description="动态内容id") String trends_id,HttpServletRequest request){
+        return trendsService.setCommentStar(comment_id,trends_id,request);
+    }
 }

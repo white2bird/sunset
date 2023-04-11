@@ -37,4 +37,15 @@ public interface TrendsMapper {
     String FindUserFollow(String uid);
     //更新用户表点赞
     int UpdateUserStar(String star,String uid);
+
+    // 评论点赞详情
+    CommTrends GetCommentDetail(String id);
+    // 评论点赞
+    int SetCommentStar (FollowComm followComm);
+    // 评论是否点赞
+    String FindCommentStar(String trends_id, String uid,String comment_id);
+    // 删除一条评论点赞记录
+    int DeleteCommentStar(String id);
+    // 更新评论详情里的点赞 +1
+    int UpdateCommentStar(String star,String id);
 }

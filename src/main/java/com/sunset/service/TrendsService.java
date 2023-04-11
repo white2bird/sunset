@@ -265,7 +265,7 @@ public class TrendsService {
         return ReturnJson.success(listComment, "ok");
     }
 
-    // 点赞
+    // 动态点赞
     public ReturnJson<String> setTrendsStar(String id, HttpServletRequest request) {
         String token = request.getHeader("ms_token");
         Map<String, String> map = TokenUtils.SelectToken(token);
@@ -307,7 +307,40 @@ public class TrendsService {
         trendsMapper.SetTrendsStar(fcomm);
         return ReturnJson.success("点赞ok", "ok");
     }
+    // 评论点赞
+    public ReturnJson<String> setCommentStar(String comment_id,String trends_id,HttpServletRequest request){
+        String token = request.getHeader("ms_token");
+        Map<String, String> map = TokenUtils.SelectToken(token);
+        String uid = map.get("uid");
+        String commid = trendsMapper.FindCommentStar(trends_id,comment_id, uid);
 
+        CommTrends trendsComm = trendsMapper.GetCommentDetail(comment_id);
+        log.info(String.valueOf(trendsComm.getStar()));
+        int star = trendsComm.getStar() == null ? 0 : Integer.parseInt(trendsComm.getStar());
+        if (commid != null) {
+
+            trendsMapper.DeleteCommentStar(commid);
+            // 动态列表 star 减一
+            star = star - 1;
+            trendsMapper.UpdateCommentStar(star + "", commid);
+            return ReturnJson.success("取消评论点赞ok", "ok");
+        }
+        FollowComm fcomm = new FollowComm();
+        String uuid = UUID.randomUUID().toString().toUpperCase();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String dateTime = formatter.format(LocalDateTime.now());
+        fcomm.setId(uuid);
+        fcomm.setTrends_id(trends_id);
+        fcomm.setUid(uid);
+        fcomm.setCreate_time(dateTime);
+        fcomm.setComment_id(comment_id);
+        fcomm.setType(0);
+        // 动态列表 star 增一
+        star = star + 1;
+        trendsMapper.UpdateCommentStar(star + "", commid);
+        trendsMapper.SetTrendsStar(fcomm);
+        return ReturnJson.success("点赞评论ok", "ok");
+    }
     // 用于返回的用户关注，粉丝，获赞的新实体类
     @Data
     public static class UserFollows {
