@@ -30,11 +30,11 @@ public class InterceptorConfig extends HandlerInterceptorAdapter {
             return true;
         }
         String msToken = request.getHeader("ms_token");
-        log.info("获取的token：" + msToken);
+//        log.info("获取的token：" + msToken);
         if (msToken != null) {
             HashMap<String, String> map = TokenUtils.SelectToken(msToken);
             String uid = map.get("uid");
-            log.info("解析token：" + uid);
+//            log.info("解析token：" + uid);
             return true;
         }else{
             // token过期
