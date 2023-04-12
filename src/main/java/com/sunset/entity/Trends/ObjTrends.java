@@ -17,7 +17,7 @@ public class ObjTrends {
     @Schema(description = "图片集合")
     private List images;
     @Schema(description = "点赞数量")
-    private String star;
+    private Integer star;
     @Schema(description = "是否点赞")
     private boolean isstar;
     @Schema(description = "评论数量")

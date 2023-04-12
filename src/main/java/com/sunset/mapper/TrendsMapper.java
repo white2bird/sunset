@@ -32,11 +32,11 @@ public interface TrendsMapper {
     // 删除一条点赞记录
     int DeleteStar(String id);
     // 更新动态详情里的点赞 +1
-    int UpdateTrendsStar(String star,String id);
+    int UpdateTrendsStar(Integer star,String id);
     // 查询用户记录表中是否点赞
     String FindUserFollow(String uid);
     //更新用户表点赞
-    int UpdateUserStar(String star,String uid);
+    int UpdateUserStar(Integer star,String uid);
 
     // 评论点赞详情
     CommTrends GetCommentDetail(String id);
@@ -47,5 +47,11 @@ public interface TrendsMapper {
     // 删除一条评论点赞记录
     int DeleteCommentStar(String id);
     // 更新评论详情里的点赞 +1
-    int UpdateCommentStar(String star,String id);
+    int UpdateCommentStar(Integer star,String id);
+    // 关注
+    int SetUserFollow(Followers followers);
+    // 是否关注
+    String FindIsFollow(String uid,String my_id);
+    // 取消关注
+    int DeleteFollow(String id);
 }

@@ -85,9 +85,9 @@ public class SignService {
 
             // 初始化粉丝，关注，获赞
             UserFollow userFollow = new UserFollow();
-            userFollow.setFollowers("0");
-            userFollow.setStar("0");
-            userFollow.setFollowers("0");
+            userFollow.setFollowers(0);
+            userFollow.setStar(0);
+            userFollow.setFollowers(0);
             userFollow.setUid(uuid);
             String followId = UUID.randomUUID().toString().toUpperCase();
             userFollow.setId(followId);

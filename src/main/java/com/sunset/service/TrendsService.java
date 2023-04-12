@@ -227,8 +227,10 @@ public class TrendsService {
     }
 
     // 根据动态id获取评论列表
-    public ReturnJson<ListComment> getTrendsComm(PageComm pageComm) {
-
+    public ReturnJson<ListComment> getTrendsComm(PageComm pageComm,HttpServletRequest request) {
+        String token = request.getHeader("ms_token");
+        Map<String, String> map = TokenUtils.SelectToken(token);
+        String uid = map.get("uid");
         NewTrends newTrends = trendsMapper.GetTrensDetail(pageComm.getTrends_id());
         if (newTrends == null) {
             return ReturnJson.fail(-1, "该动态不存在");
@@ -248,6 +250,14 @@ public class TrendsService {
             commTrends.setId(x.getId());
             commTrends.setTrends_id(x.getTrends_id());
             commTrends.setUid(x.getUid());
+            // 判断动态是否有点赞
+            if (uid != null) {
+                String isStar = trendsMapper.FindCommentStar(x.getId(),x.getTrends_id(), uid);
+                commTrends.setIsstar(isStar != null);
+            } else {
+                commTrends.setIsstar(false);
+            }
+
             // 解码数据库存储的 Emoji 表情符号
             commTrends.setContent(EmojiParser.parseToUnicode(x.getContent()));
             commTrends.setStar(x.getStar());
@@ -272,8 +282,8 @@ public class TrendsService {
         String followComm_id = trendsMapper.FindIsStar(id, uid);
 
         NewTrends newTrends = trendsMapper.GetTrensDetail(id);
-        String s = newTrends.getStar();
-        int star = s == null || s.equals("") ? 0 : Integer.parseInt(newTrends.getStar());
+        Integer s = newTrends.getStar();
+        Integer star = s <=0 ? 0 : newTrends.getStar();
         String userUid = trendsMapper.FindUserFollow(newTrends.getUid());
         log.info(userUid);
         if (followComm_id != null) {
@@ -282,10 +292,9 @@ public class TrendsService {
             // 动态列表 star 减一
             star = star - 1;
             if (userUid != null) {
-                log.info(String.valueOf(star));
-                trendsMapper.UpdateUserStar(star + "", userUid);
+                trendsMapper.UpdateUserStar(star, userUid);
             }
-            trendsMapper.UpdateTrendsStar(star + "", id);
+            trendsMapper.UpdateTrendsStar(star, id);
             return ReturnJson.success("取消点赞ok", "ok");
         }
         FollowComm fcomm = new FollowComm();
@@ -300,10 +309,9 @@ public class TrendsService {
         // 动态列表 star 增一
         star = star + 1;
         if (userUid != null) {
-            log.info(String.valueOf(star));
-            trendsMapper.UpdateUserStar(star + "", userUid);
+            trendsMapper.UpdateUserStar(star, userUid);
         }
-        trendsMapper.UpdateTrendsStar(star + "", id);
+        trendsMapper.UpdateTrendsStar(star, id);
         trendsMapper.SetTrendsStar(fcomm);
         return ReturnJson.success("点赞ok", "ok");
     }
@@ -314,13 +322,13 @@ public class TrendsService {
         String uid = map.get("uid");
         String commid = trendsMapper.FindCommentStar(comment_id,trends_id, uid);
         CommTrends trendsComm = trendsMapper.GetCommentDetail(comment_id);
-        String s = trendsComm.getStar();
-        int star = s == null || s.equals("") ? 0 : Integer.parseInt(s);
+        Integer s = trendsComm.getStar();
+        int star = s <= 0 ? 0 : s;
         if (commid != null) {
             trendsMapper.DeleteCommentStar(commid);
             // 评论列表 star 减一
             star = star - 1;
-            trendsMapper.UpdateCommentStar(star + "", comment_id);
+            trendsMapper.UpdateCommentStar(star, comment_id);
             return ReturnJson.success("取消评论点赞ok", "ok");
         }
         FollowComm fcomm = new FollowComm();
@@ -335,9 +343,34 @@ public class TrendsService {
         fcomm.setType(0);
         // 评论列表 star 增一
         star = star + 1;
-        trendsMapper.UpdateCommentStar(star + "", comment_id);
+        trendsMapper.UpdateCommentStar(star, comment_id);
         trendsMapper.SetCommentStar(fcomm);
         return ReturnJson.success("点赞评论ok", "ok");
+    }
+    // 关注
+    public ReturnJson<String> setUserFollows(String uid,HttpServletRequest request){
+        String token = request.getHeader("ms_token");
+        Map<String, String> map = TokenUtils.SelectToken(token);
+        String u_id = map.get("uid");
+        Followers followers = new Followers();
+
+        // 查询是否关注
+        String follow_id = trendsMapper.FindIsFollow(uid,u_id);
+        // 查询用户 & 自己的关注表
+        String userUid = trendsMapper.FindUserFollow(uid);
+        if(follow_id != null){
+            trendsMapper.DeleteFollow(follow_id);
+            return ReturnJson.success("取消关注成功","ok");
+        }
+        String uuid = UUID.randomUUID().toString().toUpperCase();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String dateTime = formatter.format(LocalDateTime.now());
+        followers.setId(uuid);
+        followers.setUid(uid);
+        followers.setMy_id(u_id);
+        followers.setCreate_time(dateTime);
+        trendsMapper.SetUserFollow(followers);
+        return ReturnJson.success("关注成功","ok");
     }
     // 用于返回的用户关注，粉丝，获赞的新实体类
     @Data
@@ -354,10 +387,10 @@ public class TrendsService {
         @Schema(description = "星座")
         private String constellation;
         @Schema(description = "关注")
-        private String following = "0";
+        private Integer following = 0;
         @Schema(description = "粉丝")
-        private String followers = "0";
+        private Integer followers =0;
         @Schema(description = "获赞")
-        private String star = "0";
+        private Integer star = 0;
     }
 }

@@ -18,7 +18,7 @@ public class CommTrends {
     @Schema(description = "用户头像")
     private String avator;
     @Schema(description = "评论获赞数")
-    private String star;
+    private Integer star;
     @Schema(description = "是否点赞")
     private boolean isstar;
     @Schema(description = "发表评论时间")

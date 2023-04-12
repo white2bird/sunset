@@ -17,9 +17,9 @@ public class UserFollow {
     private String id;
     private String uid;
     @Schema(description = "关注")
-    private String following = "0";
+    private Integer following = 0;
     @Schema(description = "粉丝")
-    private String followers = "0";
+    private Integer followers = 0;
     @Schema(description = "获赞")
-    private String star = "0";
+    private Integer star = 0;
 }

@@ -80,4 +80,16 @@
     <update id="UpdateUserStar" parameterType="UserFollow">
         update tb_userfollow set star=#{star} where uid = #{uid}
     </update>
+    <!--  关注  -->
+    <insert id="SetUserFollow" parameterType="Followers">
+        insert into tb_follower (id,uid,my_id,create_time) values (#{id},#{uid},#{my_id},#{create_time});
+    </insert>
+    <!-- 查询是否关注 -->
+    <select id="FindIsFollow" resultType="String">
+        select id from tb_follower where uid= #{uid} and my_id=#{my_id}
+    </select>
+    <!--  取消关注【删除一条关注记录】  -->
+    <delete id="DeleteFollow" parameterType="UserFollow">
+        delete from tb_follower where id = #{id}
+    </delete>
 </mapper>
