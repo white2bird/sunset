@@ -53,8 +53,8 @@ public class TrendsController {
     }
     @Operation(summary = "获取动态详情")
     @GetMapping("/get/detail")
-    public ReturnJson<ObjTrends> getTrendsDetail(@RequestParam(name = "trends_id") @Parameter(description="动态详情id") String trends_id) {
-        return trendsService.getTrendsDetail(trends_id);
+    public ReturnJson<ObjTrends> getTrendsDetail(@RequestParam(name = "trends_id") @Parameter(description="动态详情id") String trends_id,HttpServletRequest request) {
+        return trendsService.getTrendsDetail(trends_id,request);
     }
     @Operation(summary = "发表评论")
     @PostMapping("/pub/comment")

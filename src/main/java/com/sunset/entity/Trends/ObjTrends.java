@@ -20,6 +20,8 @@ public class ObjTrends {
     private Integer star;
     @Schema(description = "是否点赞")
     private boolean isstar;
+    @Schema(description = "是否关注")
+    private boolean isfollow;
     @Schema(description = "评论数量")
     private long comment_num;
     @Schema(description = "前三评论")

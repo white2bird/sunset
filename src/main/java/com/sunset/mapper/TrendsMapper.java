@@ -54,4 +54,8 @@ public interface TrendsMapper {
     String FindIsFollow(String uid,String my_id);
     // 取消关注
     int DeleteFollow(String id);
+    // 更新用户粉丝
+    int UpdateUserFollowers(Integer followers,String uid);
+    // 更新用户关注
+    int UpdateUserFollowing(Integer following,String uid);
 }

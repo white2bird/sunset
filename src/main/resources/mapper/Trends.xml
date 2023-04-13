@@ -9,6 +9,14 @@
     <select id="GetUserFollw" resultType="UserFollow">
         select * from tb_userFollow where uid=#{uid}
     </select>
+    <!--  更新关注 -->
+    <update id="UpdateUserFollowing" parameterType="UserFollow">
+        update tb_userFollow set following=#{following} where uid = #{uid}
+    </update>
+    <!--  更新粉丝 -->
+    <update id="UpdateUserFollowers" parameterType="UserFollow">
+        update tb_userFollow set followers=#{followers} where uid = #{uid}
+    </update>
     <!--  发布动态  -->
     <insert id="SetTrends" parameterType="NewTrends">
         insert into tb_trends (id,uid,text,images,create_time) values (#{id},#{uid},#{text},#{images},#{create_time});

@@ -93,13 +93,21 @@ public class TrendsService {
         List<NewTrends> lists = pageInfo.getList();
         List<ObjTrends> newList = new ArrayList<>();
         lists.forEach((x) -> {
+            ObjTrends objTrends = new ObjTrends();
+            // 是否关注
+            String isFollow = trendsMapper.FindIsFollow(x.getUid(),uid);
+            // 判断查询是否关注 || 自己不能关注自己
+            if(isFollow != null || Objects.equals(x.getUid(), uid)){
+               objTrends.setIsfollow(true);
+            }else{
+                objTrends.setIsfollow(false);
+            }
             // 用户信息
             UserInfoEntity uinfo = signMapper.GetUserInfo(x.getUid());
             // 评论列表
             PageHelper.startPage(1, 3, "create_time desc");
             List<CommTrends> commList = trendsMapper.GetTrendsComm(x.getId());
             PageInfo<CommTrends> comm_page = new PageInfo<>(commList);
-            ObjTrends objTrends = new ObjTrends();
             // 判断动态是否有点赞
             if (uid != null) {
                 String isStar = trendsMapper.FindIsStar(x.getId(), uid);
@@ -184,12 +192,24 @@ public class TrendsService {
     }
 
     // 动态详情
-    public ReturnJson<ObjTrends> getTrendsDetail(String id) {
+    public ReturnJson<ObjTrends> getTrendsDetail(String id,HttpServletRequest request) {
+        String token = request.getHeader("ms_token");
+        Map<String, String> map = TokenUtils.SelectToken(token);
+        String u_id = map.get("uid");
+
         NewTrends newTrends = trendsMapper.GetTrensDetail(id);
         ObjTrends objTrends = new ObjTrends();
         String uid = newTrends.getUid();
         UserInfoEntity uinfo = signMapper.GetUserInfo(uid);
         JSONArray images = JSONArray.parseArray(newTrends.getImages());
+
+        // 查询用户 & 自己的关注表
+        String follow_id = trendsMapper.FindIsFollow(uid,u_id);
+        if(follow_id != null || Objects.equals(uid, u_id)){
+            objTrends.setIsfollow(true);
+        }else{
+            objTrends.setIsfollow(false);
+        }
         objTrends.setId(newTrends.getId());
         objTrends.setNickname(uinfo.getNickname());
         objTrends.setAvator(uinfo.getAvator());
@@ -352,16 +372,28 @@ public class TrendsService {
         String token = request.getHeader("ms_token");
         Map<String, String> map = TokenUtils.SelectToken(token);
         String u_id = map.get("uid");
+        if(Objects.equals(u_id, uid)){
+            return ReturnJson.fail(-1,"自己不能关注自己");
+        }
         Followers followers = new Followers();
-
-        // 查询是否关注
-        String follow_id = trendsMapper.FindIsFollow(uid,u_id);
+        int fonum = 0;
         // 查询用户 & 自己的关注表
-        String userUid = trendsMapper.FindUserFollow(uid);
+        String follow_id = trendsMapper.FindIsFollow(uid,u_id);
         if(follow_id != null){
             trendsMapper.DeleteFollow(follow_id);
+            fonum = fonum <= 0 ? 0 : fonum - 1;
+            // 增加粉丝【给对方增加一个粉丝】
+            trendsMapper.UpdateUserFollowers(fonum,uid);
+            // 增加关注【给自己增加一个关注者】
+            trendsMapper.UpdateUserFollowing(fonum,u_id);
             return ReturnJson.success("取消关注成功","ok");
         }
+        fonum = fonum+ 1;
+
+        // 增加粉丝【给对方增加一个粉丝】
+        trendsMapper.UpdateUserFollowers(fonum,uid);
+        // 增加关注【给自己增加一个关注者】
+        trendsMapper.UpdateUserFollowing(fonum,u_id);
         String uuid = UUID.randomUUID().toString().toUpperCase();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dateTime = formatter.format(LocalDateTime.now());
