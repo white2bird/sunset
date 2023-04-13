@@ -270,9 +270,10 @@ public class TrendsService {
             commTrends.setId(x.getId());
             commTrends.setTrends_id(x.getTrends_id());
             commTrends.setUid(x.getUid());
-            // 判断动态是否有点赞
+            // 判断评论是否有点赞
             if (uid != null) {
                 String isStar = trendsMapper.FindCommentStar(x.getId(),x.getTrends_id(), uid);
+                log.info(isStar);
                 commTrends.setIsstar(isStar != null);
             } else {
                 commTrends.setIsstar(false);
@@ -303,7 +304,7 @@ public class TrendsService {
 
         NewTrends newTrends = trendsMapper.GetTrensDetail(id);
         Integer s = newTrends.getStar();
-        Integer star = s <=0 ? 0 : newTrends.getStar();
+        int star = s <=0 ? 0 : newTrends.getStar();
         String userUid = trendsMapper.FindUserFollow(newTrends.getUid());
         log.info(userUid);
         if (followComm_id != null) {
