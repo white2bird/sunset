@@ -4,11 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sunset.entity.User.CommStar;
-import com.sunset.entity.User.FollowComm;
+import com.sunset.entity.User.*;
 import com.sunset.entity.Trends.*;
-import com.sunset.entity.User.UserFollow;
-import com.sunset.entity.User.UserInfoEntity;
 import com.sunset.mapper.TrendsMapper;
 import com.sunset.utils.ReturnJson;
 import com.sunset.utils.TokenUtils;
@@ -417,6 +414,23 @@ public class TrendsService {
         followers.setCreate_time(dateTime);
         trendsMapper.SetUserFollow(followers);
         return ReturnJson.success("关注成功","ok");
+    }
+    // 关注列表
+    public ReturnJson<List> getFollowList(FollowPage followPage,HttpServletRequest request){
+        String token = request.getHeader("ms_token");
+        Map<String, String> map = TokenUtils.SelectToken(token);
+        String uid = map.get("uid");
+        // 时间倒序
+        String orby = "create_time desc";
+        // 分页查询
+        PageHelper.startPage(followPage.getPage_num(), followPage.getPage_rows(), orby);
+        List<Followers> list = trendsMapper.FindFollow(followPage);
+        PageInfo<Followers> pageInfo = new PageInfo<>(list);
+        List<Followers> lists = pageInfo.getList();
+        log.info("---"+lists);
+        List<FollowAll> newList = new ArrayList<>();
+
+        return ReturnJson.success(null,"ok");
     }
     // 用于返回的用户关注，粉丝，获赞的新实体类
     @Data

@@ -96,6 +96,10 @@
     <select id="FindIsFollow" resultType="String">
         select id from tb_follower where uid= #{uid} and my_id=#{my_id}
     </select>
+    <!-- 关注列表 -->
+    <select id="FindFollow" resultType="Followers">
+        select uid,my_id from tb_follower where my_id=#{my_id}
+    </select>
     <!--  取消关注【删除一条关注记录】  -->
     <delete id="DeleteFollow" parameterType="UserFollow">
         delete from tb_follower where id = #{id}

@@ -3,6 +3,7 @@ package com.sunset.mapper;
 import com.sunset.entity.User.CommStar;
 import com.sunset.entity.User.FollowComm;
 import com.sunset.entity.Trends.*;
+import com.sunset.entity.User.FollowPage;
 import com.sunset.entity.User.UserFollow;
 import org.springframework.stereotype.Repository;
 
@@ -59,4 +60,6 @@ public interface TrendsMapper {
     int UpdateUserFollowers(Integer followers,String uid);
     // 更新用户关注
     int UpdateUserFollowing(Integer following,String uid);
+    // 关注列表
+    List<Followers> FindFollow(FollowPage followPage);
 }
