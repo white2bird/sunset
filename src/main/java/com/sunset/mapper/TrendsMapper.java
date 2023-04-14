@@ -1,5 +1,6 @@
 package com.sunset.mapper;
 
+import com.sunset.entity.User.CommStar;
 import com.sunset.entity.User.FollowComm;
 import com.sunset.entity.Trends.*;
 import com.sunset.entity.User.UserFollow;
@@ -41,7 +42,7 @@ public interface TrendsMapper {
     // 评论点赞详情
     CommTrends GetCommentDetail(String id);
     // 评论点赞
-    int SetCommentStar (FollowComm followComm);
+    int SetCommentStar (CommStar commStar);
     // 评论是否点赞
     String FindCommentStar(String comment_id,String trends_id, String uid);
     // 删除一条评论点赞记录

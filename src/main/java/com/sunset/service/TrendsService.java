@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sunset.entity.User.CommStar;
 import com.sunset.entity.User.FollowComm;
 import com.sunset.entity.Trends.*;
 import com.sunset.entity.User.UserFollow;
@@ -326,7 +327,6 @@ public class TrendsService {
         fcomm.setTrends_id(id);
         fcomm.setUid(uid);
         fcomm.setCreate_time(dateTime);
-        fcomm.setType(0);
         // 动态列表 star 增一
         star = star + 1;
         if (userUid != null) {
@@ -352,20 +352,19 @@ public class TrendsService {
             trendsMapper.UpdateCommentStar(star, comment_id);
             return ReturnJson.success("取消评论点赞ok", "ok");
         }
-        FollowComm fcomm = new FollowComm();
+        CommStar commStar = new CommStar();
         String uuid = UUID.randomUUID().toString().toUpperCase();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dateTime = formatter.format(LocalDateTime.now());
-        fcomm.setId(uuid);
-        fcomm.setTrends_id(trends_id);
-        fcomm.setUid(uid);
-        fcomm.setCreate_time(dateTime);
-        fcomm.setComment_id(comment_id);
-        fcomm.setType(0);
+        commStar.setId(uuid);
+        commStar.setTrends_id(trends_id);
+        commStar.setComment_id(comment_id);
+        commStar.setUid(uid);
+        commStar.setCreate_time(dateTime);
         // 评论列表 star 增一
         star = star + 1;
         trendsMapper.UpdateCommentStar(star, comment_id);
-        trendsMapper.SetCommentStar(fcomm);
+        trendsMapper.SetCommentStar(commStar);
         return ReturnJson.success("点赞评论ok", "ok");
     }
     // 关注

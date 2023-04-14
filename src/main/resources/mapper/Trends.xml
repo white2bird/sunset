@@ -65,7 +65,7 @@
         select * from tb_comment where id = #{id}
     </select>
     <!--  点赞 【评论】 -->
-    <insert id="SetCommentStar" parameterType="CommTrends">
+    <insert id="SetCommentStar" parameterType="CommStar">
         insert into tb_comment_starlog (id,uid,trends_id,comment_id,create_time) values (#{id},#{uid},#{trends_id},#{comment_id},#{create_time});
     </insert>
     <!--  查询是否点赞 【评论】 -->
@@ -77,7 +77,7 @@
         delete from tb_comment_starlog where id = #{id}
     </delete>
     <!--  更新点赞 【评论】 -->
-    <update id="UpdateCommentStar" parameterType="CommTrends">
+    <update id="UpdateCommentStar" parameterType="CommStar">
         update tb_comment set star=#{star} where id = #{id}
     </update>
     <!--  查询用户点赞集合  -->
