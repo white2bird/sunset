@@ -34,13 +34,26 @@ public class TrendsService {
     SignMapper signMapper;
 
     // 用户的关注，粉丝，关注
-    public ReturnJson<UserFollows> getUserFollow(String uid) {
+    public ReturnJson<UserFollows> getUserFollow(String uid,HttpServletRequest request) {
+        String token = request.getHeader("ms_token");
+        Map<String, String> map = TokenUtils.SelectToken(token);
+        log.info("用户id：" + map.get("uid"));
+        String u_id = map.get("uid");
+
         UserFollow userFollow = trendsMapper.GetUserFollw(uid);
         UserFollows userFollows = new UserFollows();
         if (userFollow == null) {
             return ReturnJson.fail(-1, "fail");
         }
+        // 查询用户 & 自己的关注表
+        String follow_id = trendsMapper.FindIsFollow(uid,u_id);
+        if(follow_id != null || Objects.equals(uid, u_id)){
+            userFollows.setIsfollow(true);
+        }else{
+            userFollows.setIsfollow(false);
+        }
         UserInfoEntity uinfo = signMapper.GetUserInfo(uid);
+        userFollows.setUid(userFollow.getUid());
         userFollows.setFollowers(userFollow.getFollowers());
         userFollows.setFollowing(userFollow.getFollowing());
         userFollows.setStar(userFollow.getStar());
@@ -237,6 +250,7 @@ public class TrendsService {
         String uuid = UUID.randomUUID().toString().toUpperCase();
         commTrends.setId(uuid);
         commTrends.setUid(uid);
+        commTrends.setStar(0);
         commTrends.setTrends_id(setComm.getTrends_id());
         // 解码数据库存储的 Emoji 表情符号
         commTrends.setContent(EmojiParser.parseToAliases(setComm.getContent()));
@@ -424,5 +438,7 @@ public class TrendsService {
         private Integer followers =0;
         @Schema(description = "获赞")
         private Integer star = 0;
+        @Schema(description = "是否关注")
+        private boolean isfollow  = false;
     }
 }

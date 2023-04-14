@@ -25,8 +25,8 @@ public class TrendsController {
     TrendsService trendsService;
     @Operation(summary = "获取关注，粉丝，获赞数量")
     @GetMapping("/user/follow")
-    public ReturnJson<TrendsService.UserFollows> getUserFollow(@RequestParam(name = "uid") String uid) {
-        return trendsService.getUserFollow(uid);
+    public ReturnJson<TrendsService.UserFollows> getUserFollow(@RequestParam(name = "uid") String uid, HttpServletRequest request) {
+        return trendsService.getUserFollow(uid,request);
     }
     @Operation(summary = "发表动态")
     @PostMapping("/pub_trends")
