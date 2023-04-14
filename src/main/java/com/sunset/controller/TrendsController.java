@@ -1,6 +1,7 @@
 package com.sunset.controller;
 
 import com.sunset.entity.Trends.*;
+import com.sunset.entity.User.FollowAll;
 import com.sunset.entity.User.FollowPage;
 import com.sunset.service.TrendsService;
 import com.sunset.utils.AuthMsToken;
@@ -93,10 +94,10 @@ public class TrendsController {
     @Operation(summary = "关注列表")
     @PostMapping("/follow/list")
     @AuthMsToken
-    public  ReturnJson<String> getFollowList(@Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows,HttpServletRequest request){
-        FollowPage p =new FollowPage();
+    public  ReturnJson<ListTrends<FollowAll>> getFollowList(@Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows, HttpServletRequest request){
+        PageRends p =new PageRends();
         p.setPage_num(page_num);
         p.setPage_rows(page_rows);
-        return trendsService.setUserFollows(p,request);
+        return trendsService.getFollowList(p,request);
     }
 }

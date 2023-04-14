@@ -416,21 +416,34 @@ public class TrendsService {
         return ReturnJson.success("关注成功","ok");
     }
     // 关注列表
-    public ReturnJson<List> getFollowList(FollowPage followPage,HttpServletRequest request){
+    public ReturnJson getFollowList(PageRends followPage, HttpServletRequest request){
         String token = request.getHeader("ms_token");
         Map<String, String> map = TokenUtils.SelectToken(token);
         String uid = map.get("uid");
         // 时间倒序
         String orby = "create_time desc";
         // 分页查询
+        followPage.setUid(uid);
         PageHelper.startPage(followPage.getPage_num(), followPage.getPage_rows(), orby);
         List<Followers> list = trendsMapper.FindFollow(followPage);
         PageInfo<Followers> pageInfo = new PageInfo<>(list);
         List<Followers> lists = pageInfo.getList();
         log.info("---"+lists);
-        List<FollowAll> newList = new ArrayList<>();
-
-        return ReturnJson.success(null,"ok");
+        List<FollowAll> followList = new ArrayList<>();
+        lists.forEach((x)->{
+            String u_id = x.getUid();
+            // 用户信息
+            UserInfoEntity u = signMapper.GetUserInfo(u_id);
+            FollowAll followAll = new FollowAll();
+            followAll.setAvator(u.getAvator());
+            followAll.setNickname(u.getNickname());
+            followAll.setUid(u.getUid());
+            followList.add(followAll);
+        });
+        ListTrends listTrends = new ListTrends();
+        listTrends.setTotal(pageInfo.getTotal());
+        listTrends.setList(followList);
+        return ReturnJson.success(listTrends,"ok");
     }
     // 用于返回的用户关注，粉丝，获赞的新实体类
     @Data

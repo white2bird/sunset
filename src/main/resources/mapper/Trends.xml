@@ -98,7 +98,7 @@
     </select>
     <!-- 关注列表 -->
     <select id="FindFollow" resultType="Followers">
-        select uid,my_id from tb_follower where my_id=#{my_id}
+        select uid,my_id from tb_follower where my_id=#{uid}
     </select>
     <!--  取消关注【删除一条关注记录】  -->
     <delete id="DeleteFollow" parameterType="UserFollow">

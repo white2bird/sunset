@@ -61,5 +61,5 @@ public interface TrendsMapper {
     // 更新用户关注
     int UpdateUserFollowing(Integer following,String uid);
     // 关注列表
-    List<Followers> FindFollow(FollowPage followPage);
+    List<Followers> FindFollow(PageRends pageRends);
 }
