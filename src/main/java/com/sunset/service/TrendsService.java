@@ -428,7 +428,6 @@ public class TrendsService {
         List<Followers> list = trendsMapper.FindFollow(followPage);
         PageInfo<Followers> pageInfo = new PageInfo<>(list);
         List<Followers> lists = pageInfo.getList();
-        log.info("---"+lists);
         List<FollowAll> followList = new ArrayList<>();
         lists.forEach((x)->{
             String u_id = x.getUid();
