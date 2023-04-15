@@ -70,6 +70,12 @@ public class TrendsController {
     public ReturnJson<String> setTrendsComm(@RequestBody SetComm setComm,HttpServletRequest request) {
         return trendsService.setTrendsComm(setComm,request);
     }
+    @Operation(summary = "删除评论")
+    @PostMapping("/del/comment")
+    @AuthMsToken
+    public ReturnJson<String> deleteComm(@RequestParam(name = "id") @Parameter(description="评论id") String id, HttpServletRequest request) {
+        return trendsService.deleteComm(id,request);
+    }
     @Operation(summary = "根据动态id获取评论列表")
     @GetMapping("/get/comment")
     public ReturnJson<ListComment> getTrendsComm(@RequestParam(name = "trends_id", required = false) @Parameter(description="动态内容id") String trends_id, @Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows,HttpServletRequest request) {

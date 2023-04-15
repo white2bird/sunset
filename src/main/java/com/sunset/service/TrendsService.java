@@ -264,7 +264,14 @@ public class TrendsService {
         trendsMapper.SetTrendsComm(commTrends);
         return ReturnJson.success(null, "ok");
     }
-
+    // 删除评论
+    public ReturnJson<String> deleteComm(String id,HttpServletRequest request){
+        int isdel =  trendsMapper.DeleteComm(id);
+        if(isdel == 0){
+            return ReturnJson.fail(-1,"删除失败或该评论不存在");
+        }
+        return ReturnJson.success(null,"ok");
+    }
     // 根据动态id获取评论列表
     public ReturnJson<ListComment> getTrendsComm(PageComm pageComm,HttpServletRequest request) {
         String token = request.getHeader("ms_token");

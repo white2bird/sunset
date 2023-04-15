@@ -48,6 +48,10 @@
     <insert id="SetTrendsComm" parameterType="CommTrends">
         insert into tb_comment (id,uid,trends_id,content,create_time) values (#{id},#{uid},#{trends_id},#{content},#{create_time});
     </insert>
+    <!--  删除动态  -->
+    <delete id="DeleteComm" parameterType="String">
+        delete from tb_comment where id = #{id}
+    </delete>
     <!--  动态评论列表  -->
     <select id="GetTrendsComm" resultType="CommTrends">
         select * from tb_comment where trends_id=#{id}
