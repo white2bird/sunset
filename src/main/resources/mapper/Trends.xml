@@ -21,6 +21,10 @@
     <insert id="SetTrends" parameterType="NewTrends">
         insert into tb_trends (id,uid,text,images,create_time) values (#{id},#{uid},#{text},#{images},#{create_time});
     </insert>
+    <!--  删除动态  -->
+    <delete id="DeleteTrends" parameterType="String">
+        delete from tb_trends where id = #{id}
+    </delete>
     <!-- 动态列表 -->
     <select id="GetTrends" resultType="NewTrends" >
         select * from tb_trends

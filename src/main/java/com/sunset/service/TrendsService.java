@@ -89,7 +89,14 @@ public class TrendsService {
         trendsMapper.SetTrends(newTrends);
         return ReturnJson.success(null, "ok");
     }
-
+    // 删除动态
+    public ReturnJson<String> deleteTrends(String id,HttpServletRequest request){
+      int isdel =  trendsMapper.DeleteTrends(id);
+      if(isdel == 0){
+          return ReturnJson.fail(-1,"删除失败或该动态不存在");
+      }
+      return ReturnJson.success(null,"ok");
+    }
     // 获取用户动态列表
     public ReturnJson<ListTrends> getTrendslist(PageRends pageRends, HttpServletRequest request) {
         String token = request.getHeader("ms_token");

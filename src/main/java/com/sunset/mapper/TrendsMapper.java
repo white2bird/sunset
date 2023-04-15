@@ -17,6 +17,8 @@ public interface TrendsMapper {
     UserFollow GetUserFollw(String uid);
     // 发布动态
     int SetTrends(NewTrends newTrends);
+    // 删除动态
+    int DeleteTrends(String id);
     // 动态列表
     List<NewTrends> GetTrends(PageRends pageRends);
     // 含有图片的动态【首页】

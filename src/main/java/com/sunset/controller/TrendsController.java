@@ -36,6 +36,12 @@ public class TrendsController {
     public ReturnJson<String> setTrends(@RequestBody PubTrends pubTrends, HttpServletRequest request) {
         return trendsService.setTrends(pubTrends,request);
     }
+    @Operation(summary = "删除动态")
+    @PostMapping("/del_trends")
+    @AuthMsToken
+    public ReturnJson<String> deleteTrends(@RequestParam(name = "id") @Parameter(description="动态id") String id, HttpServletRequest request) {
+        return trendsService.deleteTrends(id,request);
+    }
     @Operation(summary = "获取动态列表")
     @GetMapping("/get/list")
     public ReturnJson<ListTrends> getTrendslist(@RequestParam(name = "uid", required = false) @Parameter(description="用户id") String uid, @Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows,HttpServletRequest request) {
