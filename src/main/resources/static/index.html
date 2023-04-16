@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>发布文章</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/element-plus/2.3.3/index.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/wangeditor5/5.1.23/css/style.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.prod.min.js"></script>
+    <style>
+        #app {
+            width: 900px;
+            margin: 0 auto;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .el-upload {
+            width: 100px;
+            height: 100px;
+            border: 1px dashed #ccc;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all .3s linear;
+        }
+
+        .avatar-uploader .el-upload:hover {
+            border-color: #eee;
+        }
+
+        .avatar-uploader-icon {
+            font-size: 28px;
+            color: #8c939d;
+            width: 178px;
+            height: 178px;
+            text-align: center;
+        }
+
+        .editor-box {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<div id="app">
+    <el-form label-width="120px" :model="form" :rules="rules" ref="formRef">
+        <el-form-item label="标题" prop="title">
+            <el-input v-model="form.title" placeholder="请输入文章标题"></el-input>
+        </el-form-item>
+        <el-form-item label="封面">
+            <el-upload class="upload-demo" :action="apiurl+'/upload/image'" :on-success="onSuccess"
+                       :show-file-list="false">
+                <img v-if="form.cover_img" :src="apiurl+form.cover_img" class="avatar"
+                     style="width:100px;height:100px;" />
+                <el-icon v-else class="avatar-uploader-icon">
+                    <component :is="Plus"></component>
+                </el-icon>
+            </el-upload>
+        </el-form-item>
+        <el-form-item label="类型" prop="type">
+            <el-select v-model="form.type" clearable class="m-2" placeholder="选择类型" size="large">
+                <el-option v-for="(item,index) in options" :key="index" :label="item" :value="index" />
+            </el-select>
+        </el-form-item>
+        <el-form-item label="是否第三方" prop="isthird">
+            <el-radio-group v-model="form.isthird" class="ml-4">
+                <el-radio :label="0" size="large">否</el-radio>
+                <el-radio :label="1" size="large">是</el-radio>
+            </el-radio-group>
+        </el-form-item>
+        <el-form-item label="来源链接" v-if="form.isthird == 1">
+            <el-input v-model="form.url" placeholder="请输入第三方来源链接"></el-input>
+        </el-form-item>
+        <el-form-item label="文章详情" prop="content">
+            <div class="editor-box">
+                <div id="toolbar" style="border: 1px solid #e4e4e4;"></div>
+                <div id="editor" style="width:100%;height:300px;border: 1px solid #e4e4e4;"></div>
+            </div>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="onSubmit">确定</el-button>
+            <el-button @click="onReset">重置</el-button>
+        </el-form-item>
+    </el-form>
+</div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/element-plus/2.3.3/index.full.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/element-plus-icons-vue/2.1.0/index.iife.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/wangeditor5/5.1.23/index.min.js"></script>
+<script>
+    const {
+        createApp,
+        onMounted,
+        reactive,
+        toRefs
+    } = Vue;
+    const { Plus } = ElementPlusIconsVue
+    const { createEditor, createToolbar } = window.wangEditor
+    const {
+        ElMessage
+    } = ElementPlus
+    createApp({
+        setup() {
+            const state = reactive({
+                apiurl: 'http://localhost:801',
+                dialogVisible: false,
+                form: {
+                    isthird: 0
+                },
+                rules: {
+                    title: { required: true, message: '标题必填', trigger: 'blur' },
+                    isthird: { required: true, message: '必选', trigger: 'blur' },
+                    type: { required: true, message: '类型必选', trigger: 'blur' },
+                    content: { required: true, message: '内容必填', trigger: 'blur' },
+                },
+                options: ["旅游", "饮食", "运动", "减肥", "亲子",],
+                formRef: {},
+                editor: null
+            })
+            onMounted(() => {
+                initEditor()
+            })
+            // 富文本编辑初始化
+            const initEditor = () => {
+                // 配置
+                const editorConfig = {
+                    placeholder: '输入或粘贴文字',
+                    onChange(editor) {
+                        const html = editor.getHtml()
+                        state.form.content = html
+                    }
+                }
+                // 富文本挂载
+                const editor = createEditor({
+                    selector: '#editor',
+                    html: '',
+                    config: editorConfig,
+                    mode: 'simple',
+                })
+                state.editor = editor
+                // 工具区
+                createToolbar({
+                    editor,
+                    selector: '#toolbar',
+                    config: {},
+                    mode: 'simple',
+                })
+            }
+            // 图片上传成功回调
+            const onSuccess = (e) => {
+                state.form.cover_img = e.data.path
+            }
+            const onSubmit = async () => {
+                console.log(state.form);
+                await state.formRef.validate((valid, fields) => {
+                    if (!valid) return
+
+                    fetch(state.apiurl + "/know/pub", {
+                        method: 'POST',
+                        body: JSON.stringify(state.form),
+                        headers: {
+                            "Content-Type": "application/json;charset=UTF-8"
+                        }
+                    }).then(response => response.json()).then(res => {
+                        state.editor.clear()
+                        if (res.code == 200) {
+                            ElMessage.success("保存成功")
+                            onReset()
+                        } else {
+                            ElMessage.error("保存失败")
+                        }
+                    })
+                })
+
+            }
+            const onReset = () => {
+                state.editor.clear()
+                state.formRef.resetFields()
+            }
+            return {
+                ...toRefs(state),
+                Plus,
+                onSuccess,
+                onSubmit,
+                onReset
+            }
+        }
+    }).use(ElementPlus).mount("#app")
+</script>
+
+</html>

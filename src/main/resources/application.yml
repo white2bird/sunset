@@ -24,8 +24,8 @@ pagehelper:
   support-methods-arguments: true
 springdoc:
   swagger-ui:
-    path: /
-    enabled: true
+    path: /api
+    enabled: true # 开启swagger
   api-docs:
     path: /v1
     enabled: true

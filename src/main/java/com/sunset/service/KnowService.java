@@ -24,7 +24,7 @@ import java.util.UUID;
 public class KnowService {
     @Autowired
     KnowMapper knowMapper;
-    String[] typeList = {"饮食","运动","减肥","亲子","旅游"};
+    String[] typeList = {"旅游","饮食","运动","减肥","亲子"};
     // 发布文章
     public ReturnJson<String> SetKnow(KnowParams kp, HttpServletRequest request) {
 

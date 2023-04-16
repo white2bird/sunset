@@ -25,7 +25,6 @@ public class KnowController {
 
     @Operation(summary = "发表文章【后台】")
     @PostMapping("pub")
-    @AuthMsToken
     public ReturnJson<String> SetKnow(@RequestBody KnowParams knowParams, HttpServletRequest request) {
         return knowService.SetKnow(knowParams, request);
     }
