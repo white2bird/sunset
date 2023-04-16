@@ -5,6 +5,8 @@ import lombok.Data;
 
 @Data
 public class PageKnow {
+    @Schema(description =  "是否筛选有图")
+    private boolean isimg;
     @Schema(description = "类型")
     private String type;
     @Schema(description = "页码")

@@ -12,6 +12,9 @@
         <if test="type != null">
             where type = #{type}
         </if>
+        <if test="isimg == true">
+            where cover_img != null and cover_img != ""
+        </if>
     </select>
     <!--  文章详情  -->
     <select id="GetKnowDetail" resultType="KnowIsLike">

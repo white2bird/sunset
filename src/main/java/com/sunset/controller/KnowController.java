@@ -36,13 +36,15 @@ public class KnowController {
     }
     @Operation(summary = "文章列表")
     @GetMapping("/list")
-    public ReturnJson<ListTrends<KnowEntity>> GetKnow(@RequestParam(name = "type", required = false) @Parameter(description="类型") String type, @Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows) {
+    public ReturnJson<ListTrends<KnowEntity>> GetKnow(@RequestParam(name = "isimg", required = false) @Parameter(description="是否有封面") boolean isimg,@RequestParam(name = "type", required = false) @Parameter(description="类型") String type, @Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows) {
         PageKnow p =new PageKnow();
         p.setType(type);
         p.setPage_num(page_num);
         p.setPage_rows(page_rows);
+        p.setIsimg(isimg);
         return knowService.GetKnow(p);
     }
+
     @Operation(summary = "文章详情")
     @GetMapping("/detail")
     public ReturnJson<KnowIsLike> GetKnowDetail(@RequestParam(name = "id") String id, HttpServletRequest request) {
