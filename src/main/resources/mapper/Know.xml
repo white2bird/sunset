@@ -6,9 +6,16 @@
         insert into tb_knowledge (id,title,url,cover_img,content,type,isthird,read_num,like_num,comment_num,create_time)
         values (#{id},#{title},#{url},#{cover_img},#{content},#{type},#{isthird},#{read_num},#{like_num},#{comment_num},#{create_time});
     </insert>
-    <!--  获取用户关注，粉丝，获赞  -->
-    <select id="GetUserFollw" resultType="UserFollow">
-        select * from tb_userFollow where uid=#{uid}
+    <!-- 文章列表 -->
+    <select id="GetKnow" resultType="KnowEntity" >
+        select * from tb_knowledge
+        <if test="type != null">
+            where type = #{type}
+        </if>
+    </select>
+    <!--  文章详情  -->
+    <select id="GetKnowDetail" resultType="KnowEntity">
+        select * from tb_knowledge where id = #{id}
     </select>
     <!--  更新关注 -->
     <update id="UpdateUserFollowing" parameterType="UserFollow">
@@ -26,21 +33,12 @@
     <delete id="DeleteTrends" parameterType="String">
         delete from tb_trends where id = #{id}
     </delete>
-    <!-- 动态列表 -->
-    <select id="GetTrends" resultType="NewTrends" >
-        select * from tb_trends
-        <if test="uid != null">
-            where uid = #{uid}
-        </if>
-    </select>
+
     <!--  含图片的动态  -->
     <select id="GetImgTrends" resultType="NewTrends" >
         select * from tb_trends where images is not null and images != "" and images != "[]"
     </select>
-    <!--  动态详情  -->
-    <select id="GetTrensDetail" resultType="NewTrends">
-        select * from tb_trends where id = #{id}
-    </select>
+
     <!--  更新动态点赞 【动态】 -->
     <update id="UpdateTrendsStar" parameterType="NewTrends">
         update tb_trends set star=#{star} where id = #{id}

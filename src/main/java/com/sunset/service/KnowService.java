@@ -1,7 +1,13 @@
 package com.sunset.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sunset.entity.Know.KnowEntity;
 import com.sunset.entity.Know.KnowParams;
+import com.sunset.entity.Know.PageKnow;
+import com.sunset.entity.Trends.ListTrends;
+import com.sunset.entity.Trends.NewTrends;
+import com.sunset.entity.Trends.ObjTrends;
 import com.sunset.mapper.KnowMapper;
 import com.sunset.mapper.TrendsMapper;
 import com.sunset.utils.ReturnJson;
@@ -13,6 +19,8 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -40,5 +48,31 @@ public class KnowService {
 
 
         return ReturnJson.success(null,"ok");
+    }
+    // 文章列表
+    public ReturnJson<ListTrends<KnowEntity>> GetKonw(PageKnow pageKnow){
+        // 时间倒序
+        String orby = "create_time desc";
+        // 分页查询
+        PageHelper.startPage(pageKnow.getPage_num(), pageKnow.getPage_rows(), orby);
+
+        List<KnowEntity> list = knowMapper.GetKnow(pageKnow);
+        PageInfo<KnowEntity> pageInfo = new PageInfo<>(list);
+        List<KnowEntity> lists = pageInfo.getList();
+        List<KnowEntity> newList = new ArrayList<>();
+
+
+        ListTrends listTrends = new ListTrends();
+        listTrends.setTotal(pageInfo.getTotal());
+        listTrends.setList(lists);
+        return ReturnJson.success(listTrends,"ok");
+    }
+    // 文章详情
+    public ReturnJson<KnowEntity> GetKnowDetail(String id){
+       KnowEntity k =  knowMapper.GetKnowDetail(id);
+       if(k == null){
+           return ReturnJson.fail(-1,"文章不存在");
+       }
+        return ReturnJson.success(k,"ok");
     }
 }

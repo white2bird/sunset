@@ -15,15 +15,15 @@ public class KnowEntity {
     @Schema(description = "内容【富文本】")
     private  String content;
     @Schema(description = "类型 【运动，饮食....】")
-    private  Integer type;
+    private  Integer type = 0;
     @Schema(description = "是否第三方")
-    private  Integer isthird;
+    private  Integer isthird = 0;
     @Schema(description = "阅读数")
-    private  Integer read_num;
+    private  Integer read_num = 0;
     @Schema(description = "收藏数")
-    private  Integer like_num;
+    private  Integer like_num = 0;
     @Schema(description = "评论数")
-    private  Integer comment_num;
+    private  Integer comment_num = 0;
     @Schema(description = "创建时间")
     private  String create_time;
 }
