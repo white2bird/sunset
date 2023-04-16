@@ -13,7 +13,7 @@
             where type = #{type}
         </if>
         <if test="isimg == true">
-            where cover_img != null and cover_img != ""
+            where cover_img is not null and cover_img != ''
         </if>
     </select>
     <!--  文章详情  -->
@@ -44,92 +44,4 @@
     <select id="GetLike" resultType="LikeKnow" >
         select * from tb_know_likelog where uid = #{uid}
     </select>
-
-
-
-
-    <!--  更新关注 -->
-    <update id="UpdateUserFollowing" parameterType="UserFollow">
-        update tb_userFollow set following=#{following} where uid = #{uid}
-    </update>
-    <!--  更新粉丝 -->
-    <update id="UpdateUserFollowers" parameterType="UserFollow">
-        update tb_userFollow set followers=#{followers} where uid = #{uid}
-    </update>
-    <!--  发布动态  -->
-    <insert id="SetTrends" parameterType="NewTrends">
-        insert into tb_trends (id,uid,text,images,create_time) values (#{id},#{uid},#{text},#{images},#{create_time});
-    </insert>
-    <!--  删除动态  -->
-    <delete id="DeleteTrends" parameterType="String">
-        delete from tb_trends where id = #{id}
-    </delete>
-
-    <!--  含图片的动态  -->
-    <select id="GetImgTrends" resultType="NewTrends" >
-        select * from tb_trends where images is not null and images != "" and images != "[]"
-    </select>
-
-    <!--  更新动态点赞 【动态】 -->
-    <update id="UpdateTrendsStar" parameterType="NewTrends">
-        update tb_trends set star=#{star} where id = #{id}
-    </update>
-    <!--  发表评论  -->
-    <insert id="SetTrendsComm" parameterType="CommTrends">
-        insert into tb_comment (id,uid,trends_id,content,create_time) values (#{id},#{uid},#{trends_id},#{content},#{create_time});
-    </insert>
-    <!--  删除动态  -->
-    <delete id="DeleteComm" parameterType="String">
-        delete from tb_comment where id = #{id}
-    </delete>
-    <!--  动态评论列表  -->
-    <select id="GetTrendsComm" resultType="CommTrends">
-        select * from tb_comment where trends_id=#{id}
-    </select>
-
-
-    <!--  评论点赞详情  -->
-    <select id="GetCommentDetail" resultType="CommTrends">
-        select * from tb_comment where id = #{id}
-    </select>
-    <!--  点赞 【评论】 -->
-    <insert id="SetCommentStar" parameterType="CommStar">
-        insert into tb_comment_starlog (id,uid,trends_id,comment_id,create_time) values (#{id},#{uid},#{trends_id},#{comment_id},#{create_time});
-    </insert>
-    <!--  查询是否点赞 【评论】 -->
-    <select id="FindCommentStar" resultType="String">
-        select id from tb_comment_starlog where trends_id= #{trends_id} and comment_id = #{comment_id} and uid= #{uid}
-    </select>
-    <!--  取消点赞【评论】  -->
-    <delete id="DeleteCommentStar" parameterType="CommTrends">
-        delete from tb_comment_starlog where id = #{id}
-    </delete>
-    <!--  更新点赞 【评论】 -->
-    <update id="UpdateCommentStar" parameterType="CommStar">
-        update tb_comment set star=#{star} where id = #{id}
-    </update>
-    <!--  查询用户点赞集合  -->
-    <select id="FindUserFollow" resultType="String">
-        select uid from tb_userfollow where uid= #{uid}
-    </select>
-    <!--  插入用户点赞  -->
-    <update id="UpdateUserStar" parameterType="UserFollow">
-        update tb_userfollow set star=#{star} where uid = #{uid}
-    </update>
-    <!--  关注  -->
-    <insert id="SetUserFollow" parameterType="Followers">
-        insert into tb_follower (id,uid,my_id,create_time) values (#{id},#{uid},#{my_id},#{create_time});
-    </insert>
-    <!-- 查询是否关注 -->
-    <select id="FindIsFollow" resultType="String">
-        select id from tb_follower where uid= #{uid} and my_id=#{my_id}
-    </select>
-    <!-- 关注列表 -->
-    <select id="FindFollow" resultType="Followers">
-        select uid,my_id from tb_follower where my_id=#{uid}
-    </select>
-    <!--  取消关注【删除一条关注记录】  -->
-    <delete id="DeleteFollow" parameterType="UserFollow">
-        delete from tb_follower where id = #{id}
-    </delete>
 </mapper>
