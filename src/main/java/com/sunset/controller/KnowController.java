@@ -1,6 +1,7 @@
 package com.sunset.controller;
 
 import com.sunset.entity.Know.KnowEntity;
+import com.sunset.entity.Know.KnowIsLike;
 import com.sunset.entity.Know.KnowParams;
 import com.sunset.entity.Know.PageKnow;
 import com.sunset.entity.Trends.ListTrends;
@@ -35,17 +36,17 @@ public class KnowController {
     }
     @Operation(summary = "文章列表")
     @GetMapping("/list")
-    public ReturnJson<ListTrends<KnowEntity>> GetTrendslist(@RequestParam(name = "type", required = false) @Parameter(description="类型") String type, @Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows) {
+    public ReturnJson<ListTrends<KnowEntity>> GetKnow(@RequestParam(name = "type", required = false) @Parameter(description="类型") String type, @Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows) {
         PageKnow p =new PageKnow();
         p.setType(type);
         p.setPage_num(page_num);
         p.setPage_rows(page_rows);
-        return knowService.GetKonw(p);
+        return knowService.GetKnow(p);
     }
     @Operation(summary = "文章详情")
     @GetMapping("/detail")
-    public ReturnJson<KnowEntity> GetKnowDetail(@RequestParam(name = "id") String id) {
-        return knowService.GetKnowDetail(id);
+    public ReturnJson<KnowIsLike> GetKnowDetail(@RequestParam(name = "id") String id, HttpServletRequest request) {
+        return knowService.GetKnowDetail(id,request);
     }
     @Operation(summary = "文章收藏<-->取消收藏")
     @PostMapping("/like")

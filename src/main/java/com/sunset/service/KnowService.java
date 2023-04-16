@@ -2,10 +2,7 @@ package com.sunset.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sunset.entity.Know.KnowEntity;
-import com.sunset.entity.Know.KnowParams;
-import com.sunset.entity.Know.LikeKnow;
-import com.sunset.entity.Know.PageKnow;
+import com.sunset.entity.Know.*;
 import com.sunset.entity.Trends.ListTrends;
 import com.sunset.entity.Trends.NewTrends;
 import com.sunset.entity.Trends.ObjTrends;
@@ -53,7 +50,7 @@ public class KnowService {
     }
 
     // 文章列表
-    public ReturnJson<ListTrends<KnowEntity>> GetKonw(PageKnow pageKnow) {
+    public ReturnJson<ListTrends<KnowEntity>> GetKnow(PageKnow pageKnow) {
         // 时间倒序
         String orby = "create_time desc";
         // 分页查询
@@ -72,10 +69,20 @@ public class KnowService {
     }
 
     // 文章详情
-    public ReturnJson<KnowEntity> GetKnowDetail(String id) {
-        KnowEntity k = knowMapper.GetKnowDetail(id);
+    public ReturnJson<KnowIsLike> GetKnowDetail(String id, HttpServletRequest request) {
+        String token = request.getHeader("ms_token");
+        Map<String, String> map = TokenUtils.SelectToken(token);
+        String uid = map.get("uid");
+        String islike = knowMapper.FindIsLike(id,uid);
+        KnowIsLike k = knowMapper.GetKnowDetail(id);
         if (k == null) {
             return ReturnJson.fail(-1, "文章不存在");
+        }
+        // 收藏记录存在 并且 有token未失效
+        if(islike != null && uid != null){
+            k.setIslike(true);
+        }else{
+            k.setIslike(false);
         }
         int num = k.getRead_num();
         // 增加阅读数
@@ -101,7 +108,6 @@ public class KnowService {
         String like_id = knowMapper.FindIsLike(id, uid);
         LikeKnow likeKnow = new LikeKnow();
         int like_num = k.getLike_num();
-        log.info(">>"+like_num+"--");
         if (like_id != null) {
             like_num--;
             knowMapper.DeleteKnowLike(like_id);

@@ -14,7 +14,7 @@
         </if>
     </select>
     <!--  文章详情  -->
-    <select id="GetKnowDetail" resultType="KnowEntity">
+    <select id="GetKnowDetail" resultType="KnowIsLike">
         select * from tb_knowledge where id = #{id}
     </select>
     <!--  文章阅读数   -->
