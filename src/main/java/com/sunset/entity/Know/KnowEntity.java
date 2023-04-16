@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-public class KnowList {
+public class KnowEntity {
     private  String id;
     @Schema(description = "标题")
     private  String title;
