@@ -2,7 +2,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sunset.mapper.KnowMapper">
     <!--  发布文章   -->
-    <insert id="SetKnow" parameterType="KnowList">
+    <insert id="SetKnow" parameterType="KnowEntity">
         insert into tb_knowledge (id,title,url,cover_img,content,type,isthird,read_num,like_num,comment_num,create_time)
         values (#{id},#{title},#{url},#{cover_img},#{content},#{type},#{isthird},#{read_num},#{like_num},#{comment_num},#{create_time});
     </insert>

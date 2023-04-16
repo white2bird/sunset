@@ -4,8 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-public class KnowEntity {
-    private  String id;
+public class KnowParams {
     @Schema(description = "标题")
     private  String title;
     @Schema(description = "第三方url")
@@ -18,12 +17,4 @@ public class KnowEntity {
     private  Integer type;
     @Schema(description = "是否第三方")
     private  Integer isthird;
-    @Schema(description = "阅读数")
-    private  Integer read_num;
-    @Schema(description = "收藏数")
-    private  Integer like_num;
-    @Schema(description = "评论数")
-    private  Integer comment_num;
-    @Schema(description = "创建时间")
-    private  String create_time;
 }

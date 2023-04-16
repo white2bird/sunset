@@ -1,6 +1,7 @@
 package com.sunset.controller;
 
 import com.sunset.entity.Know.KnowEntity;
+import com.sunset.entity.Know.KnowParams;
 import com.sunset.entity.Trends.PubTrends;
 import com.sunset.service.KnowService;
 import com.sunset.utils.AuthMsToken;
@@ -26,7 +27,7 @@ public class KnowController {
     @PostMapping("pub")
     @AuthMsToken
     // 发布文章
-    public ReturnJson<String> SetKnow(@RequestBody KnowEntity knowEntity, HttpServletRequest request) {
-        return knowService.SetKnow(knowEntity, request);
+    public ReturnJson<String> SetKnow(@RequestBody KnowParams knowParams, HttpServletRequest request) {
+        return knowService.SetKnow(knowParams, request);
     }
 }
