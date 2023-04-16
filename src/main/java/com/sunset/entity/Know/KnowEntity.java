@@ -14,8 +14,9 @@ public class KnowEntity {
     private  String cover_img;
     @Schema(description = "内容【富文本】")
     private  String content;
-    @Schema(description = "类型 【运动，饮食....】")
+    @Schema(description = "类型 【饮食，运动，减肥，亲子，旅游】")
     private  Integer type = 0;
+    private  String type_name;
     @Schema(description = "是否第三方")
     private  Integer isthird = 0;
     @Schema(description = "阅读数")

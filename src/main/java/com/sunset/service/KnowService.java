@@ -24,7 +24,7 @@ import java.util.UUID;
 public class KnowService {
     @Autowired
     KnowMapper knowMapper;
-
+    String[] typeList = {"饮食","运动","减肥","亲子","旅游"};
     // 发布文章
     public ReturnJson<String> SetKnow(KnowParams kp, HttpServletRequest request) {
 
@@ -36,6 +36,8 @@ public class KnowService {
         k.setTitle(kp.getTitle());
         k.setUrl(kp.getUrl());
         k.setType(kp.getType());
+        int t = kp.getType();
+        k.setType_name(typeList[t]);
         k.setContent(kp.getContent());
         k.setCover_img(kp.getCover_img());
         k.setIsthird(kp.getIsthird());
@@ -52,7 +54,6 @@ public class KnowService {
         String orby = "create_time desc";
         // 分页查询
         PageHelper.startPage(pageKnow.getPage_num(), pageKnow.getPage_rows(), orby);
-
         List<KnowEntity> list = knowMapper.GetKnow(pageKnow);
         PageInfo<KnowEntity> pageInfo = new PageInfo<>(list);
         List<KnowEntity> lists = pageInfo.getList();
@@ -145,6 +146,7 @@ public class KnowService {
                 k.setIsthird(kw.getIsthird());
                 k.setTitle(kw.getTitle());
                 k.setUrl(kw.getUrl());
+                k.setType_name(kw.getType_name());
                 k.setType(kw.getType());
                 k.setRead_num(kw.getRead_num());
                 k.setLike_num(kw.getLike_num());

@@ -4,7 +4,6 @@ import com.sunset.entity.Know.KnowEntity;
 import com.sunset.entity.Know.KnowIsLike;
 import com.sunset.entity.Know.LikeKnow;
 import com.sunset.entity.Know.PageKnow;
-import com.sunset.entity.Trends.ListTrends;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

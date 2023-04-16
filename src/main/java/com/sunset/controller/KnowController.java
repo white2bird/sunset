@@ -2,8 +2,6 @@ package com.sunset.controller;
 
 import com.sunset.entity.Know.*;
 import com.sunset.entity.Trends.ListTrends;
-import com.sunset.entity.Trends.PageRends;
-import com.sunset.entity.Trends.PubTrends;
 import com.sunset.service.KnowService;
 import com.sunset.utils.AuthMsToken;
 import com.sunset.utils.ReturnJson;
