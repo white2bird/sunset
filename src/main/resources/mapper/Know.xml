@@ -36,10 +36,16 @@
     <delete id="DeleteKnowLike" parameterType="LikeKnow">
         delete from tb_know_likelog where id = #{id}
     </delete>
-    <!--  更新动态点赞 【动态】 -->
+    <!--  更新收藏数量 -->
     <update id="UpdateKnowLike" parameterType="LikeKnow">
         update tb_knowledge set like_num=#{like_num} where id = #{id}
     </update>
+    <!-- 我的收藏 -->
+    <select id="GetLike" resultType="LikeKnow" >
+        select * from tb_know_likelog where uid = #{uid}
+    </select>
+
+
 
 
     <!--  更新关注 -->

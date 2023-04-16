@@ -59,8 +59,6 @@ public class KnowService {
         List<KnowEntity> list = knowMapper.GetKnow(pageKnow);
         PageInfo<KnowEntity> pageInfo = new PageInfo<>(list);
         List<KnowEntity> lists = pageInfo.getList();
-        List<KnowEntity> newList = new ArrayList<>();
-
 
         ListTrends listTrends = new ListTrends();
         listTrends.setTotal(pageInfo.getTotal());
@@ -126,5 +124,40 @@ public class KnowService {
         knowMapper.UpdateKnowLike(Math.max(like_num, 0), k.getId());
         knowMapper.SetKnowLike(likeKnow);
         return ReturnJson.success(null, "收藏ok");
+    }
+    // 我的收藏
+    public ReturnJson<ListTrends<KnowEntity>> GetLike(MyLike myLike,HttpServletRequest request){
+        String token = request.getHeader("ms_token");
+        Map<String, String> map = TokenUtils.SelectToken(token);
+        String uid = map.get("uid");
+        // 时间倒序
+        String orby = "create_time desc";
+        // 分页查询
+        PageHelper.startPage(myLike.getPage_num(), myLike.getPage_rows(), orby);
+        myLike.setUid(uid);
+        List<LikeKnow> list = knowMapper.GetLike(myLike);
+        PageInfo<LikeKnow> pageInfo = new PageInfo<>(list);
+        List<LikeKnow> lists = pageInfo.getList();
+        List<KnowEntity> likeList = new ArrayList<>();
+        lists.forEach(x->{
+            KnowEntity k = new KnowEntity();
+            KnowEntity kw = knowMapper.GetKnowDetail(x.getKnow_id());
+            if(kw != null){
+                k.setId(kw.getId());
+                k.setCover_img(kw.getCover_img());
+                k.setIsthird(kw.getIsthird());
+                k.setTitle(kw.getTitle());
+                k.setUrl(kw.getUrl());
+                k.setType(kw.getType());
+                k.setRead_num(kw.getRead_num());
+                k.setLike_num(kw.getLike_num());
+                k.setCreate_time(x.getCreate_time());
+                likeList.add(k);
+            }
+        });
+        ListTrends listTrends = new ListTrends();
+        listTrends.setTotal(pageInfo.getTotal());
+        listTrends.setList(likeList);
+        return ReturnJson.success(listTrends,"ok");
     }
 }

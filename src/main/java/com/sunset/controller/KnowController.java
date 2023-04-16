@@ -1,9 +1,6 @@
 package com.sunset.controller;
 
-import com.sunset.entity.Know.KnowEntity;
-import com.sunset.entity.Know.KnowIsLike;
-import com.sunset.entity.Know.KnowParams;
-import com.sunset.entity.Know.PageKnow;
+import com.sunset.entity.Know.*;
 import com.sunset.entity.Trends.ListTrends;
 import com.sunset.entity.Trends.PageRends;
 import com.sunset.entity.Trends.PubTrends;
@@ -44,7 +41,14 @@ public class KnowController {
         p.setIsimg(isimg);
         return knowService.GetKnow(p);
     }
-
+    @Operation(summary = "我的收藏【文章收藏】")
+    @GetMapping("/my_like")
+    public ReturnJson<ListTrends<KnowEntity>> GetLike(@Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows,HttpServletRequest request) {
+        MyLike p =new MyLike();
+        p.setPage_num(page_num);
+        p.setPage_rows(page_rows);
+        return knowService.GetLike(p,request);
+    }
     @Operation(summary = "文章详情")
     @GetMapping("/detail")
     public ReturnJson<KnowIsLike> GetKnowDetail(@RequestParam(name = "id") String id, HttpServletRequest request) {

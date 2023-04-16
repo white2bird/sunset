@@ -27,4 +27,6 @@ public interface KnowMapper {
     int DeleteKnowLike(String id);
     // 更新列表收藏数量
     int UpdateKnowLike(int like_num,String id);
+    // 我的收藏
+    List<LikeKnow> GetLike(PageKnow pageKnow);
 }
