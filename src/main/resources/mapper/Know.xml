@@ -21,6 +21,24 @@
     <update id="SetKnowRead" parameterType="KnowEntity">
         update tb_knowledge set read_num=#{read_num} where id = #{id}
     </update>
+    <!-- 收藏 -->
+    <insert id="SetKnowLike" parameterType="LikeKnow">
+        insert into tb_know_likelog (id,uid,know_id,create_time) values (#{id},#{uid},#{know_id},#{create_time});
+    </insert>
+    <!--  查询是否收藏 -->
+    <select id="FindIsLike" resultType="String">
+        select id from tb_know_likelog where know_id= #{know_id} and uid= #{uid}
+    </select>
+    <!--  取消收藏  -->
+    <delete id="DeleteKnowLike" parameterType="LikeKnow">
+        delete from tb_know_likelog where id = #{id}
+    </delete>
+    <!--  更新动态点赞 【动态】 -->
+    <update id="UpdateKnowLike" parameterType="LikeKnow">
+        update tb_knowledge set like_num=#{like_num} where id = #{id}
+    </update>
+
+
     <!--  更新关注 -->
     <update id="UpdateUserFollowing" parameterType="UserFollow">
         update tb_userFollow set following=#{following} where uid = #{uid}
@@ -59,18 +77,8 @@
     <select id="GetTrendsComm" resultType="CommTrends">
         select * from tb_comment where trends_id=#{id}
     </select>
-    <!--  点赞 【动态】 -->
-    <insert id="SetTrendsStar" parameterType="CommTrends">
-        insert into tb_trends_starlog (id,uid,trends_id,create_time) values (#{id},#{uid},#{trends_id},#{create_time});
-    </insert>
-    <!--  查询是否点赞 【动态】 -->
-    <select id="FindIsStar" resultType="String">
-        select id from tb_trends_starlog where trends_id= #{trends_id} and uid= #{uid}
-    </select>
-    <!--  取消点赞【动态】  -->
-    <delete id="DeleteStar" parameterType="CommTrends">
-        delete from tb_trends_starlog where id = #{id}
-    </delete>
+
+
     <!--  评论点赞详情  -->
     <select id="GetCommentDetail" resultType="CommTrends">
         select * from tb_comment where id = #{id}

@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sunset.entity.Know.KnowEntity;
 import com.sunset.entity.Know.KnowParams;
+import com.sunset.entity.Know.LikeKnow;
 import com.sunset.entity.Know.PageKnow;
 import com.sunset.entity.Trends.ListTrends;
 import com.sunset.entity.Trends.NewTrends;
@@ -87,15 +88,37 @@ public class KnowService {
         return ReturnJson.success(k, "ok");
     }
 
-    // 文章阅读数
-    public ReturnJson<String> SetKnowRead(String id) {
+    // 收藏文章 & 取消收藏文章
+    public ReturnJson<String> SetKnowLike(String id, HttpServletRequest request) {
+        String token = request.getHeader("ms_token");
+        Map<String, String> map = TokenUtils.SelectToken(token);
+        String uid = map.get("uid");
+
         KnowEntity k = knowMapper.GetKnowDetail(id);
-        int num = k.getRead_num();
-        log.info("num" + num);
-//        int isSet =  knowMapper.SetKnowRead(num,id);
         if (k == null) {
             return ReturnJson.fail(-1, "文章不存在");
         }
-        return ReturnJson.success(null, "ok");
+        String like_id = knowMapper.FindIsLike(id, uid);
+        LikeKnow likeKnow = new LikeKnow();
+        int like_num = k.getLike_num();
+        log.info(">>"+like_num+"--");
+        if (like_id != null) {
+            like_num--;
+            knowMapper.DeleteKnowLike(like_id);
+            // Math.max 如果表中查到的收藏数量小于0就初始为0否则相减
+            knowMapper.UpdateKnowLike(Math.max(like_num, 0), k.getId());
+            return ReturnJson.success(null, "取消收藏ok");
+        }
+        like_num++;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String dateTime = formatter.format(LocalDateTime.now());
+        String uuid = UUID.randomUUID().toString().toUpperCase();
+        likeKnow.setId(uuid);
+        likeKnow.setUid(uid);
+        likeKnow.setKnow_id(id);
+        likeKnow.setCreate_time(dateTime);
+        knowMapper.UpdateKnowLike(Math.max(like_num, 0), k.getId());
+        knowMapper.SetKnowLike(likeKnow);
+        return ReturnJson.success(null, "收藏ok");
     }
 }

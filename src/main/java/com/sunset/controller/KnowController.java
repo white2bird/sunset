@@ -47,9 +47,10 @@ public class KnowController {
     public ReturnJson<KnowEntity> GetKnowDetail(@RequestParam(name = "id") String id) {
         return knowService.GetKnowDetail(id);
     }
-    @Operation(summary = "文章阅读数")
-    @PostMapping("/detail")
-    public ReturnJson<String> SetKnowRead(@RequestParam(name = "id") String id) {
-        return knowService.SetKnowRead(id);
+    @Operation(summary = "文章收藏<-->取消收藏")
+    @PostMapping("/like")
+    @AuthMsToken
+    public ReturnJson<String> SetKnowLike(@RequestParam(name = "id") String id, HttpServletRequest request) {
+        return knowService.SetKnowLike(id,request);
     }
 }
