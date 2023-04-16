@@ -15,6 +15,7 @@ public class KnowParams {
     private  String content;
     @Schema(description = "类型 【运动，饮食....】")
     private  Integer type;
+    private  String type_name;
     @Schema(description = "是否第三方")
     private  Integer isthird;
 }

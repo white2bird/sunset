@@ -3,8 +3,8 @@
 <mapper namespace="com.sunset.mapper.KnowMapper">
     <!--  发布文章   -->
     <insert id="SetKnow" parameterType="KnowEntity">
-        insert into tb_knowledge (id,title,url,cover_img,content,type,isthird,read_num,like_num,comment_num,create_time)
-        values (#{id},#{title},#{url},#{cover_img},#{content},#{type},#{isthird},#{read_num},#{like_num},#{comment_num},#{create_time});
+        insert into tb_knowledge (id,title,url,cover_img,content,type,type_name,isthird,read_num,like_num,comment_num,create_time)
+        values (#{id},#{title},#{url},#{cover_img},#{content},#{type},#{type_name},#{isthird},#{read_num},#{like_num},#{comment_num},#{create_time});
     </insert>
     <!-- 文章列表 -->
     <select id="GetKnow" resultType="KnowEntity" >
