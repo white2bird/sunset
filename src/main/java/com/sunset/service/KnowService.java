@@ -29,13 +29,14 @@ import java.util.UUID;
 public class KnowService {
     @Autowired
     KnowMapper knowMapper;
+
     // 发布文章
-    public ReturnJson<String> SetKnow(KnowParams kp, HttpServletRequest request){
+    public ReturnJson<String> SetKnow(KnowParams kp, HttpServletRequest request) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dateTime = formatter.format(LocalDateTime.now());
         String uuid = UUID.randomUUID().toString().toUpperCase();
-        KnowEntity k  = new KnowEntity();
+        KnowEntity k = new KnowEntity();
         k.setId(uuid);
         k.setTitle(kp.getTitle());
         k.setUrl(kp.getUrl());
@@ -47,10 +48,11 @@ public class KnowService {
         knowMapper.SetKnow(k);
 
 
-        return ReturnJson.success(null,"ok");
+        return ReturnJson.success(null, "ok");
     }
+
     // 文章列表
-    public ReturnJson<ListTrends<KnowEntity>> GetKonw(PageKnow pageKnow){
+    public ReturnJson<ListTrends<KnowEntity>> GetKonw(PageKnow pageKnow) {
         // 时间倒序
         String orby = "create_time desc";
         // 分页查询
@@ -65,14 +67,35 @@ public class KnowService {
         ListTrends listTrends = new ListTrends();
         listTrends.setTotal(pageInfo.getTotal());
         listTrends.setList(lists);
-        return ReturnJson.success(listTrends,"ok");
+        return ReturnJson.success(listTrends, "ok");
     }
+
     // 文章详情
-    public ReturnJson<KnowEntity> GetKnowDetail(String id){
-       KnowEntity k =  knowMapper.GetKnowDetail(id);
-       if(k == null){
-           return ReturnJson.fail(-1,"文章不存在");
-       }
-        return ReturnJson.success(k,"ok");
+    public ReturnJson<KnowEntity> GetKnowDetail(String id) {
+        KnowEntity k = knowMapper.GetKnowDetail(id);
+        if (k == null) {
+            return ReturnJson.fail(-1, "文章不存在");
+        }
+        int num = k.getRead_num();
+        // 增加阅读数
+        num++;
+        int isSet = knowMapper.SetKnowRead(num, id);
+        if (isSet == 1) {
+            // 保持阅读数同步
+            k.setRead_num(k.getRead_num() + 1);
+        }
+        return ReturnJson.success(k, "ok");
+    }
+
+    // 文章阅读数
+    public ReturnJson<String> SetKnowRead(String id) {
+        KnowEntity k = knowMapper.GetKnowDetail(id);
+        int num = k.getRead_num();
+        log.info("num" + num);
+//        int isSet =  knowMapper.SetKnowRead(num,id);
+        if (k == null) {
+            return ReturnJson.fail(-1, "文章不存在");
+        }
+        return ReturnJson.success(null, "ok");
     }
 }

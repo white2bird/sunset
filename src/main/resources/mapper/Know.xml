@@ -17,6 +17,10 @@
     <select id="GetKnowDetail" resultType="KnowEntity">
         select * from tb_knowledge where id = #{id}
     </select>
+    <!--  文章阅读数   -->
+    <update id="SetKnowRead" parameterType="KnowEntity">
+        update tb_knowledge set read_num=#{read_num} where id = #{id}
+    </update>
     <!--  更新关注 -->
     <update id="UpdateUserFollowing" parameterType="UserFollow">
         update tb_userFollow set following=#{following} where uid = #{uid}

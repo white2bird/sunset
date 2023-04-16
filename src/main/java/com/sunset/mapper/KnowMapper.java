@@ -15,4 +15,6 @@ public interface KnowMapper {
     List<KnowEntity> GetKnow(PageKnow pageKnow);
     // 文章详情
     KnowEntity GetKnowDetail(String id);
+    // 文章阅读数
+    int SetKnowRead(int read_num, String id);
 }

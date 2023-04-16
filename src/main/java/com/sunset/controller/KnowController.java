@@ -47,4 +47,9 @@ public class KnowController {
     public ReturnJson<KnowEntity> GetKnowDetail(@RequestParam(name = "id") String id) {
         return knowService.GetKnowDetail(id);
     }
+    @Operation(summary = "文章阅读数")
+    @PostMapping("/detail")
+    public ReturnJson<String> SetKnowRead(@RequestParam(name = "id") String id) {
+        return knowService.SetKnowRead(id);
+    }
 }
