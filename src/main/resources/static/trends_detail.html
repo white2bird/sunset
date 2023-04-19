@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章详情</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        img {
+            vertical-align: top;
+            border: none;
+        }
+
+        .content {
+            width: 92%;
+            margin: 0 auto;
+            line-height: 28px;
+            padding: 30px 0;
+        }
+    </style>
+</head>
+<!-- 
+    自定义文章详情
+    Author:dinglong
+    DateTime:2023/04/19 PM 16:06 公司摸鱼所作
+ -->
+
+<body>
+    <div id="app">
+        <div class="content" v-html="detail.content"></div>
+    </div>
+    <script>
+        const {
+            createApp,
+            onMounted,
+            reactive,
+            toRefs
+        } = Vue;
+        createApp({
+            setup() {
+                const state = reactive({
+                    apiurl: 'http://192.168.0.152:801',
+                    detail: {
+                        content: '',
+                    },
+                })
+                onMounted(() => {
+                    const sParams = new URLSearchParams(window.location.search);
+                    let id = sParams.get("id")
+                    if (id != null) {
+                        console.log(id);
+                        getKnowDetail(id)
+                    }else{
+                        state.detail.content = "文章不见了"
+                    }
+                })
+                // 文章详情
+                const getKnowDetail = (id) => {
+                    fetch(state.apiurl + "/know/detail?id=" + id, {
+                        method: 'GET',
+                        headers: {
+                            "Content-Type": "application/json;charset=UTF-8"
+                        }
+                    }).then(response => response.json()).then(res => {
+                        if (res.code == 200) {
+                            state.detail = res.data
+                        } else {
+                            state.detail.content = "文章不见了"
+                        }
+                    })
+                }
+
+                return {
+                    ...toRefs(state),
+                }
+            }
+        }).mount("#app")
+    </script>
+</body>
+
+</html>
