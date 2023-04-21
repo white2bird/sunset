@@ -13,7 +13,7 @@ public interface SignMapper {
     //根据 token 解析用户 id 获取用户信息
     RegisterEntity FindUserInfo(String uid);
     // 设置密码
-    int UpdatePwd(String password,String uid);
+    int UpdatePwd(String password,String update_time,String uid);
     // 忘记密码
     int ResetPwd(String phone, String password);
     // 换绑手机号

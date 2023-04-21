@@ -130,11 +130,14 @@ public class SignService {
         String token = request.getHeader("ms_token");
         Map<String, String> map = TokenUtils.SelectToken(token);
         log.info("用户id：" + map.get("uid"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String dateTime = formatter.format(LocalDateTime.now());
         String uid = map.get("uid");
         if (uid != null) {
-            signMapper.UpdatePwd(password, uid);
+            signMapper.UpdatePwd(password,dateTime, uid);
+            return ReturnJson.success(null, "ok");
         }
-        return ReturnJson.success(null, "ok");
+        return ReturnJson.fail(-1, "设置密码失败,请重试");
     }
 
     // 手机号是否存在

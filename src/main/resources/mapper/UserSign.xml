@@ -14,7 +14,7 @@
     </select>
     <!--  设置密码  -->
     <update id="UpdatePwd" parameterType="com.sunset.entity.Sign.RegisterEntity">
-        update tb_register set password = #{password} where uid = #{uid}
+        update tb_register set password = #{password},update_time=#{update_time} where uid = #{uid}
     </update>
     <!--  忘记密码  -->
     <update id="ResetPwd" parameterType="com.sunset.entity.Sign.RegisterEntity">
