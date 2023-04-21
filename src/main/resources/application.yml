@@ -32,4 +32,7 @@ springdoc:
     path: /v1
     enabled: true
   packages-to-scan: com.sunset.controller
+logging:
+  file:
+    name: running.log
 
