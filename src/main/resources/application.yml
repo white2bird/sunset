@@ -11,6 +11,8 @@ spring:
   servlet:
     multipart:
       max-file-size: 50MB # 图片上传的大小
+  mvc:
+    static-path-pattern: /static/**
   web:
     resources:
       static-locations: classpath:/static/

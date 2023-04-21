@@ -11,13 +11,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements  WebMvcConfigurer {
     public  void addInterceptors(InterceptorRegistry interceptorRegistry) {
         // 拦截器
-        interceptorRegistry.addInterceptor(new InterceptorConfig());
+        interceptorRegistry.addInterceptor(new InterceptorConfig()).excludePathPatterns("/static/**");
 
     }
     public void addResourceHandlers(ResourceHandlerRegistry r){
+        r.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
         // 静态资源映射，解决上传图片后无法访问
-        r.addResourceHandler("/images/**").addResourceLocations("file:" + System.getProperty("user.dir") + "/src/main/resources/static/images/");
-        r.addResourceHandler("/avator/**").addResourceLocations("file:" + System.getProperty("user.dir") + "/src/main/resources/static/avator/");
+//        r.addResourceHandler("/images/**").addResourceLocations("file:" + System.getProperty("user.dir") + "/src/main/resources/static/images/");
+//        r.addResourceHandler("/avator/**").addResourceLocations("file:" + System.getProperty("user.dir") + "/src/main/resources/static/avator/");
     }
 
 }
