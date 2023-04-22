@@ -44,8 +44,9 @@ public class TrendsController {
     }
     @Operation(summary = "获取动态列表")
     @GetMapping("/get/list")
-    public ReturnJson<ListTrends> getTrendslist(@RequestParam(name = "uid", required = false) @Parameter(description="用户id") String uid, @Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows,HttpServletRequest request) {
+    public ReturnJson<ListTrends> getTrendslist(@RequestParam(name = "type", required = false) @Parameter(description="筛选类型(日期/点赞)") int type,@RequestParam(name = "uid", required = false) @Parameter(description="用户id") String uid, @Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows,HttpServletRequest request) {
         PageRends p =new PageRends();
+        p.setType(type);
         p.setUid(uid);
         p.setPage_num(page_num);
         p.setPage_rows(page_rows);

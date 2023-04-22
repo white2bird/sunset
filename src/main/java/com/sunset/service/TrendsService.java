@@ -102,10 +102,12 @@ public class TrendsService {
         String token = request.getHeader("ms_token");
         Map<String, String> map = TokenUtils.SelectToken(token);
         String uid = map.get("uid");
+        int ty = pageRends.getType();
         // 时间倒序
-        String orby = "create_time desc";
+        String c_orby = "create_time desc"; // 最新
+        String s_orby = "star desc"; // 精选 点赞排序
         // 分页查询
-        PageHelper.startPage(pageRends.getPage_num(), pageRends.getPage_rows(), orby);
+        PageHelper.startPage(pageRends.getPage_num(), pageRends.getPage_rows(), ty == 0 ? c_orby : s_orby);
         List<NewTrends> list = trendsMapper.GetTrends(pageRends);
         PageInfo<NewTrends> pageInfo = new PageInfo<>(list);
         List<NewTrends> lists = pageInfo.getList();
