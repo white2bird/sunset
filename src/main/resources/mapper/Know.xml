@@ -6,16 +6,36 @@
         insert into tb_knowledge (id,title,url,cover_img,content,type,type_name,isthird,read_num,like_num,comment_num,create_time)
         values (#{id},#{title},#{url},#{cover_img},#{content},#{type},#{type_name},#{isthird},#{read_num},#{like_num},#{comment_num},#{create_time});
     </insert>
+    <!--  删除文章  -->
+    <delete id="DeleteKnow" parameterType="KnowEntity">
+        delete from tb_knowledge where id = #{id}
+    </delete>
+    <!--  更新文章 -->
+    <update id="UpdateKnow" parameterType="KnowEntity">
+        update tb_knowledge set title=#{title},url=#{url},cover_img=#{cover_img},content=#{content},type=#{type},type_name=#{type_name},isthird=#{isthird}
+        where id = #{id}
+    </update>
     <!-- 文章列表 -->
     <select id="GetKnow" resultType="KnowEntity" >
         select * from tb_knowledge
-        <if test="type != null">
-            where type = #{type}
-        </if>
-        <if test="isimg == true">
-            where cover_img is not null and cover_img != ''
-        </if>
+                 <where>
+                     <if test="type != null and type != ''">
+                         and type = #{type}
+                     </if>
+                     <if test="isthird != null and isthird != ''">
+                         and isthird = #{isthird}
+                     </if>
+                     <if test="keyword != null and keyword != ''">
+                         and title like concat('%',#{keyword},'%')
+                     </if>
+                     <if test="isimg == true">
+                         and cover_img is not null and cover_img != ''
+                     </if>
+
+                 </where>
+
     </select>
+
     <!--  文章详情  -->
     <select id="GetKnowDetail" resultType="KnowIsLike">
         select * from tb_knowledge where id = #{id}

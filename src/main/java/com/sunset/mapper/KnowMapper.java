@@ -1,9 +1,6 @@
 package com.sunset.mapper;
 
-import com.sunset.entity.Know.KnowEntity;
-import com.sunset.entity.Know.KnowIsLike;
-import com.sunset.entity.Know.LikeKnow;
-import com.sunset.entity.Know.PageKnow;
+import com.sunset.entity.Know.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,6 +9,10 @@ import java.util.List;
 public interface KnowMapper {
     // 发布文章 【后台端】
     int SetKnow(KnowEntity knowEntity);
+    // 删除文章
+    int DeleteKnow(String id);
+    // 更新文章
+    int UpdateKnow(KnowEntity knowEntity);
     // 文章列表
     List<KnowEntity> GetKnow(PageKnow pageKnow);
     // 文章详情

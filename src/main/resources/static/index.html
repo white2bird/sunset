@@ -7,10 +7,12 @@
     <link href="https://cdn.bootcdn.net/ajax/libs/element-plus/2.3.3/index.css" rel="stylesheet">
     <link href="https://cdn.bootcdn.net/ajax/libs/wangeditor5/5.1.23/css/style.min.css" rel="stylesheet">
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.prod.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/wangeditor5/5.1.23/index.min.js"></script>
     <style>
         #app {
-            width: 900px;
+            width: 1200px;
             margin: 0 auto;
+            margin-top: 20px;
         }
 
         * {
@@ -49,74 +51,128 @@
 
 <body>
 <div id="app">
-    <el-form label-width="120px" :model="form" :rules="rules" ref="formRef">
-        <el-form-item label="标题" prop="title">
-            <el-input v-model="form.title" placeholder="请输入文章标题"></el-input>
-        </el-form-item>
-        <el-form-item label="封面">
-            <el-upload class="upload-demo" :action="apiurl+'/upload/image'" :on-success="onSuccess"
-                       :show-file-list="false">
-                <img v-if="form.cover_img" :src="apiurl+form.cover_img" class="avatar"
-                     style="width:100px;height:100px;" />
-                <el-icon v-else class="avatar-uploader-icon">
-                    <component :is="Plus"></component>
-                </el-icon>
-            </el-upload>
-        </el-form-item>
-        <el-form-item label="类型" prop="type">
-            <el-select v-model="form.type" clearable class="m-2" placeholder="选择类型" size="large">
-                <el-option v-for="(item,index) in options" :key="index" :label="item" :value="index" />
+    <el-row type="flex" style="margin-bottom: 10px;">
+        <el-col :span="17">
+            <el-button @click="openDialog" type="primary">新建</el-button>
+            <el-button @click="getData" type="success">刷新</el-button>
+            <el-select v-model="page.type" placeholder="选择筛选类型" clearable style="margin:0 10px;">
+                <el-option v-for='(item,index) in options' :key="index" :label="item" :value="index" />
             </el-select>
-        </el-form-item>
-        <el-form-item label="是否第三方" prop="isthird">
-            <el-radio-group v-model="form.isthird" class="ml-4">
-                <el-radio :label="0" size="large">否</el-radio>
-                <el-radio :label="1" size="large">是</el-radio>
-            </el-radio-group>
-        </el-form-item>
-        <el-form-item label="来源链接" v-if="form.isthird == 1">
-            <el-input v-model="form.url" placeholder="请输入第三方来源链接"></el-input>
-        </el-form-item>
-        <el-form-item label="文章详情" prop="content">
-            <div class="editor-box">
-                <div id="toolbar" style="border: 1px solid #e4e4e4;"></div>
-                <div id="editor" style="width:100%;height:300px;border: 1px solid #e4e4e4;"></div>
-            </div>
-        </el-form-item>
-        <el-form-item>
-            <el-button type="primary" @click="onSubmit">确定</el-button>
-            <el-button @click="onReset">重置</el-button>
-        </el-form-item>
-    </el-form>
+            <el-select v-model="page.isthird" placeholder="选择是否第三方" clearable style="margin:0 10px;">
+                <el-option v-for='(item,index) in ["非第三方","第三方"]' :key="index" :label="item" :value="index" />
+            </el-select>
+            <el-input placeholder="请输入标题搜索" v-model="page.keyword" style="width:200px" clearable />
+        </el-col>
+        <el-button @click="resetData" type="info" plain>重置</el-button>
+        <el-button @click="getData" type="primary" plain>点击查询</el-button>
+    </el-row>
+    <el-table :data="data" border style="width: 100%">
+        <el-table-column prop="title" label="标题" width="360px"></el-table-column>
+        <el-table-column prop="image" label="图片" width="140px">
+            <template #default="scope">
+                <el-image style="width: 80px;"
+                          :src="scope.row.isthird ==1 ? scope.row.cover_img : apiurl+scope.row.cover_img"
+                          :preview-src-list="scope.cover_img">
+                </el-image>
+            </template>
+        </el-table-column>
+        <el-table-column prop="read_num" label="阅读数" width="100px"></el-table-column>
+        <el-table-column prop="like_num" label="收藏数" width="100px"></el-table-column>
+        <el-table-column prop="comment_num" label="评论数" width="100px"></el-table-column>
+        <el-table-column prop="create_time" label="时间" width="200px"></el-table-column>
+        <el-table-column label="操作">
+            <template #default="scope">
+                <el-button @click="onTheData(scope.row.id)" type="primary">编辑</el-button>
+                <el-button @click="onDelete(scope.row.id)" type="danger">删除</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+    <div style="display:flex;justify-content:center;margin-top: 20px;">
+        <el-pagination background layout="prev, pager, next" @current-change="handlePage" :total="total" />
+    </div>
+    <el-dialog title="文章表单" draggable v-model="visible" width="50%" top="20px" :before-close="handleClose">
+        <el-form v-loading="loading" label-width="120px" :model="form" :rules="rules" ref="formRef">
+            <el-form-item label="标题" prop="title">
+                <el-input v-model="form.title" placeholder="请输入文章标题"></el-input>
+            </el-form-item>
+            <el-form-item label="封面">
+                <el-upload class="upload-demo" :action="apiurl+'/upload/image'" :on-success="onSuccess"
+                           :show-file-list="false">
+                    <img v-if="form.cover_img" :src="apiurl+form.cover_img" class="avatar"
+                         style="width:100px;height:100px;" />
+                    <el-icon v-else class="avatar-uploader-icon">
+                        <component :is="Plus"></component>
+                    </el-icon>
+                </el-upload>
+            </el-form-item>
+            <el-form-item label="类型" prop="type">
+                <el-select v-model="form.type" clearable class="m-2" placeholder="选择类型" size="large">
+                    <el-option v-for="(item,index) in options" :key="index" :label="item" :value="index" />
+                </el-select>
+            </el-form-item>
+            <el-form-item label="是否第三方" prop="isthird">
+                <el-radio-group v-model="form.isthird" class="ml-4">
+                    <el-radio :label="0" size="large">否</el-radio>
+                    <el-radio :label="1" size="large">是</el-radio>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item label="来源链接" v-show="form.isthird == 1" prop="url">
+                <el-input v-model="form.url" placeholder="请输入第三方来源链接"></el-input>
+            </el-form-item>
+            <el-form-item label="文章详情" v-show="form.isthird == 0" prop="content">
+                <div class="editor-box">
+                    <div id="toolbar" style="border: 1px solid #e4e4e4;"></div>
+                    <div id="editor" style="width:100%;height:300px;border: 1px solid #e4e4e4;"></div>
+                </div>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="onSubmit">确定</el-button>
+                <el-button @click="onReset">重置</el-button>
+            </el-form-item>
+        </el-form>
+    </el-dialog>
+
 </div>
 </body>
 <script src="https://cdn.bootcdn.net/ajax/libs/element-plus/2.3.3/index.full.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/element-plus-icons-vue/2.1.0/index.iife.min.js"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/wangeditor5/5.1.23/index.min.js"></script>
 <script>
     const {
         createApp,
         onMounted,
         reactive,
-        toRefs
+        toRefs,
+        nextTick,
+        watch
     } = Vue;
-    const { Plus } = ElementPlusIconsVue
+
+    const { Plus, Search } = ElementPlusIconsVue
     const { createEditor, createToolbar } = window.wangEditor
     const {
-        ElMessage
+        ElMessage,
     } = ElementPlus
     createApp({
         setup() {
             const state = reactive({
                 apiurl: 'http://localhost:801',
-                dialogVisible: false,
+                visible: false,
+                page: {
+                    page_num: 1,
+                    page_rows: 8,
+                    type: '',
+                    isthird: '',
+                    keyword: ''
+                },
+                loading: false,
+                data: [],
+                total: 0,
                 form: {
                     isthird: 0
                 },
                 rules: {
                     title: { required: true, message: '标题必填', trigger: 'blur' },
                     isthird: { required: true, message: '必选', trigger: 'blur' },
-                    type: { required: true, message: '类型必选', trigger: 'blur' },
+                    type: { required: true, message: '类型必选', trigger: 'change' },
                     content: { required: true, message: '内容必填', trigger: 'blur' },
                 },
                 options: ["旅游", "饮食", "运动", "减肥", "亲子",],
@@ -124,8 +180,91 @@
                 editor: null
             })
             onMounted(() => {
-                initEditor()
+                getData()
             })
+            watch(() => state.form.isthird, (n, o) => {
+                if (n) {
+                    state.rules = {
+                        title: { required: true, message: '标题必填', trigger: 'blur' },
+                        isthird: { required: true, message: '必选', trigger: 'blur' },
+                        type: { required: true, message: '类型必选', trigger: 'change' },
+                        url: { required: true, message: '链接必填', trigger: 'blur' },
+                    }
+                } else {
+                    state.rules = {
+                        title: { required: true, message: '标题必填', trigger: 'blur' },
+                        isthird: { required: true, message: '必选', trigger: 'blur' },
+                        type: { required: true, message: '类型必选', trigger: 'change' },
+                        content: { required: true, message: '内容必填', trigger: 'blur' },
+                    }
+                }
+            }, { deep: true })
+            // 新建
+            const openDialog = () => {
+                state.visible = true;
+                nextTick(() => {
+                    initEditor()
+                })
+            }
+            // 关闭dialog
+            const handleClose = () => {
+                state.visible = false;
+            }
+            // 重置筛选
+            const resetData = () => {
+                state.page = {
+                    page_num: 1,
+                    page_rows: 10,
+                    type: '',
+                    isthird: '',
+                    keyword: '',
+                }
+                getData()
+            }
+            // 列表
+            const getData = () => {
+                const { page_num, page_rows, type, isthird, keyword } = state.page
+                let url = `${state.apiurl}/know/list?page_num=${page_num}&page_rows=${page_rows}&type=${type}&isthird=${isthird}&keyword=${decodeURIComponent(keyword)}`
+                fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/json;charset=UTF-8"
+                    }
+                }).then(response => response.json()).then(res => {
+                    if (res.code == 200) {
+                        state.data = res.data.list
+                        state.total = res.data.total
+                    } else {
+                        ElMessage.error("获取文章列表失败")
+                    }
+                })
+            }
+            // 改变分页
+            const handlePage = (data) => {
+                state.page.page_num = data
+                getData()
+            }
+            // 详情
+            const onTheData = (id) => {
+                state.loading = state.visible = true
+                nextTick(() => {
+                    initEditor()
+                })
+                fetch(state.apiurl + "/know/detail?id=" + id, {
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/json;charset=UTF-8"
+                    }
+                }).then(response => response.json()).then(res => {
+                    state.loading = false
+                    if (res.code == 200) {
+                        state.form = res.data
+                        state.editor.setHtml(res.data.content)
+                    } else {
+                        ElMessage.error("获取文章详情失败")
+                    }
+                })
+            }
             // 富文本编辑初始化
             const initEditor = () => {
                 // 配置
@@ -156,22 +295,43 @@
             const onSuccess = (e) => {
                 state.form.cover_img = e.data.path
             }
+            // 提交
             const onSubmit = async () => {
-                console.log(state.form);
                 await state.formRef.validate((valid, fields) => {
                     if (!valid) return
-
+                    let body = state.form
+                    if (body.isthird) {
+                        body = { ...body, content: "" }
+                    }
+                    if (body.id) {
+                        fetch(state.apiurl + "/know/update", {
+                            method: 'POST',
+                            body: JSON.stringify(body),
+                            headers: {
+                                "Content-Type": "application/json;charset=UTF-8"
+                            }
+                        }).then(response => response.json()).then(res => {
+                            if (res.code == 200) {
+                                ElMessage.success("修改成功")
+                                state.editor.clear()
+                                state.visible = false
+                            } else {
+                                ElMessage.error("修改失败")
+                            }
+                        })
+                        return
+                    }
                     fetch(state.apiurl + "/know/pub", {
                         method: 'POST',
-                        body: JSON.stringify(state.form),
+                        body: JSON.stringify(body),
                         headers: {
                             "Content-Type": "application/json;charset=UTF-8"
                         }
                     }).then(response => response.json()).then(res => {
-                        state.editor.clear()
                         if (res.code == 200) {
                             ElMessage.success("保存成功")
-                            onReset()
+                            state.editor.clear()
+                            state.visible = false
                         } else {
                             ElMessage.error("保存失败")
                         }
@@ -179,13 +339,38 @@
                 })
 
             }
+            // 删除文章
+            const onDelete = async (id) => {
+                fetch(state.apiurl + "/know/del?id=" + id, {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json;charset=UTF-8"
+                    }
+                }).then(response => response.json()).then(res => {
+                    if (res.code == 200) {
+                        getData()
+                    } else {
+                        ElMessage.error("删除失败")
+                    }
+                })
+            }
             const onReset = () => {
-                state.editor.clear()
+                if (state.form.isthird) {
+                    state.editor.clear()
+                }
                 state.formRef.resetFields()
             }
             return {
                 ...toRefs(state),
                 Plus,
+                Search,
+                openDialog,
+                handleClose,
+                getData,
+                resetData,
+                handlePage,
+                onTheData,
+                onDelete,
                 onSuccess,
                 onSubmit,
                 onReset

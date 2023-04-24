@@ -47,7 +47,16 @@ public class KnowService {
 
         return ReturnJson.success(null, "ok");
     }
-
+   // 删除文章
+    public ReturnJson<String> DeleteKnow(String id){
+        knowMapper.DeleteKnow(id);
+        return ReturnJson.success(null, "ok");
+    }
+    // 更新文章
+    public ReturnJson<String> UpdateKnow(KnowEntity knowEntity){
+        knowMapper.UpdateKnow(knowEntity);
+        return ReturnJson.success(null, "ok");
+    }
     // 文章列表
     public ReturnJson<ListTrends<KnowEntity>> GetKnow(PageKnow pageKnow) {
         // 时间倒序

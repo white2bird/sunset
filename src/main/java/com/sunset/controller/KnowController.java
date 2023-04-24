@@ -30,13 +30,32 @@ public class KnowController {
     }
     @Operation(summary = "文章列表")
     @GetMapping("/list")
-    public ReturnJson<ListTrends<KnowEntity>> GetKnow(@RequestParam(name = "isimg", required = false) @Parameter(description="是否有封面") boolean isimg,@RequestParam(name = "type", required = false) @Parameter(description="类型") String type, @Parameter(description="页码") Integer page_num, @Parameter(description="页数") Integer page_rows) {
+    public ReturnJson<ListTrends<KnowEntity>> GetKnow(
+            @RequestParam(name = "isimg", required = false) @Parameter(description="是否有封面") boolean isimg,
+            @RequestParam(name = "isthird", required = false) @Parameter(description="是否第三方") String isthird,
+            @RequestParam(name = "keyword", required = false) @Parameter(description="搜索关键字") String keyword,
+            @RequestParam(name = "type", required = false) @Parameter(description="类型") String type,
+            @Parameter(description="页码") Integer page_num,
+            @Parameter(description="页数") Integer page_rows
+    ) {
         PageKnow p =new PageKnow();
         p.setType(type);
+        p.setIsthird(isthird);
+        p.setKeyword(keyword);
         p.setPage_num(page_num);
         p.setPage_rows(page_rows);
         p.setIsimg(isimg);
         return knowService.GetKnow(p);
+    }
+    @Operation(summary = "删除文章【后台】")
+    @PostMapping("/del")
+    public ReturnJson<String> DeleteKnow(@RequestParam(name = "id") String id) {
+        return knowService.DeleteKnow(id);
+    }
+    @Operation(summary = "更新文章【后台】")
+    @PostMapping("/update")
+    public ReturnJson<String> UpdateKnow(@RequestBody KnowEntity knowEntity) {
+        return knowService.UpdateKnow(knowEntity);
     }
     @Operation(summary = "我的收藏【文章收藏】")
     @GetMapping("/my_like")
@@ -51,6 +70,7 @@ public class KnowController {
     public ReturnJson<KnowIsLike> GetKnowDetail(@RequestParam(name = "id") String id, HttpServletRequest request) {
         return knowService.GetKnowDetail(id,request);
     }
+
     @Operation(summary = "文章收藏<-->取消收藏")
     @PostMapping("/like")
     @AuthMsToken
