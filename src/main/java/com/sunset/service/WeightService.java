@@ -12,6 +12,7 @@ import com.sunset.mapper.WeightMapper;
 import com.sunset.request.*;
 
 import com.sunset.response.BodyCompositionResponse;
+import com.sunset.response.CompareResponse;
 import com.sunset.response.HealthDataResponse;
 import com.sunset.utils.BodyCalculator;
 import com.sunset.utils.BodyCompositionCalculator;
@@ -24,6 +25,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -44,13 +47,15 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
 
 
     @Transactional(rollbackFor = Exception.class)
-    public Map<String, Object> saveWeight(WeightRequest weightRequest){
+    public Map<String, Object> saveWeight(WeightRequest weightRequest, boolean save){
         // 保存体重
         WeightEntity weightEntity = new WeightEntity();
         weightEntity.setWeight(weightRequest.getWeight());
         weightEntity.setUid(UserIdThreadLocal.getUserId());
         weightEntity.setBlueAddress(weightRequest.getBlueAddress());
-        this.save(weightEntity);
+        if(save){
+            this.save(weightEntity);
+        }
         // todo 计算进行保存
         UserInfoEntity userInfoEntity = signMapper.GetUserInfo(UserIdThreadLocal.getUserId());
         Double height = Double.valueOf(userInfoEntity.getHeight());
@@ -69,9 +74,11 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
         BodyCalculator calculator = new BodyCalculator(sexChar, age, weight, height, waist);
 
 
+        BodyComposition latestWeighInfo = getLatestBodyComposition();
 
         BodyComposition  bodyComposition = new BodyComposition();
         bodyComposition.setUserId(UserIdThreadLocal.getUserId());
+        bodyComposition.setWeightTime(new Date());
         bodyComposition.setHeight(height);
         bodyComposition.setBirthDate(date);
         bodyComposition.setGender(sex);
@@ -102,7 +109,9 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
         bodyComposition.setMetabolicAge(calculator.metabolicAge());
         bodyComposition.setObesityDegreeIndicator(calculator.fatPercent()*100);
         bodyComposition.setFatBurningHeartRate(calculator.fatBurningHeartRate());
-        bodyCompositionService.save(bodyComposition);
+        if(save){
+            bodyCompositionService.save(bodyComposition);
+        }
 
         Integer i = simulateVisceralFatLevel(bodyComposition.getBmi(), bodyComposition.getWaistCircumference(), bodyComposition.getGender() == 1);
         Map<String, Object> result = new HashMap<>();
@@ -132,8 +141,34 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
         result.put("fatDegree", fatDegree(bodyComposition));
         result.put("fatBurningHeartRate", buildBurningHeartRate(bodyComposition));
 
+        if(latestWeighInfo != null){
+            result.put("lastWeightTime", latestWeighInfo.getWeightTime());
+            result.put("weightChange", buildWeightChange(bodyComposition, latestWeighInfo));
+            result.put("bmiChange", buildBmiChange(bodyComposition, latestWeighInfo));
+            result.put("bodyFatChange", buildBodyFatChange(bodyComposition, latestWeighInfo));
+        }else{
+            result.put("lastWeightTime", null);
+            result.put("weightChange", null);
+            result.put("bmiChange", null);
+            result.put("bodyFatChange", null);
+
+        }
+
+
         return result;
 
+    }
+
+    private Object buildBodyFatChange(BodyComposition bodyComposition, BodyComposition latestWeighInfo) {
+        return bodyComposition.getBodyFat()-latestWeighInfo.getBodyFat();
+    }
+
+    private Object buildBmiChange(BodyComposition bodyComposition, BodyComposition latestWeighInfo) {
+        return bodyComposition.getBmi()-latestWeighInfo.getBmi();
+    }
+
+    private Object buildWeightChange(BodyComposition bodyComposition, BodyComposition latestWeighInfo) {
+        return bodyComposition.getWeight()-latestWeighInfo.getWeight();
     }
 
     private Map<String, Object> buildWeightResult(BodyComposition bodyComposition){
@@ -174,7 +209,7 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
     private Map<String, Object> buildBmrResult(BodyComposition bodyComposition){
         Map<String, Object> result = new HashMap<>();
         result.put("value", bodyComposition.getBmr());
-        result.putAll(BmrCal.calLevel());
+        result.putAll(BmrCal.calLevel(bodyComposition.getBmr()));
         return result;
     }
 
@@ -411,7 +446,7 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
     private Map<String, Object> buildBurningHeartRate(BodyComposition bodyComposition){
         Map<String, Object> result = new HashMap<>();
         result.put("value", bodyComposition.getFatBurningHeartRate());
-        result.putAll(BurnFatHeartCal.calLevel());
+        result.putAll(BurnFatHeartCal.calLevel(bodyComposition.getFatBurningHeartRate()));
         return result;
     }
 
@@ -500,7 +535,7 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
      * 体重比较
      * @return
      */
-    public BodyCompositionResponse weightCompare(WeightCompareRequest weightCompareRequest){
+    public CompareResponse weightCompare(WeightCompareRequest weightCompareRequest){
         List<Long> ids = weightCompareRequest.getIds();
         ids = ids.stream().distinct().collect(Collectors.toList());
         if(!Objects.equals(2, ids.size())){
@@ -517,108 +552,56 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
         BodyComposition newData = list.get(1);
 
 
-        BodyCompositionResponse response = new BodyCompositionResponse();
+        CompareResponse response = new CompareResponse();
+        Map<String, Object> oldDataMap = saveWeight(new WeightRequest(new BigDecimal(oldData.getWeight()), ""), false);
+        Map<String, Object> newDataMap = saveWeight(new WeightRequest(new BigDecimal(newData.getWeight()), ""), false);
 
-        response.setObesityDegree(createComparisonItem(
-                newData.getObesityDegreeIndicator(),
-                oldData.getObesityDegreeIndicator(),
-                getObesityDegreeStatus(newData.getObesityDegreeIndicator()),
-                getObesityDegreeStatus(oldData.getObesityDegreeIndicator())
-        ));
+        Field[] declaredFields = CompareResponse.class.getDeclaredFields();
+        for(Field field : declaredFields){
+            String name = field.getName();
+            try{
+                Double oldValue = getValue(name, oldDataMap);
+                Double newValue = getValue(name, newDataMap);
+                if(oldValue == null || newValue == null){
+                    continue;
+                }
+                String oldStatus = getStatus(name, oldDataMap);
+                String newStatus = getStatus(name, newDataMap);
+                field.setAccessible(true);
+                BodyCompositionResponse.BodyCompositionItem comparisonItem = createComparisonItem(newValue, oldValue, newStatus, oldStatus);
+                field.set(response, comparisonItem);
+            }catch (Exception e){
+                System.out.println("字段：" + name + "异常");
+                e.printStackTrace();
+            }
 
-        response.setBodyFat(createComparisonItem(
-                newData.getBodyFat(),
-                oldData.getBodyFat(),
-                getBodyFatStatus(newData.getBodyFat()),
-                getBodyFatStatus(oldData.getBodyFat())
-        ));
-
-        response.setFatMass(createComparisonItem(
-                newData.getFatMass(),
-                oldData.getFatMass(),
-                getFatMassStatus(newData.getFatMass()),
-                getFatMassStatus(oldData.getFatMass())
-        ));
-
-        response.setSubcutaneousFat(createComparisonItem(
-                newData.getSubcutaneousFat(),
-                oldData.getSubcutaneousFat(),
-                getSubcutaneousFatStatus(newData.getSubcutaneousFat()),
-                getSubcutaneousFatStatus(oldData.getSubcutaneousFat())
-        ));
-
-        response.setFatFreeMass(createComparisonItem(
-                newData.getFatFreeMass(),
-                oldData.getFatFreeMass(),
-                getFatFreeMassStatus(newData.getFatFreeMass()),
-                getFatFreeMassStatus(oldData.getFatFreeMass())
-        ));
-
-        response.setMusclePercentage(createComparisonItem(
-                newData.getSkeletalMusclePercentage(),
-                oldData.getSkeletalMusclePercentage(),
-                getMusclePercentageStatus(newData.getSkeletalMusclePercentage()),
-                getMusclePercentageStatus(oldData.getSkeletalMusclePercentage())
-        ));
-
-        response.setMuscleMass(createComparisonItem(
-                newData.getMuscleMass(),
-                oldData.getMuscleMass(),
-                getMuscleMassStatus(newData.getMuscleMass()),
-                getMuscleMassStatus(oldData.getMuscleMass())
-        ));
-
-        response.setSkeletalMusclePercentage(createComparisonItem(
-                newData.getSkeletalMusclePercentage(),
-                oldData.getSkeletalMusclePercentage(),
-                getSkeletalMuscleStatus(newData.getSkeletalMusclePercentage()),
-                getSkeletalMuscleStatus(oldData.getSkeletalMusclePercentage())
-        ));
-
-        response.setSkeletalMuscle(createComparisonItem(
-                newData.getSkeletalMuscle(),
-                oldData.getSkeletalMuscle(),
-                getSkeletalMuscleStatus(newData.getSkeletalMuscle()),
-                getSkeletalMuscleStatus(oldData.getSkeletalMuscle())
-        ));
-
-        response.setVisceralFat(createComparisonItem(
-                newData.getVisceralFat(),
-                oldData.getVisceralFat(),
-                getVisceralFatStatus(newData.getVisceralFat()),
-                getVisceralFatStatus(oldData.getVisceralFat())
-        ));
-
-        response.setBodyWaterPercentage(createComparisonItem(
-                newData.getBodyWaterPercentage(),
-                oldData.getBodyWaterPercentage(),
-                getBodyWaterStatus(newData.getBodyWaterPercentage()),
-                getBodyWaterStatus(oldData.getBodyWaterPercentage())
-        ));
-
-        response.setBoneMass(createComparisonItem(
-                newData.getBoneMass(),
-                oldData.getBoneMass(),
-                getBoneMassStatus(newData.getBoneMass()),
-                getBoneMassStatus(oldData.getBoneMass())
-        ));
-
-        response.setProteinMass(createComparisonItem(
-                newData.getProteinMass(),
-                oldData.getProteinMass(),
-                getProteinMassStatus(newData.getProteinMass()),
-                getProteinMassStatus(oldData.getProteinMass())
-        ));
-
-        response.setMetabolicAge(createComparisonItem(
-                newData.getMetabolicAge().doubleValue(),
-                oldData.getMetabolicAge().doubleValue(),
-                getMetabolicAgeStatus(newData.getMetabolicAge()),
-                getMetabolicAgeStatus(oldData.getMetabolicAge())
-        ));
-
+        }
         return response;
 
+    }
+
+    private Double getValue(String name, Map<String, Object> dataMap){
+        Object o = dataMap.get(name);
+        if(o == null){
+            return null;
+        }
+        Map<String, Object> map = (Map<String, Object>) o;
+        o = map.get("value");
+        Double value = null;
+        if(o instanceof Integer){
+            value = ((Integer) o).doubleValue();
+        } else if(o instanceof Double){
+            value = (Double) o;
+        }
+        if(value == null){
+            return null;
+        }
+        return value;
+    }
+
+    private String getStatus(String name, Map<String, Object> dataMap){
+
+        return ((Map)dataMap.get(name)).get("levelName").toString();
     }
 
     private Map<String, Date> buildTimeQuery(HistoryTrendRequest historyTrendRequest, LambdaQueryWrapper<BodyComposition> healthDataLambdaQueryWrapper) {
@@ -668,13 +651,26 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
         return Period.between(birthDate, currentDate).getYears();
     }
 
-    public BodyComposition getLatestWeighInfo() {
+    public Map<String, Object> getLatestWeighInfo() {
         LambdaQueryWrapper<BodyComposition> healthDataLambdaQueryWrapper = new LambdaQueryWrapper<>();
         healthDataLambdaQueryWrapper.orderByDesc(BodyComposition::getId);
+        healthDataLambdaQueryWrapper.eq(BodyComposition::getUserId, UserIdThreadLocal.getUserId());
         healthDataLambdaQueryWrapper.last("limit 1");
         BodyComposition one = bodyCompositionService.getOne(healthDataLambdaQueryWrapper);
-        return one;
+        if(one == null){
+            return null;
+        }
+        Map<String, Object> result = saveWeight(new WeightRequest(new BigDecimal(one.getWeight()), ""), false);
+        return result;
 
+    }
+
+    private BodyComposition getLatestBodyComposition() {
+        LambdaQueryWrapper<BodyComposition> healthDataLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        healthDataLambdaQueryWrapper.orderByDesc(BodyComposition::getId);
+        healthDataLambdaQueryWrapper.eq(BodyComposition::getUserId, UserIdThreadLocal.getUserId());
+        healthDataLambdaQueryWrapper.last("limit 1");
+        return bodyCompositionService.getOne(healthDataLambdaQueryWrapper);
     }
 
     public Boolean deleteHistory(DeleteHistoryWeightRequest deleteHistoryWeightRequest) {

@@ -12,7 +12,6 @@ public class GlobalException extends  RuntimeException{
     @ExceptionHandler(TokenExpiredException.class)
     @ResponseBody
     public  ReturnJson tokenException(Exception exception){
-
         log.info(exception.toString());
         log.info("Token异常："+exception.getMessage());
         return ReturnJson.fail(401, "令牌过期");
@@ -21,6 +20,7 @@ public class GlobalException extends  RuntimeException{
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public ReturnJson<Object> otherException(Exception exception){
+        exception.printStackTrace();
         log.info("全局异常："+exception.getMessage());
         return ReturnJson.fail(500,exception.getMessage());
     }

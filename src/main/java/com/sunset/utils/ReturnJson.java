@@ -11,6 +11,16 @@ public class ReturnJson<T> implements Serializable {
     private String message;
     private T data;
     private long timestamp;
+
+    public static <T>ReturnJson<T> success(T data){
+        ReturnJson<T> returnJson = new ReturnJson<>();
+        returnJson.code = 200;
+        returnJson.data = data;
+        returnJson.message = "success";
+        returnJson.timestamp = new Date().getTime();
+        return returnJson;
+    }
+
     public static <T>ReturnJson<T> success(T data,String message){
         ReturnJson<T> returnJson = new ReturnJson<>();
         returnJson.code = 200;

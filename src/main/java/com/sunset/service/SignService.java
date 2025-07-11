@@ -172,10 +172,12 @@ public class SignService {
     }
 
     // 获取用户信息
-    public ReturnJson<UserInfoEntity> GetUserInfo(HttpServletRequest request) {
+    public ReturnJson<UserInfoEntity>
+    GetUserInfo(HttpServletRequest request) {
         String token = request.getHeader("ms_token");
         Map<String, String> map = TokenUtils.SelectToken(token);
         String uid = map.get("uid");
+
         UserInfoEntity userInfoEntity = signMapper.GetUserInfo(uid);
         userInfoEntity.setDescription(EmojiParser.parseToUnicode(userInfoEntity.getDescription()));
         return ReturnJson.success(userInfoEntity, "ok");

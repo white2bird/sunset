@@ -21,8 +21,8 @@ import java.util.*;
 public class UploadController {
 //    String uploadImageUrl = "/src/main/resources/static/images/";
 //    String uploadAvatorUrl = "/src/main/resources/static/avator/";
-    String uploadImageUrl = "/resources/static/images/";
-    String uploadAvatorUrl = "/resources/static/avator/";
+    String uploadImageUrl = "/upload/images/";
+    String uploadAvatorUrl = "/upload/avator/";
     @Operation(summary = "上传图片【单图】")
     @PostMapping("/image")
     public ReturnJson<Map> UploadImage(@RequestParam("file") MultipartFile fImage) throws IOException {
@@ -60,8 +60,8 @@ public class UploadController {
         // 存储的绝对路径
         ApplicationHome h = new ApplicationHome(getClass());
         File jarF = h.getSource();
-//        String path = System.getProperty("user.dir")+uploadUrl; // 开发环境
-        String path = jarF.getParentFile().toString()+uploadUrl; // 生产环境
+        String path = System.getProperty("user.dir")+uploadUrl; // 开发环境
+//        String path = jarF.getParentFile().toString()+uploadUrl; // 生产环境
         String fuuid = path + uuid;
         HashMap<String,String> map = new HashMap<>();
         map.put("path",setPath+uuid);

@@ -17,14 +17,15 @@ public class UserInfoEntity {
     private String avator="/avator/sunset202303311711.png";
     @Schema(description = "简介")
     private String description;
-    private String birthday = "1998-5-04";
+    private String birthday;
+    @Schema(description = "0: 女性 1：男性")
     private int sex;
     @Schema(description = "身高")
-    private String height = "0";
+    private String height;
     @Schema(description = "体重")
-    private String weight = "0";
+    private String weight;
     @Schema(description = "腰围")
-    private String waistline = "0";
+    private String waistline;
     @Schema(description = "显示ID【个人信息】")
     private String showid;
     private String uid;

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 
-@Tag(name = "Sign")
+@Tag(name = "用户信息（注册 登录）")
 @RestController
 @RequestMapping("/sign")
 @ResponseBody
