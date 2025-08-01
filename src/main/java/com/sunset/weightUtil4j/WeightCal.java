@@ -18,9 +18,20 @@ public class WeightCal {
 
 
     public static Map<String,?> calLevel(Double weight){
-        return SplitUtil.levelInfo(returnStandList(weight), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), desc, weight);
+        return SplitUtil.levelInfo(returnStandList(weight), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, weight);
     }
 
+
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+                "AEDBFD",
+                "11B6EB",
+                "5BCC70",
+                "F9AB3E",
+                "F84F2E",
+                "D53010"
+        );
+    }
     /**
      * 返回bmi对应的标准数组列表
      * @param height 传入米

@@ -9,13 +9,13 @@ import com.sunset.entity.Trends.*;
 import com.sunset.mapper.TrendsMapper;
 import com.sunset.utils.ReturnJson;
 import com.sunset.utils.TokenUtils;
-import com.vdurmont.emoji.EmojiParser;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sunset.mapper.SignMapper;
+import org.springframework.util.CollectionUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
@@ -58,7 +58,7 @@ public class TrendsService {
         userFollows.setNickname(uinfo.getNickname());
         userFollows.setAvator(uinfo.getAvator());
         userFollows.setConstellation(uinfo.getConstellation());
-        userFollows.setDescription(EmojiParser.parseToUnicode(uinfo.getDescription()));
+        userFollows.setDescription(uinfo.getDescription());
         userFollows.setSex(uinfo.getSex());
         return ReturnJson.success(userFollows, "ok");
     }
@@ -79,7 +79,7 @@ public class TrendsService {
             String image = JSON.toJSONString(pubTrends.getImages());
             newTrends.setImages(image);
         }
-        newTrends.setText(EmojiParser.parseToAliases(pubTrends.getText()));
+        newTrends.setText(pubTrends.getText());
 
         String uuid = UUID.randomUUID().toString().toUpperCase();
         newTrends.setId(uuid);
@@ -112,64 +112,68 @@ public class TrendsService {
         PageInfo<NewTrends> pageInfo = new PageInfo<>(list);
         List<NewTrends> lists = pageInfo.getList();
         List<ObjTrends> newList = new ArrayList<>();
-        lists.forEach((x) -> {
-            ObjTrends objTrends = new ObjTrends();
-            // 是否关注
-            String isFollow = trendsMapper.FindIsFollow(x.getUid(),uid);
-            // 判断查询是否关注 || 自己不能关注自己
-            if(isFollow != null || Objects.equals(x.getUid(), uid)){
-               objTrends.setIsfollow(true);
-            }else{
-                objTrends.setIsfollow(false);
-            }
-            // 用户信息
-            UserInfoEntity uinfo = signMapper.GetUserInfo(x.getUid());
-            // 评论列表
-            PageHelper.startPage(1, 3, "create_time desc");
-            List<CommTrends> commList = trendsMapper.GetTrendsComm(x.getId());
-            PageInfo<CommTrends> comm_page = new PageInfo<>(commList);
-            // 判断动态是否有点赞
-            if (uid != null) {
-                String isStar = trendsMapper.FindIsStar(x.getId(), uid);
-                if (isStar != null) {
-                    objTrends.setIsstar(true);
+        if(!CollectionUtils.isEmpty(lists)){
+            lists.forEach((x) -> {
+                ObjTrends objTrends = new ObjTrends();
+                // 是否关注
+                String isFollow = trendsMapper.FindIsFollow(x.getUid(),uid);
+                // 判断查询是否关注 || 自己不能关注自己
+                if(isFollow != null || Objects.equals(x.getUid(), uid)){
+                    objTrends.setIsfollow(true);
+                }else{
+                    objTrends.setIsfollow(false);
+                }
+                // 用户信息
+                UserInfoEntity uinfo = signMapper.GetUserInfo(x.getUid());
+                // 评论列表
+                PageHelper.startPage(1, 3, "create_time desc");
+                List<CommTrends> commList = trendsMapper.GetTrendsComm(x.getId());
+                PageInfo<CommTrends> comm_page = new PageInfo<>(commList);
+                // 判断动态是否有点赞
+                if (uid != null) {
+                    String isStar = trendsMapper.FindIsStar(x.getId(), uid);
+                    if (isStar != null) {
+                        objTrends.setIsstar(true);
+                    } else {
+                        objTrends.setIsstar(false);
+                    }
                 } else {
                     objTrends.setIsstar(false);
                 }
-            } else {
-                objTrends.setIsstar(false);
-            }
-            JSONArray images = JSONArray.parseArray(x.getImages());
-            objTrends.setId(x.getId());
-            objTrends.setUid(x.getUid());
-            // 解码数据库存储的 Emoji 表情符号
-            objTrends.setText(EmojiParser.parseToUnicode(x.getText()));
-            objTrends.setImages(images);
-            objTrends.setStar(x.getStar());
-            objTrends.setCreate_time(x.getCreate_time());
-            objTrends.setComment_num(comm_page.getTotal());
-            // 用户信息
-            objTrends.setAvator(uinfo.getAvator());
-            objTrends.setNickname(uinfo.getNickname());
-            List<CommTrends> comm_list = comm_page.getList();
-
-            List<CommThree> newComm_list = new ArrayList<>();
-            // 这里挂载前三条最新的评论
-            comm_list.forEach((y) -> {
-                // 挂载用户信息
-                UserInfoEntity ucomInfo = signMapper.GetUserInfo(y.getUid());
-                CommThree commThree = new CommThree();
-                commThree.setNickname(ucomInfo.getNickname());
+                JSONArray images = JSONArray.parseArray(x.getImages());
+                objTrends.setId(x.getId());
+                objTrends.setUid(x.getUid());
                 // 解码数据库存储的 Emoji 表情符号
-                commThree.setComment(EmojiParser.parseToUnicode(y.getContent()));
-                newComm_list.add(commThree);
+                objTrends.setText(x.getText());
+                objTrends.setImages(images);
+                objTrends.setStar(x.getStar());
+                objTrends.setCreate_time(x.getCreate_time());
+                objTrends.setComment_num(comm_page.getTotal());
+                // 用户信息
+                objTrends.setAvator(uinfo.getAvator());
+                objTrends.setNickname(uinfo.getNickname());
+                List<CommTrends> comm_list = comm_page.getList();
+
+                List<CommThree> newComm_list = new ArrayList<>();
+                // 这里挂载前三条最新的评论
+                if(!CollectionUtils.isEmpty(comm_list)){
+                    comm_list.forEach((y) -> {
+                        // 挂载用户信息
+                        UserInfoEntity ucomInfo = signMapper.GetUserInfo(y.getUid());
+                        CommThree commThree = new CommThree();
+                        commThree.setNickname(ucomInfo.getNickname());
+                        // 解码数据库存储的 Emoji 表情符号
+                        commThree.setComment(y.getContent());
+                        newComm_list.add(commThree);
+                    });
+                }
+                objTrends.setComment_list(newComm_list);
+
+
+                // 序列化处理完新加旧往新数组追加
+                newList.add(objTrends);
             });
-            objTrends.setComment_list(newComm_list);
-
-
-            // 序列化处理完新加旧往新数组追加
-            newList.add(objTrends);
-        });
+        }
         ListTrends listTrends = new ListTrends();
         listTrends.setTotal(pageInfo.getTotal());
         listTrends.setList(newList);
@@ -187,24 +191,26 @@ public class TrendsService {
         PageInfo<NewTrends> pageInfo = new PageInfo<>(list);
         List<NewTrends> lists = pageInfo.getList();
         List<ObjTrends> newList = new ArrayList<>();
-        lists.forEach((x) -> {
-            // 用户信息
-            UserInfoEntity uinfo = signMapper.GetUserInfo(x.getUid());
-            ObjTrends objTrends = new ObjTrends();
-            JSONArray images = JSONArray.parseArray(x.getImages());
-            objTrends.setId(x.getId());
-            objTrends.setUid(x.getUid());
-            // 解码数据库存储的 Emoji 表情符号
-            objTrends.setText(EmojiParser.parseToUnicode(x.getText()));
-            objTrends.setImages(images);
-            objTrends.setStar(x.getStar());
-            objTrends.setCreate_time(x.getCreate_time());
-            // 用户信息
-            objTrends.setAvator(uinfo.getAvator());
-            objTrends.setNickname(uinfo.getNickname());
-            // 序列化处理完新加旧往新数组追加
-            newList.add(objTrends);
-        });
+        if (!CollectionUtils.isEmpty(lists)){
+            lists.forEach((x) -> {
+                // 用户信息
+                UserInfoEntity uinfo = signMapper.GetUserInfo(x.getUid());
+                ObjTrends objTrends = new ObjTrends();
+                JSONArray images = JSONArray.parseArray(x.getImages());
+                objTrends.setId(x.getId());
+                objTrends.setUid(x.getUid());
+                // 解码数据库存储的 Emoji 表情符号
+                objTrends.setText(x.getText());
+                objTrends.setImages(images);
+                objTrends.setStar(x.getStar());
+                objTrends.setCreate_time(x.getCreate_time());
+                // 用户信息
+                objTrends.setAvator(uinfo.getAvator());
+                objTrends.setNickname(uinfo.getNickname());
+                // 序列化处理完新加旧往新数组追加
+                newList.add(objTrends);
+            });
+        }
         ListTrends listTrends = new ListTrends();
         listTrends.setTotal(pageInfo.getTotal());
         listTrends.setList(newList);
@@ -235,7 +241,7 @@ public class TrendsService {
         objTrends.setAvator(uinfo.getAvator());
         objTrends.setUid(uinfo.getUid());
         // 解码数据库存储的 Emoji 表情符号
-        objTrends.setText(EmojiParser.parseToUnicode(newTrends.getText()));
+        objTrends.setText(newTrends.getText());
         objTrends.setImages(images);
         objTrends.setStar(newTrends.getStar());
         objTrends.setCreate_time(newTrends.getCreate_time());
@@ -259,7 +265,7 @@ public class TrendsService {
         commTrends.setStar(0);
         commTrends.setTrends_id(setComm.getTrends_id());
         // 解码数据库存储的 Emoji 表情符号
-        commTrends.setContent(EmojiParser.parseToAliases(setComm.getContent()));
+        commTrends.setContent(setComm.getContent());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dateTime = formatter.format(LocalDateTime.now());
         commTrends.setCreate_time(dateTime);
@@ -292,29 +298,31 @@ public class TrendsService {
         PageInfo<CommTrends> pageInfo = new PageInfo<>(list);
         List<CommTrends> lists = pageInfo.getList();
         List<CommTrends> newList = new ArrayList<>();
-        lists.forEach((x) -> {
-            CommTrends commTrends = new CommTrends();
-            UserInfoEntity uinfo = signMapper.GetUserInfo(x.getUid());
-            commTrends.setId(x.getId());
-            commTrends.setTrends_id(x.getTrends_id());
-            commTrends.setUid(x.getUid());
-            // 判断评论是否有点赞
-            if (uid != null) {
-                String isStar = trendsMapper.FindCommentStar(x.getId(),x.getTrends_id(), uid);
-                log.info(isStar);
-                commTrends.setIsstar(isStar != null);
-            } else {
-                commTrends.setIsstar(false);
-            }
+        if(lists != null && lists.size() > 0){
+            lists.forEach((x) -> {
+                CommTrends commTrends = new CommTrends();
+                UserInfoEntity uinfo = signMapper.GetUserInfo(x.getUid());
+                commTrends.setId(x.getId());
+                commTrends.setTrends_id(x.getTrends_id());
+                commTrends.setUid(x.getUid());
+                // 判断评论是否有点赞
+                if (uid != null) {
+                    String isStar = trendsMapper.FindCommentStar(x.getId(),x.getTrends_id(), uid);
+                    log.info(isStar);
+                    commTrends.setIsstar(isStar != null);
+                } else {
+                    commTrends.setIsstar(false);
+                }
 
-            // 解码数据库存储的 Emoji 表情符号
-            commTrends.setContent(EmojiParser.parseToUnicode(x.getContent()));
-            commTrends.setStar(x.getStar());
-            commTrends.setAvator(uinfo.getAvator());
-            commTrends.setNickname(uinfo.getNickname());
-            commTrends.setCreate_time(x.getCreate_time());
-            newList.add(commTrends);
-        });
+                // 解码数据库存储的 Emoji 表情符号
+                commTrends.setContent(x.getContent());
+                commTrends.setStar(x.getStar());
+                commTrends.setAvator(uinfo.getAvator());
+                commTrends.setNickname(uinfo.getNickname());
+                commTrends.setCreate_time(x.getCreate_time());
+                newList.add(commTrends);
+            });
+        }
 
         ListComment listComment = new ListComment();
         listComment.setTotal(pageInfo.getTotal());
@@ -445,16 +453,18 @@ public class TrendsService {
         PageInfo<Followers> pageInfo = new PageInfo<>(list);
         List<Followers> lists = pageInfo.getList();
         List<FollowAll> followList = new ArrayList<>();
-        lists.forEach((x)->{
-            String u_id = x.getUid();
-            // 用户信息
-            UserInfoEntity u = signMapper.GetUserInfo(u_id);
-            FollowAll followAll = new FollowAll();
-            followAll.setAvator(u.getAvator());
-            followAll.setNickname(u.getNickname());
-            followAll.setUid(u.getUid());
-            followList.add(followAll);
-        });
+        if(!CollectionUtils.isEmpty(lists)){
+            lists.forEach((x)->{
+                String u_id = x.getUid();
+                // 用户信息
+                UserInfoEntity u = signMapper.GetUserInfo(u_id);
+                FollowAll followAll = new FollowAll();
+                followAll.setAvator(u.getAvator());
+                followAll.setNickname(u.getNickname());
+                followAll.setUid(u.getUid());
+                followList.add(followAll);
+            });
+        }
         ListTrends listTrends = new ListTrends();
         listTrends.setTotal(pageInfo.getTotal());
         listTrends.setList(followList);

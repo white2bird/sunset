@@ -18,12 +18,22 @@ public class MusclePercentCal {
         return Arrays.asList(44d, 52.4d);
     }
 
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+                "11B6EB",
+                "5BCC70",
+                "F9AB3E"
+        );
+    }
+
     public static List<String> returnStandListName(){
         return Arrays.asList("不足", "标准", "优");
+
+
     }
 
     public static Map<String,?> calLevel(Double muscle) {
-        return SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), desc, muscle);
+        return SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, muscle);
     }
 
     public static List<String> returnAnalyzeList(){

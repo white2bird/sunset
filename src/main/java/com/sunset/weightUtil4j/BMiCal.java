@@ -20,7 +20,18 @@ public class BMiCal {
         List<String> analList = returnAnalyzeList();
         List<String> sportList = returnSportAdvice();
         List<String> eatList = returnEatAdvice();
-        return SplitUtil.levelInfo(list, nameList, analList, sportList, eatList, desc, bmi);
+        return SplitUtil.levelInfo(list, nameList, analList, sportList, eatList, returnColorList(), desc, bmi);
+    }
+
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+                "AEDBFD",
+                "11B6EB",
+                "5BCC70",
+                "F9AB3E",
+                "F84F2E",
+                "D53010"
+        );
     }
 
     /**

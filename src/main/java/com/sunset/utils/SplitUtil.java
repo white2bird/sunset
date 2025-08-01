@@ -1,6 +1,9 @@
 package com.sunset.utils;
 
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,13 +32,18 @@ public class SplitUtil {
         return start;
     }
 
-    public static Map<String, Object> levelInfo(List<Double> list, List<String> nameList, List<String> analList, List<String> sportList, List<String> eatList, String desc, Double value){
+
+    public static Map<String, Object> levelInfo(List<Double> list, List<String> nameList, List<String> analList, List<String> sportList, List<String> eatList, List<String> colorList, String desc, Double value){
         if(list.isEmpty() || nameList.isEmpty()){
             throw new RuntimeException("list is empty");
         }
         Integer index = getIndex(list, value);
         Map<String, Object> result = new HashMap<>();
-        result.put("value", value); // 数据
+
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(2, RoundingMode.HALF_UP); // 四舍五入，保留两位
+        double newValue = bd.doubleValue();
+        result.put("value", newValue); // 数据
         result.put("standDataList",  list); // 区分列表
         result.put("standDataNameList", nameList); // 对应的级别
         result.put("level", index); // 级别
@@ -44,6 +52,8 @@ public class SplitUtil {
         result.put("sportAdvice", sportList.get(index)); // 运动建议
         result.put("eatAdvice", eatList.get(index)); // 吃的建议
         result.put("desc", desc); // 解释
+        result.put("color", colorList.get(index));
+        result.put("colorList", colorList);
         return result;
     }
 

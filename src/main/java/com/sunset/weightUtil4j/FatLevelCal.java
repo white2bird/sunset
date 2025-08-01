@@ -14,12 +14,23 @@ public class FatLevelCal {
         return Arrays.asList(18.5d, 24d, 28d, 35D, 40D);
     }
 
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+                "AEDBFD",
+                "11B6EB",
+                "5BCC70",
+                "F9AB3E",
+                "F84F2E",
+                "D53010"
+        );
+    }
+
     public static List<String> returnStandListName(){
         return Arrays.asList("偏轻", "标准", "超重", "肥胖I级", "肥胖II级", "肥胖III级");
     }
 
     public static Map<String,?> calLevel(Double bone){
-        return SplitUtil.levelInfo(returnStandList(),returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), desc, bone);
+        return SplitUtil.levelInfo(returnStandList(),returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, bone);
     }
 
     public static List<String> returnAnalyzeList(){

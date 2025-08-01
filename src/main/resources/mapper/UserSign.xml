@@ -33,17 +33,53 @@
         select * from tb_userinfo where uid=#{uid}
     </select>
     <!--  更新用户信息  -->
+<!--    <update id="UpdateUserInfo" parameterType="com.sunset.entity.User.UserInfoEntity">-->
+<!--        update tb_userinfo set nickname = #{nickname},-->
+<!--                               avator=#{avator},-->
+<!--                               birthday=#{birthday},-->
+<!--                               description=#{description},-->
+<!--                               constellation=#{constellation},-->
+<!--                               sex=#{sex},-->
+<!--                               height=#{height},-->
+<!--                               weight=#{weight},-->
+<!--                               waistline=#{waistline},-->
+<!--                               update_time=#{update_time} where id = #{id}-->
+<!--    </update>-->
     <update id="UpdateUserInfo" parameterType="com.sunset.entity.User.UserInfoEntity">
-        update tb_userinfo set nickname = #{nickname},
-                               avator=#{avator},
-                               birthday=#{birthday},
-                               description=#{description},
-                               constellation=#{constellation},
-                               sex=#{sex},
-                               height=#{height},
-                               weight=#{weight},
-                               waistline=#{waistline},
-                               update_time=#{update_time} where id = #{id}
+        update tb_userinfo
+        <set>
+            <if test="nickname != null and nickname != ''">
+                nickname = #{nickname},
+            </if>
+            <if test="avator != null and avator != ''">
+                avator = #{avator},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="constellation != null and constellation != ''">
+                constellation = #{constellation},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="height != null">
+                height = #{height},
+            </if>
+            <if test="weight != null">
+                weight = #{weight},
+            </if>
+            <if test="waistline != null">
+                waistline = #{waistline},
+            </if>
+            <if test="update_time != null">
+                update_time = #{update_time},
+            </if>
+        </set>
+        where uid = #{uid}
     </update>
     <!--  更新用户简介  -->
     <update id="UpdateUserDesc" parameterType="com.sunset.entity.User.UserInfoEntity">

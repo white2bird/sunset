@@ -23,9 +23,16 @@ public class SubcutaneousFatCal {
     public static List<String> returnStandListName(){
         return Arrays.asList("偏低", "标准", "高");
     }
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+                "11B6EB",
+                "5BCC70",
+                "F9AB3E"
+        );
+    }
 
     public static Map<String,?> calLevel(Double subcutaneousFat, Boolean  male) {
-        return SplitUtil.levelInfo(returnStandList(male), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), desc, subcutaneousFat);
+        return SplitUtil.levelInfo(returnStandList(male), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, subcutaneousFat);
     }
 
     public static List<String> returnAnalyzeList(){

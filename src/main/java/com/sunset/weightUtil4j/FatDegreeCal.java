@@ -12,6 +12,17 @@ import java.util.Map;
 public class FatDegreeCal {
     public static String desc = "是指肥胖的程度。表现实际体重与理想体重的差距。肥胖度是判定肥胖症的一个指标。";
 
+
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+                "AEDBFD",
+                "11B6EB",
+                "5BCC70",
+                "F9AB3E",
+                "F84F2E",
+                "D53010"
+        );
+    }
     public static List<Double> returnStandList(){
         return Arrays.asList(-10D,-5D, 15D, 30D, 50D);
     }
@@ -30,7 +41,7 @@ public class FatDegreeCal {
 
     public static Map<String,?> calLevel(double actualWeight, double idealWeight){
         double bone = (actualWeight - idealWeight) / idealWeight * 100;
-        return SplitUtil.levelInfo(returnStandList(),returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), desc, bone);
+        return SplitUtil.levelInfo(returnStandList(),returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, bone);
     }
 
     public static List<String> returnAnalyzeList(){

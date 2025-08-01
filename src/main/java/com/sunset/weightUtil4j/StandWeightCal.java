@@ -18,7 +18,15 @@ public class StandWeightCal {
     }
 
     public static Map<String,?> calLevel(Double standWeight, Double weight) {
-        return SplitUtil.levelInfo(returnStandList(standWeight), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), desc, weight);
+        return SplitUtil.levelInfo(returnStandList(standWeight), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, weight);
+    }
+
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+                "11B6EB",
+                "5BCC70",
+                "F9AB3E"
+        );
     }
 
     public static List<String> returnAnalyzeList(){

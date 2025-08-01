@@ -15,7 +15,7 @@ public class BodyAgeCal {
 
 
     public static Map<String, Object> calLevel(Integer bodyAge, Integer age){
-        return SplitUtil.levelInfo(returnStandList(bodyAge), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), desc, age.doubleValue());
+        return SplitUtil.levelInfo(returnStandList(bodyAge), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, age.doubleValue());
     }
 
     public static List<Double> returnStandList(Integer age){
@@ -23,6 +23,14 @@ public class BodyAgeCal {
     }
     public static List<String> returnStandListName(){
         return Arrays.asList("年轻", "偏大", "较大");
+    }
+
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+                "11B6EB",
+                "5BCC70",
+                "F9AB3E"
+        );
     }
 
     public static List<String> returnAnalyzeList(){

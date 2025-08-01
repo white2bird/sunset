@@ -16,6 +16,13 @@ public class BmrCal {
         return Arrays.asList(1599.7d);
     }
 
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+                "AEDBFD",
+                "D53010"
+        );
+    }
+
     public static List<String> returnStandListName(){
         return Arrays.asList("", "");
     }
@@ -32,6 +39,8 @@ public class BmrCal {
         result.put("sportAdvice", null);
         result.put("eatAdvice", null);
         result.put("desc", desc);
+        result.put("color", returnColorList().get(0));
+        result.put("colorList", returnColorList());
         return result;
     }
 

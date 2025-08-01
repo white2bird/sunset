@@ -22,7 +22,15 @@ public class ProteinMassCal {
     }
 
     public static Map<String,?> calLevel(double proteinMassPercent) {
-        return SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), desc, proteinMassPercent);
+        return SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, proteinMassPercent);
+    }
+
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+                "11B6EB",
+                "5BCC70",
+                "F9AB3E"
+        );
     }
 
     public static List<String> returnAnalyzeList(){

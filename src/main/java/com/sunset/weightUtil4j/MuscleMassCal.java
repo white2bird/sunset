@@ -14,7 +14,15 @@ public class MuscleMassCal {
     public static String desc = "肌肉量表示身体骨骼肌的绝对重量。其与肌糖原总量、肌力、关节稳定性、基础代谢率正相关。肌肉含量对健康有重要影响，保持一定量的肌肉，可以减少代谢相关的慢病患病率，降低运动损伤风险，维持良好的身体姿态，保证基础代谢率。肌肉含量较充足的人，衰老的速度也较慢。\n";
 
     public static Map<String,?> calLevel(Double muscle) {
-        return SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), desc, muscle);
+        return SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, muscle);
+    }
+
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+                "11B6EB",
+                "5BCC70",
+                "F9AB3E"
+        );
     }
 
     public static List<Double> returnStandList(){

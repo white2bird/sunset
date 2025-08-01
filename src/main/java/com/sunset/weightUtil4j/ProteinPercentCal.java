@@ -21,8 +21,16 @@ public class ProteinPercentCal {
         return Arrays.asList("不足", "标准", "优");
     }
 
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+                "11B6EB",
+                "5BCC70",
+                "F9AB3E"
+        );
+    }
+
     public static Map<String,?> calLevel(double proteinMassPercent) {
-        return SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList() , returnSportAdvice(), returnEatAdvice(), desc, proteinMassPercent);
+        return SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList() , returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, proteinMassPercent);
     }
 
     public static List<String> returnAnalyzeList(){

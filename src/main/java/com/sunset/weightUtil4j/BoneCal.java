@@ -20,12 +20,20 @@ public class BoneCal {
         return Arrays.asList(1.8d, 3.2d);
     }
 
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+                "11B6EB",
+                "5BCC70",
+                "F9AB3E"
+        );
+    }
+
     public static List<String> returnStandListName(){
         return Arrays.asList("偏低", "标准", "偏高");
     }
 
     public static Map<String,?> calLevel(Double bone, boolean male){
-        return SplitUtil.levelInfo(returnStandList(male),returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), desc, bone);
+        return SplitUtil.levelInfo(returnStandList(male),returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, bone);
     }
 
     public static List<String> returnAnalyzeList(){

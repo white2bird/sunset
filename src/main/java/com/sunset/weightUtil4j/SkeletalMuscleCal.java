@@ -16,11 +16,18 @@ public class SkeletalMuscleCal {
     public static Map<String, Object> calLevel(Double skeletalMuscle){
         List<Double> list = returnStandList();
         List<String> nameList = returnStandListName();
-        return SplitUtil.levelInfo(list, nameList, returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), desc, skeletalMuscle);
+        return SplitUtil.levelInfo(list, nameList, returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, skeletalMuscle);
     }
 
     public static List<Double> returnStandList(){
         return Arrays.asList(35d, 45d);
+    }
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+                "11B6EB",
+                "5BCC70",
+                "F9AB3E"
+        );
     }
 
     public static List<String> returnStandListName(){

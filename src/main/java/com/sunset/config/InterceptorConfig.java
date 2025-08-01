@@ -33,7 +33,9 @@ public class InterceptorConfig extends HandlerInterceptorAdapter {
             return true;
         }
         String msToken = request.getHeader("ms_token");
+        String requestURI = request.getRequestURI();
         log.info("获取的token：" + msToken);
+        log.info("请求的url：" + requestURI);
 //        UserIdThreadLocal.setUserId("845412FF-CDEF-4158-8221-BF396F0C404B");
 //        return true;
         if (msToken != null) {

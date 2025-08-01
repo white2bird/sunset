@@ -10,6 +10,7 @@ import com.sunset.utils.TokenUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
@@ -146,23 +147,25 @@ public class KnowService {
         PageInfo<LikeKnow> pageInfo = new PageInfo<>(list);
         List<LikeKnow> lists = pageInfo.getList();
         List<KnowEntity> likeList = new ArrayList<>();
-        lists.forEach(x->{
-            KnowEntity k = new KnowEntity();
-            KnowEntity kw = knowMapper.GetKnowDetail(x.getKnow_id());
-            if(kw != null){
-                k.setId(kw.getId());
-                k.setCover_img(kw.getCover_img());
-                k.setIsthird(kw.getIsthird());
-                k.setTitle(kw.getTitle());
-                k.setUrl(kw.getUrl());
-                k.setType_name(kw.getType_name());
-                k.setType(kw.getType());
-                k.setRead_num(kw.getRead_num());
-                k.setLike_num(kw.getLike_num());
-                k.setCreate_time(x.getCreate_time());
-                likeList.add(k);
-            }
-        });
+        if(!CollectionUtils.isEmpty( lists)){
+            lists.forEach(x->{
+                KnowEntity k = new KnowEntity();
+                KnowEntity kw = knowMapper.GetKnowDetail(x.getKnow_id());
+                if(kw != null){
+                    k.setId(kw.getId());
+                    k.setCover_img(kw.getCover_img());
+                    k.setIsthird(kw.getIsthird());
+                    k.setTitle(kw.getTitle());
+                    k.setUrl(kw.getUrl());
+                    k.setType_name(kw.getType_name());
+                    k.setType(kw.getType());
+                    k.setRead_num(kw.getRead_num());
+                    k.setLike_num(kw.getLike_num());
+                    k.setCreate_time(x.getCreate_time());
+                    likeList.add(k);
+                }
+            });
+        }
         ListTrends listTrends = new ListTrends();
         listTrends.setTotal(pageInfo.getTotal());
         listTrends.setList(likeList);

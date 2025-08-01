@@ -20,8 +20,16 @@ public class IdeaWeightCal {
         return Arrays.asList("不足", "标准", "优");
     }
 
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+                "11B6EB",
+                "5BCC70",
+                "F9AB3E"
+        );
+    }
+
     public static Map<String,?> calLevel(Double idealWeight, Double weight) {
-        return SplitUtil.levelInfo(returnStandList(idealWeight), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), desc, weight);
+        return SplitUtil.levelInfo(returnStandList(idealWeight), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, weight);
     }
 
     public static List<String> returnAnalyzeList(){

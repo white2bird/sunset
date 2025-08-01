@@ -16,12 +16,20 @@ public class FatMassCal {
         return Arrays.asList(5.0d, 10.1d);
     }
 
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+                "11B6EB",
+                "5BCC70",
+                "F9AB3E"
+        );
+    }
+
     public static List<String> returnStandListName(){
         return Arrays.asList("偏低", "标准", "偏高");
     }
 
     public static Map<String,?> calLevel(Double bone){
-        return SplitUtil.levelInfo(returnStandList(),returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), desc, bone);
+        return SplitUtil.levelInfo(returnStandList(),returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, bone);
     }
 
     public static List<String> returnAnalyzeList(){

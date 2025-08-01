@@ -23,9 +23,11 @@ public class BodyCompositionResponse {
     public static class BodyCompositionItem {
         private Double currentValue;       // 当前值
         private String currentStatus;      // 当前状态
+        private String currentColor;
+        private String previousColor;
         private String previousStatus;     // 之前状态
         private Double previousValue;      // 之前值
-        private String change;             // 变化 (e.g., "1.9 ↓", "0.8 ↓", "无变化")
+        private Double change;             // 变化 (e.g., "1.9 ↓", "0.8 ↓", "无变化")
     }
 }
 

@@ -14,7 +14,15 @@ public class WeightControlCal {
     public static List<Double> standList = Arrays.asList(-5D, 5D);
 
     public static Map<String,?> calLevel(Double bone){
-        return SplitUtil.levelInfo(returnStandList(),returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), desc, bone);
+        return SplitUtil.levelInfo(returnStandList(),returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, bone);
+    }
+
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+                "11B6EB",
+                "5BCC70",
+                "F9AB3E"
+        );
     }
 
     /**

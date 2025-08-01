@@ -142,11 +142,13 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
         result.put("fatBurningHeartRate", buildBurningHeartRate(bodyComposition));
 
         if(latestWeighInfo != null){
+            result.put("currentWeightTime", bodyComposition.getWeightTime());
             result.put("lastWeightTime", latestWeighInfo.getWeightTime());
             result.put("weightChange", buildWeightChange(bodyComposition, latestWeighInfo));
             result.put("bmiChange", buildBmiChange(bodyComposition, latestWeighInfo));
             result.put("bodyFatChange", buildBodyFatChange(bodyComposition, latestWeighInfo));
         }else{
+            result.put("currentWeightTime", bodyComposition.getWeightTime());
             result.put("lastWeightTime", null);
             result.put("weightChange", null);
             result.put("bmiChange", null);
@@ -454,6 +456,7 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
     public Double getLatestWeigh(){
         LambdaQueryWrapper<BodyComposition> healthDataLambdaQueryWrapper = new LambdaQueryWrapper<>();
         healthDataLambdaQueryWrapper.orderByDesc(BodyComposition::getId);
+        healthDataLambdaQueryWrapper.eq(BodyComposition::getUserId,UserIdThreadLocal.getUserId());
         healthDataLambdaQueryWrapper.last("limit 1");
         BodyComposition one = bodyCompositionService.getOne(healthDataLambdaQueryWrapper);
         return Objects.isNull(one) ? 0D : one.getWeight();
@@ -462,6 +465,7 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
     public List<BodyComposition> weightHistory(WeightHistoryPageQuery weightHistoryPageQuery){
         Page<BodyComposition> healthDataPage = new Page<>(weightHistoryPageQuery.getPageNo(), weightHistoryPageQuery.getPageSize());
         LambdaQueryWrapper<BodyComposition> healthDataLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        healthDataLambdaQueryWrapper.eq(BodyComposition::getUserId, UserIdThreadLocal.getUserId());
         healthDataLambdaQueryWrapper.ge(Objects.nonNull(weightHistoryPageQuery.getStart()), BodyComposition::getWeightTime, weightHistoryPageQuery.getStart());
         healthDataLambdaQueryWrapper.le(Objects.nonNull(weightHistoryPageQuery.getEnd()), BodyComposition::getWeightTime, weightHistoryPageQuery.getEnd());
         Page<BodyComposition> page = bodyCompositionService.page(healthDataPage, healthDataLambdaQueryWrapper);
@@ -476,6 +480,7 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
         LambdaQueryWrapper<BodyComposition> healthDataLambdaQueryWrapper = new LambdaQueryWrapper<>();
         Map<String, Date> query = buildTimeQuery(historyTrendRequest, healthDataLambdaQueryWrapper);
         healthDataLambdaQueryWrapper.orderByAsc(BodyComposition::getWeightTime);// 时间升序
+        healthDataLambdaQueryWrapper.eq(BodyComposition::getUserId, UserIdThreadLocal.getUserId());
         List<BodyComposition> list = bodyCompositionService.list(healthDataLambdaQueryWrapper);
         // 根据结果返回不同的
         // 结果去重
@@ -559,9 +564,12 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
         Field[] declaredFields = CompareResponse.class.getDeclaredFields();
         for(Field field : declaredFields){
             String name = field.getName();
+
             try{
                 Double oldValue = getValue(name, oldDataMap);
                 Double newValue = getValue(name, newDataMap);
+                String oldColor = getColorValue(name, oldDataMap);
+                String newColor = getColorValue(name, newDataMap);
                 if(oldValue == null || newValue == null){
                     continue;
                 }
@@ -569,6 +577,8 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
                 String newStatus = getStatus(name, newDataMap);
                 field.setAccessible(true);
                 BodyCompositionResponse.BodyCompositionItem comparisonItem = createComparisonItem(newValue, oldValue, newStatus, oldStatus);
+                comparisonItem.setCurrentColor(newColor);
+                comparisonItem.setPreviousColor(oldColor);
                 field.set(response, comparisonItem);
             }catch (Exception e){
                 System.out.println("字段：" + name + "异常");
@@ -578,6 +588,16 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
         }
         return response;
 
+    }
+
+    private String getColorValue(String name, Map<String, Object> dataMap) {
+        Object o = dataMap.get(name);
+        if(o == null){
+            return null;
+        }
+        Map<String, Object> map = (Map<String, Object>) o;
+        o = map.get("color");
+        return String.valueOf(o);
     }
 
     private Double getValue(String name, Map<String, Object> dataMap){
@@ -687,15 +707,8 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
         item.setCurrentStatus(newStatus);
         item.setPreviousValue(oldValue);
         item.setPreviousStatus(oldStatus);
-
         double difference = newValue - oldValue;
-        if (difference == 0) {
-            item.setChange("无变化");
-        } else if (difference > 0) {
-            item.setChange(String.format("%.1f ↑", Math.abs(difference)));
-        } else {
-            item.setChange(String.format("%.1f ↓", Math.abs(difference)));
-        }
+        item.setChange(difference);
 
         return item;
     }

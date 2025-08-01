@@ -10,7 +10,7 @@ import com.sunset.mapper.SignMapper;
 import com.sunset.mapper.TrendsMapper;
 import com.sunset.utils.ReturnJson;
 import com.sunset.utils.TokenUtils;
-import com.vdurmont.emoji.EmojiParser;
+import com.sunset.utils.UserIdThreadLocal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -179,16 +179,18 @@ public class SignService {
         String uid = map.get("uid");
 
         UserInfoEntity userInfoEntity = signMapper.GetUserInfo(uid);
-        userInfoEntity.setDescription(EmojiParser.parseToUnicode(userInfoEntity.getDescription()));
+        userInfoEntity.setDescription(userInfoEntity.getDescription());
         return ReturnJson.success(userInfoEntity, "ok");
     }
     // 更新用户信息
     public  ReturnJson<String> UpdateUserInfo(UserInfoEntity userInfoEntity,HttpServletRequest request) throws ParseException {
+        String userId = UserIdThreadLocal.getUserId();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dateTime = formatter.format(LocalDateTime.now());
         userInfoEntity.setUpdate_time(dateTime);
-        userInfoEntity.setDescription(EmojiParser.parseToAliases(userInfoEntity.getDescription()));
+        userInfoEntity.setDescription(userInfoEntity.getDescription());
         log.info(String.valueOf(userInfoEntity));
+        userInfoEntity.setId(userId);
         int state = userInfoEntity.getState();
         Date date = new SimpleDateFormat("yyyy-MM-dd").parse(userInfoEntity.getBirthday());
         // 根据日期转换星座

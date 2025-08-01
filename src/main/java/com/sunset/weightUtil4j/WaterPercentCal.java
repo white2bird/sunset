@@ -24,8 +24,15 @@ public class WaterPercentCal {
         return Arrays.asList("不足", "标准", "优");
     }
 
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+                "11B6EB",
+                "5BCC70",
+                "F9AB3E"
+        );
+    }
     public static Map<String,?> calLevel(Double bodyWaterPercentage,  boolean male) {
-        return SplitUtil.levelInfo(returnStandList(male), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), desc, bodyWaterPercentage);
+        return SplitUtil.levelInfo(returnStandList(male), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, bodyWaterPercentage);
     }
 
     public static List<String> returnAnalyzeList(){

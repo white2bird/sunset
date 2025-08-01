@@ -52,12 +52,21 @@ public class BurnFatHeartCal {
 
     }
 
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+
+                "11B6EB",
+                "5BCC70",
+                "F9AB3E"
+        );
+    }
+
     public static void main(String[] args) {
         String format = String.format("您的燃脂心率区间为%s-%s次/分钟，在此范围运动脂肪供能比例最高。", 1, 1 + 30);
         System.out.println(format);
     }
 
     public static Map<String,?> calLevel(Double heartRate) {
-        return SplitUtil.levelInfo(returnStandList(),returnStandListName(), returnAnalyzeList(heartRate.intValue()), returnSportAdvice(), returnEatAdvice(), desc, 0D);
+        return SplitUtil.levelInfo(returnStandList(),returnStandListName(), returnAnalyzeList(heartRate.intValue()), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, 0D);
     }
 }

@@ -16,9 +16,17 @@ public class SkeletalMusclePercentageCal {
     public static Map<String, Object> calLevel(Double skeletalMusclePercentage){
         List<Double> list = returnStandList();
         List<String> nameList = returnStandListName();
-        return SplitUtil.levelInfo(list, nameList, returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), desc, skeletalMusclePercentage);
+        return SplitUtil.levelInfo(list, nameList, returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, skeletalMusclePercentage);
     }
 
+
+    public static List<String> returnColorList(){
+        return Arrays.asList(
+                "11B6EB",
+                "5BCC70",
+                "F9AB3E"
+        );
+    }
     public static List<Double> returnStandList(){
         return Arrays.asList(25d, 30d);
     }
