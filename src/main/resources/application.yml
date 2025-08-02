@@ -2,6 +2,12 @@ server:
   port: 8081
 
 
+wechat:
+  appid: wx043980e60c301947
+  appsecret: cd08fc1919f82475471a2828d7bf7ee2
+aliyun:
+  accessKeyId: "LTAI5tGcQrNhSDtCCHUMVPRM"
+  accessKeySecret: C1X4X9e8dkIc8pUTEzRcMBpaARko2U
 spring:
 #  profiles:
 #    active: local

@@ -17,4 +17,5 @@ public class RegisterEntity {
     @Schema(description = "验证码")
     public String verCode;
 
+    public String openid;
 }
