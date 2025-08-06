@@ -55,11 +55,13 @@ public class TrendsService {
         userFollows.setFollowing(userFollow.getFollowing());
         userFollows.setStar(userFollow.getStar());
         // 用户信息
-        userFollows.setNickname(uinfo.getNickname());
-        userFollows.setAvator(uinfo.getAvator());
-        userFollows.setConstellation(uinfo.getConstellation());
-        userFollows.setDescription(uinfo.getDescription());
-        userFollows.setSex(uinfo.getSex());
+        if(Objects.nonNull(uinfo)){
+            userFollows.setNickname(uinfo.getNickname());
+            userFollows.setAvator(uinfo.getAvator());
+            userFollows.setConstellation(uinfo.getConstellation());
+            userFollows.setDescription(uinfo.getDescription());
+            userFollows.setSex(uinfo.getSex());
+        }
         return ReturnJson.success(userFollows, "ok");
     }
 
@@ -150,8 +152,14 @@ public class TrendsService {
                 objTrends.setCreate_time(x.getCreate_time());
                 objTrends.setComment_num(comm_page.getTotal());
                 // 用户信息
-                objTrends.setAvator(uinfo.getAvator());
-                objTrends.setNickname(uinfo.getNickname());
+                if(Objects.nonNull(uinfo)){
+                    objTrends.setAvator(uinfo.getAvator());
+                    objTrends.setNickname(uinfo.getNickname());
+                }else{
+                    objTrends.setAvator("");
+                    objTrends.setNickname("");
+
+                }
                 List<CommTrends> comm_list = comm_page.getList();
 
                 List<CommThree> newComm_list = new ArrayList<>();
@@ -205,8 +213,13 @@ public class TrendsService {
                 objTrends.setStar(x.getStar());
                 objTrends.setCreate_time(x.getCreate_time());
                 // 用户信息
-                objTrends.setAvator(uinfo.getAvator());
-                objTrends.setNickname(uinfo.getNickname());
+                if(Objects.nonNull(uinfo)){
+                    objTrends.setAvator(uinfo.getAvator());
+                    objTrends.setNickname(uinfo.getNickname());
+                }else{
+                    objTrends.setAvator("");
+                    objTrends.setNickname("");
+                }
                 // 序列化处理完新加旧往新数组追加
                 newList.add(objTrends);
             });
@@ -237,9 +250,15 @@ public class TrendsService {
             objTrends.setIsfollow(false);
         }
         objTrends.setId(newTrends.getId());
-        objTrends.setNickname(uinfo.getNickname());
-        objTrends.setAvator(uinfo.getAvator());
-        objTrends.setUid(uinfo.getUid());
+        if(Objects.nonNull(uinfo)){
+            objTrends.setNickname(uinfo.getNickname());
+            objTrends.setAvator(uinfo.getAvator());
+            objTrends.setUid(uinfo.getUid());
+        }else{
+            objTrends.setNickname("");
+            objTrends.setAvator("");
+            objTrends.setUid("");
+        }
         // 解码数据库存储的 Emoji 表情符号
         objTrends.setText(newTrends.getText());
         objTrends.setImages(images);
@@ -317,8 +336,13 @@ public class TrendsService {
                 // 解码数据库存储的 Emoji 表情符号
                 commTrends.setContent(x.getContent());
                 commTrends.setStar(x.getStar());
-                commTrends.setAvator(uinfo.getAvator());
-                commTrends.setNickname(uinfo.getNickname());
+                if(Objects.nonNull(uinfo)){
+                    commTrends.setAvator(uinfo.getAvator());
+                    commTrends.setNickname(uinfo.getNickname());
+                }else{
+                    commTrends.setAvator("");
+                    commTrends.setNickname("");
+                }
                 commTrends.setCreate_time(x.getCreate_time());
                 newList.add(commTrends);
             });
@@ -465,6 +489,7 @@ public class TrendsService {
                 followList.add(followAll);
             });
         }
+
         ListTrends listTrends = new ListTrends();
         listTrends.setTotal(pageInfo.getTotal());
         listTrends.setList(followList);

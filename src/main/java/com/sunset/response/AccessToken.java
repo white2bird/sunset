@@ -56,4 +56,17 @@ public class AccessToken {
     public void setUnionid(String unionid) {
         this.unionid = unionid;
     }
+
+    @Override
+    public String toString() {
+        return "AccessToken{" +
+                "access_token='" + access_token + '\'' +
+                ", expires_in='" + expires_in + '\'' +
+                ", refresh_token='" + refresh_token + '\'' +
+                ", openid='" + openid + '\'' +
+                ", scope='" + scope + '\'' +
+                ", unionid='" + unionid + '\'' +
+                '}';
+    }
+
 }

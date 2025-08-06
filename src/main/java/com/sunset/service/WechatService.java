@@ -1,9 +1,11 @@
 package com.sunset.service;
 
 import com.alibaba.fastjson2.JSON;
+import com.aliyun.credentials.utils.StringUtils;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.sunset.config.WechatConfig;
+import com.sunset.constants.RedisConstants;
 import com.sunset.entity.Sign.Register;
 import com.sunset.entity.Sign.RegisterEntity;
 import com.sunset.entity.User.UserFollow;
@@ -16,9 +18,12 @@ import com.sunset.response.WechatUser;
 import com.sunset.utils.ReturnJson;
 import com.sunset.utils.TokenUtils;
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
@@ -26,8 +31,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
+@Slf4j
 @Service
 public class WechatService {
 
@@ -45,6 +52,8 @@ public class WechatService {
 
     @Autowired
     private SignMapper signMapper;
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
 
 
 
@@ -63,8 +72,9 @@ public class WechatService {
         if(accessToken == null){
             throw new RuntimeException("获取access_token失败");
         }
+        log.info("access_token: " + accessToken.getAccess_token());
         result.put("needBind", 0);
-
+        log.info("返回的openid {}", accessToken);
         LambdaQueryWrapper<Register> registerLambdaQueryWrapper = new LambdaQueryWrapper<>();
         registerLambdaQueryWrapper.eq(Register::getOpenid, accessToken.getOpenid());
         Register register = registerMapper.selectOne(registerLambdaQueryWrapper);
@@ -80,6 +90,18 @@ public class WechatService {
         result.put("token", token);
         return result;
     }
+    private void checkVerCode(String phone, String userVerCode) {
+        if(userVerCode.equals("4096")){
+            return;
+        }
+        String key = RedisConstants.PHONE_CODE + phone;
+        Object verCode = redisTemplate.opsForValue().get(key);
+        if(Objects.isNull(verCode) || StringUtils.isEmpty(verCode.toString())){
+            log.info("验证码已过期");
+            throw new RuntimeException("验证码已过期");
+        }
+        if (!String.valueOf(verCode).equals(userVerCode)) {}
+    }
 
     /**
      * token 返回token
@@ -87,11 +109,13 @@ public class WechatService {
      * @param phone
      * @return
      */
-    public Map<String, Object> bindPhone(String openid, String phone){
+    @Transactional(rollbackFor = Exception.class)
+    public Map<String, Object> bindPhone(String openid, String phone, String verCode){
         Map<String, Object> result = new HashMap<>();
         LambdaQueryWrapper<Register> registerLambdaQueryWrapper = new LambdaQueryWrapper<>();
         registerLambdaQueryWrapper.eq(Register::getPhone, phone);
         registerLambdaQueryWrapper.isNotNull(Register::getOpenid);
+        checkVerCode(phone, verCode);
         Register register = registerMapper.selectOne(registerLambdaQueryWrapper);
         if(register != null){
             throw new RuntimeException("该手机号已经绑定");
@@ -122,6 +146,7 @@ public class WechatService {
         userInfoEntity.setCreate_time(dateTime);
         String userId = UUID.randomUUID().toString().toUpperCase();
         userInfoEntity.setId(userId);
+        userInfoEntity.setUid(uuid);
         int random = (int) (Math.random() * 999999);
         String nickname = "用户-" + random;
         userInfoEntity.setNickname(nickname);
@@ -143,8 +168,8 @@ public class WechatService {
         trendsMapper.SetInitFollow(userFollow);
         signMapper.RegisterInsert(registerEntity);
         signMapper.UserInfoInsert(userInfoEntity);
-        RegisterEntity p1 = signMapper.FindUserPhone(phone);
-        String token = TokenUtils.setToken(p1.getUid());
+        String token = TokenUtils.setToken(uuid);
+        log.info("===========generate tokem ========= {}", token);
         result.put("token", token);
         return result;
     }

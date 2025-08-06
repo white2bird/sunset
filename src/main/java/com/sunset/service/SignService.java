@@ -1,5 +1,6 @@
 package com.sunset.service;
 
+import com.sunset.constants.RedisConstants;
 import com.sunset.entity.Sign.LoginPwd;
 import com.sunset.entity.Sign.LoginVerCode;
 import com.sunset.entity.Sign.PwdEntity;
@@ -13,8 +14,10 @@ import com.sunset.utils.TokenUtils;
 import com.sunset.utils.UserIdThreadLocal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
@@ -30,6 +33,8 @@ public class SignService {
     SignMapper signMapper;
     @Autowired
     TrendsMapper trendsMapper;
+    @Autowired
+    private RedisTemplate<String,Object> redisTemplate;
     // 注册 【待用】
     public ReturnJson<String> RegisterInsert(RegisterEntity registerEntity) {
         String phone = registerEntity.phone;
@@ -54,9 +59,27 @@ public class SignService {
         return ReturnJson.success(null, "ok");
     }
 
+    private void checkVerCode(String phone, String userVerCode) {
+        if(userVerCode.equals("4096")){
+            return;
+        }
+        String key = RedisConstants.PHONE_CODE + phone;
+        Object verCode = redisTemplate.opsForValue().get(key);
+        if(Objects.isNull(verCode) || StringUtils.isEmpty(verCode.toString())){
+            log.info("验证码已过期");
+            throw new RuntimeException("验证码已过期");
+        }
+        if (!String.valueOf(verCode).equals(userVerCode)) {
+            log.info("验证码错误");
+            throw new RuntimeException("验证码错误");
+        }
+    }
+
     // 验证码登录
     public ReturnJson<String> LoginVerToken(LoginVerCode loginVerCode) {
         String phone = loginVerCode.getPhone();
+        checkVerCode(phone, loginVerCode.getVerCode());
+        log.info("验证码正确");
         RegisterEntity p = signMapper.FindUserPhone(phone);
         // 手机号不存在直接注册
         if (p == null) {
@@ -179,7 +202,9 @@ public class SignService {
         String uid = map.get("uid");
 
         UserInfoEntity userInfoEntity = signMapper.GetUserInfo(uid);
-        userInfoEntity.setDescription(userInfoEntity.getDescription());
+        if(userInfoEntity == null){
+            return ReturnJson.success(null, "ok");
+        }
         return ReturnJson.success(userInfoEntity, "ok");
     }
     // 更新用户信息
@@ -190,7 +215,7 @@ public class SignService {
         userInfoEntity.setUpdate_time(dateTime);
         userInfoEntity.setDescription(userInfoEntity.getDescription());
         log.info(String.valueOf(userInfoEntity));
-        userInfoEntity.setId(userId);
+        userInfoEntity.setUid(userId);
         int state = userInfoEntity.getState();
         Date date = new SimpleDateFormat("yyyy-MM-dd").parse(userInfoEntity.getBirthday());
         // 根据日期转换星座

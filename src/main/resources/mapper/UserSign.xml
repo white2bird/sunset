@@ -2,7 +2,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sunset.mapper.SignMapper">
     <insert id="RegisterInsert" parameterType="com.sunset.entity.Sign.RegisterEntity">
-        insert into tb_register (uid,phone,password,create_time,update_time) values (#{uid},#{phone},#{password},#{create_time},#{update_time});
+        insert into tb_register (uid,phone,password,create_time,update_time,openid) values (#{uid},#{phone},#{password},#{create_time},#{update_time}, #{openid});
     </insert>
     <!--  根据手机号校验用户是否存在  -->
     <select id="FindUserPhone" resultType="com.sunset.entity.Sign.RegisterEntity">
