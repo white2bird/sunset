@@ -472,6 +472,14 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
         return page.getRecords();
     }
 
+
+    public Map<String, Object> weightHistoryDetail(Long id){
+        BodyComposition bodyComposition = bodyCompositionService.getById(id);
+        WeightRequest weightRequest = new WeightRequest(BigDecimal.valueOf(bodyComposition.getWeight()), "");
+        Map<String, Object> stringObjectMap = saveWeight(weightRequest, false);
+        return stringObjectMap;
+    }
+
     public Map<String, Object> historyTrend(HistoryTrendRequest historyTrendRequest){
         //
         if(Objects.equals(4, historyTrendRequest.getTimeType()) && (Objects.isNull(historyTrendRequest.getStart()) || Objects.isNull(historyTrendRequest.getEnd()))){

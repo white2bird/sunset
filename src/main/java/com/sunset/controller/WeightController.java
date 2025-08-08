@@ -47,6 +47,13 @@ public class WeightController {
         return ReturnJson.success(weightService.weightHistory(weightHistoryPageQuery));
     }
 
+    @Operation(summary = "称重历史详情")
+    @AuthMsToken
+    @PostMapping("/weight_history_detail/{id}")
+    public ReturnJson weight_history(@PathVariable Long id){
+        return ReturnJson.success(weightService.weightHistoryDetail(id));
+    }
+
     @Operation(summary = "变化曲线(bmi 体重 体脂率等)")
     @AuthMsToken
     @PostMapping("/change_trend")

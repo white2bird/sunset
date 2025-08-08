@@ -1,6 +1,8 @@
-2025-08-06 07:03:00.552  WARN 128032 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7h13m8s209ms720µs900ns).
-2025-08-06 09:25:15.318  WARN 128032 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h19m13s680ms963µs600ns).
-2025-08-06 11:33:29.772  WARN 118788 --- [main] ory$DuplicateJsonObjectContextCustomizer : 
+2025-08-07 07:03:22.172  WARN 128032 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18h51m32s74ms400ns).
+2025-08-07 22:49:23.573  WARN 128032 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15h43m30s357ms963µs).
+2025-08-07 23:16:45.393  INFO 128032 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-07 23:16:45.703  INFO 128032 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-07 23:18:18.948  WARN 44360 --- [main] ory$DuplicateJsonObjectContextCustomizer : 
 
 Found multiple occurrences of org.json.JSONObject on the class path:
 
@@ -9,10 +11,10 @@ Found multiple occurrences of org.json.JSONObject on the class path:
 
 You may wish to exclude one of them to ensure predictable runtime behavior
 
-2025-08-06 11:33:29.838  INFO 118788 --- [main] com.sunset.SunsetApplicationTests        : Starting SunsetApplicationTests using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 118788 (started by wang in D:\money\sunset-server)
-2025-08-06 11:33:29.839  INFO 118788 --- [main] com.sunset.SunsetApplicationTests        : The following 1 profile is active: "dev"
-2025-08-06 11:33:30.939  INFO 118788 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2025-08-06 11:33:30.943  INFO 118788 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-08-06 11:33:30.976  INFO 118788 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 0 Redis repository interfaces.
-2025-08-06 11:33:37.540  INFO 118788 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2025-08-06 11:33:37.661  INFO 118788 --- [main] com.sunset.SunsetApplicationTests        : Started SunsetApplicationTests in 8.244 seconds (JVM running for 9.146)
+2025-08-07 23:18:18.996  INFO 44360 --- [main] com.sunset.SunsetApplicationTests        : Starting SunsetApplicationTests using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 44360 (started by wang in D:\money\sunset-server)
+2025-08-07 23:18:18.996  INFO 44360 --- [main] com.sunset.SunsetApplicationTests        : The following 1 profile is active: "dev"
+2025-08-07 23:18:19.940  INFO 44360 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-07 23:18:19.945  INFO 44360 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-07 23:18:19.975  INFO 44360 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 0 Redis repository interfaces.
+2025-08-07 23:18:25.263  INFO 44360 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-07 23:18:25.326  INFO 44360 --- [main] com.sunset.SunsetApplicationTests        : Started SunsetApplicationTests in 6.707 seconds (JVM running for 7.723)
