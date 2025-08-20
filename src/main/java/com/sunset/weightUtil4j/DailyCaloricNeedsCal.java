@@ -7,15 +7,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 2 基础代谢计算 不需要
- */
-public class BmrCal {
+public class DailyCaloricNeedsCal {
 
-    public static String desc = "基础代谢量是指为维持呼吸、心脏跳动和保持体温等基本生命活动而消耗的最低能量值，一般占一天总消耗量的70%左右。基础代谢越高的人，属于脂肪易燃烧的体质，也就不容易胖，相反的，基础代谢越低的人，属于脂肪难燃烧的体质，也就越容易胖。\n";
+    public static String desc = "进食量是指当日的睡前体重与早上空腹体重之差。其反映了晚上身体内的水分滞留量与存食量，一般为正值。持续监测体重变化量，对比体重变化曲线，掌握自身体重变化规律，据此养成膳食回顾的习惯，可以指导调整每日饮食，有利于实现体重自我管理。维持合理的体重，能够降低糖尿病、高血压、高脂血症等多种慢性病患病风险，有益健康。";
 
-    public static List<Double> returnStandList(){
-        return Arrays.asList(1599.7d);
+    public static List<Double> returnStandList(Double v){
+        return Arrays.asList(v+1);
     }
 
     public static List<String> returnColorList(){
@@ -47,6 +44,5 @@ public class BmrCal {
         result.put("colorList", returnColorList());
         return result;
     }
-
 
 }

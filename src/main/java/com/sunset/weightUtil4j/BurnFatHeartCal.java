@@ -30,6 +30,8 @@ public class BurnFatHeartCal {
         String format = String.format("您的燃脂心率区间为%s-%s次/分钟，在此范围运动脂肪供能比例最高。", value, value + 30);
 
         return Arrays.asList(
+                format,
+                format,
                 format
         );
 
@@ -37,6 +39,8 @@ public class BurnFatHeartCal {
 
     public static List<String> returnSportAdvice(){
         return Arrays.asList(
+                "选择可持续30分钟以上的中低强度运动（快走、慢跑、椭圆机），保持心率在区间内。\n",
+                "选择可持续30分钟以上的中低强度运动（快走、慢跑、椭圆机），保持心率在区间内。\n",
                 "选择可持续30分钟以上的中低强度运动（快走、慢跑、椭圆机），保持心率在区间内。\n"
 
 
@@ -45,6 +49,8 @@ public class BurnFatHeartCal {
     }
     public static List<String> returnEatAdvice(){
         return Arrays.asList(
+                "运动前1小时补充低GI碳水（燕麦、苹果），避免运动中血糖波动。\n",
+                "运动前1小时补充低GI碳水（燕麦、苹果），避免运动中血糖波动。\n",
                 "运动前1小时补充低GI碳水（燕麦、苹果），避免运动中血糖波动。\n"
 
 
@@ -54,7 +60,6 @@ public class BurnFatHeartCal {
 
     public static List<String> returnColorList(){
         return Arrays.asList(
-
                 "11B6EB",
                 "5BCC70",
                 "F9AB3E"
@@ -67,6 +72,6 @@ public class BurnFatHeartCal {
     }
 
     public static Map<String,?> calLevel(Double heartRate) {
-        return SplitUtil.levelInfo(returnStandList(),returnStandListName(), returnAnalyzeList(heartRate.intValue()), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, 0D);
+        return SplitUtil.levelInfo(returnStandList(),returnStandListName(), returnAnalyzeList(heartRate.intValue()), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, heartRate);
     }
 }

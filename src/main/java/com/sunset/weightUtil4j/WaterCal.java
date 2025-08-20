@@ -2,6 +2,8 @@ package com.sunset.weightUtil4j;
 
 import com.sunset.utils.SplitUtil;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -32,8 +34,12 @@ public class WaterCal {
         );
     }
 
-    public static Map<String,?> calLevel(Double bodyWaterPercentage,  boolean male) {
-        return SplitUtil.levelInfo(returnStandList(male), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, bodyWaterPercentage);
+    public static Map<String,?> calLevel(Double bodyWaterPercentage, Double water,  boolean male) {
+        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(male), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, bodyWaterPercentage);
+        BigDecimal bigDecimal = new BigDecimal(water).setScale(2, RoundingMode.HALF_UP);
+
+        stringObjectMap.put("value", bigDecimal);
+        return stringObjectMap;
     }
 
     public static List<String> returnAnalyzeList(){

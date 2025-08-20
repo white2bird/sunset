@@ -7,6 +7,7 @@ public class CompareResponse {
 
     private BodyCompositionResponse.BodyCompositionItem weight;
     private BodyCompositionResponse.BodyCompositionItem bmr;
+    private BodyCompositionResponse.BodyCompositionItem dailyCaloricNeeds;
     private BodyCompositionResponse.BodyCompositionItem bmi;
     private BodyCompositionResponse.BodyCompositionItem bodyFat;
     private BodyCompositionResponse.BodyCompositionItem visceralFat;

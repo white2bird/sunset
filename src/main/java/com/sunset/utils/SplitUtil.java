@@ -38,6 +38,9 @@ public class SplitUtil {
             throw new RuntimeException("list is empty");
         }
         Integer index = getIndex(list, value);
+        if(index >= list.size()){
+            index = list.size()-1;
+        }
         Map<String, Object> result = new HashMap<>();
 
         BigDecimal bd = new BigDecimal(value);

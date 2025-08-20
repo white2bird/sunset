@@ -2,6 +2,8 @@ package com.sunset.response;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 public class BodyCompositionResponse {
     private BodyCompositionItem obesityDegree;          // 肥胖度
@@ -27,7 +29,7 @@ public class BodyCompositionResponse {
         private String previousColor;
         private String previousStatus;     // 之前状态
         private Double previousValue;      // 之前值
-        private Double change;             // 变化 (e.g., "1.9 ↓", "0.8 ↓", "无变化")
+        private BigDecimal change;             // 变化 (e.g., "1.9 ↓", "0.8 ↓", "无变化")
     }
 }
 

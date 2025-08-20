@@ -1,0 +1,110 @@
+2025-08-20 06:51:48.751  WARN 4684 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8h40m49s743ms990µs200ns).
+2025-08-20 09:41:15.749  WARN 4684 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h47m24s862ms553µs201ns).
+2025-08-20 09:57:02.986  INFO 4684 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-20 09:57:03.296  INFO 4684 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-20 09:57:08.444  INFO 49296 --- [main] com.sunset.SunsetApplication             : Starting SunsetApplication using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 49296 (D:\money\sunset-server\target\classes started by wang in D:\money\sunset-server)
+2025-08-20 09:57:08.445  INFO 49296 --- [main] com.sunset.SunsetApplication             : The following 1 profile is active: "dev"
+2025-08-20 09:57:09.041  INFO 49296 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-20 09:57:09.042  INFO 49296 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-20 09:57:09.058  INFO 49296 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2025-08-20 09:57:09.339  INFO 49296 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2025-08-20 09:57:09.344  INFO 49296 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-20 09:57:09.344  INFO 49296 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-08-20 09:57:09.448  INFO 49296 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-20 09:57:09.448  INFO 49296 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 974 ms
+2025-08-20 09:57:10.834  INFO 49296 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-20 09:57:10.864  INFO 49296 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2025-08-20 09:57:10.873  INFO 49296 --- [main] com.sunset.SunsetApplication             : Started SunsetApplication in 2.679 seconds (JVM running for 3.438)
+2025-08-20 09:57:11.261  INFO 49296 --- [RMI TCP Connection(2)-192.168.11.102] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-20 09:57:11.261  INFO 49296 --- [RMI TCP Connection(2)-192.168.11.102] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-20 09:57:11.262  INFO 49296 --- [RMI TCP Connection(2)-192.168.11.102] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-08-20 09:57:11.262  INFO 49296 --- [RMI TCP Connection(1)-192.168.11.102] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-20 09:57:12.441  INFO 49296 --- [RMI TCP Connection(1)-192.168.11.102] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-20 09:57:19.448  INFO 49296 --- [http-nio-8081-exec-7] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 271 ms
+2025-08-20 09:58:11.636  INFO 49296 --- [http-nio-8081-exec-9] com.sunset.controller.SignController     : 登录请求参数：LoginVerCode(phone=18717351768, verCode=string)
+2025-08-20 09:58:11.689  INFO 49296 --- [http-nio-8081-exec-9] com.sunset.service.SignService           : 验证码已过期
+2025-08-20 09:58:11.692  INFO 49296 --- [http-nio-8081-exec-9] com.sunset.utils.GlobalException         : 全局异常 - 请求URL: http://localhost:8081/sign/code_login, 方法: POST, 客户端IP: 0:0:0:0:0:0:0:1
+2025-08-20 09:58:11.692  INFO 49296 --- [http-nio-8081-exec-9] com.sunset.utils.GlobalException         : 异常信息: 验证码已过期
+2025-08-20 09:58:18.993  INFO 49296 --- [http-nio-8081-exec-3] com.sunset.controller.SignController     : 登录请求参数：LoginVerCode(phone=18717351768, verCode=4096)
+2025-08-20 09:58:18.994  INFO 49296 --- [http-nio-8081-exec-3] com.sunset.service.SignService           : 验证码正确
+2025-08-20 09:59:45.198  INFO 49296 --- [http-nio-8081-exec-4] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTY1NTA5OTA3NCwiZXhwIjoxNzU1ODcxMDk5fQ.aU8pSpTjbROcZigGe9Ri10FQIErI5ndJdZ0-307SMlQ
+2025-08-20 09:59:45.198  INFO 49296 --- [http-nio-8081-exec-4] com.sunset.config.InterceptorConfig      : 请求的url：/weight/weight_history
+2025-08-20 09:59:45.221  INFO 49296 --- [http-nio-8081-exec-4] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
+2025-08-20 10:00:05.236  INFO 49296 --- [http-nio-8081-exec-2] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTY1NTA5OTA3NCwiZXhwIjoxNzU1ODcxMDk5fQ.aU8pSpTjbROcZigGe9Ri10FQIErI5ndJdZ0-307SMlQ
+2025-08-20 10:00:05.236  INFO 49296 --- [http-nio-8081-exec-2] com.sunset.config.InterceptorConfig      : 请求的url：/weight/compare
+2025-08-20 10:00:05.237  INFO 49296 --- [http-nio-8081-exec-2] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
+2025-08-20 10:01:36.975  INFO 49296 --- [http-nio-8081-exec-8] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTY1NTA5OTA3NCwiZXhwIjoxNzU1ODcxMDk5fQ.aU8pSpTjbROcZigGe9Ri10FQIErI5ndJdZ0-307SMlQ
+2025-08-20 10:01:36.975  INFO 49296 --- [http-nio-8081-exec-8] com.sunset.config.InterceptorConfig      : 请求的url：/weight/compare
+2025-08-20 10:01:36.975  INFO 49296 --- [http-nio-8081-exec-8] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
+2025-08-20 10:03:24.684  WARN 49296 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m36s633ms314µs300ns).
+2025-08-20 10:04:41.858  INFO 49296 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-20 10:04:42.220  INFO 49296 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-20 10:04:46.376  INFO 62772 --- [main] com.sunset.SunsetApplication             : Starting SunsetApplication using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 62772 (D:\money\sunset-server\target\classes started by wang in D:\money\sunset-server)
+2025-08-20 10:04:46.377  INFO 62772 --- [main] com.sunset.SunsetApplication             : The following 1 profile is active: "dev"
+2025-08-20 10:04:46.968  INFO 62772 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-20 10:04:46.969  INFO 62772 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-20 10:04:46.984  INFO 62772 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2025-08-20 10:04:47.273  INFO 62772 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2025-08-20 10:04:47.278  INFO 62772 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-20 10:04:47.278  INFO 62772 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-08-20 10:04:47.401  INFO 62772 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-20 10:04:47.401  INFO 62772 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 992 ms
+2025-08-20 10:04:48.832  INFO 62772 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-20 10:04:48.861  INFO 62772 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2025-08-20 10:04:48.871  INFO 62772 --- [main] com.sunset.SunsetApplication             : Started SunsetApplication in 2.788 seconds (JVM running for 3.478)
+2025-08-20 10:04:49.409  INFO 62772 --- [RMI TCP Connection(3)-192.168.11.102] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-20 10:04:50.219  INFO 62772 --- [RMI TCP Connection(6)-192.168.11.102] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-20 10:04:50.220  INFO 62772 --- [RMI TCP Connection(6)-192.168.11.102] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-20 10:04:50.221  INFO 62772 --- [RMI TCP Connection(6)-192.168.11.102] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-08-20 10:04:50.472  INFO 62772 --- [RMI TCP Connection(3)-192.168.11.102] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-20 10:04:52.213  INFO 62772 --- [http-nio-8081-exec-1] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTY1NTA5OTA3NCwiZXhwIjoxNzU1ODcxMDk5fQ.aU8pSpTjbROcZigGe9Ri10FQIErI5ndJdZ0-307SMlQ
+2025-08-20 10:04:52.213  INFO 62772 --- [http-nio-8081-exec-1] com.sunset.config.InterceptorConfig      : 请求的url：/weight/compare
+2025-08-20 10:04:52.231  INFO 62772 --- [http-nio-8081-exec-1] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
+2025-08-20 10:05:49.840  WARN 53528 --- [main] ory$DuplicateJsonObjectContextCustomizer : 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/wang/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/wang/.m2/repository/org/json/json/20170516/json-20170516.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2025-08-20 10:05:49.853  INFO 53528 --- [main] com.sunset.SunsetApplicationTests        : Starting SunsetApplicationTests using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 53528 (started by wang in D:\money\sunset-server)
+2025-08-20 10:05:49.854  INFO 53528 --- [main] com.sunset.SunsetApplicationTests        : The following 1 profile is active: "dev"
+2025-08-20 10:05:50.487  INFO 53528 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-20 10:05:50.489  INFO 53528 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-20 10:05:50.505  INFO 53528 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2025-08-20 10:05:54.083  INFO 53528 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-20 10:05:54.133  INFO 53528 --- [main] com.sunset.SunsetApplicationTests        : Started SunsetApplicationTests in 4.553 seconds (JVM running for 5.145)
+2025-08-20 10:12:42.168  WARN 59400 --- [main] ory$DuplicateJsonObjectContextCustomizer : 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/wang/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/wang/.m2/repository/org/json/json/20170516/json-20170516.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2025-08-20 10:12:42.178  INFO 59400 --- [main] com.sunset.SunsetApplicationTests        : Starting SunsetApplicationTests using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 59400 (started by wang in D:\money\sunset-server)
+2025-08-20 10:12:42.178  INFO 59400 --- [main] com.sunset.SunsetApplicationTests        : The following 1 profile is active: "dev"
+2025-08-20 10:12:42.762  INFO 59400 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-20 10:12:42.764  INFO 59400 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-20 10:12:42.780  INFO 59400 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2025-08-20 10:12:46.213  INFO 59400 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-20 10:12:46.248  INFO 59400 --- [main] com.sunset.SunsetApplicationTests        : Started SunsetApplicationTests in 4.331 seconds (JVM running for 4.949)
+2025-08-20 10:13:14.134  WARN 22940 --- [main] ory$DuplicateJsonObjectContextCustomizer : 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/wang/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/wang/.m2/repository/org/json/json/20170516/json-20170516.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2025-08-20 10:13:14.146  INFO 22940 --- [main] com.sunset.SunsetApplicationTests        : Starting SunsetApplicationTests using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 22940 (started by wang in D:\money\sunset-server)
+2025-08-20 10:13:14.146  INFO 22940 --- [main] com.sunset.SunsetApplicationTests        : The following 1 profile is active: "dev"
+2025-08-20 10:13:14.710  INFO 22940 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-20 10:13:14.712  INFO 22940 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-20 10:13:14.728  INFO 22940 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2025-08-20 10:13:17.990  INFO 22940 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-20 10:13:18.042  INFO 22940 --- [main] com.sunset.SunsetApplicationTests        : Started SunsetApplicationTests in 4.169 seconds (JVM running for 4.766)

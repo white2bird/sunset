@@ -27,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -116,6 +117,7 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
         Integer i = simulateVisceralFatLevel(bodyComposition.getBmi(), bodyComposition.getWaistCircumference(), bodyComposition.getGender() == 1);
         Map<String, Object> result = new HashMap<>();
         result.put("weight", buildWeightResult(bodyComposition));
+        result.put("dailyCaloricNeeds", dailyCaloricNeeds(bodyComposition));
         result.put("bmr", buildBmrResult(bodyComposition));
         result.put("bmi", buildBmiResult(bodyComposition));
         result.put("bodyFat", buildBodyFatResult(bodyComposition));
@@ -162,15 +164,21 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
     }
 
     private Object buildBodyFatChange(BodyComposition bodyComposition, BodyComposition latestWeighInfo) {
-        return bodyComposition.getBodyFat()-latestWeighInfo.getBodyFat();
+        double v = bodyComposition.getBodyFat() - latestWeighInfo.getBodyFat();
+        BigDecimal bigDecimal = new BigDecimal(v).setScale(2, RoundingMode.HALF_UP);
+        return bigDecimal;
     }
 
     private Object buildBmiChange(BodyComposition bodyComposition, BodyComposition latestWeighInfo) {
-        return bodyComposition.getBmi()-latestWeighInfo.getBmi();
+        double v = bodyComposition.getBmi() - latestWeighInfo.getBmi();
+        BigDecimal bigDecimal = new BigDecimal(v).setScale(2, RoundingMode.HALF_UP);
+        return bigDecimal;
     }
 
     private Object buildWeightChange(BodyComposition bodyComposition, BodyComposition latestWeighInfo) {
-        return bodyComposition.getWeight()-latestWeighInfo.getWeight();
+        double v = bodyComposition.getWeight() - latestWeighInfo.getWeight();
+        BigDecimal bigDecimal = new BigDecimal(v).setScale(2, RoundingMode.HALF_UP);
+        return bigDecimal;
     }
 
     private Map<String, Object> buildWeightResult(BodyComposition bodyComposition){
@@ -189,6 +197,7 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
     private Map<String, Object> dailyCaloricNeeds(BodyComposition bodyComposition) {
         Map<String, Object> result = new HashMap<>();
         result.put("value", bodyComposition.getDailyCaloricNeeds());
+        result.putAll(DailyCaloricNeedsCal.calLevel(bodyComposition.getDailyCaloricNeeds()));
         return result;
     }
 
@@ -332,8 +341,9 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
      */
     private Map<String, Object> buildBodyWaterResult(BodyComposition bodyComposition){
         Map<String, Object> result = new HashMap<>();
-        result.put("value", bodyComposition.getBodyWaterPercentage()*bodyComposition.getWeight()/100);
-        result.putAll(WaterCal.calLevel(bodyComposition.getBodyWaterPercentage(), bodyComposition.getGender()==1));
+        double water = bodyComposition.getBodyWaterPercentage() * bodyComposition.getWeight() / 100;
+        result.put("value", water);
+        result.putAll(WaterCal.calLevel(bodyComposition.getBodyWaterPercentage(), water,bodyComposition.getGender()==1));
         return result;
     }
 
@@ -579,7 +589,12 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
                 String oldColor = getColorValue(name, oldDataMap);
                 String newColor = getColorValue(name, newDataMap);
                 if(oldValue == null || newValue == null){
-                    continue;
+                    if(oldValue == null){
+                        oldValue = 0D;
+                    }
+                    if(newValue == null){
+                        newValue = 0D;
+                    }
                 }
                 String oldStatus = getStatus(name, oldDataMap);
                 String newStatus = getStatus(name, newDataMap);
@@ -620,6 +635,8 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
             value = ((Integer) o).doubleValue();
         } else if(o instanceof Double){
             value = (Double) o;
+        } else if(o instanceof BigDecimal){
+            value = ((BigDecimal) o).doubleValue();
         }
         if(value == null){
             return null;
@@ -716,7 +733,9 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
         item.setPreviousValue(oldValue);
         item.setPreviousStatus(oldStatus);
         double difference = newValue - oldValue;
-        item.setChange(difference);
+        BigDecimal bigDecimal = new BigDecimal(difference).setScale(2, RoundingMode.HALF_UP);
+
+        item.setChange(bigDecimal);
 
         return item;
     }
