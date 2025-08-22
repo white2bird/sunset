@@ -1,66 +1,160 @@
-2025-08-20 06:51:48.751  WARN 4684 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8h40m49s743ms990µs200ns).
-2025-08-20 09:41:15.749  WARN 4684 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h47m24s862ms553µs201ns).
-2025-08-20 09:57:02.986  INFO 4684 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-08-20 09:57:03.296  INFO 4684 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-08-20 09:57:08.444  INFO 49296 --- [main] com.sunset.SunsetApplication             : Starting SunsetApplication using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 49296 (D:\money\sunset-server\target\classes started by wang in D:\money\sunset-server)
-2025-08-20 09:57:08.445  INFO 49296 --- [main] com.sunset.SunsetApplication             : The following 1 profile is active: "dev"
-2025-08-20 09:57:09.041  INFO 49296 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2025-08-20 09:57:09.042  INFO 49296 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-08-20 09:57:09.058  INFO 49296 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
-2025-08-20 09:57:09.339  INFO 49296 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2025-08-20 09:57:09.344  INFO 49296 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-08-20 09:57:09.344  INFO 49296 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
-2025-08-20 09:57:09.448  INFO 49296 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-08-20 09:57:09.448  INFO 49296 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 974 ms
-2025-08-20 09:57:10.834  INFO 49296 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2025-08-20 09:57:10.864  INFO 49296 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
-2025-08-20 09:57:10.873  INFO 49296 --- [main] com.sunset.SunsetApplication             : Started SunsetApplication in 2.679 seconds (JVM running for 3.438)
-2025-08-20 09:57:11.261  INFO 49296 --- [RMI TCP Connection(2)-192.168.11.102] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-08-20 09:57:11.261  INFO 49296 --- [RMI TCP Connection(2)-192.168.11.102] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-08-20 09:57:11.262  INFO 49296 --- [RMI TCP Connection(2)-192.168.11.102] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2025-08-20 09:57:11.262  INFO 49296 --- [RMI TCP Connection(1)-192.168.11.102] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-08-20 09:57:12.441  INFO 49296 --- [RMI TCP Connection(1)-192.168.11.102] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-08-20 09:57:19.448  INFO 49296 --- [http-nio-8081-exec-7] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 271 ms
-2025-08-20 09:58:11.636  INFO 49296 --- [http-nio-8081-exec-9] com.sunset.controller.SignController     : 登录请求参数：LoginVerCode(phone=18717351768, verCode=string)
-2025-08-20 09:58:11.689  INFO 49296 --- [http-nio-8081-exec-9] com.sunset.service.SignService           : 验证码已过期
-2025-08-20 09:58:11.692  INFO 49296 --- [http-nio-8081-exec-9] com.sunset.utils.GlobalException         : 全局异常 - 请求URL: http://localhost:8081/sign/code_login, 方法: POST, 客户端IP: 0:0:0:0:0:0:0:1
-2025-08-20 09:58:11.692  INFO 49296 --- [http-nio-8081-exec-9] com.sunset.utils.GlobalException         : 异常信息: 验证码已过期
-2025-08-20 09:58:18.993  INFO 49296 --- [http-nio-8081-exec-3] com.sunset.controller.SignController     : 登录请求参数：LoginVerCode(phone=18717351768, verCode=4096)
-2025-08-20 09:58:18.994  INFO 49296 --- [http-nio-8081-exec-3] com.sunset.service.SignService           : 验证码正确
-2025-08-20 09:59:45.198  INFO 49296 --- [http-nio-8081-exec-4] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTY1NTA5OTA3NCwiZXhwIjoxNzU1ODcxMDk5fQ.aU8pSpTjbROcZigGe9Ri10FQIErI5ndJdZ0-307SMlQ
-2025-08-20 09:59:45.198  INFO 49296 --- [http-nio-8081-exec-4] com.sunset.config.InterceptorConfig      : 请求的url：/weight/weight_history
-2025-08-20 09:59:45.221  INFO 49296 --- [http-nio-8081-exec-4] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
-2025-08-20 10:00:05.236  INFO 49296 --- [http-nio-8081-exec-2] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTY1NTA5OTA3NCwiZXhwIjoxNzU1ODcxMDk5fQ.aU8pSpTjbROcZigGe9Ri10FQIErI5ndJdZ0-307SMlQ
-2025-08-20 10:00:05.236  INFO 49296 --- [http-nio-8081-exec-2] com.sunset.config.InterceptorConfig      : 请求的url：/weight/compare
-2025-08-20 10:00:05.237  INFO 49296 --- [http-nio-8081-exec-2] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
-2025-08-20 10:01:36.975  INFO 49296 --- [http-nio-8081-exec-8] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTY1NTA5OTA3NCwiZXhwIjoxNzU1ODcxMDk5fQ.aU8pSpTjbROcZigGe9Ri10FQIErI5ndJdZ0-307SMlQ
-2025-08-20 10:01:36.975  INFO 49296 --- [http-nio-8081-exec-8] com.sunset.config.InterceptorConfig      : 请求的url：/weight/compare
-2025-08-20 10:01:36.975  INFO 49296 --- [http-nio-8081-exec-8] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
-2025-08-20 10:03:24.684  WARN 49296 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m36s633ms314µs300ns).
-2025-08-20 10:04:41.858  INFO 49296 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-08-20 10:04:42.220  INFO 49296 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-08-20 10:04:46.376  INFO 62772 --- [main] com.sunset.SunsetApplication             : Starting SunsetApplication using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 62772 (D:\money\sunset-server\target\classes started by wang in D:\money\sunset-server)
-2025-08-20 10:04:46.377  INFO 62772 --- [main] com.sunset.SunsetApplication             : The following 1 profile is active: "dev"
-2025-08-20 10:04:46.968  INFO 62772 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2025-08-20 10:04:46.969  INFO 62772 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-08-20 10:04:46.984  INFO 62772 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
-2025-08-20 10:04:47.273  INFO 62772 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2025-08-20 10:04:47.278  INFO 62772 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-08-20 10:04:47.278  INFO 62772 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
-2025-08-20 10:04:47.401  INFO 62772 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-08-20 10:04:47.401  INFO 62772 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 992 ms
-2025-08-20 10:04:48.832  INFO 62772 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2025-08-20 10:04:48.861  INFO 62772 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
-2025-08-20 10:04:48.871  INFO 62772 --- [main] com.sunset.SunsetApplication             : Started SunsetApplication in 2.788 seconds (JVM running for 3.478)
-2025-08-20 10:04:49.409  INFO 62772 --- [RMI TCP Connection(3)-192.168.11.102] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-08-20 10:04:50.219  INFO 62772 --- [RMI TCP Connection(6)-192.168.11.102] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-08-20 10:04:50.220  INFO 62772 --- [RMI TCP Connection(6)-192.168.11.102] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-08-20 10:04:50.221  INFO 62772 --- [RMI TCP Connection(6)-192.168.11.102] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2025-08-20 10:04:50.472  INFO 62772 --- [RMI TCP Connection(3)-192.168.11.102] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-08-20 10:04:52.213  INFO 62772 --- [http-nio-8081-exec-1] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTY1NTA5OTA3NCwiZXhwIjoxNzU1ODcxMDk5fQ.aU8pSpTjbROcZigGe9Ri10FQIErI5ndJdZ0-307SMlQ
-2025-08-20 10:04:52.213  INFO 62772 --- [http-nio-8081-exec-1] com.sunset.config.InterceptorConfig      : 请求的url：/weight/compare
-2025-08-20 10:04:52.231  INFO 62772 --- [http-nio-8081-exec-1] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
-2025-08-20 10:05:49.840  WARN 53528 --- [main] ory$DuplicateJsonObjectContextCustomizer : 
+2025-08-22 09:33:26.070  WARN 41944 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1d1h5m37s252ms939µs300ns).
+2025-08-22 09:46:30.564  INFO 41944 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-22 09:46:30.888  INFO 41944 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-22 09:46:33.220  INFO 66188 --- [main] com.sunset.SunsetApplication             : Starting SunsetApplication using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 66188 (D:\money\sunset-server\target\classes started by wang in D:\money\sunset-server)
+2025-08-22 09:46:33.221  INFO 66188 --- [main] com.sunset.SunsetApplication             : The following 1 profile is active: "dev"
+2025-08-22 09:46:33.995  INFO 66188 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-22 09:46:33.997  INFO 66188 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-22 09:46:34.013  INFO 66188 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2025-08-22 09:46:34.367  INFO 66188 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2025-08-22 09:46:34.375  INFO 66188 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-22 09:46:34.376  INFO 66188 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-08-22 09:46:34.519  INFO 66188 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-22 09:46:34.520  INFO 66188 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1269 ms
+2025-08-22 09:46:36.260  INFO 66188 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-22 09:46:36.301  INFO 66188 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2025-08-22 09:46:36.313  INFO 66188 --- [main] com.sunset.SunsetApplication             : Started SunsetApplication in 3.376 seconds (JVM running for 4.185)
+2025-08-22 09:46:36.894  INFO 66188 --- [RMI TCP Connection(3)-192.168.11.100] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-22 09:46:37.194  INFO 66188 --- [RMI TCP Connection(5)-192.168.11.100] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-22 09:46:37.194  INFO 66188 --- [RMI TCP Connection(5)-192.168.11.100] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-22 09:46:37.195  INFO 66188 --- [RMI TCP Connection(5)-192.168.11.100] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-08-22 09:46:37.759  INFO 66188 --- [RMI TCP Connection(3)-192.168.11.100] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-22 09:47:13.941  INFO 66188 --- [http-nio-8081-exec-2] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTY1NTA5OTA3NCwiZXhwIjoxNzU1ODcxMDk5fQ.aU8pSpTjbROcZigGe9Ri10FQIErI5ndJdZ0-307SMlQ
+2025-08-22 09:47:13.941  INFO 66188 --- [http-nio-8081-exec-2] com.sunset.config.InterceptorConfig      : 请求的url：/weight/compare
+2025-08-22 09:47:13.985  INFO 66188 --- [http-nio-8081-exec-2] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
+2025-08-22 09:47:14.218 DEBUG 66188 --- [http-nio-8081-exec-2] c.s.m.BodyCompositionMapper.selectList   : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (id IN (?,?)) ORDER BY id ASC
+2025-08-22 09:47:14.256 DEBUG 66188 --- [http-nio-8081-exec-2] c.s.m.BodyCompositionMapper.selectList   : ==> Parameters: 399(Long), 400(Long)
+2025-08-22 09:47:14.328 DEBUG 66188 --- [http-nio-8081-exec-2] c.s.m.BodyCompositionMapper.selectList   : <==      Total: 2
+2025-08-22 09:47:14.334 DEBUG 66188 --- [http-nio-8081-exec-2] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
+2025-08-22 09:47:14.336 DEBUG 66188 --- [http-nio-8081-exec-2] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
+2025-08-22 09:47:14.366 DEBUG 66188 --- [http-nio-8081-exec-2] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
+2025-08-22 09:47:14.382 DEBUG 66188 --- [http-nio-8081-exec-2] c.s.m.BodyCompositionMapper.selectOne    : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (user_id = ?) ORDER BY id DESC limit 1
+2025-08-22 09:47:14.383 DEBUG 66188 --- [http-nio-8081-exec-2] c.s.m.BodyCompositionMapper.selectOne    : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
+2025-08-22 09:47:14.416 DEBUG 66188 --- [http-nio-8081-exec-2] c.s.m.BodyCompositionMapper.selectOne    : <==      Total: 1
+2025-08-22 09:47:14.440 DEBUG 66188 --- [http-nio-8081-exec-2] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
+2025-08-22 09:47:14.441 DEBUG 66188 --- [http-nio-8081-exec-2] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
+2025-08-22 09:47:14.476 DEBUG 66188 --- [http-nio-8081-exec-2] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
+2025-08-22 09:47:14.479 DEBUG 66188 --- [http-nio-8081-exec-2] c.s.m.BodyCompositionMapper.selectOne    : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (user_id = ?) ORDER BY id DESC limit 1
+2025-08-22 09:47:14.479 DEBUG 66188 --- [http-nio-8081-exec-2] c.s.m.BodyCompositionMapper.selectOne    : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
+2025-08-22 09:47:14.514 DEBUG 66188 --- [http-nio-8081-exec-2] c.s.m.BodyCompositionMapper.selectOne    : <==      Total: 1
+2025-08-22 09:48:34.504  INFO 66188 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-22 09:48:34.841  INFO 66188 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-22 09:48:36.860  INFO 44612 --- [main] com.sunset.SunsetApplication             : Starting SunsetApplication using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 44612 (D:\money\sunset-server\target\classes started by wang in D:\money\sunset-server)
+2025-08-22 09:48:36.860  INFO 44612 --- [main] com.sunset.SunsetApplication             : The following 1 profile is active: "dev"
+2025-08-22 09:48:37.510  INFO 44612 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-22 09:48:37.511  INFO 44612 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-22 09:48:37.528  INFO 44612 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2025-08-22 09:48:37.589 DEBUG 44612 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2025-08-22 09:48:37.835  INFO 44612 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2025-08-22 09:48:37.840  INFO 44612 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-22 09:48:37.841  INFO 44612 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-08-22 09:48:37.961  INFO 44612 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-22 09:48:37.961  INFO 44612 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1073 ms
+2025-08-22 09:48:39.435  INFO 44612 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-22 09:48:39.465  INFO 44612 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2025-08-22 09:48:39.478  INFO 44612 --- [main] com.sunset.SunsetApplication             : Started SunsetApplication in 2.859 seconds (JVM running for 3.537)
+2025-08-22 09:48:39.631  INFO 44612 --- [RMI TCP Connection(1)-192.168.11.100] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-22 09:48:39.981  INFO 44612 --- [RMI TCP Connection(3)-192.168.11.100] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-22 09:48:39.982  INFO 44612 --- [RMI TCP Connection(3)-192.168.11.100] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-22 09:48:39.982  INFO 44612 --- [RMI TCP Connection(3)-192.168.11.100] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-08-22 09:48:40.541  INFO 44612 --- [RMI TCP Connection(1)-192.168.11.100] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-22 09:49:00.205  INFO 44612 --- [http-nio-8081-exec-1] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTY1NTA5OTA3NCwiZXhwIjoxNzU1ODcxMDk5fQ.aU8pSpTjbROcZigGe9Ri10FQIErI5ndJdZ0-307SMlQ
+2025-08-22 09:49:00.205  INFO 44612 --- [http-nio-8081-exec-1] com.sunset.config.InterceptorConfig      : 请求的url：/weight/compare
+2025-08-22 09:49:00.250  INFO 44612 --- [http-nio-8081-exec-1] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
+2025-08-22 09:49:00.495 DEBUG 44612 --- [http-nio-8081-exec-1] c.s.m.BodyCompositionMapper.selectList   : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (id IN (?,?)) ORDER BY id ASC
+2025-08-22 09:49:00.531 DEBUG 44612 --- [http-nio-8081-exec-1] c.s.m.BodyCompositionMapper.selectList   : ==> Parameters: 399(Long), 400(Long)
+2025-08-22 09:49:00.602 DEBUG 44612 --- [http-nio-8081-exec-1] c.s.m.BodyCompositionMapper.selectList   : <==      Total: 2
+2025-08-22 09:49:00.605 DEBUG 44612 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
+2025-08-22 09:49:00.607 DEBUG 44612 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
+2025-08-22 09:49:00.640 DEBUG 44612 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
+2025-08-22 09:49:00.654 DEBUG 44612 --- [http-nio-8081-exec-1] c.s.m.BodyCompositionMapper.selectOne    : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (user_id = ?) ORDER BY id DESC limit 1
+2025-08-22 09:49:00.655 DEBUG 44612 --- [http-nio-8081-exec-1] c.s.m.BodyCompositionMapper.selectOne    : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
+2025-08-22 09:49:00.709 DEBUG 44612 --- [http-nio-8081-exec-1] c.s.m.BodyCompositionMapper.selectOne    : <==      Total: 1
+2025-08-22 09:49:00.731 DEBUG 44612 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
+2025-08-22 09:49:00.732 DEBUG 44612 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
+2025-08-22 09:49:00.771 DEBUG 44612 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
+2025-08-22 09:49:00.774 DEBUG 44612 --- [http-nio-8081-exec-1] c.s.m.BodyCompositionMapper.selectOne    : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (user_id = ?) ORDER BY id DESC limit 1
+2025-08-22 09:49:00.774 DEBUG 44612 --- [http-nio-8081-exec-1] c.s.m.BodyCompositionMapper.selectOne    : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
+2025-08-22 09:49:00.820 DEBUG 44612 --- [http-nio-8081-exec-1] c.s.m.BodyCompositionMapper.selectOne    : <==      Total: 1
+2025-08-22 09:59:19.523  INFO 44612 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-22 09:59:19.536  INFO 44612 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-22 09:59:21.346  INFO 39024 --- [main] com.sunset.SunsetApplication             : Starting SunsetApplication using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 39024 (D:\money\sunset-server\target\classes started by wang in D:\money\sunset-server)
+2025-08-22 09:59:21.347  INFO 39024 --- [main] com.sunset.SunsetApplication             : The following 1 profile is active: "dev"
+2025-08-22 09:59:21.896  INFO 39024 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-22 09:59:21.898  INFO 39024 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-22 09:59:21.912  INFO 39024 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2025-08-22 09:59:21.963 DEBUG 39024 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2025-08-22 09:59:22.181  INFO 39024 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2025-08-22 09:59:22.187  INFO 39024 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-22 09:59:22.187  INFO 39024 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-08-22 09:59:22.298  INFO 39024 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-22 09:59:22.299  INFO 39024 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 926 ms
+2025-08-22 09:59:23.665  INFO 39024 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-22 09:59:23.697  INFO 39024 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2025-08-22 09:59:23.708  INFO 39024 --- [main] com.sunset.SunsetApplication             : Started SunsetApplication in 2.598 seconds (JVM running for 3.141)
+2025-08-22 09:59:23.968  INFO 39024 --- [RMI TCP Connection(2)-192.168.11.101] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-22 09:59:24.089  INFO 39024 --- [RMI TCP Connection(3)-192.168.11.101] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-22 09:59:24.089  INFO 39024 --- [RMI TCP Connection(3)-192.168.11.101] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-22 09:59:24.090  INFO 39024 --- [RMI TCP Connection(3)-192.168.11.101] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-08-22 09:59:24.739  INFO 39024 --- [RMI TCP Connection(2)-192.168.11.101] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-22 10:11:26.898  INFO 39024 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-22 10:11:27.221  INFO 39024 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-22 10:18:11.746  INFO 28788 --- [main] com.sunset.SunsetApplication             : Starting SunsetApplication using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 28788 (D:\money\sunset-server\target\classes started by wang in D:\money\sunset-server)
+2025-08-22 10:18:11.747  INFO 28788 --- [main] com.sunset.SunsetApplication             : The following 1 profile is active: "dev"
+2025-08-22 10:18:12.310  INFO 28788 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-22 10:18:12.312  INFO 28788 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-22 10:18:12.328  INFO 28788 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2025-08-22 10:18:12.388 DEBUG 28788 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2025-08-22 10:18:12.615  INFO 28788 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2025-08-22 10:18:12.619  INFO 28788 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-22 10:18:12.620  INFO 28788 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-08-22 10:18:12.727  INFO 28788 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-22 10:18:12.728  INFO 28788 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 953 ms
+2025-08-22 10:18:14.158  INFO 28788 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-22 10:18:14.187  INFO 28788 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2025-08-22 10:18:14.196  INFO 28788 --- [main] com.sunset.SunsetApplication             : Started SunsetApplication in 2.692 seconds (JVM running for 3.647)
+2025-08-22 10:18:14.569  INFO 28788 --- [RMI TCP Connection(2)-192.168.11.101] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-22 10:18:14.570  INFO 28788 --- [RMI TCP Connection(2)-192.168.11.101] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-22 10:18:14.572  INFO 28788 --- [RMI TCP Connection(2)-192.168.11.101] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-08-22 10:18:14.572  INFO 28788 --- [RMI TCP Connection(1)-192.168.11.101] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-22 10:18:15.417  INFO 28788 --- [RMI TCP Connection(1)-192.168.11.101] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-22 10:18:19.206  INFO 28788 --- [http-nio-8081-exec-1] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTY1NTA5OTA3NCwiZXhwIjoxNzU1ODcxMDk5fQ.aU8pSpTjbROcZigGe9Ri10FQIErI5ndJdZ0-307SMlQ
+2025-08-22 10:18:19.207  INFO 28788 --- [http-nio-8081-exec-1] com.sunset.config.InterceptorConfig      : 请求的url：/weight/save
+2025-08-22 10:18:19.226  INFO 28788 --- [http-nio-8081-exec-1] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
+2025-08-22 10:18:19.370 DEBUG 28788 --- [http-nio-8081-exec-1] com.sunset.mapper.WeightMapper.insert    : ==>  Preparing: INSERT INTO tb_weight ( weight, uid, blue_address ) VALUES ( ?, ?, ? )
+2025-08-22 10:18:19.384 DEBUG 28788 --- [http-nio-8081-exec-1] com.sunset.mapper.WeightMapper.insert    : ==> Parameters: 60(BigDecimal), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String), string(String)
+2025-08-22 10:18:19.453 DEBUG 28788 --- [http-nio-8081-exec-1] com.sunset.mapper.WeightMapper.insert    : <==    Updates: 1
+2025-08-22 10:18:19.466 DEBUG 28788 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
+2025-08-22 10:18:19.467 DEBUG 28788 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
+2025-08-22 10:18:19.510 DEBUG 28788 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
+2025-08-22 10:18:19.534 DEBUG 28788 --- [http-nio-8081-exec-1] c.s.m.BodyCompositionMapper.selectOne    : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (user_id = ?) ORDER BY id DESC limit 1
+2025-08-22 10:18:19.534 DEBUG 28788 --- [http-nio-8081-exec-1] c.s.m.BodyCompositionMapper.selectOne    : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
+2025-08-22 10:18:19.572 DEBUG 28788 --- [http-nio-8081-exec-1] c.s.m.BodyCompositionMapper.selectOne    : <==      Total: 1
+2025-08-22 10:18:19.578 DEBUG 28788 --- [http-nio-8081-exec-1] c.s.mapper.BodyCompositionMapper.insert  : ==>  Preparing: INSERT INTO body_composition ( weight_time, user_id, height, birth_date, gender, waist_circumference, weight, daily_caloric_needs, bmr, bmi, body_fat, visceral_fat, muscle, skeletal_muscle, skeletal_muscle_percentage, bone_mass, body_water_percentage, protein_mass, fat_free_mass, muscle_mass, fat_mass, subcutaneous_fat, weight_control, fat_control, muscle_control, obesity_degree, ideal_weight, metabolic_age, obesity_degree_indicator, fat_burning_heart_rate ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+2025-08-22 10:18:19.580 DEBUG 28788 --- [http-nio-8081-exec-1] c.s.mapper.BodyCompositionMapper.insert  : ==> Parameters: 2025-08-22 10:18:19.573(Timestamp), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String), 163.0(Double), 2000-08-07 00:00:00.0(Timestamp), 1(Integer), 90.0(Double), 60.0(Double), 2107.17925(Double), 1532.4940000000001(Double), 22.582709172343712(Double), 16.649251006812452(Double), 4.959925100681245(Double), 62.51306174489066(Double), 22.50470222816064(Double), 37.5078370469344(Double), 2.52(Double), 66.17(Double), 15.00313481877376(Double), 50.01044939591253(Double), 37.5078370469344(Double), 9.989550604087471(Double), 11.689325906131206(Double), 7.0(Double), 1.1654475704768714(Double), 4.37591432214235(Double), 1(Integer), 53.0(Double), 22(Integer), 2.64867805610777(Double), 195.0(Double)
+2025-08-22 10:18:19.649 DEBUG 28788 --- [http-nio-8081-exec-1] c.s.mapper.BodyCompositionMapper.insert  : <==    Updates: 1
+2025-08-22 10:18:39.207  INFO 28788 --- [http-nio-8081-exec-2] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTY1NTA5OTA3NCwiZXhwIjoxNzU1ODcxMDk5fQ.aU8pSpTjbROcZigGe9Ri10FQIErI5ndJdZ0-307SMlQ
+2025-08-22 10:18:39.207  INFO 28788 --- [http-nio-8081-exec-2] com.sunset.config.InterceptorConfig      : 请求的url：/weight/save
+2025-08-22 10:18:39.208  INFO 28788 --- [http-nio-8081-exec-2] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
+2025-08-22 10:18:39.273 DEBUG 28788 --- [http-nio-8081-exec-2] com.sunset.mapper.WeightMapper.insert    : ==>  Preparing: INSERT INTO tb_weight ( weight, uid, blue_address ) VALUES ( ?, ?, ? )
+2025-08-22 10:18:39.273 DEBUG 28788 --- [http-nio-8081-exec-2] com.sunset.mapper.WeightMapper.insert    : ==> Parameters: 60(BigDecimal), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String), string(String)
+2025-08-22 10:18:39.339 DEBUG 28788 --- [http-nio-8081-exec-2] com.sunset.mapper.WeightMapper.insert    : <==    Updates: 1
+2025-08-22 10:18:39.340 DEBUG 28788 --- [http-nio-8081-exec-2] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
+2025-08-22 10:18:39.340 DEBUG 28788 --- [http-nio-8081-exec-2] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
+2025-08-22 10:18:39.378 DEBUG 28788 --- [http-nio-8081-exec-2] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
+2025-08-22 10:18:39.380 DEBUG 28788 --- [http-nio-8081-exec-2] c.s.m.BodyCompositionMapper.selectOne    : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (user_id = ?) ORDER BY id DESC limit 1
+2025-08-22 10:18:39.380 DEBUG 28788 --- [http-nio-8081-exec-2] c.s.m.BodyCompositionMapper.selectOne    : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
+2025-08-22 10:18:39.414 DEBUG 28788 --- [http-nio-8081-exec-2] c.s.m.BodyCompositionMapper.selectOne    : <==      Total: 1
+2025-08-22 10:18:39.415 DEBUG 28788 --- [http-nio-8081-exec-2] c.s.mapper.BodyCompositionMapper.insert  : ==>  Preparing: INSERT INTO body_composition ( weight_time, user_id, height, birth_date, gender, waist_circumference, weight, daily_caloric_needs, bmr, bmi, body_fat, visceral_fat, muscle, skeletal_muscle, skeletal_muscle_percentage, bone_mass, body_water_percentage, protein_mass, fat_free_mass, muscle_mass, fat_mass, subcutaneous_fat, weight_control, fat_control, muscle_control, obesity_degree, ideal_weight, metabolic_age, obesity_degree_indicator, fat_burning_heart_rate ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+2025-08-22 10:18:39.415 DEBUG 28788 --- [http-nio-8081-exec-2] c.s.mapper.BodyCompositionMapper.insert  : ==> Parameters: 2025-08-22 10:18:39.414(Timestamp), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String), 163.0(Double), 2000-08-07 00:00:00.0(Timestamp), 1(Integer), 90.0(Double), 60.0(Double), 2107.17925(Double), 1532.4940000000001(Double), 22.582709172343712(Double), 16.649251006812452(Double), 4.959925100681245(Double), 62.51306174489066(Double), 22.50470222816064(Double), 37.5078370469344(Double), 2.52(Double), 66.17(Double), 15.00313481877376(Double), 50.01044939591253(Double), 37.5078370469344(Double), 9.989550604087471(Double), 11.689325906131206(Double), 7.0(Double), 1.1654475704768714(Double), 4.37591432214235(Double), 1(Integer), 53.0(Double), 22(Integer), 2.64867805610777(Double), 195.0(Double)
+2025-08-22 10:18:39.480 DEBUG 28788 --- [http-nio-8081-exec-2] c.s.mapper.BodyCompositionMapper.insert  : <==    Updates: 1
+2025-08-22 10:19:14.830  INFO 28788 --- [http-nio-8081-exec-6] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTY1NTA5OTA3NCwiZXhwIjoxNzU1ODcxMDk5fQ.aU8pSpTjbROcZigGe9Ri10FQIErI5ndJdZ0-307SMlQ
+2025-08-22 10:19:14.830  INFO 28788 --- [http-nio-8081-exec-6] com.sunset.config.InterceptorConfig      : 请求的url：/weight/weight_history
+2025-08-22 10:19:14.830  INFO 28788 --- [http-nio-8081-exec-6] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
+2025-08-22 10:19:14.870 DEBUG 28788 --- [http-nio-8081-exec-6] c.s.m.BodyCompositionMapper.selectPage   : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (user_id = ?) ORDER BY weight_time DESC
+2025-08-22 10:19:14.871 DEBUG 28788 --- [http-nio-8081-exec-6] c.s.m.BodyCompositionMapper.selectPage   : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
+2025-08-22 10:19:14.916 DEBUG 28788 --- [http-nio-8081-exec-6] c.s.m.BodyCompositionMapper.selectPage   : <==      Total: 17
+2025-08-22 10:21:52.376  WARN 9060 --- [main] ory$DuplicateJsonObjectContextCustomizer : 
 
 Found multiple occurrences of org.json.JSONObject on the class path:
 
@@ -69,14 +163,36 @@ Found multiple occurrences of org.json.JSONObject on the class path:
 
 You may wish to exclude one of them to ensure predictable runtime behavior
 
-2025-08-20 10:05:49.853  INFO 53528 --- [main] com.sunset.SunsetApplicationTests        : Starting SunsetApplicationTests using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 53528 (started by wang in D:\money\sunset-server)
-2025-08-20 10:05:49.854  INFO 53528 --- [main] com.sunset.SunsetApplicationTests        : The following 1 profile is active: "dev"
-2025-08-20 10:05:50.487  INFO 53528 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2025-08-20 10:05:50.489  INFO 53528 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-08-20 10:05:50.505  INFO 53528 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
-2025-08-20 10:05:54.083  INFO 53528 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2025-08-20 10:05:54.133  INFO 53528 --- [main] com.sunset.SunsetApplicationTests        : Started SunsetApplicationTests in 4.553 seconds (JVM running for 5.145)
-2025-08-20 10:12:42.168  WARN 59400 --- [main] ory$DuplicateJsonObjectContextCustomizer : 
+2025-08-22 10:21:52.407  INFO 9060 --- [main] com.sunset.SunsetApplicationTests        : Starting SunsetApplicationTests using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 9060 (started by wang in D:\money\sunset-server)
+2025-08-22 10:21:52.407  INFO 9060 --- [main] com.sunset.SunsetApplicationTests        : The following 1 profile is active: "dev"
+2025-08-22 10:21:52.964  INFO 9060 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-22 10:21:52.966  INFO 9060 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-22 10:21:52.985  INFO 9060 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2025-08-22 10:21:53.049 DEBUG 9060 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2025-08-22 10:21:56.047  INFO 9060 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-22 10:21:56.086  INFO 9060 --- [main] com.sunset.SunsetApplicationTests        : Started SunsetApplicationTests in 3.914 seconds (JVM running for 4.476)
+2025-08-22 10:22:05.654  INFO 28788 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-22 10:22:06.026  INFO 28788 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-22 10:22:09.990  INFO 66556 --- [main] com.sunset.SunsetApplication             : Starting SunsetApplication using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 66556 (D:\money\sunset-server\target\classes started by wang in D:\money\sunset-server)
+2025-08-22 10:22:09.991  INFO 66556 --- [main] com.sunset.SunsetApplication             : The following 1 profile is active: "dev"
+2025-08-22 10:22:10.610  INFO 66556 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-22 10:22:10.612  INFO 66556 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-22 10:22:10.630  INFO 66556 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
+2025-08-22 10:22:10.696 DEBUG 66556 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2025-08-22 10:22:10.925  INFO 66556 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2025-08-22 10:22:10.930  INFO 66556 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-22 10:22:10.931  INFO 66556 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-08-22 10:22:11.041  INFO 66556 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-22 10:22:11.041  INFO 66556 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1020 ms
+2025-08-22 10:22:12.475  INFO 66556 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-22 10:22:12.503  INFO 66556 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2025-08-22 10:22:12.513  INFO 66556 --- [main] com.sunset.SunsetApplication             : Started SunsetApplication in 2.804 seconds (JVM running for 3.371)
+2025-08-22 10:22:13.099  INFO 66556 --- [RMI TCP Connection(1)-192.168.11.101] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-22 10:22:13.099  INFO 66556 --- [RMI TCP Connection(1)-192.168.11.101] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-22 10:22:13.100  INFO 66556 --- [RMI TCP Connection(2)-192.168.11.101] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-22 10:22:13.101  INFO 66556 --- [RMI TCP Connection(1)-192.168.11.101] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-08-22 10:22:14.155  INFO 66556 --- [RMI TCP Connection(2)-192.168.11.101] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-22 10:22:26.003  WARN 65560 --- [main] ory$DuplicateJsonObjectContextCustomizer : 
 
 Found multiple occurrences of org.json.JSONObject on the class path:
 
@@ -85,26 +201,11 @@ Found multiple occurrences of org.json.JSONObject on the class path:
 
 You may wish to exclude one of them to ensure predictable runtime behavior
 
-2025-08-20 10:12:42.178  INFO 59400 --- [main] com.sunset.SunsetApplicationTests        : Starting SunsetApplicationTests using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 59400 (started by wang in D:\money\sunset-server)
-2025-08-20 10:12:42.178  INFO 59400 --- [main] com.sunset.SunsetApplicationTests        : The following 1 profile is active: "dev"
-2025-08-20 10:12:42.762  INFO 59400 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2025-08-20 10:12:42.764  INFO 59400 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-08-20 10:12:42.780  INFO 59400 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
-2025-08-20 10:12:46.213  INFO 59400 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2025-08-20 10:12:46.248  INFO 59400 --- [main] com.sunset.SunsetApplicationTests        : Started SunsetApplicationTests in 4.331 seconds (JVM running for 4.949)
-2025-08-20 10:13:14.134  WARN 22940 --- [main] ory$DuplicateJsonObjectContextCustomizer : 
-
-Found multiple occurrences of org.json.JSONObject on the class path:
-
-	jar:file:/C:/Users/wang/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
-	jar:file:/C:/Users/wang/.m2/repository/org/json/json/20170516/json-20170516.jar!/org/json/JSONObject.class
-
-You may wish to exclude one of them to ensure predictable runtime behavior
-
-2025-08-20 10:13:14.146  INFO 22940 --- [main] com.sunset.SunsetApplicationTests        : Starting SunsetApplicationTests using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 22940 (started by wang in D:\money\sunset-server)
-2025-08-20 10:13:14.146  INFO 22940 --- [main] com.sunset.SunsetApplicationTests        : The following 1 profile is active: "dev"
-2025-08-20 10:13:14.710  INFO 22940 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2025-08-20 10:13:14.712  INFO 22940 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-08-20 10:13:14.728  INFO 22940 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
-2025-08-20 10:13:17.990  INFO 22940 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2025-08-20 10:13:18.042  INFO 22940 --- [main] com.sunset.SunsetApplicationTests        : Started SunsetApplicationTests in 4.169 seconds (JVM running for 4.766)
+2025-08-22 10:22:26.047  INFO 65560 --- [main] com.sunset.SunsetApplicationTests        : Starting SunsetApplicationTests using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 65560 (started by wang in D:\money\sunset-server)
+2025-08-22 10:22:26.047  INFO 65560 --- [main] com.sunset.SunsetApplicationTests        : The following 1 profile is active: "dev"
+2025-08-22 10:22:26.599  INFO 65560 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-22 10:22:26.601  INFO 65560 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-22 10:22:26.618  INFO 65560 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2025-08-22 10:22:26.700 DEBUG 65560 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2025-08-22 10:22:29.594  INFO 65560 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-22 10:22:29.622  INFO 65560 --- [main] com.sunset.SunsetApplicationTests        : Started SunsetApplicationTests in 3.812 seconds (JVM running for 4.371)

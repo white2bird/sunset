@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sunset.converter.BodyConverter;
+import com.sunset.converter.HistoryWeightConverter;
 import com.sunset.entity.BodyComposition;
 import com.sunset.entity.User.UserInfoEntity;
 import com.sunset.entity.weight.WeightEntity;
@@ -14,6 +15,7 @@ import com.sunset.request.*;
 import com.sunset.response.BodyCompositionResponse;
 import com.sunset.response.CompareResponse;
 import com.sunset.response.HealthDataResponse;
+import com.sunset.response.HistoryWeigh;
 import com.sunset.utils.BodyCalculator;
 import com.sunset.utils.BodyCompositionCalculator;
 import com.sunset.utils.UserIdThreadLocal;
@@ -29,10 +31,8 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Period;
-import java.time.ZoneId;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -142,15 +142,16 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
         result.put("bodyAge", buildBodyAge(bodyComposition, age));
         result.put("fatDegree", fatDegree(bodyComposition));
         result.put("fatBurningHeartRate", buildBurningHeartRate(bodyComposition));
+//        result.put("testTime", handTime(bodyComposition.getWeightTime()));
 
         if(latestWeighInfo != null){
-            result.put("currentWeightTime", bodyComposition.getWeightTime());
-            result.put("lastWeightTime", latestWeighInfo.getWeightTime());
+            result.put("currentWeightTime", handTime(bodyComposition.getWeightTime()));
+            result.put("lastWeightTime", handTime(latestWeighInfo.getWeightTime()));
             result.put("weightChange", buildWeightChange(bodyComposition, latestWeighInfo));
             result.put("bmiChange", buildBmiChange(bodyComposition, latestWeighInfo));
             result.put("bodyFatChange", buildBodyFatChange(bodyComposition, latestWeighInfo));
         }else{
-            result.put("currentWeightTime", bodyComposition.getWeightTime());
+            result.put("currentWeightTime", handTime(bodyComposition.getWeightTime()));
             result.put("lastWeightTime", null);
             result.put("weightChange", null);
             result.put("bmiChange", null);
@@ -161,6 +162,21 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
 
         return result;
 
+    }
+
+    private Object handTime(Date originalDate){
+        Instant instant = originalDate.toInstant();
+//        System.out.println("UTC瞬间点: " + instant);
+
+        // 2. 获取系统默认时区
+        ZoneId systemTimeZone = ZoneId.systemDefault();
+//        System.out.println("系统默认时区: " + systemTimeZone);
+
+        // 3. 转换为系统时区的时间
+        ZonedDateTime systemTime = ZonedDateTime.ofInstant(instant, systemTimeZone);
+        DateTimeFormatter standardFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String standardFormat = systemTime.format(standardFormatter);
+        return standardFormat;
     }
 
     private Object buildBodyFatChange(BodyComposition bodyComposition, BodyComposition latestWeighInfo) {
@@ -472,14 +488,16 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
         return Objects.isNull(one) ? 0D : one.getWeight();
     }
 
-    public List<BodyComposition> weightHistory(WeightHistoryPageQuery weightHistoryPageQuery){
+    public List<HistoryWeigh> weightHistory(WeightHistoryPageQuery weightHistoryPageQuery){
         Page<BodyComposition> healthDataPage = new Page<>(weightHistoryPageQuery.getPageNo(), weightHistoryPageQuery.getPageSize());
         LambdaQueryWrapper<BodyComposition> healthDataLambdaQueryWrapper = new LambdaQueryWrapper<>();
         healthDataLambdaQueryWrapper.eq(BodyComposition::getUserId, UserIdThreadLocal.getUserId());
+        healthDataLambdaQueryWrapper.orderByDesc(BodyComposition::getId);
         healthDataLambdaQueryWrapper.ge(Objects.nonNull(weightHistoryPageQuery.getStart()), BodyComposition::getWeightTime, weightHistoryPageQuery.getStart());
         healthDataLambdaQueryWrapper.le(Objects.nonNull(weightHistoryPageQuery.getEnd()), BodyComposition::getWeightTime, weightHistoryPageQuery.getEnd());
         Page<BodyComposition> page = bodyCompositionService.page(healthDataPage, healthDataLambdaQueryWrapper);
-        return page.getRecords();
+        return HistoryWeightConverter.INSTANCE.toHistoryWeighList(page.getRecords());
+//        return page.getRecords();
     }
 
 
