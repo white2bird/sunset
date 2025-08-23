@@ -75,7 +75,7 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
         BodyCalculator calculator = new BodyCalculator(sexChar, age, weight, height, waist);
 
 
-        BodyComposition latestWeighInfo = getLatestBodyComposition();
+        BodyComposition latestWeighInfo = getLatestBodyComposition(weightRequest.getId());
 
         BodyComposition  bodyComposition = new BodyComposition();
         bodyComposition.setUserId(UserIdThreadLocal.getUserId());
@@ -504,6 +504,7 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
     public Map<String, Object> weightHistoryDetail(Long id){
         BodyComposition bodyComposition = bodyCompositionService.getById(id);
         WeightRequest weightRequest = new WeightRequest(BigDecimal.valueOf(bodyComposition.getWeight()), "");
+        weightRequest.setId(id);
         Map<String, Object> stringObjectMap = saveWeight(weightRequest, false);
         return stringObjectMap;
     }
@@ -728,10 +729,13 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
 
     }
 
-    private BodyComposition getLatestBodyComposition() {
+    private BodyComposition getLatestBodyComposition(Long id) {
         LambdaQueryWrapper<BodyComposition> healthDataLambdaQueryWrapper = new LambdaQueryWrapper<>();
         healthDataLambdaQueryWrapper.orderByDesc(BodyComposition::getId);
         healthDataLambdaQueryWrapper.eq(BodyComposition::getUserId, UserIdThreadLocal.getUserId());
+        if(id != null){
+            healthDataLambdaQueryWrapper.lt(BodyComposition::getId, id);
+        }
         healthDataLambdaQueryWrapper.last("limit 1");
         return bodyCompositionService.getOne(healthDataLambdaQueryWrapper);
     }

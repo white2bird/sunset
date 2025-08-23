@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Schema(description = "称重")
 public class WeightRequest {
+    private Long id;
 
     @Schema(description = "体重")
     private BigDecimal weight;
@@ -20,4 +21,9 @@ public class WeightRequest {
     @Schema(description = "蓝牙地址")
     @NotNull(message = "蓝牙地址不能为空")
     private String blueAddress;
+
+    public WeightRequest(BigDecimal weight, String blueAddress) {
+        this.weight = weight;
+        this.blueAddress = blueAddress;
+    }
 }
