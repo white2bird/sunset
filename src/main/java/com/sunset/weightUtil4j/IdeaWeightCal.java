@@ -29,7 +29,10 @@ public class IdeaWeightCal {
     }
 
     public static Map<String,?> calLevel(Double idealWeight, Double weight) {
-        return SplitUtil.levelInfo(returnStandList(idealWeight), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, weight);
+        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(idealWeight), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, weight);
+        stringObjectMap.put("name", "理想体重");
+        stringObjectMap.put("unit", "公斤");
+        return stringObjectMap;
     }
 
     public static List<String> returnAnalyzeList(){

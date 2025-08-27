@@ -16,7 +16,10 @@ public class SkeletalMusclePercentageCal {
     public static Map<String, Object> calLevel(Double skeletalMusclePercentage){
         List<Double> list = returnStandList();
         List<String> nameList = returnStandListName();
-        return SplitUtil.levelInfo(list, nameList, returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, skeletalMusclePercentage);
+        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(list, nameList, returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, skeletalMusclePercentage);
+        stringObjectMap.put("name", "骨骼肌率");
+        stringObjectMap.put("unit", "%");
+        return stringObjectMap;
     }
 
 

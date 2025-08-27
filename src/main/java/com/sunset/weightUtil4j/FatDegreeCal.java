@@ -41,7 +41,10 @@ public class FatDegreeCal {
 
     public static Map<String,?> calLevel(double actualWeight, double idealWeight){
         double bone = (actualWeight - idealWeight) / idealWeight * 100;
-        return SplitUtil.levelInfo(returnStandList(),returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, bone);
+        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, bone);
+        stringObjectMap.put("name", "肥胖度");
+        stringObjectMap.put("unit", "%");
+        return stringObjectMap;
     }
 
     public static List<String> returnAnalyzeList(){

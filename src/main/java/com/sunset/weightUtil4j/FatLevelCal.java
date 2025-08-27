@@ -30,7 +30,10 @@ public class FatLevelCal {
     }
 
     public static Map<String,?> calLevel(Double bone){
-        return SplitUtil.levelInfo(returnStandList(),returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, bone);
+        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, bone);
+        stringObjectMap.put("name", "肥胖等级");
+        stringObjectMap.put("unit", "");
+        return stringObjectMap;
     }
 
     public static List<String> returnAnalyzeList(){

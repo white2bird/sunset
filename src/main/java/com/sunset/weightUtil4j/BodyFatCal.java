@@ -16,7 +16,10 @@ public class BodyFatCal {
     public static String desc = "身体脂肪包含皮下脂肪和内脏脂肪，身体脂肪率是指体重中身体脂肪所占的比例。测量脂肪率比单纯的只测量体重更能反映我们身体的脂肪水平(肥胖程度)。体脂肪超出正常范围称之为“肥胖”。\n";
 
     public static Map<String, Object> calLevel(Double fatPercentage, Boolean male){
-        return SplitUtil.levelInfo(returnStandList(male), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, fatPercentage);
+        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(male), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, fatPercentage);
+        stringObjectMap.put("name", "体脂率");
+        stringObjectMap.put("unit", "%");
+        return stringObjectMap;
     }
 
     public static List<String> returnColorList(){

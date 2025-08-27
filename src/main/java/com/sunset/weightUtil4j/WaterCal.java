@@ -39,6 +39,8 @@ public class WaterCal {
         BigDecimal bigDecimal = new BigDecimal(water).setScale(2, RoundingMode.HALF_UP);
 
         stringObjectMap.put("value", bigDecimal);
+        stringObjectMap.put("name", "水含量");
+        stringObjectMap.put("unit", "kg");
         return stringObjectMap;
     }
 

@@ -72,6 +72,9 @@ public class BurnFatHeartCal {
     }
 
     public static Map<String,?> calLevel(Double heartRate) {
-        return SplitUtil.levelInfo(returnStandList(),returnStandListName(), returnAnalyzeList(heartRate.intValue()), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, heartRate);
+        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(heartRate.intValue()), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, heartRate);
+        stringObjectMap.put("name", "燃脂心率");
+        stringObjectMap.put("unit", "bpm");
+        return stringObjectMap;
     }
 }

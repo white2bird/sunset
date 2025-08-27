@@ -30,7 +30,10 @@ public class ProteinPercentCal {
     }
 
     public static Map<String,?> calLevel(double proteinMassPercent) {
-        return SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList() , returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, proteinMassPercent);
+        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, proteinMassPercent);
+        stringObjectMap.put("name", "蛋白质率");
+        stringObjectMap.put("unit", "%");
+        return stringObjectMap;
     }
 
     public static List<String> returnAnalyzeList(){

@@ -33,7 +33,10 @@ public class BoneCal {
     }
 
     public static Map<String,?> calLevel(Double bone, boolean male){
-        return SplitUtil.levelInfo(returnStandList(male),returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, bone);
+        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(male), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, bone);
+        stringObjectMap.put("name", "骨量");
+        stringObjectMap.put("unit", "公斤");
+        return stringObjectMap;
     }
 
     public static List<String> returnAnalyzeList(){

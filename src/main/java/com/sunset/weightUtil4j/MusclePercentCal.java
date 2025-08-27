@@ -33,7 +33,10 @@ public class MusclePercentCal {
     }
 
     public static Map<String,?> calLevel(Double muscle) {
-        return SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, muscle);
+        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, muscle);
+        stringObjectMap.put("name", "肌肉率");
+        stringObjectMap.put("unit", "%");
+        return stringObjectMap;
     }
 
     public static List<String> returnAnalyzeList(){

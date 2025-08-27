@@ -87,7 +87,7 @@ public class TrendsService {
         newTrends.setId(uuid);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dateTime = formatter.format(LocalDateTime.now());
-        newTrends.setCreate_time(dateTime);
+        newTrends.setCreateTime(dateTime);
         trendsMapper.SetTrends(newTrends);
         return ReturnJson.success(null, "ok");
     }
@@ -149,7 +149,7 @@ public class TrendsService {
                 objTrends.setText(x.getText());
                 objTrends.setImages(images);
                 objTrends.setStar(x.getStar());
-                objTrends.setCreate_time(x.getCreate_time());
+                objTrends.setCreate_time(x.getCreateTime());
                 objTrends.setComment_num(comm_page.getTotal());
                 // 用户信息
                 if(Objects.nonNull(uinfo)){
@@ -211,7 +211,7 @@ public class TrendsService {
                 objTrends.setText(x.getText());
                 objTrends.setImages(images);
                 objTrends.setStar(x.getStar());
-                objTrends.setCreate_time(x.getCreate_time());
+                objTrends.setCreate_time(x.getCreateTime());
                 // 用户信息
                 if(Objects.nonNull(uinfo)){
                     objTrends.setAvator(uinfo.getAvator());
@@ -263,7 +263,7 @@ public class TrendsService {
         objTrends.setText(newTrends.getText());
         objTrends.setImages(images);
         objTrends.setStar(newTrends.getStar());
-        objTrends.setCreate_time(newTrends.getCreate_time());
+        objTrends.setCreate_time(newTrends.getCreateTime());
 
         return ReturnJson.success(objTrends, "ok");
     }

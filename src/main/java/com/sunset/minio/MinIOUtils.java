@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-@Component
+//@Component
 public class MinIOUtils {
 
-    @Autowired
+//    @Autowired
     private MinioClient minioClient;
 
     /**

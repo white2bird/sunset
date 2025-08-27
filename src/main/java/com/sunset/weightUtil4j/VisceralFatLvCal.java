@@ -15,7 +15,10 @@ public class VisceralFatLvCal {
 
 
     public static Map<String, Object> calLevel(Double visceralFatLevel){
-        return SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, visceralFatLevel);
+        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, visceralFatLevel);
+        stringObjectMap.put("name", "内脏脂肪率");
+        stringObjectMap.put("unit", "%");
+        return stringObjectMap;
     }
 
     public static List<String> returnColorList(){

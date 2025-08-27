@@ -16,7 +16,10 @@ public class SkeletalMuscleCal {
     public static Map<String, Object> calLevel(Double skeletalMuscle){
         List<Double> list = returnStandList();
         List<String> nameList = returnStandListName();
-        return SplitUtil.levelInfo(list, nameList, returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, skeletalMuscle);
+        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(list, nameList, returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, skeletalMuscle);
+        stringObjectMap.put("name", "骨骼肌重量");
+        stringObjectMap.put("unit", "公斤");
+        return stringObjectMap;
     }
 
     public static List<Double> returnStandList(){

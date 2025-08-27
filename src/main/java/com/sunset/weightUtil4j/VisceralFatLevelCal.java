@@ -14,7 +14,11 @@ public class VisceralFatLevelCal {
     public static String desc = "内脏脂肪与皮下脂肪不同，它围绕着人的脏器起着支撑、稳定和保护的作用。内脏脂肪过多,会增加心脏病、糖尿病、脂肪肝、高血压、高脂血症等疾病的风险，进而增加中风和心肌梗死等心脑血管事件的发生率。因此，内脏型肥胖与高血糖、高血脂、高血压，被称为“死亡四重奏”。\n";
 
     public static Map<String, Object> calLevel(Double level){
-        return SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc,  level);
+        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, level);
+        stringObjectMap.put("name", "内脏脂肪等级");
+        stringObjectMap.put("unit", "");
+        stringObjectMap.put("value", stringObjectMap.get("level"));
+        return stringObjectMap;
     }
 
     public static List<Double> returnStandList() {

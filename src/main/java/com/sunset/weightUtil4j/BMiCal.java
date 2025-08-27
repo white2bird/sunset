@@ -20,7 +20,10 @@ public class BMiCal {
         List<String> analList = returnAnalyzeList();
         List<String> sportList = returnSportAdvice();
         List<String> eatList = returnEatAdvice();
-        return SplitUtil.levelInfo(list, nameList, analList, sportList, eatList, returnColorList(), desc, bmi);
+        Map<String, Object> result = SplitUtil.levelInfo(list, nameList, analList, sportList, eatList, returnColorList(), desc, bmi);
+        result.put("name", "BMI");
+        result.put("unit", "kg/m²");
+        return result;
     }
 
     public static List<String> returnColorList(){

@@ -32,7 +32,10 @@ public class WaterPercentCal {
         );
     }
     public static Map<String,?> calLevel(Double bodyWaterPercentage,  boolean male) {
-        return SplitUtil.levelInfo(returnStandList(male), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(),returnColorList(), desc, bodyWaterPercentage);
+        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(male), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, bodyWaterPercentage);
+        stringObjectMap.put("name", "水分率");
+        stringObjectMap.put("unit", "%");
+        return stringObjectMap;
     }
 
     public static List<String> returnAnalyzeList(){
