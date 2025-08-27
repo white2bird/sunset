@@ -17,8 +17,8 @@ public class WebConfig implements  WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry r){
         r.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
         // 静态资源映射，解决上传图片后无法访问
-        r.addResourceHandler("/images/**").addResourceLocations("file:" + System.getProperty("user.dir") + "/upload/images/");
-        r.addResourceHandler("/avator/**").addResourceLocations("file:" + System.getProperty("user.dir") + "/upload/avator/");
+        r.addResourceHandler("/images/**").addResourceLocations("file:/data/upload/images/");
+        r.addResourceHandler("/avator/**").addResourceLocations("file:/data/upload/avator/");
     }
 
 }

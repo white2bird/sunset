@@ -60,7 +60,7 @@ public class UploadController {
         // 存储的绝对路径
         ApplicationHome h = new ApplicationHome(getClass());
         File jarF = h.getSource();
-        String path = System.getProperty("user.dir")+uploadUrl; // 开发环境
+        String path = "/data/" + uploadUrl; // 开发环境
 //        String path = jarF.getParentFile().toString()+uploadUrl; // 生产环境
         String fuuid = path + uuid;
         HashMap<String,String> map = new HashMap<>();

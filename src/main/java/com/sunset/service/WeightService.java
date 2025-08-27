@@ -76,6 +76,13 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
 
 
         BodyComposition latestWeighInfo = getLatestBodyComposition(weightRequest.getId());
+//        if(save &&  latestWeighInfo != null){
+//            Double lastWeight = latestWeighInfo.getWeight();
+//            double abs = Math.abs(lastWeight - weight);
+//            if(abs > 20){
+//                throw new RuntimeException("前后两次称重差距过大");
+//            }
+//        }
 
         BodyComposition  bodyComposition = new BodyComposition();
         bodyComposition.setUserId(UserIdThreadLocal.getUserId());
@@ -485,7 +492,7 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
         healthDataLambdaQueryWrapper.eq(BodyComposition::getUserId,UserIdThreadLocal.getUserId());
         healthDataLambdaQueryWrapper.last("limit 1");
         BodyComposition one = bodyCompositionService.getOne(healthDataLambdaQueryWrapper);
-        return Objects.isNull(one) ? 0D : one.getWeight();
+        return Objects.isNull(one) ? null : one.getWeight();
     }
 
     public List<HistoryWeigh> weightHistory(WeightHistoryPageQuery weightHistoryPageQuery){

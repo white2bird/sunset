@@ -1,263 +1,264 @@
-2025-08-23 00:51:34.079  WARN 66556 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11h41m17s26ms998µs700ns).
-2025-08-23 06:09:00.042  WARN 66556 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5h3m25s754ms502µs100ns).
-2025-08-23 09:05:52.085  WARN 66556 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h54m49s955ms200µs200ns).
-2025-08-23 09:19:09.587 DEBUG 66556 --- [http-nio-8081-exec-5] com.sunset.mapper.KnowMapper.GetKnow     : ==>  Preparing: SELECT * FROM tb_knowledge WHERE cover_img IS NOT NULL AND cover_img != '' order by create_time desc LIMIT ?
-2025-08-23 09:19:09.588 DEBUG 66556 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.GetImgTrends     : ==>  Preparing: SELECT * FROM tb_trends WHERE images IS NOT NULL AND images != "" AND images != "[]" order by create_time desc LIMIT ?
-2025-08-23 09:19:09.587 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.TrendsMapper.GetTrends   : ==>  Preparing: SELECT * FROM tb_trends order by create_time desc LIMIT ?
-2025-08-23 09:19:09.589 DEBUG 66556 --- [http-nio-8081-exec-5] com.sunset.mapper.KnowMapper.GetKnow     : ==> Parameters: 7(Integer)
-2025-08-23 09:19:09.589 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.TrendsMapper.GetTrends   : ==> Parameters: 6(Integer)
-2025-08-23 09:19:09.589 DEBUG 66556 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.GetImgTrends     : ==> Parameters: 7(Integer)
-2025-08-23 09:19:09.625 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.TrendsMapper.GetTrends   : <==      Total: 6
-2025-08-23 09:19:09.631 DEBUG 66556 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.FindIsFollow     : ==>  Preparing: select id from tb_follower where uid= ? and my_id=?
-2025-08-23 09:19:09.632 DEBUG 66556 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.FindIsFollow     : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String), null
-2025-08-23 09:19:09.634 DEBUG 66556 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.GetImgTrends     : <==      Total: 1
-2025-08-23 09:19:09.636 DEBUG 66556 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 09:19:09.636 DEBUG 66556 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String)
-2025-08-23 09:19:09.695 DEBUG 66556 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.FindIsFollow     : <==      Total: 0
-2025-08-23 09:19:09.696 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 09:19:09.696 DEBUG 66556 --- [http-nio-8081-exec-5] com.sunset.mapper.KnowMapper.GetKnow     : <==      Total: 7
-2025-08-23 09:19:09.696 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String)
-2025-08-23 09:19:09.697 DEBUG 66556 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
-2025-08-23 09:19:09.737 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
-2025-08-23 09:19:09.787 DEBUG 66556 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.FindIsFollow     : ==>  Preparing: select id from tb_follower where uid= ? and my_id=?
-2025-08-23 09:19:09.788 DEBUG 66556 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.FindIsFollow     : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String), null
-2025-08-23 09:19:09.821 DEBUG 66556 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.FindIsFollow     : <==      Total: 0
-2025-08-23 09:19:09.822 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 09:19:09.823 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String)
-2025-08-23 09:19:09.857 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
-2025-08-23 09:19:09.893 DEBUG 66556 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.FindIsFollow     : ==>  Preparing: select id from tb_follower where uid= ? and my_id=?
-2025-08-23 09:19:09.893 DEBUG 66556 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.FindIsFollow     : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String), null
-2025-08-23 09:19:09.935 DEBUG 66556 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.FindIsFollow     : <==      Total: 0
-2025-08-23 09:19:09.936 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 09:19:09.937 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String)
-2025-08-23 09:19:09.974 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
-2025-08-23 09:19:10.022 DEBUG 66556 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.FindIsFollow     : ==>  Preparing: select id from tb_follower where uid= ? and my_id=?
-2025-08-23 09:19:10.022 DEBUG 66556 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.FindIsFollow     : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String), null
-2025-08-23 09:19:10.054 DEBUG 66556 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.FindIsFollow     : <==      Total: 0
-2025-08-23 09:19:10.055 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 09:19:10.055 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String)
-2025-08-23 09:19:10.093 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
-2025-08-23 09:19:10.136 DEBUG 66556 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.FindIsFollow     : ==>  Preparing: select id from tb_follower where uid= ? and my_id=?
-2025-08-23 09:19:10.136 DEBUG 66556 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.FindIsFollow     : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String), null
-2025-08-23 09:19:10.177 DEBUG 66556 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.FindIsFollow     : <==      Total: 0
-2025-08-23 09:19:10.178 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 09:19:10.179 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String)
-2025-08-23 09:19:10.215 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
-2025-08-23 09:19:10.254 DEBUG 66556 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.FindIsFollow     : ==>  Preparing: select id from tb_follower where uid= ? and my_id=?
-2025-08-23 09:19:10.254 DEBUG 66556 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.FindIsFollow     : ==> Parameters: 8281611F-4FA0-4238-BABD-71F46EB25B88(String), null
-2025-08-23 09:19:10.288 DEBUG 66556 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.FindIsFollow     : <==      Total: 0
-2025-08-23 09:19:10.289 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 09:19:10.289 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 8281611F-4FA0-4238-BABD-71F46EB25B88(String)
-2025-08-23 09:19:10.338 DEBUG 66556 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 0
-2025-08-23 09:19:26.198  INFO 66556 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-08-23 09:19:26.565  INFO 66556 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-08-23 09:19:29.040  INFO 58984 --- [main] com.sunset.SunsetApplication             : Starting SunsetApplication using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 58984 (D:\money\sunset-server\target\classes started by wang in D:\money\sunset-server)
-2025-08-23 09:19:29.042  INFO 58984 --- [main] com.sunset.SunsetApplication             : The following 1 profile is active: "dev"
-2025-08-23 09:19:29.835  INFO 58984 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2025-08-23 09:19:29.837  INFO 58984 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-08-23 09:19:29.856  INFO 58984 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
-2025-08-23 09:19:29.925 DEBUG 58984 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
-2025-08-23 09:19:30.236  INFO 58984 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2025-08-23 09:19:30.243  INFO 58984 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-08-23 09:19:30.243  INFO 58984 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
-2025-08-23 09:19:30.403  INFO 58984 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-08-23 09:19:30.403  INFO 58984 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1323 ms
-2025-08-23 09:19:32.430  INFO 58984 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2025-08-23 09:19:32.482  INFO 58984 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
-2025-08-23 09:19:32.495  INFO 58984 --- [main] com.sunset.SunsetApplication             : Started SunsetApplication in 3.765 seconds (JVM running for 4.529)
-2025-08-23 09:19:32.768  INFO 58984 --- [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-08-23 09:19:32.768  INFO 58984 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-08-23 09:19:32.769  INFO 58984 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2025-08-23 09:19:33.187  INFO 58984 --- [RMI TCP Connection(4)-192.168.11.101] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-08-23 09:19:34.295  INFO 58984 --- [RMI TCP Connection(4)-192.168.11.101] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-08-23 09:20:34.482  INFO 58984 --- [http-nio-8081-exec-5] com.sunset.controller.SignController     : 登录请求参数：LoginVerCode(phone=18717351768, verCode=4096)
-2025-08-23 09:20:34.482  INFO 58984 --- [http-nio-8081-exec-5] com.sunset.service.SignService           : 验证码正确
-2025-08-23 09:20:34.538 DEBUG 58984 --- [http-nio-8081-exec-5] c.s.mapper.SignMapper.FindUserPhone      : ==>  Preparing: select * from tb_register where phone=?
-2025-08-23 09:20:34.553 DEBUG 58984 --- [http-nio-8081-exec-5] c.s.mapper.SignMapper.FindUserPhone      : ==> Parameters: 18717351768(String)
-2025-08-23 09:20:34.592 DEBUG 58984 --- [http-nio-8081-exec-5] c.s.mapper.SignMapper.FindUserPhone      : <==      Total: 1
-2025-08-23 09:20:34.641  INFO 58984 --- [http-nio-8081-exec-8] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTkxMjAzNDU5NCwiZXhwIjoxNzU2MTI4MDM0fQ.RU2MJDdTeZ6HIkIMC544_kNov39kntfG8ctqtCpI9eE
-2025-08-23 09:20:34.641  INFO 58984 --- [http-nio-8081-exec-8] com.sunset.config.InterceptorConfig      : 请求的url：/sign/get/userinfo
-2025-08-23 09:20:34.652  INFO 58984 --- [http-nio-8081-exec-8] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
-2025-08-23 09:20:34.653 DEBUG 58984 --- [http-nio-8081-exec-8] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 09:20:34.654 DEBUG 58984 --- [http-nio-8081-exec-8] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:20:34.682 DEBUG 58984 --- [http-nio-8081-exec-8] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
-2025-08-23 09:20:34.709  INFO 58984 --- [http-nio-8081-exec-6] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTkxMjAzNDU5NCwiZXhwIjoxNzU2MTI4MDM0fQ.RU2MJDdTeZ6HIkIMC544_kNov39kntfG8ctqtCpI9eE
-2025-08-23 09:20:34.709  INFO 58984 --- [http-nio-8081-exec-6] com.sunset.config.InterceptorConfig      : 请求的url：/weight/latest_weight_info
-2025-08-23 09:20:34.710  INFO 58984 --- [http-nio-8081-exec-6] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
-2025-08-23 09:20:34.766 DEBUG 58984 --- [http-nio-8081-exec-6] c.s.m.BodyCompositionMapper.selectOne    : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (user_id = ?) ORDER BY id DESC limit 1
-2025-08-23 09:20:34.766 DEBUG 58984 --- [http-nio-8081-exec-6] c.s.m.BodyCompositionMapper.selectOne    : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:20:34.797 DEBUG 58984 --- [http-nio-8081-exec-6] c.s.m.BodyCompositionMapper.selectOne    : <==      Total: 1
-2025-08-23 09:20:34.797 DEBUG 58984 --- [http-nio-8081-exec-6] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 09:20:34.798 DEBUG 58984 --- [http-nio-8081-exec-6] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:20:34.829 DEBUG 58984 --- [http-nio-8081-exec-6] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
-2025-08-23 09:20:34.840 DEBUG 58984 --- [http-nio-8081-exec-6] c.s.m.BodyCompositionMapper.selectOne    : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (user_id = ?) ORDER BY id DESC limit 1
-2025-08-23 09:20:34.840 DEBUG 58984 --- [http-nio-8081-exec-6] c.s.m.BodyCompositionMapper.selectOne    : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:20:34.866 DEBUG 58984 --- [http-nio-8081-exec-6] c.s.m.BodyCompositionMapper.selectOne    : <==      Total: 1
-2025-08-23 09:20:35.045 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.GetTrends   : ==>  Preparing: SELECT * FROM tb_trends order by create_time desc LIMIT ?
-2025-08-23 09:20:35.046 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.GetTrends   : ==> Parameters: 6(Integer)
-2025-08-23 09:20:35.083 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.GetTrends   : <==      Total: 6
-2025-08-23 09:20:35.085 DEBUG 58984 --- [http-nio-8081-exec-2] com.sunset.mapper.KnowMapper.GetKnow     : ==>  Preparing: SELECT * FROM tb_knowledge WHERE cover_img IS NOT NULL AND cover_img != '' order by create_time desc LIMIT ?
-2025-08-23 09:20:35.085 DEBUG 58984 --- [http-nio-8081-exec-2] com.sunset.mapper.KnowMapper.GetKnow     : ==> Parameters: 7(Integer)
-2025-08-23 09:20:35.087 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.FindIsFollow     : ==>  Preparing: select id from tb_follower where uid= ? and my_id=?
-2025-08-23 09:20:35.087 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.FindIsFollow     : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:20:35.089 DEBUG 58984 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.GetImgTrends     : ==>  Preparing: SELECT * FROM tb_trends WHERE images IS NOT NULL AND images != "" AND images != "[]" order by create_time desc LIMIT ?
-2025-08-23 09:20:35.089 DEBUG 58984 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.GetImgTrends     : ==> Parameters: 7(Integer)
-2025-08-23 09:20:35.113 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.FindIsFollow     : <==      Total: 0
-2025-08-23 09:20:35.114 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 09:20:35.114 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String)
-2025-08-23 09:20:35.125 DEBUG 58984 --- [http-nio-8081-exec-1] c.s.mapper.TrendsMapper.GetImgTrends     : <==      Total: 1
-2025-08-23 09:20:35.126 DEBUG 58984 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 09:20:35.126 DEBUG 58984 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String)
-2025-08-23 09:20:35.136 DEBUG 58984 --- [http-nio-8081-exec-2] com.sunset.mapper.KnowMapper.GetKnow     : <==      Total: 7
-2025-08-23 09:20:35.141 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
-2025-08-23 09:20:35.162 DEBUG 58984 --- [http-nio-8081-exec-1] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
-2025-08-23 09:20:35.174 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.FindIsStar  : ==>  Preparing: select id from tb_trends_starlog where trends_id= ? and uid= ?
-2025-08-23 09:20:35.175 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.FindIsStar  : ==> Parameters: C0EDCA4D-A3E7-49C6-A80E-7580624BBCF3(String), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:20:35.208 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.FindIsStar  : <==      Total: 0
-2025-08-23 09:20:35.209 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.FindIsFollow     : ==>  Preparing: select id from tb_follower where uid= ? and my_id=?
-2025-08-23 09:20:35.209 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.FindIsFollow     : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:20:35.236 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.FindIsFollow     : <==      Total: 0
-2025-08-23 09:20:35.237 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 09:20:35.237 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String)
-2025-08-23 09:20:35.268 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
-2025-08-23 09:20:35.305 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.FindIsStar  : ==>  Preparing: select id from tb_trends_starlog where trends_id= ? and uid= ?
-2025-08-23 09:20:35.305 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.FindIsStar  : ==> Parameters: BF8A8F74-CA37-4F3F-89E3-9FBF63F81F53(String), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:20:35.339 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.FindIsStar  : <==      Total: 0
-2025-08-23 09:20:35.339 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.FindIsFollow     : ==>  Preparing: select id from tb_follower where uid= ? and my_id=?
-2025-08-23 09:20:35.340 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.FindIsFollow     : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:20:35.371 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.FindIsFollow     : <==      Total: 0
-2025-08-23 09:20:35.371 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 09:20:35.372 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String)
-2025-08-23 09:20:35.396 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
-2025-08-23 09:20:35.424 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.FindIsStar  : ==>  Preparing: select id from tb_trends_starlog where trends_id= ? and uid= ?
-2025-08-23 09:20:35.424 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.FindIsStar  : ==> Parameters: B5919BB3-3310-4089-8C6E-9171D6D289A9(String), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:20:35.448 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.FindIsStar  : <==      Total: 0
-2025-08-23 09:20:35.449 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.FindIsFollow     : ==>  Preparing: select id from tb_follower where uid= ? and my_id=?
-2025-08-23 09:20:35.449 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.FindIsFollow     : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:20:35.474 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.FindIsFollow     : <==      Total: 0
-2025-08-23 09:20:35.475 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 09:20:35.475 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String)
-2025-08-23 09:20:35.501 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
-2025-08-23 09:20:35.527 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.FindIsStar  : ==>  Preparing: select id from tb_trends_starlog where trends_id= ? and uid= ?
-2025-08-23 09:20:35.527 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.FindIsStar  : ==> Parameters: A1C0EE5F-7FE7-4783-99D2-C0B3C81E0F30(String), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:20:35.551 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.FindIsStar  : <==      Total: 0
-2025-08-23 09:20:35.552 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.FindIsFollow     : ==>  Preparing: select id from tb_follower where uid= ? and my_id=?
-2025-08-23 09:20:35.552 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.FindIsFollow     : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:20:35.577 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.FindIsFollow     : <==      Total: 0
-2025-08-23 09:20:35.577 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 09:20:35.577 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 845412FF-CDEF-4158-8221-BF396F0C404B(String)
-2025-08-23 09:20:35.605 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
-2025-08-23 09:20:35.633 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.FindIsStar  : ==>  Preparing: select id from tb_trends_starlog where trends_id= ? and uid= ?
-2025-08-23 09:20:35.634 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.FindIsStar  : ==> Parameters: 3671AE34-FDB7-428B-9816-EAC6FD70934A(String), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:20:35.659 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.FindIsStar  : <==      Total: 0
-2025-08-23 09:20:35.659 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.FindIsFollow     : ==>  Preparing: select id from tb_follower where uid= ? and my_id=?
-2025-08-23 09:20:35.661 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.FindIsFollow     : ==> Parameters: 8281611F-4FA0-4238-BABD-71F46EB25B88(String), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:20:35.685 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.TrendsMapper.FindIsFollow     : <==      Total: 0
-2025-08-23 09:20:35.685 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 09:20:35.686 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 8281611F-4FA0-4238-BABD-71F46EB25B88(String)
-2025-08-23 09:20:35.710 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 0
-2025-08-23 09:20:35.737 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.FindIsStar  : ==>  Preparing: select id from tb_trends_starlog where trends_id= ? and uid= ?
-2025-08-23 09:20:35.737 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.FindIsStar  : ==> Parameters: 4C16ABBC-DC84-4E8F-8BD6-8771D9918D62(String), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:20:35.761 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.TrendsMapper.FindIsStar  : <==      Total: 0
-2025-08-23 09:20:58.669  INFO 58984 --- [http-nio-8081-exec-9] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTkxMjAzNDU5NCwiZXhwIjoxNzU2MTI4MDM0fQ.RU2MJDdTeZ6HIkIMC544_kNov39kntfG8ctqtCpI9eE
-2025-08-23 09:20:58.669  INFO 58984 --- [http-nio-8081-exec-9] com.sunset.config.InterceptorConfig      : 请求的url：/weight/weight_history
-2025-08-23 09:20:58.670  INFO 58984 --- [http-nio-8081-exec-9] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
-2025-08-23 09:20:58.705 DEBUG 58984 --- [http-nio-8081-exec-9] c.s.m.BodyCompositionMapper.selectPage   : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (user_id = ?) ORDER BY id DESC
-2025-08-23 09:20:58.705 DEBUG 58984 --- [http-nio-8081-exec-9] c.s.m.BodyCompositionMapper.selectPage   : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:20:58.747 DEBUG 58984 --- [http-nio-8081-exec-9] c.s.m.BodyCompositionMapper.selectPage   : <==      Total: 17
-2025-08-23 09:21:30.019  INFO 58984 --- [http-nio-8081-exec-8] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTkxMjAzNDU5NCwiZXhwIjoxNzU2MTI4MDM0fQ.RU2MJDdTeZ6HIkIMC544_kNov39kntfG8ctqtCpI9eE
-2025-08-23 09:21:30.019  INFO 58984 --- [http-nio-8081-exec-8] com.sunset.config.InterceptorConfig      : 请求的url：/weight/weight_history
-2025-08-23 09:21:30.020  INFO 58984 --- [http-nio-8081-exec-8] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
-2025-08-23 09:21:30.052 DEBUG 58984 --- [http-nio-8081-exec-8] c.s.m.BodyCompositionMapper.selectPage   : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (user_id = ?) ORDER BY id DESC
-2025-08-23 09:21:30.052 DEBUG 58984 --- [http-nio-8081-exec-8] c.s.m.BodyCompositionMapper.selectPage   : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:21:30.083 DEBUG 58984 --- [http-nio-8081-exec-8] c.s.m.BodyCompositionMapper.selectPage   : <==      Total: 17
-2025-08-23 09:22:48.434  INFO 58984 --- [http-nio-8081-exec-1] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 342 ms
-2025-08-23 09:23:08.954  INFO 58984 --- [http-nio-8081-exec-7] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTkxMjAzNDU5NCwiZXhwIjoxNzU2MTI4MDM0fQ.RU2MJDdTeZ6HIkIMC544_kNov39kntfG8ctqtCpI9eE
-2025-08-23 09:23:08.955  INFO 58984 --- [http-nio-8081-exec-7] com.sunset.config.InterceptorConfig      : 请求的url：/weight/save
-2025-08-23 09:23:08.956  INFO 58984 --- [http-nio-8081-exec-7] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
-2025-08-23 09:23:09.022 DEBUG 58984 --- [http-nio-8081-exec-7] com.sunset.mapper.WeightMapper.insert    : ==>  Preparing: INSERT INTO tb_weight ( weight, uid, blue_address ) VALUES ( ?, ?, ? )
-2025-08-23 09:23:09.023 DEBUG 58984 --- [http-nio-8081-exec-7] com.sunset.mapper.WeightMapper.insert    : ==> Parameters: 80(BigDecimal), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String), string(String)
-2025-08-23 09:23:09.079 DEBUG 58984 --- [http-nio-8081-exec-7] com.sunset.mapper.WeightMapper.insert    : <==    Updates: 1
-2025-08-23 09:23:09.081 DEBUG 58984 --- [http-nio-8081-exec-7] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 09:23:09.081 DEBUG 58984 --- [http-nio-8081-exec-7] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:23:09.112 DEBUG 58984 --- [http-nio-8081-exec-7] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
-2025-08-23 09:23:09.113 DEBUG 58984 --- [http-nio-8081-exec-7] c.s.m.BodyCompositionMapper.selectOne    : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (user_id = ?) ORDER BY id DESC limit 1
-2025-08-23 09:23:09.114 DEBUG 58984 --- [http-nio-8081-exec-7] c.s.m.BodyCompositionMapper.selectOne    : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:23:09.140 DEBUG 58984 --- [http-nio-8081-exec-7] c.s.m.BodyCompositionMapper.selectOne    : <==      Total: 1
-2025-08-23 09:23:09.148 DEBUG 58984 --- [http-nio-8081-exec-7] c.s.mapper.BodyCompositionMapper.insert  : ==>  Preparing: INSERT INTO body_composition ( weight_time, user_id, height, birth_date, gender, waist_circumference, weight, daily_caloric_needs, bmr, bmi, body_fat, visceral_fat, muscle, skeletal_muscle, skeletal_muscle_percentage, bone_mass, body_water_percentage, protein_mass, fat_free_mass, muscle_mass, fat_mass, subcutaneous_fat, weight_control, fat_control, muscle_control, obesity_degree, ideal_weight, metabolic_age, obesity_degree_indicator, fat_burning_heart_rate ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
-2025-08-23 09:23:09.149 DEBUG 58984 --- [http-nio-8081-exec-7] c.s.mapper.BodyCompositionMapper.insert  : ==> Parameters: 2025-08-23 09:23:09.14(Timestamp), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String), 163.0(Double), 2000-08-07 00:00:00.0(Timestamp), 1(Integer), 90.0(Double), 80.0(Double), 2475.59675(Double), 1800.4340000000002(Double), 30.11027889645828(Double), 25.682334675749928(Double), 5.863233467574993(Double), 55.73824899318755(Double), 26.754359516730023(Double), 33.44294939591253(Double), 3.3600000000000003(Double), 66.17(Double), 17.836239677820014(Double), 59.454132259400055(Double), 44.59059919455004(Double), 20.545867740599945(Double), 19.819101208174935(Double), 27.0(Double), 6.934230362452482(Double), 15.049327228160639(Double), 2(Integer), 53.0(Double), 25(Integer), 36.86490407481036(Double), 195.0(Double)
-2025-08-23 09:23:09.201 DEBUG 58984 --- [http-nio-8081-exec-7] c.s.mapper.BodyCompositionMapper.insert  : <==    Updates: 1
-2025-08-23 09:23:14.637  INFO 58984 --- [http-nio-8081-exec-8] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTkxMjAzNDU5NCwiZXhwIjoxNzU2MTI4MDM0fQ.RU2MJDdTeZ6HIkIMC544_kNov39kntfG8ctqtCpI9eE
-2025-08-23 09:23:14.637  INFO 58984 --- [http-nio-8081-exec-8] com.sunset.config.InterceptorConfig      : 请求的url：/weight/weight_history
-2025-08-23 09:23:14.637  INFO 58984 --- [http-nio-8081-exec-8] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
-2025-08-23 09:23:14.670 DEBUG 58984 --- [http-nio-8081-exec-8] c.s.m.BodyCompositionMapper.selectPage   : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (user_id = ?) ORDER BY id DESC
-2025-08-23 09:23:14.671 DEBUG 58984 --- [http-nio-8081-exec-8] c.s.m.BodyCompositionMapper.selectPage   : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:23:14.702 DEBUG 58984 --- [http-nio-8081-exec-8] c.s.m.BodyCompositionMapper.selectPage   : <==      Total: 18
-2025-08-23 09:24:12.254  INFO 58984 --- [http-nio-8081-exec-5] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTkxMjAzNDU5NCwiZXhwIjoxNzU2MTI4MDM0fQ.RU2MJDdTeZ6HIkIMC544_kNov39kntfG8ctqtCpI9eE
-2025-08-23 09:24:12.254  INFO 58984 --- [http-nio-8081-exec-5] com.sunset.config.InterceptorConfig      : 请求的url：/weight/save
-2025-08-23 09:24:12.254  INFO 58984 --- [http-nio-8081-exec-5] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
-2025-08-23 09:24:12.305 DEBUG 58984 --- [http-nio-8081-exec-5] com.sunset.mapper.WeightMapper.insert    : ==>  Preparing: INSERT INTO tb_weight ( weight, uid, blue_address ) VALUES ( ?, ?, ? )
-2025-08-23 09:24:12.305 DEBUG 58984 --- [http-nio-8081-exec-5] com.sunset.mapper.WeightMapper.insert    : ==> Parameters: 90(BigDecimal), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String), string(String)
-2025-08-23 09:24:12.354 DEBUG 58984 --- [http-nio-8081-exec-5] com.sunset.mapper.WeightMapper.insert    : <==    Updates: 1
-2025-08-23 09:24:12.355 DEBUG 58984 --- [http-nio-8081-exec-5] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 09:24:12.355 DEBUG 58984 --- [http-nio-8081-exec-5] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:24:12.382 DEBUG 58984 --- [http-nio-8081-exec-5] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
-2025-08-23 09:24:12.383 DEBUG 58984 --- [http-nio-8081-exec-5] c.s.m.BodyCompositionMapper.selectOne    : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (user_id = ?) ORDER BY id DESC limit 1
-2025-08-23 09:24:12.384 DEBUG 58984 --- [http-nio-8081-exec-5] c.s.m.BodyCompositionMapper.selectOne    : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:24:12.411 DEBUG 58984 --- [http-nio-8081-exec-5] c.s.m.BodyCompositionMapper.selectOne    : <==      Total: 1
-2025-08-23 09:24:12.413 DEBUG 58984 --- [http-nio-8081-exec-5] c.s.mapper.BodyCompositionMapper.insert  : ==>  Preparing: INSERT INTO body_composition ( weight_time, user_id, height, birth_date, gender, waist_circumference, weight, daily_caloric_needs, bmr, bmi, body_fat, visceral_fat, muscle, skeletal_muscle, skeletal_muscle_percentage, bone_mass, body_water_percentage, protein_mass, fat_free_mass, muscle_mass, fat_mass, subcutaneous_fat, weight_control, fat_control, muscle_control, obesity_degree, ideal_weight, metabolic_age, obesity_degree_indicator, fat_burning_heart_rate ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
-2025-08-23 09:24:12.413 DEBUG 58984 --- [http-nio-8081-exec-5] c.s.mapper.BodyCompositionMapper.insert  : ==> Parameters: 2025-08-23 09:24:12.411(Timestamp), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String), 163.0(Double), 2000-08-07 00:00:00.0(Timestamp), 1(Integer), 90.0(Double), 90.0(Double), 2659.8055000000004(Double), 1934.4040000000002(Double), 33.87406375851557(Double), 30.198876510218682(Double), 6.314887651021868(Double), 52.35084261733599(Double), 28.269455013361434(Double), 31.410505570401593(Double), 3.7800000000000002(Double), 66.17(Double), 18.846303342240954(Double), 62.821011140803186(Double), 47.11575835560239(Double), 27.178988859196814(Double), 23.883988859196815(Double), 37.0(Double), 11.17358430878091(Double), 19.369811768414316(Double), 2(Integer), 53.0(Double), 27(Integer), 53.973017084161654(Double), 195.0(Double)
-2025-08-23 09:24:12.464 DEBUG 58984 --- [http-nio-8081-exec-5] c.s.mapper.BodyCompositionMapper.insert  : <==    Updates: 1
-2025-08-23 09:24:16.879  INFO 58984 --- [http-nio-8081-exec-7] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTkxMjAzNDU5NCwiZXhwIjoxNzU2MTI4MDM0fQ.RU2MJDdTeZ6HIkIMC544_kNov39kntfG8ctqtCpI9eE
-2025-08-23 09:24:16.880  INFO 58984 --- [http-nio-8081-exec-7] com.sunset.config.InterceptorConfig      : 请求的url：/weight/weight_history
-2025-08-23 09:24:16.880  INFO 58984 --- [http-nio-8081-exec-7] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
-2025-08-23 09:24:16.907 DEBUG 58984 --- [http-nio-8081-exec-7] c.s.m.BodyCompositionMapper.selectPage   : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (user_id = ?) ORDER BY id DESC
-2025-08-23 09:24:16.907 DEBUG 58984 --- [http-nio-8081-exec-7] c.s.m.BodyCompositionMapper.selectPage   : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:24:16.938 DEBUG 58984 --- [http-nio-8081-exec-7] c.s.m.BodyCompositionMapper.selectPage   : <==      Total: 19
-2025-08-23 09:24:23.891  INFO 58984 --- [http-nio-8081-exec-3] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTkxMjAzNDU5NCwiZXhwIjoxNzU2MTI4MDM0fQ.RU2MJDdTeZ6HIkIMC544_kNov39kntfG8ctqtCpI9eE
-2025-08-23 09:24:23.892  INFO 58984 --- [http-nio-8081-exec-3] com.sunset.config.InterceptorConfig      : 请求的url：/weight/save
-2025-08-23 09:24:23.892  INFO 58984 --- [http-nio-8081-exec-3] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
-2025-08-23 09:24:23.951 DEBUG 58984 --- [http-nio-8081-exec-3] com.sunset.mapper.WeightMapper.insert    : ==>  Preparing: INSERT INTO tb_weight ( weight, uid, blue_address ) VALUES ( ?, ?, ? )
-2025-08-23 09:24:23.952 DEBUG 58984 --- [http-nio-8081-exec-3] com.sunset.mapper.WeightMapper.insert    : ==> Parameters: 70(BigDecimal), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String), string(String)
-2025-08-23 09:24:24.015 DEBUG 58984 --- [http-nio-8081-exec-3] com.sunset.mapper.WeightMapper.insert    : <==    Updates: 1
-2025-08-23 09:24:24.015 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 09:24:24.016 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:24:24.043 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
-2025-08-23 09:24:24.045 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.m.BodyCompositionMapper.selectOne    : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (user_id = ?) ORDER BY id DESC limit 1
-2025-08-23 09:24:24.045 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.m.BodyCompositionMapper.selectOne    : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:24:24.070 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.m.BodyCompositionMapper.selectOne    : <==      Total: 1
-2025-08-23 09:24:24.071 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.BodyCompositionMapper.insert  : ==>  Preparing: INSERT INTO body_composition ( weight_time, user_id, height, birth_date, gender, waist_circumference, weight, daily_caloric_needs, bmr, bmi, body_fat, visceral_fat, muscle, skeletal_muscle, skeletal_muscle_percentage, bone_mass, body_water_percentage, protein_mass, fat_free_mass, muscle_mass, fat_mass, subcutaneous_fat, weight_control, fat_control, muscle_control, obesity_degree, ideal_weight, metabolic_age, obesity_degree_indicator, fat_burning_heart_rate ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
-2025-08-23 09:24:24.072 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.BodyCompositionMapper.insert  : ==> Parameters: 2025-08-23 09:24:24.07(Timestamp), 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String), 163.0(Double), 2000-08-07 00:00:00.0(Timestamp), 1(Integer), 90.0(Double), 70.0(Double), 2291.3880000000004(Double), 1666.4640000000002(Double), 26.346494034400994(Double), 21.165792841281192(Double), 5.411579284128119(Double), 59.1256553690391(Double), 24.832775254996424(Double), 35.47539322142346(Double), 2.9400000000000004(Double), 66.17(Double), 16.555183503330948(Double), 55.18394501110316(Double), 41.38795875832737(Double), 14.816054988896834(Double), 15.754213557153074(Double), 17.0(Double), 3.5981847830178033(Double), 10.05136141273665(Double), 2(Integer), 53.0(Double), 23(Integer), 19.756791065459065(Double), 195.0(Double)
-2025-08-23 09:24:24.122 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.mapper.BodyCompositionMapper.insert  : <==    Updates: 1
-2025-08-23 09:24:26.832  INFO 58984 --- [http-nio-8081-exec-9] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTkxMjAzNDU5NCwiZXhwIjoxNzU2MTI4MDM0fQ.RU2MJDdTeZ6HIkIMC544_kNov39kntfG8ctqtCpI9eE
-2025-08-23 09:24:26.832  INFO 58984 --- [http-nio-8081-exec-9] com.sunset.config.InterceptorConfig      : 请求的url：/weight/weight_history
-2025-08-23 09:24:26.832  INFO 58984 --- [http-nio-8081-exec-9] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
-2025-08-23 09:24:26.857 DEBUG 58984 --- [http-nio-8081-exec-9] c.s.m.BodyCompositionMapper.selectPage   : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (user_id = ?) ORDER BY id DESC
-2025-08-23 09:24:26.858 DEBUG 58984 --- [http-nio-8081-exec-9] c.s.m.BodyCompositionMapper.selectPage   : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 09:24:26.886 DEBUG 58984 --- [http-nio-8081-exec-9] c.s.m.BodyCompositionMapper.selectPage   : <==      Total: 20
-2025-08-23 10:19:24.485  INFO 58984 --- [http-nio-8081-exec-7] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTkxMjAzNDU5NCwiZXhwIjoxNzU2MTI4MDM0fQ.RU2MJDdTeZ6HIkIMC544_kNov39kntfG8ctqtCpI9eE
-2025-08-23 10:19:24.486  INFO 58984 --- [http-nio-8081-exec-7] com.sunset.config.InterceptorConfig      : 请求的url：/weight/weight_history_detail/542
-2025-08-23 10:19:24.489  INFO 58984 --- [http-nio-8081-exec-7] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
-2025-08-23 10:19:24.597 DEBUG 58984 --- [http-nio-8081-exec-7] c.s.m.BodyCompositionMapper.selectById   : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE id=?
-2025-08-23 10:19:24.598 DEBUG 58984 --- [http-nio-8081-exec-7] c.s.m.BodyCompositionMapper.selectById   : ==> Parameters: 542(Long)
-2025-08-23 10:19:24.629 DEBUG 58984 --- [http-nio-8081-exec-7] c.s.m.BodyCompositionMapper.selectById   : <==      Total: 1
-2025-08-23 10:19:24.631 DEBUG 58984 --- [http-nio-8081-exec-7] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 10:19:24.631 DEBUG 58984 --- [http-nio-8081-exec-7] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 10:19:24.671 DEBUG 58984 --- [http-nio-8081-exec-7] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
-2025-08-23 10:19:24.675 DEBUG 58984 --- [http-nio-8081-exec-7] c.s.m.BodyCompositionMapper.selectOne    : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (user_id = ?) ORDER BY id DESC limit 1
-2025-08-23 10:19:24.675 DEBUG 58984 --- [http-nio-8081-exec-7] c.s.m.BodyCompositionMapper.selectOne    : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 10:19:24.712 DEBUG 58984 --- [http-nio-8081-exec-7] c.s.m.BodyCompositionMapper.selectOne    : <==      Total: 1
-2025-08-23 10:19:29.833  INFO 58984 --- [http-nio-8081-exec-3] com.sunset.config.InterceptorConfig      : 获取的token：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI3N0E0RDdGOS1DRDBCLTRCNDUtODFGQi03MzUxMDhBOEM3OEEiLCJzdGFtcCI6MTc1NTkxMjAzNDU5NCwiZXhwIjoxNzU2MTI4MDM0fQ.RU2MJDdTeZ6HIkIMC544_kNov39kntfG8ctqtCpI9eE
-2025-08-23 10:19:29.834  INFO 58984 --- [http-nio-8081-exec-3] com.sunset.config.InterceptorConfig      : 请求的url：/weight/weight_history_detail/542
-2025-08-23 10:19:29.834  INFO 58984 --- [http-nio-8081-exec-3] com.sunset.config.InterceptorConfig      : 解析token：77A4D7F9-CD0B-4B45-81FB-735108A8C78A
-2025-08-23 10:19:29.865 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.m.BodyCompositionMapper.selectById   : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE id=?
-2025-08-23 10:19:29.865 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.m.BodyCompositionMapper.selectById   : ==> Parameters: 542(Long)
-2025-08-23 10:19:29.893 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.m.BodyCompositionMapper.selectById   : <==      Total: 1
-2025-08-23 10:19:29.894 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : ==>  Preparing: select * from tb_userinfo where uid=?
-2025-08-23 10:19:29.894 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 10:19:29.920 DEBUG 58984 --- [http-nio-8081-exec-3] c.sunset.mapper.SignMapper.GetUserInfo   : <==      Total: 1
-2025-08-23 10:19:29.921 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.m.BodyCompositionMapper.selectOne    : ==>  Preparing: SELECT id,weight_time,user_id,height,birth_date,gender,waist_circumference,weight,daily_caloric_needs,bmr,bmi,body_fat,visceral_fat,muscle,skeletal_muscle,skeletal_muscle_percentage,bone_mass,body_water_percentage,protein_mass,fat_free_mass,muscle_mass,fat_mass,subcutaneous_fat,weight_control,fat_control,muscle_control,obesity_degree,ideal_weight,metabolic_age,obesity_degree_indicator,fat_burning_heart_rate FROM body_composition WHERE (user_id = ?) ORDER BY id DESC limit 1
-2025-08-23 10:19:29.922 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.m.BodyCompositionMapper.selectOne    : ==> Parameters: 77A4D7F9-CD0B-4B45-81FB-735108A8C78A(String)
-2025-08-23 10:19:29.950 DEBUG 58984 --- [http-nio-8081-exec-3] c.s.m.BodyCompositionMapper.selectOne    : <==      Total: 1
-2025-08-23 10:24:17.695  INFO 58984 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-08-23 10:24:18.059  INFO 58984 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-27 00:00:31.048  WARN 41504 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7h57m29s947ms28µs700ns).
+2025-08-27 06:00:10.200  WARN 41504 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4h49m36s81ms571µs100ns).
+2025-08-27 08:49:10.844  WARN 41504 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h47m28s580ms799µs100ns).
+2025-08-27 11:19:33.062  INFO 41504 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-27 11:19:33.361  INFO 41504 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-27 11:19:41.105  INFO 75356 --- [main] com.sunset.SunsetApplication             : Starting SunsetApplication using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 75356 (D:\money\sunset-server\target\classes started by wang in D:\money\sunset-server)
+2025-08-27 11:19:41.106  INFO 75356 --- [main] com.sunset.SunsetApplication             : The following 1 profile is active: "dev"
+2025-08-27 11:19:41.781  INFO 75356 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-27 11:19:41.782  INFO 75356 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-27 11:19:41.797  INFO 75356 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2025-08-27 11:19:41.856 DEBUG 75356 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2025-08-27 11:19:42.100  INFO 75356 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2025-08-27 11:19:42.106  INFO 75356 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-27 11:19:42.106  INFO 75356 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-08-27 11:19:42.221  INFO 75356 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-27 11:19:42.221  INFO 75356 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1074 ms
+2025-08-27 11:19:42.976  WARN 75356 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'uploadController' defined in file [D:\money\sunset-server\target\classes\com\sunset\controller\UploadController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'minIOUtils': Unsatisfied dependency expressed through field 'minioClient'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'minIOConfig': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'minio.accessKey' in value "${minio.accessKey}"
+2025-08-27 11:19:42.989  INFO 75356 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-08-27 11:19:42.997  INFO 75356 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2025-08-27 11:19:43.016 ERROR 75356 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'uploadController' defined in file [D:\money\sunset-server\target\classes\com\sunset\controller\UploadController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'minIOUtils': Unsatisfied dependency expressed through field 'minioClient'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'minIOConfig': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'minio.accessKey' in value "${minio.accessKey}"
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:229) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:745) [spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:420) [spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) [spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317) [spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) [spring-boot-2.6.11.jar:2.6.11]
+	at com.sunset.SunsetApplication.main(SunsetApplication.java:18) [classes/:na]
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'minIOUtils': Unsatisfied dependency expressed through field 'minioClient'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'minIOConfig': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'minio.accessKey' in value "${minio.accessKey}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:659) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:639) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:887) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-5.3.22.jar:5.3.22]
+	... 19 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'minIOConfig': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'minio.accessKey' in value "${minio.accessKey}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:405) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:410) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:656) ~[spring-beans-5.3.22.jar:5.3.22]
+	... 34 common frames omitted
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'minio.accessKey' in value "${minio.accessKey}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:180) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:239) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:191) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:936) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1332) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:656) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:639) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.3.22.jar:5.3.22]
+	... 54 common frames omitted
+
+2025-08-27 11:20:04.454  INFO 82124 --- [main] com.sunset.SunsetApplication             : Starting SunsetApplication using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 82124 (D:\money\sunset-server\target\classes started by wang in D:\money\sunset-server)
+2025-08-27 11:20:04.455  INFO 82124 --- [main] com.sunset.SunsetApplication             : The following 1 profile is active: "dev"
+2025-08-27 11:20:05.022  INFO 82124 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-27 11:20:05.024  INFO 82124 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-27 11:20:05.038  INFO 82124 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2025-08-27 11:20:05.093 DEBUG 82124 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2025-08-27 11:20:05.315  INFO 82124 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2025-08-27 11:20:05.319  INFO 82124 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-27 11:20:05.319  INFO 82124 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-08-27 11:20:05.424  INFO 82124 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-27 11:20:05.424  INFO 82124 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 943 ms
+2025-08-27 11:20:06.116  WARN 82124 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'uploadController' defined in file [D:\money\sunset-server\target\classes\com\sunset\controller\UploadController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'minIOUtils': Unsatisfied dependency expressed through field 'minioClient'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'minioClient' defined in class path resource [com/sunset/minio/MinIOConfig.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [io.minio.MinioClient]: Factory method 'minioClient' threw exception; nested exception is java.lang.ExceptionInInitializerError
+2025-08-27 11:20:06.128  INFO 82124 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-08-27 11:20:06.137  INFO 82124 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2025-08-27 11:20:06.147 ERROR 82124 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+An attempt was made to call a method that does not exist. The attempt was made from the following location:
+
+    io.minio.S3Base.<clinit>(S3Base.java:104)
+
+The following method did not exist:
+
+    okhttp3.RequestBody.create([BLokhttp3/MediaType;)Lokhttp3/RequestBody;
+
+The calling method's class, io.minio.S3Base, was loaded from the following location:
+
+    jar:file:/C:/Users/wang/.m2/repository/io/minio/minio/8.5.2/minio-8.5.2.jar!/io/minio/S3Base.class
+
+The called method's class, okhttp3.RequestBody, is available from the following locations:
+
+    jar:file:/C:/Users/wang/.m2/repository/com/squareup/okhttp3/okhttp/3.14.9/okhttp-3.14.9.jar!/okhttp3/RequestBody.class
+
+The called method's class hierarchy was loaded from the following locations:
+
+    okhttp3.RequestBody: file:/C:/Users/wang/.m2/repository/com/squareup/okhttp3/okhttp/3.14.9/okhttp-3.14.9.jar
+
+
+Action:
+
+Correct the classpath of your application so that it contains compatible versions of the classes io.minio.S3Base and okhttp3.RequestBody
+
+2025-08-27 11:21:43.929  INFO 66284 --- [main] com.sunset.SunsetApplication             : Starting SunsetApplication using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 66284 (D:\money\sunset-server\target\classes started by wang in D:\money\sunset-server)
+2025-08-27 11:21:43.930  INFO 66284 --- [main] com.sunset.SunsetApplication             : The following 1 profile is active: "dev"
+2025-08-27 11:21:44.542  INFO 66284 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-27 11:21:44.544  INFO 66284 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-27 11:21:44.557  INFO 66284 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2025-08-27 11:21:44.614 DEBUG 66284 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2025-08-27 11:21:44.839  INFO 66284 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2025-08-27 11:21:44.845  INFO 66284 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-27 11:21:44.845  INFO 66284 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-08-27 11:21:44.995  INFO 66284 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-27 11:21:44.995  INFO 66284 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1039 ms
+2025-08-27 11:21:46.824  INFO 66284 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-27 11:21:46.853  INFO 66284 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2025-08-27 11:21:46.863  INFO 66284 --- [main] com.sunset.SunsetApplication             : Started SunsetApplication in 3.173 seconds (JVM running for 3.898)
+2025-08-27 11:21:47.779  INFO 66284 --- [RMI TCP Connection(2)-192.168.11.103] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-27 11:21:47.780  INFO 66284 --- [RMI TCP Connection(2)-192.168.11.103] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-27 11:21:47.782  INFO 66284 --- [RMI TCP Connection(2)-192.168.11.103] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-08-27 11:21:47.782  INFO 66284 --- [RMI TCP Connection(3)-192.168.11.103] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-27 11:21:48.330  INFO 66284 --- [RMI TCP Connection(3)-192.168.11.103] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-27 11:21:57.708  INFO 66284 --- [http-nio-8081-exec-5] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 274 ms
+2025-08-27 11:33:14.428  INFO 66284 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-27 11:33:14.792  INFO 66284 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-27 11:33:18.482  INFO 73156 --- [main] com.sunset.SunsetApplication             : Starting SunsetApplication using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 73156 (D:\money\sunset-server\target\classes started by wang in D:\money\sunset-server)
+2025-08-27 11:33:18.483  INFO 73156 --- [main] com.sunset.SunsetApplication             : The following 1 profile is active: "dev"
+2025-08-27 11:33:19.078  INFO 73156 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-27 11:33:19.079  INFO 73156 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-27 11:33:19.093  INFO 73156 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2025-08-27 11:33:19.146 DEBUG 73156 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2025-08-27 11:33:19.376  INFO 73156 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2025-08-27 11:33:19.381  INFO 73156 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-27 11:33:19.381  INFO 73156 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-08-27 11:33:19.503  INFO 73156 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-27 11:33:19.503  INFO 73156 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 989 ms
+2025-08-27 11:33:21.448  INFO 73156 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-27 11:33:21.477  INFO 73156 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2025-08-27 11:33:21.486  INFO 73156 --- [main] com.sunset.SunsetApplication             : Started SunsetApplication in 3.26 seconds (JVM running for 3.851)
+2025-08-27 11:33:21.869  INFO 73156 --- [RMI TCP Connection(3)-192.168.11.103] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-27 11:33:21.869  INFO 73156 --- [RMI TCP Connection(3)-192.168.11.103] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-27 11:33:21.871  INFO 73156 --- [RMI TCP Connection(3)-192.168.11.103] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-08-27 11:33:21.871  INFO 73156 --- [RMI TCP Connection(4)-192.168.11.103] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-27 11:33:22.434  INFO 73156 --- [RMI TCP Connection(4)-192.168.11.103] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-27 11:33:29.799  INFO 73156 --- [http-nio-8081-exec-2] com.sunset.utils.GlobalException         : 全局异常 - 请求URL: http://localhost:8081/upload/image, 方法: POST, 客户端IP: 0:0:0:0:0:0:0:1
+2025-08-27 11:33:29.800  INFO 73156 --- [http-nio-8081-exec-2] com.sunset.utils.GlobalException         : 异常信息: java.io.FileNotFoundException: C:\Users\wang\AppData\Local\Temp\tomcat.8081.7176848577812612099\work\Tomcat\localhost\ROOT\data\upload\ef989ae0-8e8a-43e1-9e26-1820d70b8179-1756265609797.jpg (系统找不到指定的路径。)
+2025-08-27 11:33:31.686  INFO 73156 --- [http-nio-8081-exec-3] com.sunset.utils.GlobalException         : 全局异常 - 请求URL: http://localhost:8081/upload/image, 方法: POST, 客户端IP: 0:0:0:0:0:0:0:1
+2025-08-27 11:33:31.686  INFO 73156 --- [http-nio-8081-exec-3] com.sunset.utils.GlobalException         : 异常信息: java.io.FileNotFoundException: C:\Users\wang\AppData\Local\Temp\tomcat.8081.7176848577812612099\work\Tomcat\localhost\ROOT\data\upload\7ccf385e-a531-42b3-9ebe-c84bb968e68e-1756265611685.jpg (系统找不到指定的路径。)
+2025-08-27 11:34:24.412  INFO 73156 --- [http-nio-8081-exec-4] com.sunset.utils.GlobalException         : 全局异常 - 请求URL: http://localhost:8081/upload/image, 方法: POST, 客户端IP: 0:0:0:0:0:0:0:1
+2025-08-27 11:34:24.412  INFO 73156 --- [http-nio-8081-exec-4] com.sunset.utils.GlobalException         : 异常信息: java.io.FileNotFoundException: C:\Users\wang\AppData\Local\Temp\tomcat.8081.7176848577812612099\work\Tomcat\localhost\ROOT\data\upload\a3ec1123-c7d4-4fe3-ad07-49385913b706-1756265634506.jpg (系统找不到指定的路径。)
+2025-08-27 11:34:35.998  WARN 83708 --- [main] ory$DuplicateJsonObjectContextCustomizer : 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/wang/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/wang/.m2/repository/org/json/json/20170516/json-20170516.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2025-08-27 11:34:36.030  INFO 83708 --- [main] com.sunset.SunsetApplicationTests        : Starting SunsetApplicationTests using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 83708 (started by wang in D:\money\sunset-server)
+2025-08-27 11:34:36.030  INFO 83708 --- [main] com.sunset.SunsetApplicationTests        : The following 1 profile is active: "dev"
+2025-08-27 11:34:36.671  INFO 83708 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-27 11:34:36.673  INFO 83708 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-27 11:34:36.694  INFO 83708 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 0 Redis repository interfaces.
+2025-08-27 11:34:36.760 DEBUG 83708 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2025-08-27 11:34:40.499  INFO 83708 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-27 11:34:40.548  INFO 83708 --- [main] com.sunset.SunsetApplicationTests        : Started SunsetApplicationTests in 4.77 seconds (JVM running for 5.367)
+2025-08-27 11:40:02.041  WARN 72868 --- [main] ory$DuplicateJsonObjectContextCustomizer : 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/wang/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/wang/.m2/repository/org/json/json/20170516/json-20170516.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2025-08-27 11:40:02.080  INFO 72868 --- [main] com.sunset.SunsetApplicationTests        : Starting SunsetApplicationTests using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 72868 (started by wang in D:\money\sunset-server)
+2025-08-27 11:40:02.081  INFO 72868 --- [main] com.sunset.SunsetApplicationTests        : The following 1 profile is active: "dev"
+2025-08-27 11:40:02.853  INFO 72868 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-27 11:40:02.857  INFO 72868 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-27 11:40:02.882  INFO 72868 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 11 ms. Found 0 Redis repository interfaces.
+2025-08-27 11:40:02.968 DEBUG 72868 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2025-08-27 11:40:07.884  INFO 72868 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-27 11:40:07.939  INFO 72868 --- [main] com.sunset.SunsetApplicationTests        : Started SunsetApplicationTests in 6.185 seconds (JVM running for 6.952)
+2025-08-27 11:46:45.318  WARN 72948 --- [main] ory$DuplicateJsonObjectContextCustomizer : 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/wang/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/wang/.m2/repository/org/json/json/20170516/json-20170516.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2025-08-27 11:46:45.330  INFO 72948 --- [main] com.sunset.SunsetApplicationTests        : Starting SunsetApplicationTests using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 72948 (started by wang in D:\money\sunset-server)
+2025-08-27 11:46:45.331  INFO 72948 --- [main] com.sunset.SunsetApplicationTests        : The following 1 profile is active: "dev"
+2025-08-27 11:46:46.157  INFO 72948 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-27 11:46:46.160  INFO 72948 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-27 11:46:46.183  INFO 72948 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 0 Redis repository interfaces.
+2025-08-27 11:46:46.261 DEBUG 72948 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2025-08-27 11:46:51.174  INFO 72948 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-27 11:46:51.235  INFO 72948 --- [main] com.sunset.SunsetApplicationTests        : Started SunsetApplicationTests in 6.274 seconds (JVM running for 7.043)
+2025-08-27 11:49:20.936  WARN 71944 --- [main] ory$DuplicateJsonObjectContextCustomizer : 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/wang/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/wang/.m2/repository/org/json/json/20170516/json-20170516.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2025-08-27 11:49:20.989  INFO 71944 --- [main] com.sunset.SunsetApplicationTests        : Starting SunsetApplicationTests using Java 1.8.0_411 on LAPTOP-7EKQATVO with PID 71944 (started by wang in D:\money\sunset-server)
+2025-08-27 11:49:20.990  INFO 71944 --- [main] com.sunset.SunsetApplicationTests        : The following 1 profile is active: "dev"
+2025-08-27 11:49:21.846  INFO 71944 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-27 11:49:21.847  INFO 71944 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-27 11:49:21.875  INFO 71944 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14 ms. Found 0 Redis repository interfaces.
+2025-08-27 11:49:21.967 DEBUG 71944 --- [main] org.apache.ibatis.logging.LogFactory     : Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2025-08-27 11:49:26.799  INFO 71944 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-27 11:49:26.856  INFO 71944 --- [main] com.sunset.SunsetApplicationTests        : Started SunsetApplicationTests in 6.201 seconds (JVM running for 7.0)
