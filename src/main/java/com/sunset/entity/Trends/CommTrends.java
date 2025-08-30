@@ -3,6 +3,8 @@ package com.sunset.entity.Trends;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class CommTrends {
     private String id;
@@ -22,5 +24,6 @@ public class CommTrends {
     @Schema(description = "是否点赞")
     private boolean isstar;
     @Schema(description = "发表评论时间")
+    private Date createTime;
     private String create_time;
 }

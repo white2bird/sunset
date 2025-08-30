@@ -41,12 +41,15 @@ public class InterceptorConfig extends HandlerInterceptorAdapter {
         if (msToken != null) {
             HashMap<String, String> map = TokenUtils.SelectToken(msToken);
             String uid = map.get("uid");
+            if(uid == null){
+                throw new TokenExpiredException("过期");
+            }
             UserIdThreadLocal.setUserId(uid);
             log.info("解析token：" + uid);
             return true;
         }else{
             // token过期
-            throw new TokenExpiredException(null);
+            throw new TokenExpiredException("过期");
         }
 
     }

@@ -18,9 +18,11 @@ import com.sunset.mapper.SignMapper;
 import org.springframework.util.CollectionUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.logging.SimpleFormatter;
 
 @Slf4j
 @Service
@@ -88,6 +90,7 @@ public class TrendsService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dateTime = formatter.format(LocalDateTime.now());
         newTrends.setCreateTime(dateTime);
+
         trendsMapper.SetTrends(newTrends);
         return ReturnJson.success(null, "ok");
     }
@@ -287,6 +290,7 @@ public class TrendsService {
         commTrends.setContent(setComm.getContent());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dateTime = formatter.format(LocalDateTime.now());
+        commTrends.setCreateTime(new Date());
         commTrends.setCreate_time(dateTime);
         trendsMapper.SetTrendsComm(commTrends);
         return ReturnJson.success(null, "ok");
@@ -323,6 +327,7 @@ public class TrendsService {
                 UserInfoEntity uinfo = signMapper.GetUserInfo(x.getUid());
                 commTrends.setId(x.getId());
                 commTrends.setTrends_id(x.getTrends_id());
+//                commTrends.setTrends_id("aaaa");
                 commTrends.setUid(x.getUid());
                 // 判断评论是否有点赞
                 if (uid != null) {
@@ -343,7 +348,12 @@ public class TrendsService {
                     commTrends.setAvator("");
                     commTrends.setNickname("");
                 }
-                commTrends.setCreate_time(x.getCreate_time());
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                commTrends.setCreate_time(formatter.format(x.getCreateTime()));
+
+                commTrends.setCreateTime(x.getCreateTime());
+//                commTrends.setCreate_time();
+//                commTrends.setCreateTime(new Date());
                 newList.add(commTrends);
             });
         }

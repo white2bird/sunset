@@ -12,7 +12,8 @@ src/main/resources/application-dev.yaml
 .settings
 .springBeans
 .sts4-cache
-
+*.log
+*.gz
 ### IntelliJ IDEA ###
 .idea
 *.iws

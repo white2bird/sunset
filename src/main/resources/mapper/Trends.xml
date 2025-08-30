@@ -19,7 +19,7 @@
     </update>
     <!--  发布动态  -->
     <insert id="SetTrends" parameterType="com.sunset.entity.Trends.NewTrends">
-        insert into tb_trends (id,uid,text,images,create_time) values (#{id},#{uid},#{text},#{images},#{create_time});
+        insert into tb_trends (id,uid,text,images,create_time) values (#{id},#{uid},#{text},#{images},#{createTime});
     </insert>
     <!--  删除动态  -->
     <delete id="DeleteTrends" parameterType="String">
