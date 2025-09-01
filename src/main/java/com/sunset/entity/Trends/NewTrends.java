@@ -13,5 +13,6 @@ public class NewTrends {
     @Schema(description = "点赞数量")
     private Integer star = 0;
     @Schema(description = "发布时间")
-    private String createTime;
+//    private String createTime;
+    private String create_time;
 }

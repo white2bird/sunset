@@ -39,10 +39,13 @@ public class KnowService {
         k.setType(kp.getType());
         int t = kp.getType();
         k.setType_name(typeList[t]);
+        k.setTypeName(typeList[t]);
         k.setContent(kp.getContent());
         k.setCover_img(kp.getCover_img());
+        k.setCoverImg(kp.getCover_img());
         k.setIsthird(kp.getIsthird());
         k.setCreate_time(dateTime);
+        k.setCreateTime(dateTime);
         knowMapper.SetKnow(k);
 
 
@@ -67,6 +70,14 @@ public class KnowService {
         List<KnowEntity> list = knowMapper.GetKnow(pageKnow);
         PageInfo<KnowEntity> pageInfo = new PageInfo<>(list);
         List<KnowEntity> lists = pageInfo.getList();
+        for(KnowEntity k:lists){
+//            k.setCreate_time(k.getCreateTime());
+//            k.setType_name(k.getTypeName());
+//            k.setCover_img(k.getCoverImg());
+            if(k.getContent() == null){
+                k.setContent("");
+            }
+        }
 
         ListTrends listTrends = new ListTrends();
         listTrends.setTotal(pageInfo.getTotal());
@@ -84,6 +95,10 @@ public class KnowService {
         if (k == null) {
             return ReturnJson.fail(-1, "文章不存在");
         }
+        k.setType_name(k.getTypeName());
+        k.setCreate_time(k.getCreateTime());
+        k.setCover_img(k.getCoverImg());
+//        k.set
         // 收藏记录存在 并且 有token未失效
         if(islike != null && uid != null){
             k.setIslike(true);

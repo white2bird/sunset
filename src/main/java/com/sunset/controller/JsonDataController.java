@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Tag(name = "Goods")
@@ -38,9 +41,17 @@ public class JsonDataController {
     @GetMapping("/get_banner")
     public ReturnJson<List> getBannerShopp() throws IOException {
         // 获取绝对路径
-        String path = ClassUtils.getDefaultClassLoader().getResource("").getPath();
-        File file = new File(path+"/json/banner.json");
-        String jsonData = FileUtils.readFileToString(file);
+//        String path = ClassUtils.getDefaultClassLoader().getResource("").getPath();
+
+
+        InputStream inputStream = ClassUtils.getDefaultClassLoader().getResourceAsStream("json/banner.json");
+
+// 通过输入流读取内容（使用 IO 工具类）
+        String jsonData = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+
+//        JSONArray list = JSONObject.parseArray(jsonData);
+//        File file = new File(path+"/json/banner.json");
+//        String jsonData = FileUtils.readFileToString(file);
         JSONArray list = JSONObject.parseArray(jsonData); // JSON 转换 List
         return ReturnJson.success(list, "ok");
     }

@@ -12,19 +12,25 @@ public class KnowEntity {
     private  String url;
     @Schema(description = "封面")
     private  String cover_img;
+    private String coverImg;
     @Schema(description = "内容【富文本】")
     private  String content;
     @Schema(description = "类型 【饮食，运动，减肥，亲子，旅游】")
     private  Integer type = 0;
     private  String type_name;
+    private String typeName;
     @Schema(description = "是否第三方")
     private  Integer isthird = 0;
     @Schema(description = "阅读数")
     private  Integer read_num = 0;
+    private Integer readNum;
     @Schema(description = "收藏数")
     private  Integer like_num = 0;
+    private Integer likeNum;
     @Schema(description = "评论数")
     private  Integer comment_num = 0;
+    private Integer commentNum;
     @Schema(description = "创建时间")
     private  String create_time;
+    private String createTime;
 }

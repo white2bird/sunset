@@ -89,7 +89,8 @@ public class TrendsService {
         newTrends.setId(uuid);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dateTime = formatter.format(LocalDateTime.now());
-        newTrends.setCreateTime(dateTime);
+//        newTrends.setCreateTime(dateTime);
+        newTrends.setCreate_time(dateTime);
 
         trendsMapper.SetTrends(newTrends);
         return ReturnJson.success(null, "ok");
@@ -152,7 +153,7 @@ public class TrendsService {
                 objTrends.setText(x.getText());
                 objTrends.setImages(images);
                 objTrends.setStar(x.getStar());
-                objTrends.setCreate_time(x.getCreateTime());
+                objTrends.setCreate_time(x.getCreate_time());
                 objTrends.setComment_num(comm_page.getTotal());
                 // 用户信息
                 if(Objects.nonNull(uinfo)){
@@ -214,7 +215,8 @@ public class TrendsService {
                 objTrends.setText(x.getText());
                 objTrends.setImages(images);
                 objTrends.setStar(x.getStar());
-                objTrends.setCreate_time(x.getCreateTime());
+                objTrends.setCreate_time(x.getCreate_time());
+//                objTrends.setCreate_time(x.getCreateTime());
                 // 用户信息
                 if(Objects.nonNull(uinfo)){
                     objTrends.setAvator(uinfo.getAvator());
@@ -266,8 +268,9 @@ public class TrendsService {
         objTrends.setText(newTrends.getText());
         objTrends.setImages(images);
         objTrends.setStar(newTrends.getStar());
-        objTrends.setCreate_time(newTrends.getCreateTime());
+//        objTrends.setCreate_time(newTrends.getCreateTime());
 
+        objTrends.setCreate_time(newTrends.getCreate_time());
         return ReturnJson.success(objTrends, "ok");
     }
 
@@ -290,7 +293,7 @@ public class TrendsService {
         commTrends.setContent(setComm.getContent());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dateTime = formatter.format(LocalDateTime.now());
-        commTrends.setCreateTime(new Date());
+//        commTrends.setCreateTime(new Date());
         commTrends.setCreate_time(dateTime);
         trendsMapper.SetTrendsComm(commTrends);
         return ReturnJson.success(null, "ok");
@@ -349,10 +352,10 @@ public class TrendsService {
                     commTrends.setNickname("");
                 }
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                commTrends.setCreate_time(formatter.format(x.getCreateTime()));
+//                commTrends.setCreate_time(formatter.format(x.getCreate_time()));
 
-                commTrends.setCreateTime(x.getCreateTime());
-//                commTrends.setCreate_time();
+//                commTrends.setCreateTime(x.getCreateTime());
+                commTrends.setCreate_time(x.getCreate_time());
 //                commTrends.setCreateTime(new Date());
                 newList.add(commTrends);
             });

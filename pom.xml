@@ -300,6 +300,26 @@
                 </configuration>
             </plugin>
         </plugins>
+
+<!--        <resources>-->
+<!--            &lt;!&ndash; 配置主资源目录：替代默认的 src/main/resources &ndash;&gt;-->
+<!--            <resource>-->
+<!--                <directory>src/main/assets</directory>  &lt;!&ndash; 自定义资源目录路径 &ndash;&gt;-->
+<!--                <includes>  &lt;!&ndash; 仅打包目录下的指定文件（可选，默认全部打包） &ndash;&gt;-->
+<!--                    <include>**/*.properties</include>    &lt;!&ndash; 包含所有 .properties 文件 &ndash;&gt;-->
+<!--                    <include>**/*.png</include>          &lt;!&ndash; 包含所有 .png 图片 &ndash;&gt;-->
+<!--                </includes>-->
+<!--                <excludes>  &lt;!&ndash; 排除不需要打包的文件（可选） &ndash;&gt;-->
+<!--                    <exclude>**/test/**</exclude>        &lt;!&ndash; 排除 test 子目录下的资源 &ndash;&gt;-->
+<!--                </excludes>-->
+<!--            </resource>-->
+
+<!--            &lt;!&ndash; 额外添加一个资源目录（如 src/main/config） &ndash;&gt;-->
+<!--            <resource>-->
+<!--                <directory>src/main/config</directory>-->
+<!--            </resource>-->
+<!--        </resources>-->
+
     </build>
 
 
