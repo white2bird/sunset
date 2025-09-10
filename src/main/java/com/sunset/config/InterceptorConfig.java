@@ -33,6 +33,9 @@ public class InterceptorConfig extends HandlerInterceptorAdapter {
             return true;
         }
         String msToken = request.getHeader("ms_token");
+        if("12.12.12".equals(msToken)){
+            throw new TokenExpiredException("过期");
+        }
         String requestURI = request.getRequestURI();
         log.info("获取的token：" + msToken);
         log.info("请求的url：" + requestURI);

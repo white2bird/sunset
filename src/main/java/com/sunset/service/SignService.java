@@ -202,6 +202,13 @@ public class SignService {
         String uid = map.get("uid");
 
         UserInfoEntity userInfoEntity = signMapper.GetUserInfo(uid);
+        if(StringUtils.isEmpty(userInfoEntity.getAvator())){
+            if(userInfoEntity.getSex() == 0){
+                userInfoEntity.setAvator("/avator/female.png");
+            } else if (userInfoEntity.getSex() == 1) {
+                userInfoEntity.setAvator("/avator/male.png");
+            }
+        }
         if(userInfoEntity == null){
             return ReturnJson.success(null, "ok");
         }
@@ -217,6 +224,13 @@ public class SignService {
         log.info(String.valueOf(userInfoEntity));
         userInfoEntity.setUid(userId);
         int state = userInfoEntity.getState();
+        if(StringUtils.isEmpty(userInfoEntity.getAvator())){
+            if(userInfoEntity.getSex() == 0){
+                userInfoEntity.setAvator("/avator/female.png");
+            } else if (userInfoEntity.getSex() == 1) {
+                userInfoEntity.setAvator("/avator/male.png");
+            }
+        }
         Date date = new SimpleDateFormat("yyyy-MM-dd").parse(userInfoEntity.getBirthday());
         // 根据日期转换星座
         Calendar calender = Calendar.getInstance();
