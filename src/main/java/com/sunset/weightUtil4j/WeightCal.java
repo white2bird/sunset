@@ -14,7 +14,7 @@ public class WeightCal {
 
     public static String desc = "体重是指人体各部分的总重量。它受年龄、性别、种族、遗传及地理环境的影响因此，体重是在不断变化的，在某一个时期内相对保持恒定。";
 
-    public static List<Double> standList = Arrays.asList(18.5D, 20.5D, 23D, 25.5, 29.9);
+    public static List<Double> standList = Arrays.asList(18.5D, 22.9D, 24.9D, 29.9, 35D);
 
 
     public static Map<String,?> calLevel(Double weight){
@@ -43,7 +43,7 @@ public class WeightCal {
     public static List<Double> returnStandList(Double height){
         ArrayList<Double> doubles = new ArrayList<>();
         for (Double aDouble : standList) {
-            doubles.add(aDouble * height * height);
+            doubles.add(aDouble * height * height*0.0001);
         }
         return doubles;
     }

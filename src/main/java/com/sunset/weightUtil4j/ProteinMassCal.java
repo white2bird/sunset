@@ -2,6 +2,8 @@ package com.sunset.weightUtil4j;
 
 import com.sunset.utils.SplitUtil;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -13,16 +15,24 @@ public class ProteinMassCal {
 
     public static String desc = "蛋白质是组成人体细胞、组织的重要成分，约占人体全部质量的18%。机体所有重要的组成部门都需要蛋白质的参与，它是生命活动的主要承担者。蛋白质大量包含在肌肉细胞内，是反映被检测者营养状态，身体发育和健康程度的主要因素。\n";
 
-    public static List<Double> returnStandList(){
-        return Arrays.asList(14D, 18D);
+    public static List<Double> returnStandList(Double weight){
+        List<Double> list = Arrays.asList(14D, 18D);
+        for(int i = 0; i < list.size(); i++){
+            double v = list.get(i) * weight * 0.01;
+            BigDecimal bd = new BigDecimal(v);
+            bd = bd.setScale(2, RoundingMode.HALF_UP);
+            list.set(i, bd.doubleValue());
+        }
+
+        return list;
     }
 
     public static List<String> returnStandListName(){
         return Arrays.asList("不足", "标准", "优");
     }
 
-    public static Map<String,?> calLevel(double proteinMassPercent) {
-        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, proteinMassPercent);
+    public static Map<String,?> calLevel(double proteinMassPercent, double weight) {
+        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(weight), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, proteinMassPercent);
         stringObjectMap.put("name", "蛋白质含量");
         stringObjectMap.put("unit", "公斤");
         return stringObjectMap;

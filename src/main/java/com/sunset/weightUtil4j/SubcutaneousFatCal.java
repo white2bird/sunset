@@ -33,7 +33,7 @@ public class SubcutaneousFatCal {
 
     public static Map<String,?> calLevel(Double subcutaneousFat, Boolean  male) {
         Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(male), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, subcutaneousFat);
-        stringObjectMap.put("name", "皮下脂肪");
+        stringObjectMap.put("name", "皮下脂肪率");
         stringObjectMap.put("unit", "%");
         return stringObjectMap;
     }

@@ -4,6 +4,7 @@ import com.sunset.utils.SplitUtil;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -15,11 +16,18 @@ public class WaterCal {
 
     public static String desc = "含水量表示人体内水分的绝对值。水是人体中含量最多的一种物质，是人体的重要组成成分,水分具有参与构成机体各种体液、参与机体代谢、调节体温、润滑机体等重要的生理作用。机体含水量应保持在正常范围内，如果含水量过高，则可能是水肿指征，是机体发生疾病的表现;过低，则可能出现便秘、骨关节炎、肾结石、皮肤干燥等健康问题。含水量还与肌肉量有密切关系，含水量变低可能标志着肌肉量下降、体脂率上升\n";
 
-    public static List<Double> returnStandList(boolean male){
+    public static List<Double> returnStandList(boolean male, Double waterWeigh){
+        List<Double> standList;
         if(male){
-            return Arrays.asList(50D, 65D);
+            standList = Arrays.asList(50D, 65D);
+        }else{
+            standList = Arrays.asList(45D, 60D);
         }
-        return Arrays.asList(45D, 60D);
+        List<Double> result = new ArrayList<>();
+        for (int i = 0; i < standList.size(); i++){
+            result.add(standList.get(i) * waterWeigh*0.01);
+        }
+        return result;
     }
 
     public static List<String> returnStandListName(){
@@ -34,8 +42,8 @@ public class WaterCal {
         );
     }
 
-    public static Map<String,?> calLevel(Double bodyWaterPercentage, Double water,  boolean male) {
-        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(male), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, bodyWaterPercentage);
+    public static Map<String,?> calLevel(Double bodyWaterPercentage, Double water, Double weight, boolean male) {
+        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(male, weight), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, water);
         BigDecimal bigDecimal = new BigDecimal(water).setScale(2, RoundingMode.HALF_UP);
 
         stringObjectMap.put("value", bigDecimal);

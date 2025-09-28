@@ -296,7 +296,7 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
     private Map<String, Object> buildSkeletalMuscleResult(BodyComposition bodyComposition){
         Map<String, Object> result = new HashMap<>();
         result.put("value", bodyComposition.getSkeletalMuscle());
-        result.putAll(SkeletalMuscleCal.calLevel(bodyComposition.getSkeletalMuscle()));
+        result.putAll(SkeletalMuscleCal.calLevel(bodyComposition.getSkeletalMuscle(), bodyComposition.getWeight()));
         return result;
     }
 
@@ -366,7 +366,7 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
         Map<String, Object> result = new HashMap<>();
         double water = bodyComposition.getBodyWaterPercentage() * bodyComposition.getWeight() / 100;
         result.put("value", water);
-        result.putAll(WaterCal.calLevel(bodyComposition.getBodyWaterPercentage(), water,bodyComposition.getGender()==1));
+        result.putAll(WaterCal.calLevel(bodyComposition.getBodyWaterPercentage(), water, bodyComposition.getWeight(), bodyComposition.getGender()==1));
         return result;
     }
 
@@ -377,7 +377,7 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
     private Map<String, Object> buildProteinResult(BodyComposition bodyComposition){
         Map<String, Object> result = new HashMap<>();
         result.put("value", bodyComposition.getProteinMass());
-        result.putAll(ProteinMassCal.calLevel(bodyComposition.getProteinMass()));
+        result.putAll(ProteinMassCal.calLevel(bodyComposition.getProteinMass(), bodyComposition.getWeight()));
         return result;
     }
 
@@ -389,7 +389,7 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
     private Map<String, Object> buildProteinPercentResult(BodyComposition bodyComposition){
         Map<String, Object> result = new HashMap<>();
         result.put("value", bodyComposition.getProteinMass()/bodyComposition.getWeight() * 100);
-        result.putAll(ProteinMassCal.calLevel(bodyComposition.getProteinMass()/bodyComposition.getWeight() * 100));
+        result.putAll(ProteinPercentCal.calLevel(bodyComposition.getProteinMass()/bodyComposition.getWeight() * 100, bodyComposition.getWeight()));
         return result;
     }
 
@@ -503,7 +503,17 @@ public class WeightService extends ServiceImpl<WeightMapper, WeightEntity> {
         healthDataLambdaQueryWrapper.ge(Objects.nonNull(weightHistoryPageQuery.getStart()), BodyComposition::getWeightTime, weightHistoryPageQuery.getStart());
         healthDataLambdaQueryWrapper.le(Objects.nonNull(weightHistoryPageQuery.getEnd()), BodyComposition::getWeightTime, weightHistoryPageQuery.getEnd());
         Page<BodyComposition> page = bodyCompositionService.page(healthDataPage, healthDataLambdaQueryWrapper);
-        return HistoryWeightConverter.INSTANCE.toHistoryWeighList(page.getRecords());
+        List<HistoryWeigh> historyWeighList = HistoryWeightConverter.INSTANCE.toHistoryWeighList(page.getRecords());
+        for(HistoryWeigh historyWeigh : historyWeighList){
+
+            Map<String, Object> stringObjectMap = BodyFatCal.calLevel(historyWeigh.getBodyFat(), historyWeigh.getGender() == 1);
+            String s = String.valueOf(stringObjectMap.get("levelName"));
+            String color = String.valueOf(stringObjectMap.get("color"));
+            historyWeigh.setLevelName(s);
+            historyWeigh.setColor(color);
+
+        }
+        return historyWeighList;
 //        return page.getRecords();
     }
 

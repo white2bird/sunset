@@ -17,7 +17,7 @@ public class VisceralFatLevelCal {
         Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, level);
         stringObjectMap.put("name", "内脏脂肪等级");
         stringObjectMap.put("unit", "");
-        stringObjectMap.put("value", stringObjectMap.get("level"));
+//        stringObjectMap.put("value", level);
         return stringObjectMap;
     }
 

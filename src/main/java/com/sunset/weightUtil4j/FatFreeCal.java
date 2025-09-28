@@ -31,7 +31,7 @@ public class FatFreeCal {
 
     public static Map<String,?> calLevel(Double bone){
         Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, bone);
-        stringObjectMap.put("name", "骨量");
+        stringObjectMap.put("name", "去脂重量");
         stringObjectMap.put("unit", "公斤");
         return stringObjectMap;
     }

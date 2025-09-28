@@ -1,5 +1,6 @@
 package com.sunset.entity.weight;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,9 @@ public class WeightEntity {
 
     private String uid;
 
+    @TableField(value = "create_time")
     private Date createTime;
 
+    @TableField("blue_address")
     private String blueAddress;
 }

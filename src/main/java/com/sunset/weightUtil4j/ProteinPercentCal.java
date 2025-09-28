@@ -13,8 +13,10 @@ public class ProteinPercentCal {
 
     public static String desc = "蛋白质是是肌体细胞的重要组成部分，是人体组织更新和修补的主要原料和营养物质。蛋白质在体内不能贮存，多了肌体无法吸收不会导致过高(健美运动员除外)。过低，就是营养不良，会导致体重下降、肌肉萎缩、贫血、免疫力下降等。\n";
 
-    public static List<Double> returnStandList(){
-        return Arrays.asList(14D, 18D);
+    public static List<Double> returnStandList(Double weight){
+        List<Double> list = Arrays.asList(14D, 18D);
+
+        return list;
     }
 
     public static List<String> returnStandListName(){
@@ -29,8 +31,8 @@ public class ProteinPercentCal {
         );
     }
 
-    public static Map<String,?> calLevel(double proteinMassPercent) {
-        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, proteinMassPercent);
+    public static Map<String,?> calLevel(double proteinMassPercent, double weight) {
+        Map<String, Object> stringObjectMap = SplitUtil.levelInfo(returnStandList(weight), returnStandListName(), returnAnalyzeList(), returnSportAdvice(), returnEatAdvice(), returnColorList(), desc, proteinMassPercent);
         stringObjectMap.put("name", "蛋白质率");
         stringObjectMap.put("unit", "%");
         return stringObjectMap;

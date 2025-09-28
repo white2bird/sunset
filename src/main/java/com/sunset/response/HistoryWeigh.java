@@ -38,4 +38,6 @@ public class HistoryWeigh {
     private Integer metabolicAge;              // 生理年龄 (Metabolic Age)
     private Double obesityDegreeIndicator;    // 肥胖度 (Obesity Degree Indicator)
     private Double fatBurningHeartRate;     // 燃脂心率
+    private String levelName;
+    private String color;
 }
